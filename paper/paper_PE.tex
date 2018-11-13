@@ -6,12 +6,25 @@
 \usepackage{latexsym}
 \usepackage{graphicx}
 \usepackage{bm}
-\usepackage{color}
+%\usepackage{color}
 \usepackage{enumerate}
 \usepackage{ulem}
 
+\usepackage{color}
+\usepackage[usenames,dvipsnames,svgnames,table]{xcolor}
+%\usepackage[colorlinks=true,
+%            linkcolor=green,
+%            urlcolor=blue,
+%            citecolor=red]{hyperref}
+\usepackage[colorlinks=true,
+            linkcolor=YellowOrange,
+            urlcolor=RoyalBlue,
+            citecolor=RedViolet]{hyperref}
+
 \newcommand{\be}{\begin{equation}}
 \newcommand{\ee}{\end{equation}}
+\newcommand{\bsub}{\begin{subequations}}
+\newcommand{\esub}{\end{subequations}}
 \newcommand\ud{{\mathrm{d}}}
 \newcommand\uD{{\mathrm{D}}}
 \newcommand\calO{{\mathcal{O}}}
@@ -24,6 +37,15 @@
 \newcommand{\Hz}{\,\mathrm{Hz}}
 \newcommand{\sinc}{\,\mathrm{sinc}}
 \newcommand{\Msol}{M_{\odot}}
+\newcommand\calL{{\mathcal{L}}}
+\newcommand\calA{{\mathcal{A}}}
+\newcommand\betaL{{\beta_{L}}}
+\newcommand\lambdaL{{\lambda_{L}}}
+\newcommand\varphiL{{\varphi_{L}}}
+\newcommand\psiL{{\psi_{L}}}
+
+\newcommand{\SM}[1]{{\color{Blue} #1}}
+\newcommand{\jgb}[1]{{\color{DarkGreen} #1}}
 
 \begin{document}
 
@@ -117,7 +139,97 @@
 \subsection{A simplified likelihood model}
 \label{sec:simple-like}
 
--- simplified response and closed-form likelihood
+In this section, we investigate a simplified form of the extrinsic likelihood and the structure of its degeneracies.
+
+It will be useful to introduce the following notation for the patter functions associated to the independent channels A and E:
+\bsub\label{eq:defDaDe}
+\begin{align}
+	D_{a}^{+} &= \frac{1}{2} \left( 1 + \sin^{2}\betaL \right) \cos\left( 2\lambdaL - \frac{\pi}{3} \right) \,, \\
+	D_{a}^{\times} &= \sin \betaL \sin\left( 2\lambdaL - \frac{\pi}{3} \right) \,, \\
+	D_{e}^{+} &= - \frac{1}{2} \left( 1 + \sin^{2}\betaL \right) \sin\left( 2\lambdaL - \frac{\pi}{3} \right) \,, \\
+	D_{e}^{\times} &= \sin \betaL \cos\left( 2\lambdaL - \frac{\pi}{3} \right) \,.
+\end{align}
+\esub
+Note that the expressions for the channel E can be obtained from the expressions for A with the replacement $\lambdaL \rightarrow \lambdaL + \pi/4$.
+
+In each channel, we separate the contribution of the modes $h_{22}$ and $h_{2,-2}$ as
+\bsub\label{eq:defsase}
+\begin{align}
+	s_{a} &= a_{22} + a_{2,-2} \,, \\
+	s_{e} &= e_{22} + e_{2,-2} \,,
+\end{align}
+\esub
+with
+\bsub\label{eq:defa22a2m2}
+\begin{align}
+	a_{22} &= \frac{3i}{4d} \sqrt{\frac{5}{\pi}} \cos^{4}\frac{\iota}{2} e^{2i(-\varphiL-\psiL)} \left( D_{a}^{+} + i D_{a}^{\times} \right) \,, \\
+	a_{2,-2} &= \frac{3i}{4d} \sqrt{\frac{5}{\pi}} \sin^{4}\frac{\iota}{2} e^{2i(-\varphiL+\psiL)} \left( D_{a}^{+} - i D_{a}^{\times} \right) \,.
+\end{align}
+\esub
+and similarly for the E channel with~\eqref{eq:defDe} instead of~\eqref{eq:defDa}
+\bsub\label{eq:defe22e2m2}
+\begin{align}
+	e_{22} &= \frac{3i}{4d} \sqrt{\frac{5}{\pi}} \cos^{4}\frac{\iota}{2} e^{2i(-\varphiL-\psiL)} \left( D_{e}^{+} + i D_{e}^{\times} \right) \,, \\
+	e_{2,-2} &= \frac{3i}{4d} \sqrt{\frac{5}{\pi}} \sin^{4}\frac{\iota}{2} e^{2i(-\varphiL+\psiL)} \left( D_{e}^{+} - i D_{e}^{\times} \right) \,.
+\end{align}
+\esub
+Here, we introduced the dimensionless luminosity distance ratio $d \equiv D / D^{\rm inj}$.
+
+In this simplified response, an exact symmetry relation is manifest: changing simultaneously
+\be\label{eq:symmetryresponse}
+\betaL \rightarrow -\betaL\,, \quad \iota \rightarrow \pi - \iota \,, \quad \psiL \rightarrow \pi - \psiL
+\ee
+leaves the signal unchanged. We can also rewrite the likelihood in a way that makes clearer the symmetry between the two pairs of parameters $(\iota, \varphiL)$ and $(\betaL, \lambdaL)$ \SM{[TODO]}.
+
+The simplified extrinsic likelihood for a frozen LISA then takes the form
+\be\label{eq:simplelikelihood}
+	\ln \calL = - \frac{1}{2} \Lambda \left( \left| s_{a} - s_{a}^{\rm inj} \right|^{2} + \left| s_{e} - s_{e}^{\rm inj} \right|^{2} \right) \,,
+\ee
+where $\Lambda$ appears as an overall normalization factor, playing the role of the square SNR of the signal.
+
+We can now explore possible degeneracies in the likelihood given by~\eqref{eq:simplelikelihood}, \eqref{eq:defsase} and \eqref{eq:defa22a2m2}-\eqref{eq:defe22e2m2}. We note that the relative contributions of the modes $h_{2,2}$ and $h_{2,-2}$ are strongly separated in the face-on or face-off limit, leading to a simplification of the response and an enhanced degeneracy. Due to the symmetry~\eqref{eq:symmetryresponse}, we will focus on the face-on limit $\iota \rightarrow 0$. In this limit, the $h_{2,-2}$ contributions die off rapidly as $a_{2,-2}\,, e_{2,-2} \sim \sin^{4} (\iota/2)$. If they are assumed to be negligible, then we can rewrite
+\bsub\label{eq:saseapprox}
+\begin{align}
+	s_{a} \simeq i\calA e^{2 i \xi} \left( D_{a}^{+} + i D_{a}^{\times} \right) \,, \\
+	s_{e} \simeq i\calA e^{2 i \xi} \left( D_{e}^{+} + i D_{e}^{\times} \right) \,,
+\end{align}
+\esub
+where we introduced the notations $\xi (\varphiL, \psiL) \equiv -\varphiL - \psiL$ and $\calA(d, \iota) \equiv 3/4\sqrt{5/\pi}\cos^{4}(\iota/2)/d $ for the common phase and amplitude factors.
+
+For a degeneracy to occur, both complex quantities $s_{a}$ and $s_{e}$ must be close to the injection values $s_{a}^{\rm inj}$ and $s_{e}^{\rm inj}$, which can be achieved as follows if~\eqref{eq:saseapprox} is valid. Defining the complex ratio
+\be\label{eq:defr}
+	r(\lambdaL, \betaL) = \frac{D_{a}^{+} + i D_{a}^{\times}}{D_{e}^{+} + i D_{e}^{\times} } \,,
+\ee
+if the position in the sky $(\lambda_{L}^{*}, \beta_{L}^{*})$ can be chosen so that
+\be\label{eq:rcondition}
+	r(\lambda_{L}^{*}, \beta_{L}^{*}) = \frac{s_{a}^{\rm inj}}{s_{e}^{\rm inj}} \,,
+\ee
+then adjusting $\calA$ and $\xi$ so that
+\be
+	i\calA e^{2 i \xi} = \frac{s_{a}^{\rm inj}}{\left( D_{a}^{+} + i D_{a}^{\times} \right)(\lambda_{L}^{*}, \beta_{L}^{*})}
+\ee
+generates degenerate points in parameter space with $\ln \calL \simeq 0$.
+
+The conditions~\eqref{eq:defr}-\eqref{eq:rcondition} can be inverted for the sky position as follows. For a given complex value of $r$, $r(\lambda_{L}^{*}, \beta_{L}^{*}) = r$ can be rewritten as
+\be\label{eq:eqtosolveforlambdabetaL}
+	e^{4i\lambda_{L}^{*}}e^{i\frac{\pi}{3}} \frac{\left( 1 +\sin\beta_{L}^{*} \right)^{2}}{\left( 1 - \sin\beta_{L}^{*} \right)^{2}} = \frac{1+ i r}{1 - i r} \,.
+\ee
+Solving for the modulus of~\eqref{eq:eqtosolveforlambdabetaL} then yields
+\be\label{eq:solutionbetaL}
+	\sin\beta_{L}^{*} = \frac{\rho - 1}{\rho + 1} \,,
+\ee
+for
+\be
+	\rho = \sqrt{\left| \frac{1+ i r}{1 - i r} \right|} \,.
+\ee
+Solving for the argument of~\eqref{eqtosolveforlambdabetaL} gives four solutions for $\lambda_{L}^{*}$ as
+\be\label{eq:solutionlambdaL}
+	\lambda_{L}^{*} = - \frac{\pi}{12} + \frac{1}{4}\mathrm{Arg} \frac{1+ i r}{1 - i r} + \frac{k \pi}{2} \quad \mathrm{for} \quad k = 0,\dots,3 \,.
+\ee
+
+Repeating the argument for the other branch of solutions $\iota \rightarrow \pi$ (or directly considering the symmery~\eqref{eq:symmetryresponse}) gives four other solutions in the sky with identical sky longitudes $\lambda_{L}^{*}$, with symmetrized sky latitudes $\beta_{L}^{*} \rightarrow -\beta_{L}^{*}$, and with $\xi (\varphiL, \psiL) \equiv -\varphiL + \psiL$, $\calA(d, \iota) \equiv 3/4\sqrt{5/\pi}\sin^{4}(\iota/2)/d $.
+
+Thus, with~\eqref{eq:solutionbetaL}, \eqref{eq:solutionlambdaL} and $\beta_{L}^{*} \rightarrow -\beta_{L}^{*}$, we arrive at eight degenerate positions in the sky $(\lambda_{L}^{*}, \beta_{L}^{*})$. For each of these sky positions, an exact line degeneracy exists between $\varphiL$ and $\psiL$ as long as $\xi = \mathrm{const}$, as well as an approximate line degeneracy between $d$ and $\iota$, as long as $\calA = \mathrm{const}$, limited to inclination values where $\sin^{4}(\iota/2)$ (or $\cos^{4}(\iota/2)$, for the other branch of solutions) remains negligible. The combination of these degeneracies generates an extended structure in the multi-dimensional parameter space. As a result, when considering the marginal posterior for the sky position, these degenerate spots in the sky can have a lot of probability support.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
