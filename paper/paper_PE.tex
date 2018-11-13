@@ -78,6 +78,7 @@
 \maketitle
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Introduction}
 \label{sec:intro}
@@ -85,29 +86,40 @@
 [Introduction]
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Methodology}
 \label{sec:intro}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsection{Fast frequency domain LISA response}
 \label{sec:response}
 
 -- Geometric setting, definitions, summarize the FD response
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \subsection{Reduced order model for EOBNRv2 waveforms.}
 \label{sec:waveforms}
 
 -- Waveforms: EOBNRv2HMROM + PNext
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsection{Fast likelihood computation}
 \label{sec:likelihood}
 
 -- Likelihood computation: fast overlaps
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \subsection{Fisher matrix parameter estimation}
 \label{sec:Fisher}
 
 -- Fisher matrices computation: step self-tuning,...
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsection{Bayesian sampling}
 \label{sec:samplers}
@@ -115,26 +127,26 @@
 -- Bayesian samplers: Multinest, PTMCMC
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Morphology of the signals}
-\label{sec:morph}
+\section{Instrument response}
+\label{sec:response}
 
-- Morphology of the response
-
-\subsection{Temporal development of SNR}
-\label{sec:timeSNR}
-
--- SNR accumulation with time or frequency: inspiral/MRD balance across mass range
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsection{LISAframe parameters}
 \label{sec:LISAframe}
 
 -- LISA frame angles
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \subsection{The low-frequency limit}
 \label{sec:low-freq}
 
 -- make the connection to low-f response (2 interferometers)
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsection{A simplified likelihood model}
 \label{sec:simple-like}
@@ -166,7 +178,7 @@ with
 	a_{2,-2} &= \frac{3i}{4d} \sqrt{\frac{5}{\pi}} \sin^{4}\frac{\iota}{2} e^{2i(-\varphiL+\psiL)} \left( D_{a}^{+} - i D_{a}^{\times} \right) \,.
 \end{align}
 \esub
-and similarly for the E channel with~\eqref{eq:defDe} instead of~\eqref{eq:defDa}
+and similarly for the E channel with $D_{e}^{+,\times}$ instead of $D_{a}^{+, \times}$ as
 \bsub\label{eq:defe22e2m2}
 \begin{align}
 	e_{22} &= \frac{3i}{4d} \sqrt{\frac{5}{\pi}} \cos^{4}\frac{\iota}{2} e^{2i(-\varphiL-\psiL)} \left( D_{e}^{+} + i D_{e}^{\times} \right) \,, \\
@@ -186,6 +198,56 @@ The simplified extrinsic likelihood for a frozen LISA then takes the form
 	\ln \calL = - \frac{1}{2} \Lambda \left( \left| s_{a} - s_{a}^{\rm inj} \right|^{2} + \left| s_{e} - s_{e}^{\rm inj} \right|^{2} \right) \,,
 \ee
 where $\Lambda$ appears as an overall normalization factor, playing the role of the square SNR of the signal.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Morphology of the signals}
+\label{sec:morph}
+
+- Morphology of the response
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Temporal development of SNR}
+\label{sec:timeSNR}
+
+-- SNR accumulation with time or frequency: inspiral/MRD balance across mass range
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Supermassive black holes}
+\label{sec:SMBH}
+
+- Demonstration/examples
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{A non-degenerate case}
+\label{sec:high-M-non-deg}
+
+-- High-mass system, non-degenerate, 22 and HM + Fisher - stacked SNR contours
+eg:
+
+Case 12?
+m1,    m2,    t0,D,     phi0,i,   lam,  bet, psi
+8.89e5,1.11e5,0, 3.67e4,pi/3,pi/2,3pi/4,pi/3,pi/3
+
+Case 0
+
+-- Performance: waveform and likelihood costs, number of sampler evaluations
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Highlighting degeneracies}
+\label{sec:degen}
+
+- Highlighting degeneracies
+
+-- High-mass degenerate example, 22 vs HM - stacked SNR contours
+-- show degenerate waveforms
+-- simplified response and closed-form likelihood, full degeneracies
+-- (explore simplified response further: parameter maps, other off-the-shelf samplers ?)
 
 We can now explore possible degeneracies in the likelihood given by~\eqref{eq:simplelikelihood}, \eqref{eq:defsase} and \eqref{eq:defa22a2m2}-\eqref{eq:defe22e2m2}. We note that the relative contributions of the modes $h_{2,2}$ and $h_{2,-2}$ are strongly separated in the face-on or face-off limit, leading to a simplification of the response and an enhanced degeneracy. Due to the symmetry~\eqref{eq:symmetryresponse}, we will focus on the face-on limit $\iota \rightarrow 0$. In this limit, the $h_{2,-2}$ contributions die off rapidly as $a_{2,-2}\,, e_{2,-2} \sim \sin^{4} (\iota/2)$. If they are assumed to be negligible, then we can rewrite
 \bsub\label{eq:saseapprox}
@@ -232,41 +294,13 @@ Repeating the argument for the other branch of solutions $\iota \rightarrow \pi$
 Thus, with~\eqref{eq:solutionbetaL}, \eqref{eq:solutionlambdaL} and $\beta_{L}^{*} \rightarrow -\beta_{L}^{*}$, we arrive at eight degenerate positions in the sky $(\lambda_{L}^{*}, \beta_{L}^{*})$. For each of these sky positions, an exact line degeneracy exists between $\varphiL$ and $\psiL$ as long as $\xi = \mathrm{const}$, as well as an approximate line degeneracy between $d$ and $\iota$, as long as $\calA = \mathrm{const}$, limited to inclination values where $\sin^{4}(\iota/2)$ (or $\cos^{4}(\iota/2)$, for the other branch of solutions) remains negligible. The combination of these degeneracies generates an extended structure in the multi-dimensional parameter space. As a result, when considering the marginal posterior for the sky position, these degenerate spots in the sky can have a lot of probability support.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Illustrating examples}
-\label{sec:examples}
-
-- Demonstration/examples
-
-\subsection{A non-degenerate case}
-\label{sec:high-M-non-deg}
-
--- High-mass system, non-degenerate, 22 and HM + Fisher - stacked SNR contours
-eg:
-
-Case 12?
-m1,    m2,    t0,D,     phi0,i,   lam,  bet, psi
-8.89e5,1.11e5,0, 3.67e4,pi/3,pi/2,3pi/4,pi/3,pi/3
-
-Case 0
-
--- Performance: waveform and likelihood costs, number of sampler evaluations
-
-\subsection{Stellar origin black holes}
+\section{Stellar origin black holes}
 \label{sec:SOBH}
 
 -- SOBH system, SNR sufficient for clean analysis + Fisher - stacked SNR contours
 -- Performance: waveform and likelihood costs, number of sampler evaluations
-
-\subsection{Highlighting degeneracies}
-\label{sec:degen}
-
-- Highlighting degeneracies
-
--- High-mass degenerate example, 22 vs HM - stacked SNR contours
--- show degenerate waveforms
--- simplified response and closed-form likelihood, full degeneracies
--- (explore simplified response further: parameter maps, other off-the-shelf samplers ?)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
