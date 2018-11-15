@@ -1,0 +1,39 @@
+Some analysis examples:
+(note I have checked out flare (with ptmcmc) in ../../flare dir
+
+#within-group analysis: 
+
+#t01
+python ../../../flare/ptmcmc/python/comparechains.py STP_09_lm55_t01_*/*_resampled.dat --tag trials
+--> STP_09_lm55_t01_a_0/STP_09_lm55_t01_a_trials_corner.png
+Run a_1 looks inconsistent with the others missing a mode. All others seem fully consistent.
+#combine data:
+cat STP_09_lm55_t01_a_0/*_resampled.dat  STP_09_lm55_t01_b_?/*_resampled.dat > STP_09_lm55_t01_joint_resampled.dat
+
+#t04
+python ../../../flare/ptmcmc/python/comparechains.py STP_09_lm55_t04_*/*_resampled.dat --tag trials
+--> STP_09_lm55_t04_a_0/STP_09_lm55_t04_a_t04_trials_corner.png
+All runs look consistent, could be added together if desired
+#combine data:
+cat STP_09_lm55_t04_*/*_resampled.dat > STP_09_lm55_t04_joint_resampled.dat
+
+#t16
+python ../../../flare/ptmcmc/python/comparechains.py STP_09_lm55_t16_*/*_resampled.dat --tag trials
+-->STP_09_lm55_t16_a_0/STP_09_lm55_t16_a_trials_corner.png
+All runs look consistent.
+#combine data:
+cat STP_09_lm55_t16_*/*_resampled.dat > STP_09_lm55_t16_joint_resampled.dat
+
+#t64
+python ../../../flare/ptmcmc/python/comparechains.py STP_09_lm55_t64_*/*_resampled.dat --tag trials
+-->STP_09_lm55_t64_a_0/STP_09_lm55_t64_a_trials_corner.png
+All runs look consistent
+#combine data:
+cat STP_09_lm55_t64_*/*_resampled.dat > STP_09_lm55_t64_joint_resampled.dat
+
+
+
+########
+Series analysis:
+python ../../../flare/ptmcmc/python/comparechains.py *_resampled.dat --tag t-series
+python skyplot.py
