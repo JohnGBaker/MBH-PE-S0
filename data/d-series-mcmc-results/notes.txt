@@ -1,0 +1,38 @@
+#within-group analysis: 
+
+#d01
+python ../../../flare/ptmcmc/python/comparechains.py STP_09_lm55_d01_*/*_resampled.dat --tag trials
+-->STP_09_lm55_d01_a_0/STP_09_lm55_d01_a_trials_corner.png
+All runs closely consistent.
+#combine data:
+cat STP_09_lm55_d01_*/*_resampled.dat > STP_09_lm55_d01_joint_resampled.dat
+
+#d04
+python ../../../flare/ptmcmc/python/comparechains.py STP_09_lm55_d04_*/*_resampled.dat --tag trials
+-->STP_09_lm55_d04_a_0/STP_09_lm55_d04_a_trials_corner.png
+All runs closely consistent.
+#combine data:
+cat STP_09_lm55_d04_*/*_resampled.dat > STP_09_lm55_d04_joint_resampled.dat
+
+#d16
+python ../../../flare/ptmcmc/python/comparechains.py STP_09_lm55_d16_*/*_resampled.dat --tag trials
+-->STP_09_lm55_d16_a_0/STP_09_lm55_d16_a_trials_corner.png
+All runs closely consistent. Although the median for the a_1 case is (Nov16) favors + inclination unlike for the others.  Interestingly this is the case which hasn't yet reached the stopping critierion.  For this reason I have continued the run a bit more.
+#combine data:
+cat STP_09_lm55_d16_*/*_resampled.dat > STP_09_lm55_d16_joint_resampled.dat
+
+
+#d64
+python ../../../flare/ptmcmc/python/comparechains.py STP_09_lm55_d64_*/*_resampled.dat --tag trials
+-->STP_09_lm55_d64_a_0/STP_09_lm55_d64_a_trials_corner.png
+All runs seem closely consistent.
+#combine data:
+cat STP_09_lm55_d64_*/*_resampled.dat > STP_09_lm55_d64_joint_resampled.dat
+
+########
+Series analysis:
+python ../../../flare/ptmcmc/python/comparechains.py *_resampled.dat --tag d-series
+-->d-series-mcmc-resultd-series_corner.png
+In this case, note that the "correct" distance parameter is actually different for the differnt cases.  For the farthest/lowest-SNR case the distance is actually outside the prior range.  The resulting bias in the distance inference probably leads to bias in inc as well.
+#sky plots
+python skyplot.py
