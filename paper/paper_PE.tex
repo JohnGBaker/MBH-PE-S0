@@ -88,53 +88,17 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Methodology}
-\label{sec:intro}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\subsection{Fast frequency domain LISA response}
-\label{sec:response}
-
--- Geometric setting, definitions, summarize the FD response
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\subsection{Reduced order model for EOBNRv2 waveforms.}
-\label{sec:waveforms}
-
--- Waveforms: EOBNRv2HMROM + PNext
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\subsection{Fast likelihood computation}
-\label{sec:likelihood}
-
--- Likelihood computation: fast overlaps
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\subsection{Fisher matrix parameter estimation}
-\label{sec:Fisher}
-
--- Fisher matrices computation: step self-tuning,...
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\subsection{Bayesian sampling}
-\label{sec:samplers}
-
--- Bayesian samplers: Multinest, PTMCMC
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 \section{Instrument response}
 \label{sec:response}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\subsection{LISAframe parameters}
+\subsection{The LISA response}
+\label{sec:lisaresponse}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{LISA-frame parameters}
 \label{sec:LISAframe}
 
 -- LISA frame angles
@@ -202,6 +166,47 @@ where $\Lambda$ appears as an overall normalization factor, playing the role of 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\section{Methodology}
+\label{sec:method}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Frequency domain LISA response}
+\label{sec:response}
+
+-- Geometric setting, definitions, summarize the FD response
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Reduced order model for EOBNRv2 waveforms.}
+\label{sec:waveforms}
+
+-- Waveforms: EOBNRv2HMROM + PNext
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Likelihood computation}
+\label{sec:likelihood}
+
+-- Likelihood computation: fast overlaps
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Fisher matrix parameter estimation}
+\label{sec:Fisher}
+
+-- Fisher matrices computation: step self-tuning,...
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Bayesian sampling}
+\label{sec:samplers}
+
+-- Bayesian samplers: Multinest, PTMCMC
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \section{Morphology of the signals}
 \label{sec:morph}
 
@@ -209,8 +214,15 @@ where $\Lambda$ appears as an overall normalization factor, playing the role of 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\subsection{Temporal development of SNR}
-\label{sec:timeSNR}
+\subsection{Signals and transfer functions}
+\label{sec:signaltransfer}
+
+-- SNR accumulation with time or frequency: inspiral/MRD balance across mass range
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Time and frequency accumulation of SNR}
+\label{sec:timefreqSNR}
 
 -- SNR accumulation with time or frequency: inspiral/MRD balance across mass range
 
@@ -224,7 +236,7 @@ where $\Lambda$ appears as an overall normalization factor, playing the role of 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsection{A non-degenerate case}
-\label{sec:high-M-non-deg}
+\label{sec:SMBHPEnondeg}
 
 -- High-mass system, non-degenerate, 22 and HM + Fisher - stacked SNR contours
 eg:
@@ -239,8 +251,18 @@ Case 0
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\subsection{Accumulating signal with time}
+\label{sec:SMBHPEacctime}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{SNR dependence of parameter estimation}
+\label{sec:SMBHPEdistance}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \subsection{Highlighting degeneracies}
-\label{sec:degen}
+\label{sec:SMBHPEdegen}
 
 - Highlighting degeneracies
 
