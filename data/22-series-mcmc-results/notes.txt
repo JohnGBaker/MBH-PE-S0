@@ -1,0 +1,40 @@
+#Some analysis examples:
+#(note I have checked out flare (with ptmcmc) in ../../flare dir
+
+#within-group analysis: 
+
+#STP_00
+python ../../../flare/ptmcmc/python/comparechains.py STP_00_lm22_*/*_resampled.dat --tag trials
+#--> STP_00_lm22_b/STP_00_lm22_trials_corner.png
+#All 4 cases except red=b_1 are consistent.  b_1 shows marginal differences
+#combine data:
+cat STP_00_lm22_b_0/*_resampled.dat STP_00_lm22_[cd]/*_resampled.dat  > STP_00_lm22_full_joint_resampled.dat
+cat STP_00_lm22_[cd]/*_resampled.dat  > STP_00_lm22_joint_resampled.dat
+
+#STP_09
+python ../../../flare/ptmcmc/python/comparechains.py STP_09_lm22_*/*_resampled.dat --tag trials
+#--> STP_09_lm22_c/STP_09_lm22_trials_corner.png
+#All cases look consistent.
+#combine data:
+cat STP_09_lm22_*/*_resampled.dat  > STP_09_lm22_full_joint_resampled.dat
+cat STP_09_lm22_[cd]/*_resampled.dat  > STP_09_lm22_joint_resampled.dat
+
+#STP_12
+python ../../../flare/ptmcmc/python/comparechains.py STP_12_lm22_*/*_resampled.dat --tag trials
+#--> STP_12_lm22_c/STP_12_lm22_trials_corner.png
+#All cases look consistent.
+#combine data:
+cat STP_12_lm22_*/*_resampled.dat  > STP_12_lm22_full_joint_resampled.dat
+cat STP_12_lm22_[cd]/*_resampled.dat  > STP_12_lm22_joint_resampled.dat
+
+#STP_13
+python ../../../flare/ptmcmc/python/comparechains.py STP_13_lm22_*/*_resampled.dat --tag trials
+#--> STP_13_lm22_a/STP_13_lm22_trials_corner.png
+#??Both cases a0/1 look consistent.
+#combine data:
+cat STP_13_lm22_*/*_resampled.dat  > STP_13_lm22_joint_resampled.dat
+
+
+########
+#Series analysis:
+python ../../../flare/ptmcmc/python/comparechains.py *lm22_joint_resampled.dat --tag t-series
