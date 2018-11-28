@@ -1,0 +1,30 @@
+#Some analysis examples:
+#(note I have checked out flare (with ptmcmc) in ../../flare dir
+
+#within-group analysis: 
+
+#STP_00
+python ../../../flare/ptmcmc/python/comparechains.py STP_00_lm55_*/*_resampled.dat --tag trials
+#--> STP_00_lm55_c/STP_00_lm55_trials_corner.png
+#Both cases c/d look consistent.
+#combine data:
+cat STP_00_lm55_?/*_resampled.dat  > STP_00_lm55_joint_resampled.dat
+
+#STP_09
+python ../../../flare/ptmcmc/python/comparechains.py STP_09_lm55_*/*_resampled.dat --tag trials
+#--> STP_09_lm55_c/STP_09_lm55_trials_corner.png
+#Both cases c/d look consistent.
+#combine data:
+cat STP_09_lm55_?/*_resampled.dat  > STP_09_lm55_joint_resampled.dat
+
+#STP_12
+python ../../../flare/ptmcmc/python/comparechains.py STP_12_lm55_*/*_resampled.dat --tag trials
+#--> STP_12_lm55_c/STP_12_lm55_trials_corner.png
+#Both cases c/d look consistent.
+#combine data:
+cat STP_12_lm55_?/*_resampled.dat  > STP_12_lm55_joint_resampled.dat
+
+
+########
+#Series analysis:
+python ../../../flare/ptmcmc/python/comparechains.py *_resampled.dat --tag t-series
