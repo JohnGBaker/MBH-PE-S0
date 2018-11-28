@@ -1,4 +1,4 @@
-\documentclass[aps,showpacs,twocolumn,prd,superscriptaddress,nofootinbib]{revtex4}
+\documentclass[aps,showpacs,twocolumn,prd,superscriptaddress,nofootinbib]{revtex4-1}
 
 \usepackage{amsmath}
 \usepackage{amsfonts}
@@ -9,6 +9,8 @@
 %\usepackage{color}
 \usepackage{enumerate}
 \usepackage{ulem}
+\usepackage{tabularx}
+\usepackage{braket}
 
 \usepackage{color}
 \usepackage[usenames,dvipsnames,svgnames,table]{xcolor}
@@ -28,6 +30,12 @@
 \newcommand\ud{{\mathrm{d}}}
 \newcommand\uD{{\mathrm{D}}}
 \newcommand\calO{{\mathcal{O}}}
+\newcommand\calM{{\mathcal{M}}}
+\newcommand\calF{{\mathcal{F}}}
+\newcommand\calT{{\mathcal{T}}}
+\newcommand\calD{{\mathcal{D}}}
+\newcommand\calA{{\mathcal{A}}}
+\newcommand\calL{{\mathcal{L}}}
 \newcommand\bfx{\mathbf{x}}
 \newcommand{\ov}[1]{\overline{#1}}
 \newcommand{\ph}[1]{\phantom{#1}}
@@ -37,12 +45,19 @@
 \newcommand{\Hz}{\,\mathrm{Hz}}
 \newcommand{\sinc}{\,\mathrm{sinc}}
 \newcommand{\Msol}{M_{\odot}}
-\newcommand\calL{{\mathcal{L}}}
-\newcommand\calA{{\mathcal{A}}}
+\newcommand{\Mchirp}{M_{c}}
 \newcommand\betaL{{\beta_{L}}}
 \newcommand\lambdaL{{\lambda_{L}}}
 \newcommand\varphiL{{\varphi_{L}}}
 \newcommand\psiL{{\psi_{L}}}
+\newcommand{\tf}{t_{f}}
+\newcommand{\Tf}{T_{f}}
+\newcommand{\tfd}{t_{f}^{d}}
+\newcommand{\tfSPA}{t_{f}^{\rm SPA}}
+\newcommand{\TfSPA}{T_{f}^{\rm SPA}}
+
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
 
 \newcommand{\SM}[1]{{\color{Blue} #1}}
 \newcommand{\jgb}[1]{{\color{DarkGreen} #1}}
@@ -88,20 +103,266 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Instrument response}
+\section{The LISA instrument response}
 \label{sec:response}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\subsection{The LISA response}
+\subsection{The LISA response - OLD}
 \label{sec:lisaresponse}
+
+\SM{------------------------------------------------------}
+
+\SM{[copy-paste from previous paper -- just here to copy needed formulas / refs]}
+
+We begin by detailing the model that we use for the response of a LISA-like detector, together with the assumptions used and their limitations. Since our aim is to assess the accuracy of our direct Fourier-domain treatment of the response, we can focus on the gravitational-wave contribution to the basic single-link observables. We therefore use a somewhat simplified model for the time-domain response~\cite{Krolak+04}, ignoring corrections that would be crucial from the point of view of noise cancellations, keeping in mind that the response model can be enriched later without affecting the conclusions of the present analysis.
+
+The frequency-shift response for a single link~\eqref{eq:yslr} was derived in Ref.~\cite{EW75} (see also~\cite{CR02, RCP04, Finn08, Cornish09}). Several assumptions enter the result as written in~\eqref{eq:yslr}: (i) effects of the order $v/c$ are neglected, including for instance the special relativistic Doppler effect created by the relative speeds of the spacecraft on their orbits (ii) the propagation is assumed to take place in a flat spacetime, perturbed only by the gravitational wave; thus the gravitational redshift as well as the deflection of light created by the gravitational potential of the Sun is ignored (iii) all geometric factors are evaluated at a single time, whereas one should consider the beam as propagating from the position of the first spacecraft at the time of emission to the position of the second scapecraft at the time of reception, leading to a point-ahead effect.
+
+Additionally, we limit ourselves to a rigid model for the orbits of the constellation, namely we assume that the constellation remains in an equilateral configuration with fixed armlengths. These simplified orbits neglect (iv) effects of order $e^{2}$ from the eccentricity of the individual Keplerian orbits, (v) the effect of gravitational perturbations coming from other celestial bodies, such as the Earth, the quadrupole of the Sun, and the other planets. Note that although we can neglect all the effects (i)-(v) for our present study, keeping track of these corrections is crucial for the purpose of laser noise cancellations, and led to the development of new generations of TDI observables~\cite{Tintoliving}.
+
+It is natural to split the response~\eqref{eq:yslr} into two steps: first the orbital delay related to the orbit around the Sun of the whole constellation, and then the constellation response. The baselines for the delays are indeed very different in the two cases. Geometrical projection factors aside, we have for the orbit around the Sun $R=1\text{au}=1.5\times 10^{8} \text{km}$, while the detector armlength is $L=2.5\times 10^{6}\text{km}$ (in the configuration proposed in~\cite{LISA17}). It is natural to define two transfer frequencies for the two relevant length scales for the delays, defined such that a wavelength fits within this length scale, i.e. $2\pi f d = 1$. This gives
+\begin{subequations}\label{eq:transferfrequencies}
+\begin{align}
+	f_{R} &= 3.2\times10^{-4}\Hz \,,\\
+	f_{L} &= 1.9\times 10^{-2}\Hz \,.
+\end{align}
+\end{subequations}
+The LISA response will behave qualitatively differently on the three frequency bands $f \leq f_{R}$, $f_{R} \leq f \leq f_{L}$ and $f_{L} \leq f$.
+
+The first stage of the response, the orbital delay, consists simply in applying the varying time delay to bring the wavefront sampling point from the SSB reference to the center of the LISA triangular constellation, common to all $y_{slr}$ observables. For $h^{\rm TT}$ the transverse-traceless gravitational waveform in matrix form, we write this orbital time delay as
+\be\label{eq:defresponse0}
+	h_{0}^{\rm TT} (t) = h^{\rm TT}(t-\hatk\cdot p_{0}) \,,
+\ee
+with $p_{0}$ the position of the constellation center, which follows the Earth orbit around the Sun. The second stage of the response calculation comprises the remaining, constellation-centered response. For the single-link contribution to the response, for the laser link from spacecraft $s$ to spacecraft $r$ along a path in direction $n_l$, we write
+\begin{align}\label{eq:defresponseL}
+	y_{slr} &= \frac{1}{2} \frac{1}{1 - \hatk\cdot n_{l}} \nn\\
+	& \cdot n_{l}\cdot \left[ h_{0}^{\rm TT}(t - L - \hatk\cdot p^{L}_{s}) - h_{0}^{\rm TT}(t - \hatk\cdot p^{L}_{r}) \right] \cdot n_{l}\,,
+\end{align}
+where we reference the positions of the spacecraft relative to the center of the constellation, $p^{L}_{A} \equiv p_{A} - p_{0}$.
+
+As described in App.~\ref{app:notation} We will decompose the full signal in the contributions of the individual spin-weighted spherical modes $h_{\ell m}$, whose Fourier transforms are assumed to have a smooth amplitude and phase. First, we define the matrices $P_{+},P_{\times}$ such that, in the sense of matrices,
+\be
+	h^{\rm TT} = h_{+}P_{+} + h_{\times}P_{\times} \,.
+\ee
+We focus only on positive frequencies. Assuming that the approximation~\eqref{eq:zeronegativef} applies, we consider a single mode contribution, $h=h_{\ell m}$ with $m>0$. For each given mode we define a complex matrix $P_{\ell m}$ incorporating the spin-weighted spherical harmonic constant factor as
+\be
+	P_{\ell m} =
+	\begin{cases}
+	\frac{1}{2} {}_{-2}Y_{\ell m} \left( P_{+} + i P_{\times} \right) \text{ for } m>0\,,\\
+	\frac{1}{2} {}_{-2}Y_{\ell m}^{*} \left( P_{+} - i P_{\times} \right) \text{ for } m<0\,.
+	\end{cases}
+\ee
+
+We now turn to the transformation of~\eqref{eq:defresponse0} and~\eqref{eq:defresponseL} to the Fourier domain. Applying a pure delay as in~\eqref{eq:defresponse0} translates into
+\be\label{eq:G0}
+	G_{0}(f, t) = e^{-2i\pi f d_{0}(t)} \,,
+\ee
+with $d_{0} = -\hatk \cdot p_{0}$ the delay associated to the orbit around the Sun. For the leading-order response~\eqref{eq:transferlocal}, this gives a Fourier-domain transfer function common to all modes, that is a pure phase factor, proportional to the frequency but also $t_{f}$-dependent:
+\be\label{eq:transfer0local}
+	\calT_{0}^{\rm local}(f) = G_{0}(f, \tf)\,.
+\ee
+If $(\lambda, \beta)$ are the ecliptic longitude and latitude of the source in the sky, and if the orbital phase is set by convention to $0$ at $t=0$, the orbital delay has the simple expression
+\be\label{eq:delay0}
+	d_{0}(t) = -R \cos\beta \cos\left(\Omega_{0}t - \lambda\right)\,.
+\ee
+
+For the constellation part of response~\eqref{eq:defresponseL}, treated separately from the delay~\eqref{eq:delay0}, we write
+\begin{align}\label{eq:decomposeGslr}
+	F_{slr}^{L}(t) &= \frac{1}{2} \frac{1}{1 - \hatk\cdot n_{l}(t)} n_{l}(t) \cdot P_{\ell m} \cdot n_{l} (t) \,,\nn\\
+	d_{s}(t) &= - k\cdot p_{s}^{L}(t) \,, \quad d_{r}(t) = - k\cdot p_{r}^{L}(t) \,,\nn\\
+	G_{slr}^{L}(f,t) &=  F_{slr}^{L}(t) \left( e^{-2i\pi f (d_{s,L}(t) + L)} - e^{-2i\pi f d_{r}(t)} \right) \,.
+\end{align}
+The superscript $L$ indicates that the orbital delay~\eqref{eq:delay0} is not included. Since we also assume the rigid approximation for the constellation, where the armlengths are fixed, a particular simplification occurs when combining these individual delays, thanks to the relation $p^{L}_{r} - p^{L}_{s} =  L n_{l}$:
+\begin{align}\label{eq:GslrL}
+	G_{slr}^{L}(f,t) &= \frac{i \pi f L}{2} \sinc \left[ \pi f L\left(1-\hatk\cdot n_{l} \right) \right] \nn\\
+	& \quad \cdot \exp\left[ i \pi f \left( L + \hatk\cdot \left( p_{1}^{L} + p_{2}^{L} \right) \right) \right]  n_{l} \cdot P_{\ell m} \cdot n_{l} \,,
+\end{align}
+with all time-dependent vectors evaluated at $t$. This expression is well known as describing the frequency-dependency in the LISA response~\cite{Larson+99, Cornish01, CR02, RCP04}. In the local approximation~\eqref{eq:transferlocal}, the Fourier-domain transfer function then reads
+\begin{align}\label{eq:transferLlocal}
+	\calT_{slr}^{L, \mathrm{local}}(f) &= G_{slr}^{L}(f, \tf) \,.
+\end{align}
+For plotting purposes, we will also define
+\be\label{eq:transferLenvelope}
+	\overline{\calT}_{slr}^{L} (f) = \frac{i \pi f L}{2} n_{l} \cdot P_{\ell m} \cdot n_{l} (\tf)
+\ee
+which will serve as an estimate for the enveloppe function of the response, devoid of the zero-crossings at high frequencies of the $\sinc$ term in~\eqref{eq:GslrL}.
+
+Note that, if the corrections of Sec.~\ref{subsec:delays}, for non-negligible $\dot d$, are included for the constellation delays, the transfer function will not have this simple form anymore, as $\dot{d}$ will have a different velocity-dependent expression for the sending and receiving spacecraft. One must then separately handle $d_{s}$ and $d_{r}$ in~\eqref{eq:decomposeGslr} to compute the corrections.
+
+The orbital response~\eqref{eq:transfer0local}-\eqref{eq:delay0} takes a simple analytic form, but the phase contribution of this delay is significant across most of the frequency band and can be large for $f \gg f_{R}$.
+
+The constellation response~\eqref{eq:GslrL}-\eqref{eq:transferLlocal} can be interpreted as the Fourier-domain translation of a discrete derivative taken on the waveform. The leading factor in~\eqref{eq:GslrL} shows that the amplitude of the response is proportional to $f$ in the low-frequency limit $f\ll f_{L}$, where the other factors are essentially unity. For $f\gtrsim f_{L}$, the $\sinc$ and the phase of the exponential generate additional structure in the response, including zero-crossings when the projected armlength is an integer number of wavelengths. From~\eqref{eq:transferLlocal}, an expansion for small $f\ll f_{L}$ yields back a Fourier-domain analog of the low-frequency approximation of the response~\cite{Cutler97, RCP04}, which is equivalent to having two LIGO-type interferometers turned by $\pi/4$ and set in motion.
+
+For analysis of the response we need a concrete set of gravitational waveforms. We will use the PhenomD model~\cite{Khan+15,Husa+15}, which provides Fourier-domain inspiral-merger-ringdown waveforms for aligned spins. We refer to App.~\ref{app:precLISA} for a brief discussion of the prospects for applying our formalism for the LISA response to precessing Fourier-domain waveforms.
+
+\SM{------------------------------------------------------}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\subsection{LISA-frame parameters}
+\subsection{The GW signal}
+\label{sec:gwsignal}
+
+We start by introducing a source-frame $(\hat{x}_{S}, \hat{y}_{S}, \hat{z}_{S})$ attached to the binary system emitting gravitational waves. For comparable-mass systems without spin, the natural choice is to take the normal to the orbital plane as $\hat{z}_{S}$, and we will assume that the remaining rotation around $\hat{z}_{S}$ is fixed by the phase convention of the waveform model (see Sec.~\ref{}).
+
+Introducing $k$ the wave propagation vector going from the source towards the observer, we define the inclination $\iota$ and the observer phase $\varphi$ simply as being its spherical angular coordinates $(\theta_{S}, \phi_{S})$, so that in the source-frame
+\be
+	k_{S} = (\sin\iota \cos\varphi, \sin\iota \sin\varphi, \cos\iota) \,.
+\ee
+
+By convention, for our polarization vectors $p$ and $q$ we will use the spherical coordinate vectors $p = e_{\theta}^{S}$, $q = e_{\phi}^{S}$. In terms of only $\hat{z}_{S}$,
+\bsub
+\begin{align}
+	p &= q \times k \,,\\
+	q &= \hat{z}_{S} \times k / |\hat{z}_{S} \times k|\,.
+\end{align}
+\esub
+If $H_{ij} = h_{ij}^{\rm TT}$ represents the gravitational wave signal in the transverse-traceless gauge,
+\be
+	H = h_{+} P_{+} + h_{\times} P_{\times}
+\ee
+with the polarization tensors
+\bsub
+\begin{align}
+	P_{+} &= p \otimes p - q \otimes q \,,\\
+	P_{\times} &= p \otimes q + q \otimes p \,.
+\end{align}
+\esub
+Conversely, the polarizations are
+\bsub
+\begin{align}
+	h_{+} &= \frac{1}{2} \left(p \otimes p - q \otimes q \right) : H \,,\\
+	h_{\times} &= \frac{1}{2} \left( p \otimes q + q \otimes p \right) : H \,.
+\end{align}
+\esub
+
+We will further decompose the gravitational wave signal, seen as a function of the direction of emission $(\iota, \varphi)$, in spin-weighted spherical harmonics as
+\be
+	h_{+} - i h_{\times} = \sum_{\ell \geq 2} \sum_{m = -\ell}^{\ell} {}_{-2}Y_{\ell m} (\iota, \varphi) h_{\ell m} \,,
+\ee
+where the explicit expression of the ${}_{-2}Y_{\ell m}$ is given in~\cite{}.
+
+The vectors $(p,q,k)$ form the Wave-frame, such that the gravitational wave takes in this frame the familiar form
+\be
+	H_{W} = \begin{pmatrix}
+		h_{+} & h_{\times} & 0 \\
+		h_{\times} & -h_{+} & 0 \\
+		0 & 0 & 0
+		\end{pmatrix} \,.
+\ee
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{LISA trajectories}
+\label{sec:lisatraj}
+
+For completeness, we gather in this appendix explicit expressions for the trajectory of the LISA constellation and the rotation matrices entering the response.
+
+The orbits of the three spacecrafts around the Sun can be chosen so that, at leading order in the eccentricity of the orbits, the constellation retains the shape of an equilateral triangle in a cartwheeling motion following the Earth orbit. We denote by $a$ the semi-major axis, $e$ the eccentricity and pose $\alpha = \Omega_{0} (t-t_{0}))$, with $t_{0}$ a reference time for the initial position ($t_{0} = 0$ in our case). The reference SSB frame is $(\hat{x}, \hat{y}, \hat{z})$.
+
+Using the notation $c,s = \cos, \sin \alpha$, the trajectory of the center of the constellation is simply
+\be
+	p_{0} = ac \hat{x} + as \hat{y} \,,
+\ee
+and we take $a\equiv R = 1 \, \mathrm{au}$. We denote the positions of the spacecrafts as $p_{A}$ for $A=1,2,3$, and the positions relative to the constellation center as $p_{A}^{L} = p_{A} - p_{0}$. Setting $\beta_{A} = 2(A-1)\pi/3 + \beta_{0}$ (with $\beta_{0}$ and initial condition set to 0 in our case), the Cartesian coordinates in the SSB-frame of the position of the spacecrafts read~\cite{}
+\bsub
+\begin{align}
+	p_{A}^{L} &= a e \left[ \sin \beta_{A} c s - \cos\beta_{A} \left( 1 + s^{2} \right) \right] \hat{x} \nn\\
+	& + a e \left[ \cos \beta_{A} c s - \sin\beta_{A} \left( 1 + c^{2} \right) \right] \hat{y} \nn\\
+	& - a e \sqrt{3} \cos(\alpha - \beta_{A}) \hat{z} \,,
+\end{align}
+\esub
+The armlength, constant in this approximation, is related to the eccentricity and semi-major axis by
+\be
+	L = 2\sqrt{3} a e \,.
+\ee
+The rigid approximation for the constellation, at first order in $e$, can be seen as being at first order in $L/R \simeq 0.017$ for a $2.5 \, \mathrm{Gm}$ armlength~\cite{}.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{The LISA frame}
 \label{sec:LISAframe}
 
--- LISA frame angles
+It will be very useful to introduce a time-dependent frame $(\hat{x}_{L}, \hat{y}_{L}, \hat{z}_{L})(t)$ following the detector in its motion. Specifically, we choose this LISA frame such that at any time,
+\bsub
+\begin{align}
+	p_{1}^{L} &= - \frac{L}{\sqrt{3}} \hat{x}_{L} \,,\\
+	p_{2}^{L} &= \frac{L}{2\sqrt{3}} \hat{x}_{L} - \frac{L}{2} \hat{y}_{L} \,,\\
+	p_{3}^{L} &= \frac{L}{2\sqrt{3}} \hat{x}_{L} + \frac{L}{2} \hat{y}_{L} \,.\\
+\end{align}
+\esub
+
+This frame also provides us with an equivalent representation of the trajectories making use of rotation matrices. Since in our rigid approximation the constellation remains an equilateral triangle in its cartwheeling motion around the Sun, the configuration of the constellation at a later time is given by a rotation around the Sun composed with a rotation of the constellation around its symmetry axis.
+
+If $R(v,\varpi)$ denotes the matrix of an active rotation around the vector $v$ by an angle $\varpi$, and if we denote by $R_{L}$ the active rotation from the SSB-frame to the L-frame such that for each of the three basis vectors $(\hat{x}_{L}, \hat{y}_{L}, \hat{z}_{L}) = R_{L} (\hat{x}, \hat{y}, \hat{z})$, we have
+\be\label{eq:RL}
+	R_{L} = R(z, \alpha) \cdot R(y, -\pi/3) \cdot R(z, -\alpha) \,,
+\ee
+where we recall that $\alpha = \Omega_{0} (t-t_{0}) $. For all vectors $X$ among $p_{A}^{L}$, $n_{A}$ we have $X(t) = R_{L} \cdot X(t=t_{0})$. If a vector $X$ is given by its components in the SSB-frame, in the L-frame the components are $X_{L} = R_{L}^{-1} \cdot X$.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{From the Wave frame to the SSB frame}
+\label{sec:wavessbframe}
+
+We can now relate the Wave-frame to the SSB-frame. The source position in the sky is given by $(\lambda, \beta)$, the ecliptic longitude and latitude in the SSB-frame. Like with the Source-frame, we can introduce spherical vectors $(e_{r}^{SSB}, e_{\theta}^{SSB}, e_{\phi}^{SSB})$. Since the propagation vector is $k = - e_{r}^{SSB}$,
+\be
+	k = (- \cos\beta\cos\lambda, - \cos\beta\sin\lambda, -\sin\beta) \,.
+\ee
+
+The last degree of freedom between the frames represents a rotation along the line-of-sight, parametrized by the polarization angle $\psi$. We introduce reference polarization vectors in the SSB-frame as
+\bsub
+\begin{align}
+	u &= \hat{z} \times k / |\hat{z} \times k| \,,\\
+	v &= k \times u \,.
+\end{align}
+\esub
+In terms of spherical vectors, $(k, u, v) = (-e_{r}^{SSB}, -e_{\phi}^{SSB}, -e_{\theta}^{SSB})$. The polarization angle $\psi$ is then defined such that $(p,q)$ are obtained by rotating $(u,v)$ by the angle $\psi$ around $k$, i.e.
+\be
+	(p,q) = R(k, \psi) \cdot (u,v) \,.
+\ee
+
+These relations can be summarized by the active rotation matrix from the SSB-frame to the Wave-frame $R_{W}$:
+\be\label{eq:RW}
+	R_{W} = R(z, \lambda - \pi/2) \cdot R(x, \beta + \pi/2 ) \cdot R(z, \psi)\,.
+\ee
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Parametrizing the signal in the LISA-frame}
+\label{sec:LISAframeparams}
+
+While long-lasting signals like SOBHs will see a strong imprint of the LISA orbital motion over the course of observation, SMBH signals are dominated in SNR by a short-lived burst of emission at merger. For such signals, it will be useful to use a parametrization based on the L-frame at the time of merger instead of the SSB frame.
+
+The new parameters are defined as playing the same role as the SSB parameters, but relative to the L-frame. Namely, we define $R_{LW}$ the active rotation matrix from the L-frame to the Wave-frame, expressed in the L-frame basis, so that for each basis vector expressed in the L-frame basis $(\hat{x}_{W}, \hat{y}_{W}, \hat{z}_{W})_{L} = R_{LW} \cdot (\hat{x}_{L}, \hat{y}_{L}, \hat{z}_{L})_{L}$. The defining condition on $(\lambda_{L}, \beta_{L}, \psi_{L})$ is
+\be\label{eq:defRLW}
+	R_{LW} = R(z, \lambda_{L} - \pi/2) \cdot R(x, \beta_{L} + \pi/2 ) \cdot R(z, \psi_{L}) \,.
+\ee
+
+Coming back to vectors expressed in the SSB-basis, $R_{L}^{-1} \cdot (\hat{x}_{W}, \hat{y}_{W}, \hat{z}_{W}) = R_{LW} \cdot R_{L}^{-1} \cdot (\hat{x}_{L}, \hat{y}_{L}, \hat{z}_{L})$. Since $ (\hat{x}_{W}, \hat{y}_{W}, \hat{z}_{W}) = R_{W} \cdot (\hat{x}, \hat{y}, \hat{z})$ and $ (\hat{x}_{L}, \hat{y}_{L}, \hat{z}_{L}) = R_{L} \cdot (\hat{x}, \hat{y}, \hat{z})$, we arrive at
+\be\label{eq:RLW}
+	R_{LW} = R_{L}^{-1} \cdot R_{W} \,.
+\ee
+
+Combining~\eqref{eq:RLW}, \eqref{eq:RL}, \eqref{eq:RW} and~\eqref{eq:defRLW} yields the following expressions for the L-frame angular parameters\footnote{The convention here is that the point of coordinates $(x,y)$ in the plane has for argument $\arctan\left[ x, y \right]$.}:
+\bsub
+\begin{align}
+	\beta_{L} &= \arcsin \left[ \cos \frac{\pi}{3} \sin \beta - \sin \frac{\pi}{3} \cos \beta \cos \left( \lambda - \alpha \right) \right] \,,\\
+	\lambda_{L} &= \arctan \left[ \cos\beta \cos\lambda \left( \cos \frac{\pi}{3} \cos^{2}\alpha + \sin^{2}\alpha \right) \right. \nn\\
+	& \qquad\quad\;\; \left. + \cos\beta \sin\lambda \cos\alpha \sin\alpha \left( \cos\frac{\pi}{3} - 1 \right) \right. \nn\\
+	& \qquad\quad\;\; \left. + \sin\frac{\pi}{3} \sin\beta \cos\alpha , \right. \nn\\
+	& \qquad\qquad\; \left. \cos\beta \sin\lambda \left( \cos \frac{\pi}{3} \sin^{2}\alpha + \cos^{2}\alpha \right) \right. \nn\\
+	& \qquad\quad\;\; \left. + \cos\beta \cos\lambda \cos\alpha \sin\alpha \left( \cos\frac{\pi}{3} - 1 \right) \right. \nn\\
+	& \qquad\quad\;\; \left. + \sin\frac{\pi}{3} \sin\beta \sin\alpha \right] \,,\\
+	\lambda_{L} &= \arctan \left[ \cos\psi \left( \cos\frac{\pi}{3}\cos\beta + \sin\frac{\pi}{3} \sin\beta \cos(\lambda - \alpha)\right) \right. \nn\\
+	& \qquad\quad\;\; \left. + \sin \psi \sin\frac{\pi}{3} \sin(\lambda - \alpha), \right. \nn\\
+	& \qquad\qquad\; \left. \sin\psi \left( \cos\frac{\pi}{3}\cos\beta + \sin\frac{\pi}{3} \sin\beta \cos(\lambda - \alpha)\right) \right. \nn\\
+	& \qquad\quad\;\; \left. - \cos \psi \sin\frac{\pi}{3} \sin(\lambda - \alpha) \right] \,.
+\end{align}
+\esub
+
+The definition of the reference phase $\phi_{\rm Ref}$, \dots
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -112,7 +373,7 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\subsection{A simplified likelihood model}
+\subsection{A simple extrinsic likelihood}
 \label{sec:simple-like}
 
 In this section, we investigate a simplified form of the extrinsic likelihood and the structure of its degeneracies.
@@ -138,15 +399,15 @@ In each channel, we separate the contribution of the modes $h_{22}$ and $h_{2,-2
 with
 \bsub\label{eq:defa22a2m2}
 \begin{align}
-	a_{22} &= \frac{3i}{4d} \sqrt{\frac{5}{\pi}} \cos^{4}\frac{\iota}{2} e^{2i(-\varphiL-\psiL)} \left( D_{a}^{+} + i D_{a}^{\times} \right) \,, \\
-	a_{2,-2} &= \frac{3i}{4d} \sqrt{\frac{5}{\pi}} \sin^{4}\frac{\iota}{2} e^{2i(-\varphiL+\psiL)} \left( D_{a}^{+} - i D_{a}^{\times} \right) \,.
+	a_{22} &= \frac{3i}{4d} \sqrt{\frac{5}{\pi}} \cos^{4}\frac{\iota}{2} e^{2i(-\varphi-\psiL)} \left( D_{a}^{+} + i D_{a}^{\times} \right) \,, \\
+	a_{2,-2} &= \frac{3i}{4d} \sqrt{\frac{5}{\pi}} \sin^{4}\frac{\iota}{2} e^{2i(-\varphi+\psiL)} \left( D_{a}^{+} - i D_{a}^{\times} \right) \,.
 \end{align}
 \esub
 and similarly for the E channel with $D_{e}^{+,\times}$ instead of $D_{a}^{+, \times}$ as
 \bsub\label{eq:defe22e2m2}
 \begin{align}
-	e_{22} &= \frac{3i}{4d} \sqrt{\frac{5}{\pi}} \cos^{4}\frac{\iota}{2} e^{2i(-\varphiL-\psiL)} \left( D_{e}^{+} + i D_{e}^{\times} \right) \,, \\
-	e_{2,-2} &= \frac{3i}{4d} \sqrt{\frac{5}{\pi}} \sin^{4}\frac{\iota}{2} e^{2i(-\varphiL+\psiL)} \left( D_{e}^{+} - i D_{e}^{\times} \right) \,.
+	e_{22} &= \frac{3i}{4d} \sqrt{\frac{5}{\pi}} \cos^{4}\frac{\iota}{2} e^{2i(-\varphi-\psiL)} \left( D_{e}^{+} + i D_{e}^{\times} \right) \,, \\
+	e_{2,-2} &= \frac{3i}{4d} \sqrt{\frac{5}{\pi}} \sin^{4}\frac{\iota}{2} e^{2i(-\varphi+\psiL)} \left( D_{e}^{+} - i D_{e}^{\times} \right) \,.
 \end{align}
 \esub
 Here, we introduced the dimensionless luminosity distance ratio $d \equiv D / D^{\rm inj}$.
@@ -325,6 +586,7 @@ Thus, with~\eqref{eq:solutionbetaL}, \eqref{eq:solutionlambdaL} and $\beta_{L}^{
 -- Performance: waveform and likelihood costs, number of sampler evaluations
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Discussion}
 \label{sec:discussion}
@@ -342,5 +604,29 @@ Other questions:
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\appendix
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Numerical integration with spline-interpolated phases}
+\label{sec:numintegration}
+
+[describe implementation of 0-noise integrals]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Reduced-order model for EOBNRv2HMROM}
+\label{sec:rom}
+
+[describe implementation of the ROM]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\bibliography{references.bib}
 
 \end{document}
