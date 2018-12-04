@@ -55,6 +55,9 @@
 \newcommand{\tfd}{t_{f}^{d}}
 \newcommand{\tfSPA}{t_{f}^{\rm SPA}}
 \newcommand{\TfSPA}{T_{f}^{\rm SPA}}
+\newcommand{\sYlm}{{}_{-2}Y_{\ell m}}
+\newcommand{\sYlmstar}{{}_{-2}Y_{\ell, -m}^{*}}
+\newcommand{\sYlminusmstar}{{}_{-2}Y_{\ell, -m}^{*}}
 
 \newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
 \newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
@@ -237,7 +240,7 @@ Conversely, the polarizations are
 \esub
 
 We will further decompose the gravitational wave signal, seen as a function of the direction of emission $(\iota, \varphi)$, in spin-weighted spherical harmonics as
-\be
+\be\label{eq:hpcmodes}
 	h_{+} - i h_{\times} = \sum_{\ell \geq 2} \sum_{m = -\ell}^{\ell} {}_{-2}Y_{\ell m} (\iota, \varphi) h_{\ell m} \,,
 \ee
 where the explicit expression of the ${}_{-2}Y_{\ell m}$ is given in~\cite{}.
@@ -250,6 +253,14 @@ The vectors $(p,q,k)$ form the Wave-frame, such that the gravitational wave take
 		0 & 0 & 0
 		\end{pmatrix} \,.
 \ee
+
+We will both generate the waveforms and apply the response directly in the Fourier domain. Our convention for the Fourier transform is
+\be\label{eq:defFourier}
+	\tilde{F}(f) = \int dt \; e^{2 i \pi f t} F(t) \,.
+\ee
+Note that this differs by a change $f\rightarrow -f$ from the most usual one (used e.g. in \texttt{LAL}).
+
+The definition of the reference time and phase \dots
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -305,7 +316,7 @@ where we recall that $\alpha = \Omega_{0} (t-t_{0}) $. For all vectors $X$ among
 \subsection{From the Wave frame to the SSB frame}
 \label{sec:wavessbframe}
 
-We can now relate the Wave-frame to the SSB-frame. The source position in the sky is given by $(\lambda, \beta)$, the ecliptic longitude and latitude in the SSB-frame. Like with the Source-frame, we can introduce spherical vectors $(e_{r}^{SSB}, e_{\theta}^{SSB}, e_{\phi}^{SSB})$. Since the propagation vector is $k = - e_{r}^{SSB}$,
+We can now relate the Wave-frame to the SSB-frame, which will fix our convention for the sky position and polarization angle. The source position in the sky is given by $(\lambda, \beta)$, the ecliptic longitude and latitude in the SSB-frame. Like with the Source-frame, we can introduce spherical vectors $(e_{r}^{SSB}, e_{\theta}^{SSB}, e_{\phi}^{SSB})$. Since the propagation vector is $k = - e_{r}^{SSB}$,
 \be
 	k = (- \cos\beta\cos\lambda, - \cos\beta\sin\lambda, -\sin\beta) \,.
 \ee
@@ -322,7 +333,7 @@ In terms of spherical vectors, $(k, u, v) = (-e_{r}^{SSB}, -e_{\phi}^{SSB}, -e_{
 	(p,q) = R(k, \psi) \cdot (u,v) \,.
 \ee
 
-These relations can be summarized by the active rotation matrix from the SSB-frame to the Wave-frame $R_{W}$:
+These relations can be summarized by the active rotation matrix $R_{W}$ from the SSB-frame to the Wave-frame:
 \be\label{eq:RW}
 	R_{W} = R(z, \lambda - \pi/2) \cdot R(x, \beta + \pi/2 ) \cdot R(z, \psi)\,.
 \ee
@@ -355,7 +366,7 @@ Combining~\eqref{eq:RLW}, \eqref{eq:RL}, \eqref{eq:RW} and~\eqref{eq:defRLW} yie
 	& \qquad\qquad\; \left. \cos\beta \sin\lambda \left( \cos \frac{\pi}{3} \sin^{2}\alpha + \cos^{2}\alpha \right) \right. \nn\\
 	& \qquad\quad\;\; \left. + \cos\beta \cos\lambda \cos\alpha \sin\alpha \left( \cos\frac{\pi}{3} - 1 \right) \right. \nn\\
 	& \qquad\quad\;\; \left. + \sin\frac{\pi}{3} \sin\beta \sin\alpha \right] \,,\\
-	\lambda_{L} &= \arctan \left[ \cos\psi \left( \cos\frac{\pi}{3}\cos\beta + \sin\frac{\pi}{3} \sin\beta \cos(\lambda - \alpha)\right) \right. \nn\\
+	\psi_{L} &= \arctan \left[ \cos\psi \left( \cos\frac{\pi}{3}\cos\beta + \sin\frac{\pi}{3} \sin\beta \cos(\lambda - \alpha)\right) \right. \nn\\
 	& \qquad\quad\;\; \left. + \sin \psi \sin\frac{\pi}{3} \sin(\lambda - \alpha), \right. \nn\\
 	& \qquad\qquad\; \left. \sin\psi \left( \cos\frac{\pi}{3}\cos\beta + \sin\frac{\pi}{3} \sin\beta \cos(\lambda - \alpha)\right) \right. \nn\\
 	& \qquad\quad\;\; \left. - \cos \psi \sin\frac{\pi}{3} \sin(\lambda - \alpha) \right] \,.
@@ -366,14 +377,189 @@ The definition of the reference phase $\phi_{\rm Ref}$, \dots
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\subsection{The low-frequency limit}
-\label{sec:low-freq}
+\subsection{Mode decomposition and polarization angle}
+\label{sec:modespol}
 
--- make the connection to low-f response (2 interferometers)
+We now translate the mode decomposition~\eqref{eq:hpcmodes} in the Fourier domain, and make more explicit the dependence of the signal in the polarization $\psi$, so as to make manifest its purely extrinsic nature. Indeed, $\psi$ enters the observables only through constant prefactors, which is a bit obscured by the rotation matrix formulation~\eqref{eq:RW}.
+
+The mode decomposition~\eqref{eq:hpcmodes} gives (dropping $(\iota, \varphi)$)
+\bsub
+\begin{align}
+	h_{+} = \frac{1}{2} \sum_{\ell, m} \left( \sYlm h_{\ell, m} + \sYlmstar h_{\ell, m}^{*} \right) \,,\\
+	h_{+} = \frac{i}{2} \sum_{\ell, m} \left( \sYlm h_{\ell, m} - \sYlmstar h_{\ell, m}^{*} \right) \,,
+\end{align}
+\esub
+which is valid in general. Now, for non-precessing binary systems, an exact symmetry relation between modes reads
+\be\label{eq:nonprecsymmetry}
+	h_{\ell, -m} = (-1)^{\ell} h_{\ell, m}^{*} \,.
+\ee
+Using this symmetry, we can write
+\be
+	h_{+,\times} = \sum_{\ell, m} K_{\ell m}^{+, \times} h_{\ell m} \,, 
+\ee
+with
+\bsub
+\begin{align}
+	K_{\ell m}^{+} =\frac{1}{2} \left( \sYlm + (-1)^{\ell} \sYlminusmstar \right) \,,\\
+	K_{\ell m}^{\times} = \frac{i}{2} \left( \sYlm - (-1)^{\ell} \sYlminusmstar \right) \,.
+\end{align}
+\esub
+
+Going to the Fourier domain, an approximation often used is to neglect support for negative/positive frequencies according to
+\be\label{eq:approxnegf}
+	\tilde{h}_{\ell m} (f) \simeq 0 \;\; \text{for} \;\; m<0, \; f>0 \;\; ( m>0, \; f<0 )\,,
+\ee
+and neglecting modes $h_{\ell 0}$. We will use this approximation throughout this paper. Note that we picked our Fourier convention~\eqref{eq:defFourier} to ensure that the mode $\tilde{h}_{22} (f)$ has support for $f>0$. Using~\eqref{eq:approxnegf},
+\be
+	\tilde{h}_{+,\times} = \sum_{\ell} \sum_{m>0} K_{\ell m}^{+, \times} \tilde{h}_{\ell m} \,.
+\ee
+
+Next, it is convenient to introduce mode-by-mode polarization matrices
+\be
+	P_{\ell m} = P_{+} K_{\ell m}^{+} + P_{\times} K_{\ell m}^{\times} \,,
+\ee
+so that
+\be
+	H = \sum_{\ell m} P_{\ell m} h_{\ell m} \,.
+\ee
+To make explicit the dependence in polarization, we can define polarization tensors for 0 polarization angle as
+\bsub
+\begin{align}
+	P_{+}^{0} &= P_{+}(\psi = 0) = u \otimes u - v \otimes v \,,\\
+	P_{\times}^{0} &= P_{\times}(\psi = 0) = u \otimes v + v \otimes u \,.
+\end{align}
+\esub
+This allows to write the dependence in polarization as
+\be
+	P_{+} + i P_{\times} = e^{-2 i \psi} \left( P_{+}^{0} + i P_{\times}^{0} \right) \,,
+\ee
+or explicitly in $P_{\ell m}$ as
+\begin{align}
+	P_{\ell m} &= \frac{1}{2} \sYlm e^{-2 i \psi} \left( P_{+}^{0} + i P_{\times}^{0} \right) \nn\\
+	& + \frac{1}{2} (-1)^{\ell} \sYlminusmstar e^{+2 i \psi} \left( P_{+}^{0} - i P_{\times}^{0} \right) \,.
+\end{align}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\subsection{A simple extrinsic likelihood}
+\subsection{The LISA observables}
+\label{sec:LISAobservables}
+
+The single-link frequency shift observable $y_{slr} = (\nu_{r} - \nu_{s})/\nu$ between sending spacecraft $s$ and receiving spacecraft $r$ along the link $l$ takes the form 
+\be\label{eq:defyslr}
+	y_{slr} = \frac{1}{2} \frac{n_{l} \otimes n_{l}}{1 - k\cdot n_{l}} : \left[ H(t - L - k\cdot p_{s}) - H(t - k\cdot p_{r}) \right] \,.
+\ee
+Several assumptions enter this form of the response: \dots. In the frequency domain, the corresponding form of the kernel $G^{\ell m}_{slr}(f, t)$ for the response to a given mode $h_{\ell m}$ in this approximation is
+\begin{align}\label{eq:Gslr}
+	G_{slr}^{\ell m}(f,t) &= \frac{i \pi f L}{2} \sinc \left[ \pi f L\left(1-k\cdot n_{l} \right) \right] \nn\\
+	& \quad \cdot \exp\left[ i \pi f \left( L + k\cdot \left( p_{1} + p_{2} \right) \right) \right]  n_{l} \cdot P_{\ell m} \cdot n_{l} \,.
+\end{align}
+
+In our rigid approximation, delays are simply all constant and constant to $L$. Using the shortcut notation $y_{sr,L} = y_{slr}(t - L)$, the first-generation TDI Michelson observable $X$ reads
+\begin{align}
+	X &= y_{31} + y_{13,L} + \left( y_{21} + y_{12,L} \right)_{2L} \nn\\
+	& - \left( y_{21} + y_{12,L} \right) - \left( y_{31} + y_{13,L} \right)_{2L} \,,
+\end{align}
+with the other Michelson observables $Y$, $Z$ being obtained by cyclic permutation. The independent combinations $A$, $E$ and $T$ are then defined as
+\bsub
+\begin{align}
+	A &= \frac{1}{\sqrt{2}} \left( Z - X \right) \,,\\
+	E &= \frac{1}{\sqrt{6}} \left( X - 2Y + Z \right) \,,\\
+	T &= \frac{1}{\sqrt{3}} \left( X + Y + Z \right) \,.
+\end{align}
+\esub
+These channels are independent under the approximation of an uncorrrelated noise between the arms. With constant delays in the rigid approximation, the TDI combinations take the form
+\bsub\label{eq:aet}
+\begin{align}
+	\tilde{a} &= \left[ (1+z) \left( \tilde{y}_{31} + \tilde{y}_{13} \right) - \tilde{y}_{23} - z \tilde{y}_{32} - \tilde{y}_{21} - z \tilde{y}_{12} \right] \,,\\
+	\tilde{e} &= \frac{1}{\sqrt{3}} \left[ (1-z)\left( \tilde{y}_{13} - \tilde{y}_{31} \right) + (2+z) \left( \tilde{y}_{12} - \tilde{y}_{32} \right) \right. \nn\\
+	&\qquad\quad \left. + (1+2z) \left( \tilde{y}_{21} - \tilde{y}_{23} \right) \right] \,,\\
+	\tilde{t} &= \frac{\sqrt{2}}{\sqrt{3}} \left[ \tilde{y}_{21} - \tilde{y}_{12} + \tilde{y}_{32} - \tilde{y}_{23} + \tilde{y}_{13} - \tilde{y}_{31} \right] \,,
+\end{align}
+\esub
+where we have introduced the rescalings
+\bsub\label{eq:scalingAET}
+\begin{align}
+	\tilde{a}, \tilde{e} &= \frac{1}{i \sqrt{2} z \sin 2\pi f L}\times \tilde{A}, \tilde{E} \,,\\
+	\tilde{t} &= \frac{1}{2\sqrt{2} z^{3} \sin \pi f L \sin 2\pi f L} \times \tilde{T} \,.
+\end{align}
+\esub
+Scaling out the same square factors from the noise power spectral density as
+\bsub
+\begin{align}
+	S_{n}^{A}, S_{n}^{E} &= 2 \sin^{2} 2\pi f L \times S_{n}^{a}, S_{n}^{e} \,,\\
+	S_{n}^{T} &= 8 \sin^{2} \pi f L \sin^{2} 2\pi f L S_{n}^{t} \,,
+\end{align}
+\esub
+the reduced PSD for the three channels take the form
+\bsub
+\begin{align}
+	S_{n}^{a} = S_{n}^{e} &= 2 \left( 3 + 2\cos 2\pi f L + \cos 4 \pi f L \right) S^{\rm pm}(f) \nn\\
+	& \quad + \left( 2 + \cos 2\pi f L \right) S^{\rm op}(f) \,,\\
+	S_{n}^{t} &= 4 \sin^{2} 2\pi f L S^{\rm pm}(f) + S^{\rm op}(f) \,,
+\end{align}
+\esub
+with $S^{\rm pm}$ the test-mass noise PSD and $S^{\rm op}$ the optical noise PSD. Here we ignore the confusion noise coming from the background of galactic binaries in the  LISA band. Note that the prefactors~\eqref{eq:scalingAET} are oscillatory and have zero-crossings at high frequencies, and scaling them out from both the signal and the noise is an approximation, as we can expect that the real delays would lead to imperfect cancellations in the vicinity of the zero-crossings. 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{The low-frequency limit}
+\label{sec:low-freq}
+
+As is well known~\cite{Cutler97}, in the low-frequency limit (also called the long-wavelength approximation), the finite-length effects of the arms of LISA disappear, and the response of the detectors falls back to the one of two LIGO-type detectors set in motion, rotated from each other by $\pi/4$.
+
+For $f \ll f_{L}$, we have $2\pi f L \ll 1$ and the kernel~\eqref{eq:defGslr} reduces to
+\be\label{eq:Gslrlowf}
+	G^{\ell m}_{slr} \simeq \frac{i \pi f L}{2} \exp\left[ 2 i \pi f k\cdot p_{0} \right] n_{l} \otimes n_{l} : P_{\ell m}\,.
+\ee
+For even lower frequencies, when $f \ll f_{R}$ as well, $2\pi f R \ll 1$ and the delay term is negligible: $\exp\left[ 2 i \pi f k\cdot p_{0} \right] \simeq 1$.
+
+In the following, we will also apply frequency-domain response at leading order in the separation of timescales~\cite{MB18}, so that the transfer functions are $\calT(f) = G(f, \tf)$ with $\tf$ the time-of-frequency function~\eqref{eq:deftf}. For $2\pi f L \ll 1$, we have $z\simeq 1$, and the link reversal symmetry $\tilde{y}_{slr} \simeq \tilde{y}_{r-ls}$, so that~\eqref{eq:aet} becomes
+\bsub\label{eq:aetlowf}
+\begin{align}
+	\tilde{a} &\simeq 4\tilde{y}_{31} - 2 \tilde{y}_{23} - 2 \tilde{y}_{12} \,,\\
+	\tilde{e} &\simeq 2\sqrt{3} \left[ \tilde{y}_{12}  - \tilde{y}_{23} \right] \,,\\
+	\tilde{t} &\simeq 0 \,,
+\end{align}
+\esub
+with the $T$-channel becoming negligible in this limit. Using~\eqref{eq:Gslrlowf}, we can write
+\be\label{eq:aelowfmodes}
+	\tilde{a}, \tilde{e} = \sum_{\ell, m>0} (-2i\pi f) \exp\left[ 2 i \pi f k\cdot p_{0} \right] \tilde{h}_{\ell m} D_{a,e} : P_{\ell m} \,,
+\ee
+where we introduced the detector tensors
+\bsub\label{eq:DaDe}
+\begin{align}
+	D_{a} &= \frac{L}{2} \left( n_{1}\otimes n_{1} + n_{3} \otimes n_{3} - 2 n_{2} \otimes n_{2} \right) \,,\\
+	D_{e} &= \frac{L\sqrt{3}}{2} \left( n_{1} \otimes n_{1} - n_{3} \otimes n_{3} \right) \,.
+\end{align}
+\esub
+Here, we have made apparent factors $(-2i\pi f)$ corresponding to the Fourier-domain translation of a time derivative. Indeed, the observables $\Delta \nu / \nu$ used here are time derivatives of the laser phase more commonly used for ground-based detectors.
+
+We can now map these two channels to two fictitious LIGO-type detectors as follows. For an orthogonal detector of the same setup as the ground-based LIGO and Virgo with armlength $L_{D}$, rotated by an angle $\epsilon_{D}$ from the basis vectors $x,y$, the detector tensor is
+\begin{align}
+	D &= \frac{L_{D}}{2} \left[ \cos 2\epsilon_{D} \left( x\otimes x - y\otimes y \right) \right. \nn\\
+	& \qquad\quad + \left. \sin 2\epsilon_{D} \left( x\otimes y + y \otimes x\right) \right] \,.
+\end{align}
+By comparison with~\eqref{eq:DaDe}, we obtain
+\be
+	L_{a} = L_{e} = \frac{3L}{2} \,, \; \epsilon_{a} = \frac{2\pi}{3} \,, \; \epsilon_{e} = \frac{5\pi}{12} \,.
+\ee
+Note a degeneracy $\pm \pi$ in how we choose to orient these effective detectors. We can recover pattern functions (for $\psi_{L}=0$) by factoring out the effective length, defining
+\be
+	F_{a,e}^{+,\times} \equiv \frac{2}{3L} D_{a,e} : P_{+,\times}^{0} \,,
+\ee
+which gives in terms of the LISA-frame sky position angles
+\bsub\label{eq:FapcFepc}
+\begin{align}
+	F_{a}^{+} &= \frac{1}{2} \left( 1 + \sin^{2}\beta_{L} \right) \sin \left(2\lambda_{L} + \frac{\pi}{6} \right) \,,\\
+	F_{a}^{\times} &= -\sin\beta_{L} \cos \left(2\lambda_{L} + \frac{\pi}{6} \right) \,,\\
+	F_{e}^{+} &= \frac{1}{2} \left( 1 + \sin^{2}\beta_{L} \right) \cos \left(2\lambda_{L} + \frac{\pi}{6} \right) \,,\\
+	F_{e}^{\times} &= \sin\beta_{L} \sin \left(2\lambda_{L} + \frac{\pi}{6} \right)  \,.
+\end{align}
+\esub
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{TO UPDATE -- A simple extrinsic likelihood}
 \label{sec:simple-like}
 
 In this section, we investigate a simplified form of the extrinsic likelihood and the structure of its degeneracies.
