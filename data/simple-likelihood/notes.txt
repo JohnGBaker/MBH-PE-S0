@@ -1,2 +1,13 @@
 full_c_effdata.dat
 Resampled ptmcmc output of standalone version of simple likelihood from July2017
+
+#results from Dec18 code
+#within-group analysis: 
+
+python ../../../flare/ptmcmc/python/comparechains.py simple_v1_*/*_resampled.dat --tag trials
+--> simple_v1_a0/simple_v1_atrials_corner.png
+Run a_1 looks 
+#combine data:
+cat simple_v1_*/*_resampled.dat >simple_v1_joint_resampled.dat
+
+

@@ -45,5 +45,7 @@ This is content being developed for a future paper.  Please wait for release or 
 
 ### PE SOBH
 
+--case 3/6?
+
 * full corner plot : SSB frame, 22, bambi/ptmcmc and Fisher -- ptmcmc and Fisher to be completed
 * table for likelihood/sampler performance
