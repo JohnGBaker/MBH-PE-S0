@@ -1,0 +1,2 @@
+full_c_effdata.dat
+Resampled ptmcmc output of standalone version of simple likelihood from July2017
