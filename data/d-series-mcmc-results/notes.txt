@@ -22,16 +22,23 @@ All runs closely consistent. Although the median for the a_1 case is (Nov16) fav
 cat STP_09_lm55_d16_*/*_resampled.dat > STP_09_lm55_d16_joint_resampled.dat
 
 
-#d64
-python ../../../flare/ptmcmc/python/comparechains.py STP_09_lm55_d64_*/*_resampled.dat --tag trials
--->STP_09_lm55_d64_a_0/STP_09_lm55_d64_a_trials_corner.png
+#orig d64 # (now overridden, not to be used in comparative analysis)
+#python ../../../flare/ptmcmc/python/comparechains.py STP_09_lm55_d64_*/*_resampled.dat --tag trials
+#-->STP_09_lm55_d64_a_0/STP_09_lm55_d64_a_trials_corner.png
+#All runs seem closely consistent.
+#combine data:
+#cat STP_09_lm55_d64_*/*_resampled.dat > STP_09_lm55_d64_joint_resampled.dat
+
+#d64 with extended prior range
+python ../../../flare/ptmcmc/python/comparechains.py STP_09_lm55_d64_[cd]*/*_resampled.dat --tag trials
+-->STP_09_lm55_d64_c_0/STP_09_lm55_d64_a_trials_corner.png
 All runs seem closely consistent.
 #combine data:
-cat STP_09_lm55_d64_*/*_resampled.dat > STP_09_lm55_d64_joint_resampled.dat
+cat STP_09_lm55_d64_[cd]*/*_resampled.dat > STP_09_lm55_d64_joint_resampled.dat
 
 ########
 Series analysis:
-python ../../../flare/ptmcmc/python/comparechains.py *_resampled.dat --tag d-series
+python ../../../flare/ptmcmc/python/comparechains.py *joint_resampled.dat --tag d-series
 -->d-series-mcmc-resultd-series_corner.png
 In this case, note that the "correct" distance parameter is actually different for the differnt cases.  For the farthest/lowest-SNR case the distance is actually outside the prior range.  The resulting bias in the distance inference probably leads to bias in inc as well.
 #sky plots
