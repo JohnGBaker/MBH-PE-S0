@@ -1,0 +1,211 @@
+ptmcmc flags=
+ Fisher_err_target:(not set)
+ allow_m2gtm1:(not set)
+ burn_frac:(not set)
+ chain_ess_stop:2000
+ chain_init_file:(not set)
+ checkp_at_step:(not set)
+ checkp_at_time:11.75
+ cov_draw_frac:(not set)
+ covariance_file:(not set)
+ de_Tmix:(not set)
+ de_eps:(not set)
+ de_mixing:(not set)
+ de_ni:50
+ de_reduce_gamma:4
+ gauss_1d_frac:0.5
+ gauss_draw_frac:(not set)
+ gauss_temp_scaled:(not set)
+ help:(not set)
+ info_every:10000
+ nchains:(not set)
+ nevery:(not set)
+ noFisher:(not set)
+ nskip:(not set)
+ nsteps:0
+ precision:(not set)
+ prop:7
+ pt:240
+ pt_Tmax:1e9
+ pt_dump_n:(not set)
+ pt_evolve_lpost_cut:(not set)
+ pt_evolve_rate:0.01
+ pt_reboot_blindly:(not set)
+ pt_reboot_cut:(not set)
+ pt_reboot_every:(not set)
+ pt_reboot_grace:(not set)
+ pt_reboot_grad:(not set)
+ pt_reboot_rate:(not set)
+ pt_reboot_thermal:(not set)
+ pt_stop_evid_err:0.05
+ pt_swap_rate:(not set)
+ restart_dir:(not set)
+ rng_seed:0.074871943462
+ save_every:40
+ stateFile:(not set)
+
+Injected params
+-----------------------------------------------
+m1:           1.5000000000000000e+06
+m2:           5.0000000000000000e+05
+tRef:         0.0000000000000000e+00
+phiRef:       5.0340487937100002e+00
+distance:     3.6594300000000003e+04
+lambda:       2.2753359735499998e+00
+beta:         -1.3764755706700000e+00
+inclination:  1.0471975512000000e+00
+polarization: 1.6345894544099999e+00
+-----------------------------------------------
+
+Total SNR: 166.499
+logZtrue = 0.000000
+Saving injection SNR and logZ info to file.
+
+outname = 'STP_09_lm55_t04_F'
+seed=0.074871943462
+Running on 24 threads.
+Parameter space:
+StateSpace:(dim=9)
+  m1 in (-inf,inf)
+  m2 in (-inf,inf)
+  tRef in (-inf,inf)
+  dist in (-inf,inf)
+  phase in w[0,6.28319)w
+  inc in (-inf,inf)
+  lambda in w[0,6.28319)w
+  beta in (-inf,inf)
+  pol in w[0,3.14159)w
+
+Prior is:
+SampleableDistProduct(
+  m1 from LogDist[166667,4.5e+06]
+  m2 from LogDist[166667,4.5e+06]
+  tRef from [-3600,3600]
+  dist from [500,1.3e+06]
+  phase from [0,6.28319]
+  inc from UniformPolar( (0,3.14159) )
+  lambda from [0,6.28319]
+  beta from UniformCoPolar( (-1.5708,1.5708) )
+  pol from [0,3.14159]
+)
+
+injected state=(
+  m1 = 1.5e+06
+  m2 = 500000
+  tRef = 0
+  dist = 36594.3
+  phase = 5.03405
+  inc = 1.0472
+  lambda = 2.27534
+  beta = -1.37648
+  pol = 1.63459
+)
+
+eval_time = 0.0165581703186  result=0 prior=-60.68315159982 logZdata=0 post=-60.68315159982 mean = 0.0165581703186 through 1 total evals
+injected log-like 0 post=-60.68315159982
+
+count=0
+scales = 750000	250000	3600	18297.15	3.14159265359	1.570796326795	3.14159265359	1.570796326795	1.570796326795	
+minscales = 7.5e-05	2.5e-05	3.6e-07	1.829715e-06	3.14159265359e-10	1.570796326795e-10	3.14159265359e-10	1.570796326795e-10	1.570796326795e-10	
+Fisher i,j=0,0
+Fisher i,j=1,1
+Fisher i,j=2,2
+Fisher i,j=3,3
+Fisher i,j=4,4
+Fisher i,j=5,5
+Fisher i,j=6,6
+Fisher i,j=7,7
+Fisher i,j=8,8
+delta[0,0]=4.659177789594e+13
+delta[1,1]=2.66960602787e+13
+delta[2,2]=8.127167278468e+18
+delta[3,3]=48030529.2888
+delta[4,4]=2376293503747
+delta[5,5]=13179441025.19
+delta[6,6]=240131944619.9
+delta[7,7]=5246046253826
+delta[8,8]=103846215144.3
+oldscales = 750000	250000	3600	18297.15	3.14159265359	1.570796326795	3.14159265359	1.570796326795	1.570796326795	
+err->8.127248545852e+18( goal=5e-09), better than olderr=1e+100?
+
+count=1
+scales = 14673.12451735	5243.655021923	15.57973623966	2005.366597761	0.08915841978895	0.08533609256082	0.1187390665506	0.04037763358324	0.06592817333555	
+minscales = 7.5e-05	2.5e-05	3.6e-07	1.829715e-06	3.14159265359e-10	1.570796326795e-10	3.14159265359e-10	1.570796326795e-10	1.570796326795e-10	
+Fisher i,j=0,0
+Fisher i,j=1,1
+Fisher i,j=2,2
+Fisher i,j=3,3
+Fisher i,j=4,4
+Fisher i,j=5,5
+Fisher i,j=6,6
+Fisher i,j=7,7
+Fisher i,j=8,8
+delta[0,0]=1823.84965738
+delta[1,1]=160852.4379976
+delta[2,2]=7753810.326754
+delta[3,3]=0.0003739644638793
+delta[4,4]=0.001044528700747
+delta[5,5]=0.0003772090001173
+delta[6,6]=0.001747984057884
+delta[7,7]=0.005181536901176
+delta[8,8]=3.336940944188e-06
+oldscales = 14673.12451735	5243.655021923	15.57973623966	2005.366597761	0.08915841978895	0.08533609256082	0.1187390665506	0.04037763358324	0.06592817333555	
+err->7916486.623137( goal=5e-09), better than olderr=8.127248545852e+18?
+
+count=2
+scales = 2060.832553311	729.1863513792	1.011973773039	663.8557528819	0.01501985642799	0.01989048692783	0.02308458088659	0.006473758878248	0.0135066074077	
+minscales = 7.5e-05	2.5e-05	3.6e-07	1.829715e-06	3.14159265359e-10	1.570796326795e-10	3.14159265359e-10	1.570796326795e-10	1.570796326795e-10	
+Fisher i,j=0,0
+Fisher i,j=1,1
+Fisher i,j=2,2
+Fisher i,j=3,3
+Fisher i,j=4,4
+Fisher i,j=5,5
+Fisher i,j=6,6
+Fisher i,j=7,7
+Fisher i,j=8,8
+delta[0,0]=1353.416147166
+delta[1,1]=24.05857074424
+delta[2,2]=0.01000542866128
+delta[3,3]=0.0003104923896361
+delta[5,5]=1.155539717102e-06
+delta[6,6]=0.0176091614755
+delta[7,7]=0.0002352146506313
+oldscales = 2060.832553311	729.1863513792	1.011973773039	663.8557528819	0.01501985642799	0.01989048692783	0.02308458088659	0.006473758878248	0.0135066074077	
+err->1377.502879364( goal=5e-09), better than olderr=7916486.623137?
+
+count=3
+scales = 1067.199185354	278.7794582761	0.2578861534604	381.7721478378	0.006164777780346	0.009602745197544	0.01016583300458	0.002592430730557	0.006113415519233	
+minscales = 7.5e-05	2.5e-05	3.6e-07	1.829715e-06	3.14159265359e-10	1.570796326795e-10	3.14159265359e-10	1.570796326795e-10	1.570796326795e-10	
+Fisher i,j=0,0
+Fisher i,j=1,1
+Fisher i,j=2,2
+Fisher i,j=3,3
+Fisher i,j=4,4
+Fisher i,j=5,5
+Fisher i,j=6,6
+Fisher i,j=7,7
+Fisher i,j=8,8
+delta[0,0]=110.6722938503
+delta[1,1]=2.816565825311
+delta[2,2]=0.001292937109098
+delta[3,3]=4.289686588432e-05
+delta[6,6]=0.001006658912826
+delta[7,7]=0.0007160451766083
+oldscales = 1067.199185354	278.7794582761	0.2578861534604	381.7721478378	0.006164777780346	0.009602745197544	0.01016583300458	0.002592430730557	0.006113415519233	
+err->113.4919182138( goal=5e-09), better than olderr=1377.502879364?
+
+count=4
+scales = -nan	184.9391515697	0.1302600484032	289.6709437141	0.003949510489533	0.00667222347549	0.006756527848289	0.001642288256506	0.004112942057936	
+minscales = 7.5e-05	2.5e-05	3.6e-07	1.829715e-06	3.14159265359e-10	1.570796326795e-10	3.14159265359e-10	1.570796326795e-10	1.570796326795e-10	
+Fisher i,j=0,0
+WARNING: f_match exceeds high-freq range of the ROM model
+WARNING: f_match exceeds high-freq range of the ROM model
+WARNING: f_match exceeds high-freq range of the ROM model
+WARNING: f_match exceeds high-freq range of the ROM model
+WARNING: f_match exceeds high-freq range of the ROM model
+gsl: interp.c:83: x values must be strictly increasing - 4
+
+real	0m5.761s
+user	0m4.336s
+sys	0m0.280s
