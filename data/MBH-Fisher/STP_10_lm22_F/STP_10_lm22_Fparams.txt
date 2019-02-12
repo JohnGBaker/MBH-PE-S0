@@ -23,9 +23,9 @@ tagextpn:       5.0000000000000000e-01
 Mfmatch:        0.0000000000000000e+00
 nbmodeinj:      1
 nbmodetemp:     1
-tagint:         0
+tagint:         1
 tagtdi:         5
-nbptsoverlap:   32768
+nbptsoverlap:   65536
 zerolikelihood: 0
 frozenLISA:     0
 responseapprox: 0
@@ -107,6 +107,6 @@ seed:           0
 -----------------------------------------------
 SNR and logZ of the injection:
 -----------------------------------------------
-SNR:   1.1595832210768826e+03
-logZ:  0.0000000000000000e+00
+SNR:   1.1595832040956595e+03
+logZ:  -0.0000000000000000e+00
 -----------------------------------------------
