@@ -1,0 +1,5 @@
+# Bambi runs for SMBH systems cases 0 and 9 for the paper
+# With and without higher modes
+
+# Runs on minerva with root dir bambi_170119
+# From commit 5b95a0cc34a5fab84c3183ddef49fb471518be9a on branch PEPaperCode
