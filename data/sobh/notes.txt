@@ -1,9 +1,0 @@
-inj01
------
-
-Parameters from Radler's signal #1. SNR 24.6.
-
-inj12
------
-
-Parameters from Radler's signal #12. SNR 10.9.

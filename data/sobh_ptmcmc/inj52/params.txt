@@ -1,0 +1,112 @@
+-----------------------------------------------
+Injection parameters:
+-----------------------------------------------
+m1:           5.7008000000000003e+01
+m2:           3.6802000000000000e+01
+tRef:         0.0000000000000000e+00
+phiRef:       0.0000000000000000e+00
+distance:     3.0790254808728287e+02
+lambda:       1.0755999999999999e+00
+beta:         1.3726963267948966e+00
+inclination:  2.6381999999999999e+00
+polarization: 3.5583999999999998e+00
+-----------------------------------------------
+
+-----------------------------------------------
+Global parameters:
+-----------------------------------------------
+fRef:           0.0000000000000000e+00
+deltatobs:      2.0000000000000000e+00
+minf:           9.9999999999999995e-07
+maxf:           1.0000000000000000e+00
+tagextpn:       1.0000000000000000e+00
+Mfmatch:        0.0000000000000000e+00
+nbmodeinj:      1
+nbmodetemp:     1
+tagint:         0
+tagtdi:         5
+nbptsoverlap:   32768
+zerolikelihood: 0
+frozenLISA:     0
+responseapprox: 0
+simplelikelihood: 0
+-----------------------------------------------
+
+-----------------------------------------------
+Prior parameters:
+-----------------------------------------------
+samplemassparams:  0.0000000000000000e+00
+sampleLframe:      0
+deltaT:            6.0000000000000000e+01
+comp_min:          1.0000000000000000e+04
+comp_max:          1.0000000000000000e+08
+mtot_min:          5.0000000000000000e+04
+mtot_max:          1.0000000000000000e+08
+qmax:              1.1980000000000000e+01
+Mchirp_min:        3.9669800000000002e+01
+Mchirp_max:        3.9701599999999999e+01
+eta_min:           2.3000000000000001e-01
+eta_max:           2.3999999999999999e-01
+dist_min:          1.0000000000000000e+01
+dist_max:          5.0000000000000000e+02
+lambda_min:        0.0000000000000000e+00
+lambda_max:        6.2831853071795862e+00
+beta_min:          -1.5707963267948966e+00
+beta_max:          1.5707963267948966e+00
+phase_min:         0.0000000000000000e+00
+phase_max:         6.2831853071795862e+00
+pol_min:           0.0000000000000000e+00
+pol_max:           3.1415926535897931e+00
+inc_min:           0.0000000000000000e+00
+inc_max:           3.1415926535897931e+00
+fix_m1:            nan
+fix_m2:            nan
+fix_Mchirp:        nan
+fix_eta:           nan
+fix_dist:          nan
+fix_time:          nan
+fix_phase:         nan
+fix_pol:           nan
+fix_lambda:        nan
+fix_beta:          nan
+fix_inc:           nan
+pin_m1:            0
+pin_m2:            0
+pin_Mchirp:        0
+pin_eta:           0
+pin_dist:          0
+pin_time:          0
+pin_phase:         0
+pin_pol:           0
+pin_lambda:        0
+pin_beta:          0
+pin_inc:           0
+snr_target:        nan
+rescale_distprior: 0
+flat-distprior:    1
+logflat-massprior: 0
+-----------------------------------------------
+
+-----------------------------------------------
+Run parameters:
+-----------------------------------------------
+eff:            0.5
+tol:            0.5
+consteff:       0
+nlive:          1000
+bambi:          0
+resume:         0
+maxiter:        0
+mmodal:         0
+maxcls:         1
+nclspar:        1
+ztol:           -1e+90
+seed:           0
+-----------------------------------------------
+
+-----------------------------------------------
+SNR and logZ of the injection:
+-----------------------------------------------
+SNR:   1.4754558581528757e+01
+logZ:  0.0000000000000000e+00
+-----------------------------------------------
