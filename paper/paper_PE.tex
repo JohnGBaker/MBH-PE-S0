@@ -64,6 +64,7 @@
 
 \newcommand{\SM}[1]{{\color{Blue} #1}}
 \newcommand{\jgb}[1]{{\color{DarkGreen} #1}}
+\newcommand{\tdc}[1]{{\color{red} #1}}
 
 \begin{document}
 
@@ -832,6 +833,82 @@ Thus, with~\eqref{eq:solutionbetaL}, \eqref{eq:solutionlambdaL} and $\beta_{L}^{
 
 -- SOBH system, SNR sufficient for clean analysis + Fisher - stacked SNR contours
 -- Performance: waveform and likelihood costs, number of sampler evaluations
+
+Stellar-origin black-hole (SOBH) mergers have been recently recognized as an
+important source of LISA detections \cite{Sesana16} although full parameter
+estimation studies are not available yet. In this section we present
+three case studies of parameter inference for such sources. The parameters of
+the simulated mergers are taken from the Radler LISA data challenge and are
+listed in Table \ref{table:sobh_params}.
+\begin{table}
+	\begin{tabular}{|c||c|c|c|}
+		\hline
+		Radler entry 		& 1 	& 12 	& 52 \\
+		\hline
+		Mass 1 ($\Msol$) 	& 21.4	& 63.5	& 57.0 \\
+		\hline
+		Mass 2 ($\Msol$) 	& 20.1	& 45.1	& 36.8 \\
+		\hline
+		Distance (Mpc) 		& 49.1	& 318	& 308 \\
+		\hline
+		LISA SNR 			& 26.6	& 11.9	& 16.0 \\
+		\hline
+	\end{tabular}
+	\caption{Parameters of the simulated SOBH mergers. \tdc{Maybe we can show
+			 these on the upper right of each corner plot instead.}}
+	\label{table:sobh_params}
+\end{table}
+
+The waveform model used to work with such systems is the phenomenological
+approximant IMRPhenomD, extended at low frequency with a post-Newtonian
+frequency-domain waveform. In practice, because LISA only observes the early
+inspiral of SOBH systems, only the post-Newtonian waveform plays a role here.
+We do not expect radiation modes beyond the quadrupole to give a significant
+contribution to the parameter estimates, so we only include the $(2,2)$ mode
+for simplicity. We do not include any effect arising from black-hole spins.
+
+As done in the previous section, we apply our parameter inference procedure to
+these systems using both BAMBI and parallel-tempered MCMC sampling, and we
+numerically evaluate the Fisher matrix at the parameters of the injection.
+
+Due to the duration of an SOBH inspiral in the LISA band, and the complete lack
+of merger and ringdown, the chirp mass $\Mchirp$ is measured much better than
+other mass parameters and the component masses have a much stronger correlation
+than usually found with ground-based gravitational-wave detectors. In order for
+the sampling to converge robustly in a reasonable time, we find it is necessary
+to express the mass parameters in terms of $\Mchirp$ and symmetric mass ratio
+$\eta$, and a relatively tight prior around the injected parameters is required
+as well.
+
+In order to generate these results, our PTMCMC sampler requires between
+$5\times 10^5$ and $3\times 10^6$ steps with 100 temperatures, taking on the
+order of days on a single CPU core without careful optimization. The BAMBI
+sampling, on the other hand, completes in tens of minutes only.
+
+The resulting posterior distributions are shown in Fig.~\ref{fig:sobh_corner_1}
+and \ref{fig:sobh_corner_12}. We find close agreement between the BAMBI and
+PTMCMC samplers. The full joint distributions are fairly complex, but the
+complexity is mostly restricted to multimodalities and degeneracies in the
+angular parameters only. The typical degeneracy between inclination and distance
+is evident. Masses, merger time, distance, inclination and sky location, which
+are arguably the most astrophysically useful parameters, have simple marginal
+distributions with a well-defined mode and close to Gaussian, even at these
+moderate SNR values. The Fisher matrix estimates represent the marginal
+distributions of these parameters at least to the order of magnitude. In some
+cases the Fisher estimates approximate very precisely even the joint
+distributions of pairs of these parameters.
+
+\begin{figure*}
+	\includegraphics[width=\textwidth]{../plots/corner_sobh_tdc1_ptmcmc_bambi}
+	\caption{Inferred parameter posterior distribution for SOBH system 1.}
+	\label{fig:sobh_corner_1}
+\end{figure*}
+
+\begin{figure*}
+	\includegraphics[width=\textwidth]{../plots/corner_sobh_tdc2_ptmcmc_bambi}
+	\caption{Inferred parameter posterior distribution for SOBH system 12.}
+	\label{fig:sobh_corner_12}
+\end{figure*}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
