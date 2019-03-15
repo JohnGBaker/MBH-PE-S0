@@ -654,17 +654,29 @@ where $\Lambda$ appears as an overall normalization factor, playing the role of 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Morphology of the signals}
-\label{sec:morph}
+\section{Supermassive black holes}
+\label{sec:SMBH}
 
-- Morphology of the response
+- Demonstration/examples
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsection{Signals and transfer functions}
 \label{sec:signaltransfer}
 
--- SNR accumulation with time or frequency: inspiral/MRD balance across mass range
+\begin{figure*}
+  \centering
+  \includegraphics[width=.98\linewidth]{../plots/plot_smbh9_alltdi.pdf}
+  \caption{\SM{TODO: rethink the visualization, maybe plot only transfer functions}.}
+  \label{fig:tranferSMBHCase9}
+\end{figure*}
+
+\begin{figure*}
+  \centering
+  \includegraphics[width=.7\linewidth]{../plots/plot_tdia_hm.pdf}
+  \caption{\SM{TODO: make figure smaller, single-column.}}
+  \label{fig:FDHMSMBHCase9}
+\end{figure*}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -672,13 +684,6 @@ where $\Lambda$ appears as an overall normalization factor, playing the role of 
 \label{sec:timefreqSNR}
 
 -- SNR accumulation with time or frequency: inspiral/MRD balance across mass range
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\section{Supermassive black holes}
-\label{sec:SMBH}
-
-- Demonstration/examples
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -708,6 +713,28 @@ Case 0
 \subsection{Accumulating signal with time}
 \label{sec:SMBHPEacctime}
 
+\begin{figure*}
+  \centering
+  \begin{minipage}{.32\linewidth}
+      \includegraphics[width=.99\linewidth]{../plots/corner_smbh_case9_hm_tseries_m1m2.png}
+   \end{minipage}
+   \begin{minipage}{.32\linewidth}
+      \includegraphics[width=.99\linewidth]{../plots/corner_smbh_case9_hm_tseries_Dinc.png}
+   \end{minipage}
+   \begin{minipage}{.32\linewidth}
+      \includegraphics[width=.99\linewidth]{../plots/corner_smbh_case9_hm_tseries_tphi.png}
+   \end{minipage}
+  \caption{.}
+  \label{fig:smbhCornerZoomHMCase9}
+\end{figure*}
+
+\begin{figure*}
+  \centering
+  \includegraphics[width=.8\linewidth]{../plots/plot_mollweide_tseries.png}
+  \caption{.}
+  \label{fig:MollweidesmbhTserieshmCase9}
+\end{figure*}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsection{SNR dependence of parameter estimation}
@@ -726,6 +753,25 @@ Case 0
   \caption{.}
   \label{fig:PEsmbh22hmCase0}
 \end{figure*}
+
+\begin{figure*}
+  \centering
+  \includegraphics[width=.8\linewidth]{../plots/corner_smbh_case9_simplelike_ptmcmc_bambi.png}
+  \caption{.}
+  \label{fig:PEsmbh22hmSimpleLikeCase0}
+\end{figure*}
+
+\begin{figure}
+  \centering
+  \begin{minipage}{.49\linewidth}
+  \includegraphics[width=.99\linewidth]{../plots/corner_skydown_smbh_case9_22_ptmcmc_bambi_withdegen.png}
+  \end{minipage}
+  \begin{minipage}{.49\linewidth}
+  \includegraphics[width=.99\linewidth]{../plots/corner_skydown_smbh_case9_simplelike_ptmcmc_bambi_withdegen.png}
+  \end{minipage}
+  \caption{.}
+  \label{fig:Skydownsmbh22hmSimpleLikeCase0}
+\end{figure}
 
 - Highlighting degeneracies
 
@@ -786,6 +832,18 @@ Thus, with~\eqref{eq:solutionbetaL}, \eqref{eq:solutionlambdaL} and $\beta_{L}^{
 
 -- SOBH system, SNR sufficient for clean analysis + Fisher - stacked SNR contours
 -- Performance: waveform and likelihood costs, number of sampler evaluations
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Signals and transfer functions}
+\label{subsec:signaltransferSOBH}
+
+\begin{figure*}
+  \centering
+  \includegraphics[width=.98\linewidth]{../plots/plot_sobh1_alltdi.pdf}
+  \caption{\SM{TODO: rethink the visualization, maybe plot only transfer functions}.}
+  \label{fig:PEsmbh22hmCase0}
+\end{figure*}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
