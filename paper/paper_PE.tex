@@ -374,7 +374,7 @@ Combining~\eqref{eq:RLW}, \eqref{eq:RL}, \eqref{eq:RW} and~\eqref{eq:defRLW} yie
 \end{align}
 \esub
 
-The definition of the reference phase $\phi_{\rm Ref}$, \dots
+The definition of the reference phase $\phi_{\rm Ref}$, \dots \SM{[COMPLETE]}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -420,7 +420,7 @@ Next, it is convenient to introduce mode-by-mode polarization matrices
 	P_{\ell m} = P_{+} K_{\ell m}^{+} + P_{\times} K_{\ell m}^{\times} \,,
 \ee
 so that
-\be
+\be\label{eq:Hsummodes}
 	H = \sum_{\ell m} P_{\ell m} h_{\ell m} \,.
 \ee
 To make explicit the dependence in polarization, we can define polarization tensors for 0 polarization angle as
@@ -439,6 +439,7 @@ or explicitly in $P_{\ell m}$ as
 	P_{\ell m} &= \frac{1}{2} \sYlm e^{-2 i \psi} \left( P_{+}^{0} + i P_{\times}^{0} \right) \nn\\
 	& + \frac{1}{2} (-1)^{\ell} \sYlminusmstar e^{+2 i \psi} \left( P_{+}^{0} - i P_{\times}^{0} \right) \,.
 \end{align}
+Writing the $P_{\ell m}$ matrices in this way allows to factor out all dependencies in the extrinsic parameters $(\iota, \phi, \psi)$. Together with the luminosity distance $D_{L}$, these parameters appear in combinations of constant factors multiplying the whole response.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -449,11 +450,22 @@ The single-link frequency shift observable $y_{slr} = (\nu_{r} - \nu_{s})/\nu$ b
 \be\label{eq:defyslr}
 	y_{slr} = \frac{1}{2} \frac{n_{l} \otimes n_{l}}{1 - k\cdot n_{l}} : \left[ H(t - L - k\cdot p_{s}) - H(t - k\cdot p_{r}) \right] \,.
 \ee
-Several assumptions enter this form of the response: \dots. In the frequency domain, the corresponding form of the kernel $G^{\ell m}_{slr}(f, t)$ for the response to a given mode $h_{\ell m}$ in this approximation is
+Several assumptions enter this form of the response: \dots \SM{[COMPLETE]}.
+
+In the frequency domain, we will use the analysis of~\cite{} and write the response in individual observables $y_{slr}$ with a transfer function for each spherical harmonic mode as
+\be
+	\tilde{y}_{slr} = \sum_{\ell, m}\calT_{slr}^{\ell m}(f) \tilde{h}_{\ell m} \,.
+\ee
+With the decomposition~\eqref{eq:Hsummodes}, the corresponding form of the kernel $G^{\ell m}_{slr}(f, t)$ in the formalism of~\cite{} is
 \begin{align}\label{eq:Gslr}
 	G_{slr}^{\ell m}(f,t) &= \frac{i \pi f L}{2} \sinc \left[ \pi f L\left(1-k\cdot n_{l} \right) \right] \nn\\
 	& \quad \cdot \exp\left[ i \pi f \left( L + k\cdot \left( p_{1} + p_{2} \right) \right) \right]  n_{l} \cdot P_{\ell m} \cdot n_{l} \,.
 \end{align}
+At leading order in the separation of timescales, we have simply
+\be
+	\calT_{slr}^{\ell m}(f) = G_{slr}^{\ell m}(f, t_{f}^{\ell m}) \,,
+\ee
+with $t_{f}^{\ell m}$ the effective time-to-frequency correspondence, defined across the whole frequency band, including in the merger-ringdown, as $t_{f}^{\ell m} = -1/(2\pi) d\Psi_{\ell m} / df$ for a mode $\tilde{h}_{\ell m} = A_{\ell m}(f) \exp\left[-i \Psi_{\ell m}\right]$. The analysis of~\cite{} has shown that higher-order corrections are small for SMBH systems, and for SOBH systems that are close enough to merger as will be the case for the examples chosen here. The fact that we use the same Fourier-domain treatment of the transfer functions for both the signal and the templates should also mitigate errors. 
 
 In our rigid approximation, delays are simply all constant and constant to $L$. Using the shortcut notation $y_{sr,L} = y_{slr}(t - L)$, the first-generation TDI Michelson observable $X$ reads
 \begin{align}
@@ -545,77 +557,48 @@ By comparison with~\eqref{eq:DaDe}, we obtain
 	L_{a} = L_{e} = \frac{3L}{2} \,, \; \epsilon_{a} = \frac{2\pi}{3} \,, \; \epsilon_{e} = \frac{5\pi}{12} \,.
 \ee
 Note a degeneracy $\pm \pi$ in how we choose to orient these effective detectors. We can recover pattern functions (for $\psi_{L}=0$) by factoring out the effective length, defining
-\be
+\be\label{eq:defFapcFepc}
 	F_{a,e}^{+,\times} \equiv \frac{2}{3L} D_{a,e} : P_{+,\times}^{0} \,,
 \ee
 which gives in terms of the LISA-frame sky position angles
 \bsub\label{eq:FapcFepc}
 \begin{align}
-	F_{a}^{+} &= \frac{1}{2} \left( 1 + \sin^{2}\beta_{L} \right) \sin \left(2\lambda_{L} + \frac{\pi}{6} \right) \,,\\
-	F_{a}^{\times} &= -\sin\beta_{L} \cos \left(2\lambda_{L} + \frac{\pi}{6} \right) \,,\\
+	F_{a}^{+} &= \frac{1}{2} \left( 1 + \sin^{2}\beta_{L} \right) \cos \left(2\lambda_{L} - \frac{\pi}{3} \right) \,,\\
+	F_{a}^{\times} &= \sin\beta_{L} \sin \left(2\lambda_{L} - \frac{\pi}{3} \right) \,,\\
 	F_{e}^{+} &= \frac{1}{2} \left( 1 + \sin^{2}\beta_{L} \right) \cos \left(2\lambda_{L} + \frac{\pi}{6} \right) \,,\\
 	F_{e}^{\times} &= \sin\beta_{L} \sin \left(2\lambda_{L} + \frac{\pi}{6} \right)  \,.
 \end{align}
 \esub
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\subsection{TO UPDATE -- A simple extrinsic likelihood}
-\label{sec:simple-like}
-
-In this section, we investigate a simplified form of the extrinsic likelihood and the structure of its degeneracies.
-
-It will be useful to introduce the following notation for the patter functions associated to the independent channels A and E:
-\bsub\label{eq:defDaDe}
-\begin{align}
-	D_{a}^{+} &= \frac{1}{2} \left( 1 + \sin^{2}\betaL \right) \cos\left( 2\lambdaL - \frac{\pi}{3} \right) \,, \\
-	D_{a}^{\times} &= \sin \betaL \sin\left( 2\lambdaL - \frac{\pi}{3} \right) \,, \\
-	D_{e}^{+} &= - \frac{1}{2} \left( 1 + \sin^{2}\betaL \right) \sin\left( 2\lambdaL - \frac{\pi}{3} \right) \,, \\
-	D_{e}^{\times} &= \sin \betaL \cos\left( 2\lambdaL - \frac{\pi}{3} \right) \,.
-\end{align}
-\esub
-Note that the expressions for the channel E can be obtained from the expressions for A with the replacement $\lambdaL \rightarrow \lambdaL + \pi/4$.
-
-In each channel, we separate the contribution of the modes $h_{22}$ and $h_{2,-2}$ as
-\bsub\label{eq:defsase}
-\begin{align}
-	s_{a} &= a_{22} + a_{2,-2} \,, \\
-	s_{e} &= e_{22} + e_{2,-2} \,,
-\end{align}
-\esub
-with
-\bsub\label{eq:defa22a2m2}
-\begin{align}
-	a_{22} &= \frac{3i}{4d} \sqrt{\frac{5}{\pi}} \cos^{4}\frac{\iota}{2} e^{2i(-\varphi-\psiL)} \left( D_{a}^{+} + i D_{a}^{\times} \right) \,, \\
-	a_{2,-2} &= \frac{3i}{4d} \sqrt{\frac{5}{\pi}} \sin^{4}\frac{\iota}{2} e^{2i(-\varphi+\psiL)} \left( D_{a}^{+} - i D_{a}^{\times} \right) \,.
-\end{align}
-\esub
-and similarly for the E channel with $D_{e}^{+,\times}$ instead of $D_{a}^{+, \times}$ as
-\bsub\label{eq:defe22e2m2}
-\begin{align}
-	e_{22} &= \frac{3i}{4d} \sqrt{\frac{5}{\pi}} \cos^{4}\frac{\iota}{2} e^{2i(-\varphi-\psiL)} \left( D_{e}^{+} + i D_{e}^{\times} \right) \,, \\
-	e_{2,-2} &= \frac{3i}{4d} \sqrt{\frac{5}{\pi}} \sin^{4}\frac{\iota}{2} e^{2i(-\varphi+\psiL)} \left( D_{e}^{+} - i D_{e}^{\times} \right) \,.
-\end{align}
-\esub
-Here, we introduced the dimensionless luminosity distance ratio $d \equiv D / D^{\rm inj}$.
-
-In this simplified response, an exact symmetry relation is manifest: changing simultaneously
-\be\label{eq:symmetryresponse}
-\betaL \rightarrow -\betaL\,, \quad \iota \rightarrow \pi - \iota \,, \quad \psiL \rightarrow \pi - \psiL
-\ee
-leaves the signal unchanged. We can also rewrite the likelihood in a way that makes clearer the symmetry between the two pairs of parameters $(\iota, \varphiL)$ and $(\betaL, \lambdaL)$ \SM{[TODO]}.
-
-The simplified extrinsic likelihood for a frozen LISA then takes the form
-\be\label{eq:simplelikelihood}
-	\ln \calL = - \frac{1}{2} \Lambda \left( \left| s_{a} - s_{a}^{\rm inj} \right|^{2} + \left| s_{e} - s_{e}^{\rm inj} \right|^{2} \right) \,,
-\ee
-where $\Lambda$ appears as an overall normalization factor, playing the role of the square SNR of the signal.
+Note that the expressions for the channel $e$ can be obtained from the expressions for $a$ with the replacement $\lambdaL \rightarrow \lambdaL + \pi/4$.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Methodology}
 \label{sec:method}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Bayesian setting}
+\label{subsec:defbayes}
+
+-- definitions relevant to the Bayesian setting (likelihood, ...)
+
+Introducing the standard matched-filter inner product as
+\be
+	\left( \tilde{a} | \tilde{b} \right) = 4 \mathrm{Re} \int_{0}^{+\infty} df \; \frac{\tilde{a}(f) \tilde{b}^{*}(f)}{S_{n}(f)} \,,
+\ee
+for stationary Gaussian noise with noise PSD $S_{n}$, the likelihood $\calL = p(d | \bm{\theta})$ for a given gravitational wave channel takes the form
+\be\label{eq:deflnL}
+	\ln \calL = -\frac{1}{2} \left( h(\bm{\theta}) - d | h(\bm{\theta}) - d \right) \,,
+\ee
+with the data stream being a superposition of the gravitational wave signal for the true parameters $\bm{\theta}_{0}$ and the noise realization in the experiment, $d = s(\bm{\theta}_{0}) + n$. The posterior distribution for the physical parameters $\bm{\theta}$ given the observed data $d$ is then
+\be\label{eq:defBayes}
+	p\left( \bm{\theta} | d \right) = \frac{p(d | \bm{\theta})p(\bm{\theta})}{p(d)}\,,
+\ee
+with $p(\bm{\theta})$ the priors on the parameters, and $p(d)$ the evidence that we will ignore here as it enters as a multiplicative constant in the posterior.
+
+In our analysis, we will use the so-called zero-noise approximation. This corresponds simply to performing a Bayesian analysis with~\eqref{eq:deflnL} and ~\eqref{eq:defBayes}, but setting the noise realization to zero, $n=0$. It allows us to accelerate the likelihood computation, as will be explained in~\ref{}. For exploratory parameter estimation runs, this approximation allows us to explore the structure of the likelihood with its possible parameter degeneracies (\SM{[cite past use of this approx.]}), and is a significant improvement over Fisher matrix estimates in that sense. We leave the extension of our analysis to include noise realizations for future work. We will also ignore waveform systematic errors and assume our waveform templates match exactly the real signals.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -626,7 +609,7 @@ where $\Lambda$ appears as an overall normalization factor, playing the role of 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\subsection{Reduced order model for EOBNRv2 waveforms.}
+\subsection{Reduced order model for EOBNRv2HM waveforms.}
 \label{sec:waveforms}
 
 -- Waveforms: EOBNRv2HMROM + PNext
@@ -745,7 +728,7 @@ Case 0
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\subsection{Highlighting degeneracies}
+\subsection{Investigating degeneracies}
 \label{sec:SMBHPEdegen}
 
 \begin{figure*}
@@ -759,7 +742,7 @@ Case 0
   \centering
   \includegraphics[width=.8\linewidth]{../plots/corner_smbh_case9_simplelike_ptmcmc_bambi.png}
   \caption{.}
-  \label{fig:PEsmbh22hmSimpleLikeCase0}
+  \label{fig:PEsmbh22hmSimpleLikeCase9}
 \end{figure*}
 
 \begin{figure}
@@ -771,59 +754,176 @@ Case 0
   \includegraphics[width=.99\linewidth]{../plots/corner_skydown_smbh_case9_simplelike_ptmcmc_bambi_withdegen.png}
   \end{minipage}
   \caption{.}
-  \label{fig:Skydownsmbh22hmSimpleLikeCase0}
+  \label{fig:Skydownsmbh22hmSimpleLikeCase9}
 \end{figure}
 
-- Highlighting degeneracies
+In this section, we investigate the cause of the degeneracies appearing in the posterior of Case~II shown in~\ref{subsec:SMBHPE}. Understanding the structure of these features could prove useful to inform Bayesian samplers, for instance by building adapted jump proposal allowing a much faster mixing of MCMC chains than naive methods. a simplified form of the extrinsic likelihood and the structure of its degeneracies.
 
--- High-mass degenerate example, 22 vs HM - stacked SNR contours
--- show degenerate waveforms
--- simplified response and closed-form likelihood, full degeneracies
--- (explore simplified response further: parameter maps, other off-the-shelf samplers ?)
+An important clue about the appearance of these degeneracies is the length of the observable signal. As shown in Fig.~\ref{}, for our example SMBH systems the SNR accumulates in a matter of days before merger, which means that there is only little impact of the modulations caused by the motion of the detector on the TDI transfer functions~\eqref{}. If we can neglect entirely the motion of the detector (which is not quite true as we will see later on), then we are in a regime where the information about the sky position of the source comes essentially from the pattern functions affecting this high-SNR signal. Using the the low-frequency approximation (see~\ref{}) and the time-at-LISA $t_{L}$ as a time variable, there is no frequency dependence in the response. A further simplification occurs when pinning the masses and the time of coalescence to their true values. We found indeed that these parameters correlate only weakly to the other ones, so that we can hope to understand the degeneracy features by restricting the analysis to the six extrinsic parameters $(D_{L}, \iota, \varphi, \lambdaL, \betaL, \psiL)$.
 
-We can now explore possible degeneracies in the likelihood given by~\eqref{eq:simplelikelihood}, \eqref{eq:defsase} and \eqref{eq:defa22a2m2}-\eqref{eq:defe22e2m2}. We note that the relative contributions of the modes $h_{2,2}$ and $h_{2,-2}$ are strongly separated in the face-on or face-off limit, leading to a simplification of the response and an enhanced degeneracy. Due to the symmetry~\eqref{eq:symmetryresponse}, we will focus on the face-on limit $\iota \rightarrow 0$. In this limit, the $h_{2,-2}$ contributions die off rapidly as $a_{2,-2}\,, e_{2,-2} \sim \sin^{4} (\iota/2)$. If they are assumed to be negligible, then we can rewrite
-\bsub\label{eq:saseapprox}
+Under all these simplifying assumptions, the likelihood function becomes purely extrinsic, and takes the form of trivial geometric factors multiplying a constant overlap that can be precomputed. Using the subscript $\mathrm{inj}$ for the injected signal, the likelihood~\eqref{eq:defliklihood} is
+\be
+	\ln \calL = -\frac{1}{2} \left( \tilde{a} - \tilde{a}_{\rm inj} | \tilde{a} - \tilde{a}_{\rm inj} \right) -\frac{1}{2} \left( \tilde{e} - \tilde{e}_{\rm inj} | \tilde{e} - \tilde{e}_{\rm inj} \right) \,.
+\ee
+From the low-frequency response \eqref{eq:aelowfmodes}, pinning the time-at-LISA so that we ca ignore the factor $\exp [2 i \pi f k\cdot p_{0}]$ as a pure constant corresponding to a redefinition of time, we obtain 
 \begin{align}
-	s_{a} \simeq i\calA e^{2 i \xi} \left( D_{a}^{+} + i D_{a}^{\times} \right) \,, \\
-	s_{e} \simeq i\calA e^{2 i \xi} \left( D_{e}^{+} + i D_{e}^{\times} \right) \,,
+	\ln \calL &= -\frac{1}{2} \sum_{\ell m} \sum_{\ell' m'}   \left[ \left( s_{a}^{\ell m} - s_{a, \mathrm{inj}}^{\ell m}\right) \left( s_{a}^{\ell' m'} - s_{a, \mathrm{inj}}^{\ell' m'}\right)^{*} \right. \nn\\
+	& \qquad \left. + \left( s_{e}^{\ell m} - s_{e, \mathrm{inj}}^{\ell m}\right) \left( s_{e}^{\ell' m'} - s_{e, \mathrm{inj}}^{\ell' m'}\right)^{*} \right] \left\langle \ell m | \ell' m' \right\rangle \,,
+\end{align}
+where we introduced the following extrinsic signal functions
+\be\label{eq:defsaelm}
+	s_{a,e}^{\ell m} = \frac{1}{d} \frac{2}{3L} D_{a,e} : P_{\ell m} \,,
+\ee
+with $d = D / D^{\rm inj}$ the dimensionless ratio of luminosity distances. The prefactors $\left\langle \ell m | \ell' m' \right\rangle$ are pure normalization constants, and represent mode overlaps as
+\be
+	\left\langle \ell m | \ell' m' \right\rangle = 4\mathrm{Re} \int \frac{df}{S_{n}^{a,e}} \left( 3 \pi f L\right)^{2} \tilde{h}_{\ell m} \tilde{h}_{\ell' m'}^{*} \,.
+\ee
+Here, the noise PSD $S_{n}^{a,e}$ is given by~\eqref{} and is identical between the channels $a$ and $e$. Having fixed the masses and the time, these overlaps are to be computed with the modes $\tilde{h}_{\ell m}^{\rm inj}$ of the injected signal.
+
+In the case where we only include the dominant harmonic $h_{22}$, the functions~\eqref{eq:defsaelm} take the explicit form
+\begin{align}
+	s_{a,e}^{22} &= \frac{1}{4d} \sqrt{\frac{5}{\pi}} \cos^{4}\frac{\iota}{2} e^{2i(\varphi-\psiL)} \left( F_{a,e}^{+} + i F_{a,e}^{\times} \right) \\
+	&+ \frac{1}{4d} \sqrt{\frac{5}{\pi}} \sin^{4}\frac{\iota}{2} e^{2i(\varphi+\psiL)} \left( F_{a,e}^{+} - i F_{a,e}^{\times} \right) \,,
+\end{align}
+with the pattern functions for the channels $a$ and $e$ defined in \eqref{eq:defFapcFepc}-\eqref{eq:FapcFepc}.
+
+In order to make more manifest the degeneracies in the problem, it will be useful to introduce the following notations. First, since $\iota \in [0, \pi]$ while $\beta_{L} \in [-\pi/2, \pi/2]$, it will be more convenient to work with $\theta_{L} = \pi/2 - \beta_{L}$. We will further abbreviate notations by using the variables
+\be
+	t_{\iota} \equiv \tan \iota/2 \,, \quad t_{\theta} \equiv \tan \theta_{L} / 2 \,.
+\ee
+We also introduce the azimuthal angles $\lambda_{a} = \lambda_{L} - \pi/6$, $\lambda_{e} = \lambda_{L} + \pi/12 = \lambda_{a} + \pi/4$, and form the combinations
+\be
+	\sigma_{\pm} \equiv s_{a}^{22} \pm i s_{e}^{22} \,.
+\ee
+In these notations, we obtain
+\bsub\label{eq:sigmapm}
+\begin{align}
+	\sigma_{+} &= \rho e^{2i\varphi} \left[ t_{\theta}^{4} e^{-2 i \psiL} + t_{\iota}^{4} e^{2 i \psiL} \right] e^{-2i \lambda_{a}} \,, \\
+	\sigma_{-} &= \rho e^{2i\varphi} \left[ e^{-2 i \psiL} + t_{\theta}^{4} t_{\iota}^{4} e^{2 i \psiL} \right] e^{2i \lambda_{a}} \,,
 \end{align}
 \esub
-where we introduced the notations $\xi (\varphiL, \psiL) \equiv -\varphiL - \psiL$ and $\calA(d, \iota) \equiv 3/4\sqrt{5/\pi}\cos^{4}(\iota/2)/d $ for the common phase and amplitude factors.
+with a common prefactor
+\be\label{eq:sigmafactorrho}
+	\rho(d, \iota, \theta_{L}) = \frac{1}{4d} \sqrt{\frac{5}{\pi}} \frac{1}{\left( 1 + t_{\iota}^{2} \right)^{2} \left(1 + t_{\theta}^{2} \right)^{2}} \,.
+\ee
+Finding points in the parameter space that are degenerate with the injection, with $\ln \calL \simeq 0$, amounts to try to obtain both the same value of $\sigma_{+}$ and $\sigma_{-}$ as the injection.
 
-For a degeneracy to occur, both complex quantities $s_{a}$ and $s_{e}$ must be close to the injection values $s_{a}^{\rm inj}$ and $s_{e}^{\rm inj}$, which can be achieved as follows if~\eqref{eq:saseapprox} is valid. Defining the complex ratio
-\be\label{eq:defr}
-	r(\lambdaL, \betaL) = \frac{D_{a}^{+} + i D_{a}^{\times}}{D_{e}^{+} + i D_{e}^{\times} } \,,
+We can now use the simplified response written in the form~\eqref{eq:sigmapm}-\eqref{eq:sigmafactorrho} to look for symmetries and degeneracies. First, we note the following manifest symmetry: changing simultaneously
+\be\label{eq:symmetryresponse}
+	\betaL \rightarrow -\betaL\,, \quad \iota \rightarrow \pi - \iota \,, \quad \psiL \rightarrow \pi - \psiL
 \ee
-if the position in the sky $(\lambda_{L}^{*}, \beta_{L}^{*})$ can be chosen so that
-\be\label{eq:rcondition}
-	r(\lambda_{L}^{*}, \beta_{L}^{*}) = \frac{s_{a}^{\rm inj}}{s_{e}^{\rm inj}} \,,
-\ee
-then adjusting $\calA$ and $\xi$ so that
+leaves the likelihood exactly invariant. There is also a form of symmetry obatained by exchanging $\iota \leftrightarrow \theta_{L}$. This conjugate the term inside bracket for $\sigma_{+}$, which can be corrected withe the phase terms $\varphi \pm \lambda_{a}$. If $\Phi = \mathrm{Arg} \left[ t_{\theta}^{4} e^{-2 i \psiL} + t_{\iota}^{4} e^{2 i \psiL} \right]$, we obtain the symmetry
+\begin{align}
+	\iota' = \theta_{L} \,, \quad \theta_{L}' = \iota \,, \nn\\
+	\varphi' = \varphi + \frac{1}{2} \Phi \; \mathrm{mod} \; \pi\,, \nn\\
+	\lambda_{a}' = \lambda_{a} - \frac{1}{2} \Phi \; \mathrm{mod} \; \pi\,.
+\end{align}
+
+We can now explain the degenerate features we found as certain limits in this simplified likelihood. In the face-on or face-off limit $\iota \rightarrow 0$, $|t_{\iota}| \ll 1$. This amounts to the $(\ell,m)=(2,2)$ contribution dominating the $(\ell, m)=(2,-2)$ contribution. Neglecting the terms in~\eqref{eq:sigmapm} that are quartic in $t_{\iota}$, we have
+\bsub\label{eq:sigmapmapprox}
+\begin{align}
+	\sigma_{+} &\simeq \rho e^{2i(\varphi - \psiL)} t_{\theta}^{4} e^{-2i \lambda_{a}} \,, \\
+	\sigma_{-} &\simeq \rho e^{2i(\varphi - \psiL)} e^{2i \lambda_{a}} \,,
+\end{align}
+\esub
+Defining the ratio
 \be
-	i\calA e^{2 i \xi} = \frac{s_{a}^{\rm inj}}{\left( D_{a}^{+} + i D_{a}^{\times} \right)(\lambda_{L}^{*}, \beta_{L}^{*})}
+	r = \frac{\sigma_{+}}{\sigma_{-}} \,,
 \ee
-generates degenerate points in parameter space with $\ln \calL \simeq 0$.
-
-The conditions~\eqref{eq:defr}-\eqref{eq:rcondition} can be inverted for the sky position as follows. For a given complex value of $r = s_{a}^{\rm inj} / s_{e}^{\rm inj}$, $r(\lambda_{L}^{*}, \beta_{L}^{*}) = r$ can be rewritten as
-\be\label{eq:eqtosolveforlambdabetaL}
-	e^{4i\lambda_{L}^{*}}e^{i\frac{\pi}{3}} \frac{\left( 1 +\sin\beta_{L}^{*} \right)^{2}}{\left( 1 - \sin\beta_{L}^{*} \right)^{2}} = \frac{1+ i r}{1 - i r} \,.
+we see that finding $(\lambda_{a}^{*}, \theta_{L}^{*})$ verifying
+\be\label{eq:conditionsky}
+	\frac{\sigma_{+}}{\sigma_{-}} (\lambda_{a}^{*}, \theta_{L}^{*}) = r_{\rm inj} \,,
 \ee
-Solving for the modulus of~\eqref{eq:eqtosolveforlambdabetaL} then yields
-\be\label{eq:solutionbetaL}
-	\sin\beta_{L}^{*} = \frac{\rho - 1}{\rho + 1} \,,
+with the approximation~\eqref{eq:sigmapmapprox} for the left-hand side, guarantees that we can then match both $\sigma_{+}$ and $\sigma_{-}$ of the injection with the condition
+\be\label{eq:conditionprefactor}
+	\rho e^{2i(\varphi - \psiL)} e^{2i \lambda_{a}^{*}} = \sigma_{-}^{\rm inj}\,.
 \ee
-for
+In the limit $|t_{\iota}| \ll 1$,
 \be
-	\rho = \sqrt{\left| \frac{1+ i r}{1 - i r} \right|} \,.
+	\frac{\sigma_{+}}{\sigma_{-}} \simeq t_{\theta}^{4} e^{-4i\lambda_{a}} \,,
 \ee
-Solving for the argument of~\eqref{eq:eqtosolveforlambdabetaL} gives four solutions for $\lambda_{L}^{*}$ as
-\be\label{eq:solutionlambdaL}
-	\lambda_{L}^{*} = - \frac{\pi}{12} + \frac{1}{4}\mathrm{Arg} \frac{1+ i r}{1 - i r} + \frac{k \pi}{2} \quad \mathrm{for} \quad k = 0,\dots,3 \,.
+so that~\eqref{eq:conditionsky} is verified for special positions in the sky at (coming back to the original variables $(\lambdaL, \betaL)$)
+\bsub\label{eq:soldegensky}
+\begin{align}
+	\beta_{L}^{*} &= \frac{\pi}{2} - 2 \mathrm{Arctan} \; \left| r_{\rm inj}\right|^{1/4} \,, \\
+	\lambda_{L}^{*} &= \frac{\pi}{6} -\frac{1}{4} \mathrm{Arg} \; r_{\rm inj} \;\mathrm{mod}\; \frac{\pi}{2} \,.
+\end{align}
+\esub
+The other condition gives then a single phase constraint for $\varphi - \psiL$, and a single amplitude constraint for $\rho(d, \iota, \theta_{L}^{*})$. The limit $\iota \rightarrow \pi$ (where the $(2,-2)$ contribution dominates the $(2,2)$) is very similar, as can be seen most easily by the change of variable $\iota \rightarrow \pi - \iota$, with $-\psiL$ and $\pi - \theta_{L}$ playing the roles of $\psiL$ and $\theta_{L}$.
+
+With the $\lambdaL \rightarrow \lambdaL + k \pi/2$ and $\betaL \rightarrow - \betaL$ symmetries, we arrive at eight sky positions where the degeneracy occurs, with an exact degeneracy for the pair of parameters $(\varphi, \psiL)$, as well as an approximate degeneracy for the pair $(d, \iota)$ as long as we remain in the regime $t_{\iota}^{4} \ll 1$ or $t_{\iota}^{4} \gg 1$ (which is quite extended, thanks to the quartic power). For each of these sky positions built from~\eqref{eq:soldegensky}, many different values of $(\varphi, \psiL)$ and $(d, \iota)$ produce a waveform very close to the injection, resulting in apparent peaks in the marginalized posterior distribution for the sky position, located at the special sky positions $(\lambda_{a}^{*}, \theta_{L}^{*})$, which are offset from the injected value.
+
+We can further find the same mechanism, with a few differences, by exchanging the roles of $(\iota, \varphi)$ and $(\theta_{L}, \lambda_{a})$, as follows. In the limit $\theta_{L} \rightarrow 0$ with $|t_{\theta}| \ll 1$, we have this time
+\be
+	\frac{\sigma_{+}}{\sigma_{-}} \simeq t_{\iota}^{4} e^{-4i(\lambda_{a} - \psi_{L})} \,,
 \ee
+which gives in the same way a degeneracy if
+\bsub\label{eq:soldegeniotaphi}
+\begin{align}
+	\iota^{*} &= 2 \mathrm{Arctan} \; \left| r_{\rm inj}\right|^{1/4} \,, \\
+	(\lambda_{a} - \psiL)^{*} &= -\frac{1}{4} \mathrm{Arg} \; r_{\rm inj} \;\mathrm{mod}\; \frac{\pi}{2} \,,
+\end{align}
+\esub
+with a condition on prefactors that is now concerning $\rho e^{2 i \varphi}$. Thus, we find again a degenerate pattern, with the difference that \eqref{eq:soldegeniotaphi} imposes a condition on the pair $\lambda_{a} - \psiL$ instead of $\lambda_{a}$, and the extra condition imposes a condition on $\varphi$ instead of the pair $\varphi - \psiL$.
 
-Repeating the argument for the other branch of solutions $\iota \rightarrow \pi$ (or directly considering the symmery~\eqref{eq:symmetryresponse}) gives four other solutions in the sky with identical sky longitudes $\lambda_{L}^{*}$, with symmetrized sky latitudes $\beta_{L}^{*} \rightarrow -\beta_{L}^{*}$, and with $\xi (\varphiL, \psiL) \equiv -\varphiL + \psiL$, $\calA(d, \iota) \equiv 3/4\sqrt{5/\pi}\sin^{4}(\iota/2)/d $.
+We illustrate our findings by running a Bayesian parameter estimation for the simplified likelihood. The results are shown in Fig.~\ref{fig:PEsmbh22hmSimpleLikeCase9}, with the two samplers.
 
-Thus, with~\eqref{eq:solutionbetaL}, \eqref{eq:solutionlambdaL} and $\beta_{L}^{*} \rightarrow -\beta_{L}^{*}$, we arrive at eight degenerate positions in the sky $(\lambda_{L}^{*}, \beta_{L}^{*})$. For each of these sky positions, an exact line degeneracy exists between $\varphiL$ and $\psiL$ as long as $\xi = \mathrm{const}$, as well as an approximate line degeneracy between $d$ and $\iota$, as long as $\calA = \mathrm{const}$, limited to inclination values where $\sin^{4}(\iota/2)$ (or $\cos^{4}(\iota/2)$, for the other branch of solutions) remains negligible. The combination of these degeneracies generates an extended structure in the multi-dimensional parameter space. As a result, when considering the marginal posterior for the sky position, these degenerate spots in the sky can have a lot of probability support.
+Focusing on the sky position, we investigate the degenerate peak in the sky that is the closest to the injection in Fig.~\ref{fig:Skydownsmbh22hmSimpleLikeCase9}. We compare here the sky position posterior distribution generated by the two samplers for the true likelihood 
+
+%\be\label{eq:symmetryresponse}
+%\betaL \rightarrow -\betaL\,, \quad \iota \rightarrow \pi - \iota \,, \quad \psiL \rightarrow \pi - \psiL
+%\ee
+%leaves the signal unchanged. We can also rewrite the likelihood in a way that makes clearer the symmetry between the two pairs of parameters $(\iota, \varphiL)$ and $(\betaL, \lambdaL)$ \SM{[TODO]}.
+%
+%The simplified extrinsic likelihood for a frozen LISA then takes the form
+%\be\label{eq:simplelikelihood}
+%	\ln \calL = - \frac{1}{2} \Lambda \left( \left| s_{a} - s_{a}^{\rm inj} \right|^{2} + \left| s_{e} - s_{e}^{\rm inj} \right|^{2} \right) \,,
+%\ee
+%where $\Lambda$ appears as an overall normalization factor, playing the role of the square SNR of the signal.
+
+%We can now explore possible degeneracies in the likelihood given by~\eqref{eq:simplelikelihood}, \eqref{eq:defsase} and \eqref{eq:defa22a2m2}-\eqref{eq:defe22e2m2}. We note that the relative contributions of the modes $h_{2,2}$ and $h_{2,-2}$ are strongly separated in the face-on or face-off limit, leading to a simplification of the response and an enhanced degeneracy. Due to the symmetry~\eqref{eq:symmetryresponse}, we will focus on the face-on limit $\iota \rightarrow 0$. In this limit, the $h_{2,-2}$ contributions die off rapidly as $a_{2,-2}\,, e_{2,-2} \sim \sin^{4} (\iota/2)$. If they are assumed to be negligible, then we can rewrite
+%\bsub\label{eq:saseapprox}
+%\begin{align}
+%	s_{a} \simeq i\calA e^{2 i \xi} \left( D_{a}^{+} + i D_{a}^{\times} \right) \,, \\
+%	s_{e} \simeq i\calA e^{2 i \xi} \left( D_{e}^{+} + i D_{e}^{\times} \right) \,,
+%\end{align}
+%\esub
+%where we introduced the notations $\xi (\varphiL, \psiL) \equiv -\varphiL - \psiL$ and $\calA(d, \iota) \equiv 3/4\sqrt{5/\pi}\cos^{4}(\iota/2)/d $ for the common phase and amplitude factors.
+%
+%For a degeneracy to occur, both complex quantities $s_{a}$ and $s_{e}$ must be close to the injection values $s_{a}^{\rm inj}$ and $s_{e}^{\rm inj}$, which can be achieved as follows if~\eqref{eq:saseapprox} is valid. Defining the complex ratio
+%\be\label{eq:defr}
+%	r(\lambdaL, \betaL) = \frac{D_{a}^{+} + i D_{a}^{\times}}{D_{e}^{+} + i D_{e}^{\times} } \,,
+%\ee
+%if the position in the sky $(\lambda_{L}^{*}, \beta_{L}^{*})$ can be chosen so that
+%\be\label{eq:rcondition}
+%	r(\lambda_{L}^{*}, \beta_{L}^{*}) = \frac{s_{a}^{\rm inj}}{s_{e}^{\rm inj}} \,,
+%\ee
+%then adjusting $\calA$ and $\xi$ so that
+%\be
+%	i\calA e^{2 i \xi} = \frac{s_{a}^{\rm inj}}{\left( D_{a}^{+} + i D_{a}^{\times} \right)(\lambda_{L}^{*}, \beta_{L}^{*})}
+%\ee
+%generates degenerate points in parameter space with $\ln \calL \simeq 0$.
+%
+%The conditions~\eqref{eq:defr}-\eqref{eq:rcondition} can be inverted for the sky position as follows. For a given complex value of $r = s_{a}^{\rm inj} / s_{e}^{\rm inj}$, $r(\lambda_{L}^{*}, \beta_{L}^{*}) = r$ can be rewritten as
+%\be\label{eq:eqtosolveforlambdabetaL}
+%	e^{4i\lambda_{L}^{*}}e^{i\frac{\pi}{3}} \frac{\left( 1 +\sin\beta_{L}^{*} \right)^{2}}{\left( 1 - \sin\beta_{L}^{*} \right)^{2}} = \frac{1+ i r}{1 - i r} \,.
+%\ee
+%Solving for the modulus of~\eqref{eq:eqtosolveforlambdabetaL} then yields
+%\be\label{eq:solutionbetaL}
+%	\sin\beta_{L}^{*} = \frac{\rho - 1}{\rho + 1} \,,
+%\ee
+%for
+%\be
+%	\rho = \sqrt{\left| \frac{1+ i r}{1 - i r} \right|} \,.
+%\ee
+%Solving for the argument of~\eqref{eq:eqtosolveforlambdabetaL} gives four solutions for $\lambda_{L}^{*}$ as
+%\be\label{eq:solutionlambdaL}
+%	\lambda_{L}^{*} = - \frac{\pi}{12} + \frac{1}{4}\mathrm{Arg} \frac{1+ i r}{1 - i r} + \frac{k \pi}{2} \quad \mathrm{for} \quad k = 0,\dots,3 \,.
+%\ee
+%
+%Repeating the argument for the other branch of solutions $\iota \rightarrow \pi$ (or directly considering the symmery~\eqref{eq:symmetryresponse}) gives four other solutions in the sky with identical sky longitudes $\lambda_{L}^{*}$, with symmetrized sky latitudes $\beta_{L}^{*} \rightarrow -\beta_{L}^{*}$, and with $\xi (\varphiL, \psiL) \equiv -\varphiL + \psiL$, $\calA(d, \iota) \equiv 3/4\sqrt{5/\pi}\sin^{4}(\iota/2)/d $.
+%
+%Thus, with~\eqref{eq:solutionbetaL}, \eqref{eq:solutionlambdaL} and $\beta_{L}^{*} \rightarrow -\beta_{L}^{*}$, we arrive at eight degenerate positions in the sky $(\lambda_{L}^{*}, \beta_{L}^{*})$. For each of these sky positions, an exact line degeneracy exists between $\varphiL$ and $\psiL$ as long as $\xi = \mathrm{const}$, as well as an approximate line degeneracy between $d$ and $\iota$, as long as $\calA = \mathrm{const}$, limited to inclination values where $\sin^{4}(\iota/2)$ (or $\cos^{4}(\iota/2)$, for the other branch of solutions) remains negligible. The combination of these degeneracies generates an extended structure in the multi-dimensional parameter space. As a result, when considering the marginal posterior for the sky position, these degenerate spots in the sky can have a lot of probability support.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
