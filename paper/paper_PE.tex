@@ -107,100 +107,575 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{The LISA instrument response}
-\label{sec:response}
+\section{Methodology}
+\label{sec:method}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\subsection{The LISA response - OLD}
-\label{sec:lisaresponse}
+\subsection{Bayesian setting}
+\label{subsec:defbayes}
 
-\SM{------------------------------------------------------}
+-- definitions relevant to the Bayesian setting (likelihood, ...)
 
-\SM{[copy-paste from previous paper -- just here to copy needed formulas / refs]}
+Introducing the standard matched-filter inner product as
+\be\label{eq:definnerproduct}
+	( \tilde{a} | \tilde{b} ) = 4 \mathrm{Re} \int_{0}^{+\infty} df \; \frac{\tilde{a}(f) \tilde{b}^{*}(f)}{S_{n}(f)} \,,
+\ee
+for stationary Gaussian noise with noise PSD $S_{n}$, the likelihood $\calL = p(d | \bm{\theta})$ for a given gravitational wave channel takes the form
+\be\label{eq:deflnL}
+	\ln \calL = -\frac{1}{2} \left( h(\bm{\theta}) - d | h(\bm{\theta}) - d \right) \,,
+\ee
+with the data stream being a superposition of the gravitational wave signal for the true parameters $\bm{\theta}_{0}$ and the noise realization in the experiment, $d = s(\bm{\theta}_{0}) + n$. The posterior distribution for the physical parameters $\bm{\theta}$ given the observed data $d$ is then
+\be\label{eq:defBayes}
+	p\left( \bm{\theta} | d \right) = \frac{p(d | \bm{\theta})p(\bm{\theta})}{p(d)}\,,
+\ee
+with $p(\bm{\theta})$ the priors on the parameters, and $p(d)$ the evidence that we will ignore here as it enters as a multiplicative constant in the posterior.
 
-We begin by detailing the model that we use for the response of a LISA-like detector, together with the assumptions used and their limitations. Since our aim is to assess the accuracy of our direct Fourier-domain treatment of the response, we can focus on the gravitational-wave contribution to the basic single-link observables. We therefore use a somewhat simplified model for the time-domain response~\cite{Krolak+04}, ignoring corrections that would be crucial from the point of view of noise cancellations, keeping in mind that the response model can be enriched later without affecting the conclusions of the present analysis.
+In our analysis, we will use the so-called zero-noise approximation. This corresponds simply to performing a Bayesian analysis with~\eqref{eq:deflnL} and ~\eqref{eq:defBayes}, but setting the noise realization to zero, $n=0$. It allows us to accelerate the likelihood computation, as will be explained in~\ref{}. For exploratory parameter estimation runs, this approximation allows us to explore the structure of the likelihood with its possible parameter degeneracies (\SM{[cite past use of this approx.]}), and is a significant improvement over Fisher matrix estimates in that sense. We leave the extension of our analysis to include noise realizations for future work. We will also ignore waveform systematic errors and assume our waveform templates match exactly the real signals.
 
-The frequency-shift response for a single link~\eqref{eq:yslr} was derived in Ref.~\cite{EW75} (see also~\cite{CR02, RCP04, Finn08, Cornish09}). Several assumptions enter the result as written in~\eqref{eq:yslr}: (i) effects of the order $v/c$ are neglected, including for instance the special relativistic Doppler effect created by the relative speeds of the spacecraft on their orbits (ii) the propagation is assumed to take place in a flat spacetime, perturbed only by the gravitational wave; thus the gravitational redshift as well as the deflection of light created by the gravitational potential of the Sun is ignored (iii) all geometric factors are evaluated at a single time, whereas one should consider the beam as propagating from the position of the first spacecraft at the time of emission to the position of the second scapecraft at the time of reception, leading to a point-ahead effect.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Additionally, we limit ourselves to a rigid model for the orbits of the constellation, namely we assume that the constellation remains in an equilateral configuration with fixed armlengths. These simplified orbits neglect (iv) effects of order $e^{2}$ from the eccentricity of the individual Keplerian orbits, (v) the effect of gravitational perturbations coming from other celestial bodies, such as the Earth, the quadrupole of the Sun, and the other planets. Note that although we can neglect all the effects (i)-(v) for our present study, keeping track of these corrections is crucial for the purpose of laser noise cancellations, and led to the development of new generations of TDI observables~\cite{Tintoliving}.
+\subsection{Frequency domain LISA response}
+\label{sec:response}
 
-It is natural to split the response~\eqref{eq:yslr} into two steps: first the orbital delay related to the orbit around the Sun of the whole constellation, and then the constellation response. The baselines for the delays are indeed very different in the two cases. Geometrical projection factors aside, we have for the orbit around the Sun $R=1\text{au}=1.5\times 10^{8} \text{km}$, while the detector armlength is $L=2.5\times 10^{6}\text{km}$ (in the configuration proposed in~\cite{LISA17}). It is natural to define two transfer frequencies for the two relevant length scales for the delays, defined such that a wavelength fits within this length scale, i.e. $2\pi f d = 1$. This gives
-\begin{subequations}\label{eq:transferfrequencies}
+-- Geometric setting, definitions, summarize the FD response
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Reduced order model for EOBNRv2HM waveforms.}
+\label{sec:waveforms}
+
+-- Waveforms: EOBNRv2HMROM + PNext
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Likelihood computation}
+\label{sec:likelihood}
+
+-- Likelihood computation: fast overlaps
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Fisher matrix parameter estimation}
+\label{sec:Fisher}
+
+-- Fisher matrices computation: step self-tuning,...
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Bayesian sampling}
+\label{sec:samplers}
+
+-- Bayesian samplers: Multinest, PTMCMC
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Supermassive black holes}
+\label{sec:SMBH}
+
+- Demonstration/examples
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Signals and transfer functions}
+\label{sec:signaltransfer}
+
+\begin{figure*}
+  \centering
+  \includegraphics[width=.98\linewidth]{../plots/plot_smbh9_alltdi.pdf}
+  \caption{\SM{TODO: rethink the visualization, maybe plot only transfer functions}.}
+  \label{fig:tranferSMBHCase9}
+\end{figure*}
+
+\begin{figure}
+  \centering
+  \includegraphics[width=.99\linewidth]{../plots/plot_hc_tdia_hm.pdf}
+  \caption{.}
+  \label{fig:FDHMSMBHCase9}
+\end{figure}
+
+-- add plot for SNR accumulation with time or frequency: inspiral/MRD balance across mass range
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Parameter estimation}
+\label{sec:SMBHPE}
+
+\begin{figure*}
+  \centering
+  \includegraphics[width=.98\linewidth]{../plots/corner_smbh_case0_ptmcmc_22_hm.png}
+  \caption{.}
+  \label{fig:PEsmbh22hmCase0}
+\end{figure*}
+
+\begin{figure*}
+  \centering
+  \includegraphics[width=.98\linewidth]{../plots/corner_smbh_case9_ptmcmc_22_hm.png}
+  \caption{.}
+  \label{fig:PEsmbh22hmCase0}
+\end{figure*}
+
+-- High-mass system, non-degenerate, 22 and HM + Fisher - stacked SNR contours
+eg:
+
+Case 12?
+m1,    m2,    t0,D,     phi0,i,   lam,  bet, psi
+8.89e5,1.11e5,0, 3.67e4,pi/3,pi/2,3pi/4,pi/3,pi/3
+
+Case 0
+
+-- Performance: waveform and likelihood costs, number of sampler evaluations
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Accumulation of signal with time}
+\label{sec:SMBHPEacctime}
+
+\begin{figure*}
+  \centering
+  \begin{minipage}{.32\linewidth}
+      \includegraphics[width=.99\linewidth]{../plots/corner_smbh_case9_hm_tseries_m1m2.png}
+   \end{minipage}
+   \begin{minipage}{.32\linewidth}
+      \includegraphics[width=.99\linewidth]{../plots/corner_smbh_case9_hm_tseries_Dinc.png}
+   \end{minipage}
+   \begin{minipage}{.32\linewidth}
+      \includegraphics[width=.99\linewidth]{../plots/corner_smbh_case9_hm_tseries_tphi.png}
+   \end{minipage}
+  \caption{.}
+  \label{fig:smbhCornerZoomHMCase9}
+\end{figure*}
+
+\begin{figure*}
+  \centering
+  \includegraphics[width=.8\linewidth]{../plots/plot_mollweide_tseries.png}
+  \caption{.}
+  \label{fig:MollweidesmbhTserieshmCase9}
+\end{figure*}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Investigating degeneracies}
+\label{sec:SMBHPEdegen}
+
+\begin{figure*}
+  \centering
+  \includegraphics[width=.8\linewidth]{../plots/corner_smbh_case9_simplelike_ptmcmc_bambi.png}
+  \caption{Posterior distributions obtained with the two samplers \texttt{PTMCMC} (blue) and $\texttt{MultiNest}$ (green) for the simplified likelihood~\eqref{eq:simplelikelihoodhm}, using only the dominant mode $(\ell, m) = (2,2)$. Masses and time are pinned to the injected value, and the motion of the detector is neglected. We also superimpose (red) the contours obtained with \texttt{MultiNest} by including all harmonics $(2,2)$, $(2,1)$, $(3,3)$, $(4,4)$, $(5,5)$.}
+  \label{fig:PEsmbh22hmSimpleLikeCase9}
+\end{figure*}
+
+\begin{figure}
+  \centering
+  \begin{minipage}{.49\linewidth}
+  \includegraphics[width=.99\linewidth]{../plots/corner_skydown_smbh_case9_22_ptmcmc_bambi_withdegen.png}
+  \end{minipage}
+  \begin{minipage}{.49\linewidth}
+  \includegraphics[width=.99\linewidth]{../plots/corner_skydown_smbh_case9_simplelike_ptmcmc_bambi_withdegen.png}
+  \end{minipage}
+  \caption{Sky position posterior in presence of degeneracies, zooming close to the injected value. The left panel shows the complete likelihood, while the right panel shows the simplified likelihood~\eqref{eq:simplelikelihoodhm} with a motionless LISA and fixed masses and time. The results of \texttt{PTMCMC} (blue) and \texttt{MultiNest} are superimposed. The black cross is the injected value, and the grey cross is the analytic prediction~\eqref{eq:soldegensky} for the offset peak created by degeneracies.}
+  \label{fig:Skydownsmbh22hmSimpleLikeCase9}
+\end{figure}
+
+In this section, we investigate the cause of the degeneracies appearing in the posterior of Case~II shown in~\ref{subsec:SMBHPE}. Understanding the structure of these features could prove useful to inform Bayesian samplers, for instance by building adapted jump proposal allowing a much faster mixing of MCMC chains than naive methods. a simplified form of the extrinsic likelihood and the structure of its degeneracies.
+
+An important clue about the appearance of these degeneracies is the length of the observable signal. As shown in Fig.~\ref{}, for our example SMBH systems the SNR accumulates in a matter of days before merger, which means that there is only little impact of the modulations caused by the motion of the detector on the TDI transfer functions~\eqref{}. If we can neglect entirely the motion of the detector (which is not quite true as we will see later on), then we are in a regime where the information about the sky position of the source comes essentially from the pattern functions affecting this high-SNR signal. Using the the low-frequency approximation (see~\ref{}) and the time-at-LISA $t_{L}$ as a time variable, there is no frequency dependence in the response. A further simplification occurs when pinning the masses and the time of coalescence to their true values. We found indeed that these parameters correlate only weakly to the other ones, so that we can hope to understand the degeneracy features by restricting the analysis to the six extrinsic parameters $(D_{L}, \iota, \varphi, \lambdaL, \betaL, \psiL)$.
+
+Under all these simplifying assumptions, the likelihood function becomes purely extrinsic, and takes the form of trivial geometric factors multiplying a constant overlap that can be precomputed. Using the subscript $\mathrm{inj}$ for the injected signal, the likelihood~\eqref{eq:defliklihood} is
+\be
+	\ln \calL = -\frac{1}{2} \left( \tilde{a} - \tilde{a}_{\rm inj} | \tilde{a} - \tilde{a}_{\rm inj} \right) -\frac{1}{2} \left( \tilde{e} - \tilde{e}_{\rm inj} | \tilde{e} - \tilde{e}_{\rm inj} \right) \,.
+\ee
+From the low-frequency response \eqref{eq:aelowfmodes}, pinning the time-at-LISA so that we ca ignore the factor $\exp [2 i \pi f k\cdot p_{0}]$ as a pure constant corresponding to a redefinition of time, we obtain 
+\begin{align}\label{eq:simplelikelihoodhm}
+	\ln \calL &= -\frac{1}{2} \sum_{\ell m} \sum_{\ell' m'}   \left[ \left( s_{a}^{\ell m} - s_{a, \mathrm{inj}}^{\ell m}\right) \left( s_{a}^{\ell' m'} - s_{a, \mathrm{inj}}^{\ell' m'}\right)^{*} \right. \nn\\
+	& \qquad \left. + \left( s_{e}^{\ell m} - s_{e, \mathrm{inj}}^{\ell m}\right) \left( s_{e}^{\ell' m'} - s_{e, \mathrm{inj}}^{\ell' m'}\right)^{*} \right] \left\langle \ell m | \ell' m' \right\rangle \,,
+\end{align}
+where we introduced the following extrinsic signal functions
+\be\label{eq:defsaelm}
+	s_{a,e}^{\ell m} = \frac{1}{d} \frac{2}{3L} D_{a,e} : P_{\ell m} \,,
+\ee
+with $d = D / D^{\rm inj}$ the dimensionless ratio of luminosity distances. The prefactors $\left\langle \ell m | \ell' m' \right\rangle$ are pure normalization constants, and represent mode overlaps as
+\be\label{eq:innerproductlmlpmp}
+	\left\langle \ell m | \ell' m' \right\rangle = 4\mathrm{Re} \int \frac{df}{S_{n}^{a,e}} \left( 3 \pi f L\right)^{2} \tilde{h}_{\ell m} \tilde{h}_{\ell' m'}^{*} \,.
+\ee
+Here, the noise PSD $S_{n}^{a,e}$ is given by~\eqref{} and is identical between the channels $a$ and $e$. Having fixed the masses and the time, these overlaps are to be computed with the modes $\tilde{h}_{\ell m}^{\rm inj}$ of the injected signal.
+
+In the case where we only include the dominant harmonic $h_{22}$, the likelihood~\eqref{eq:simplelikelihoodhm} simplifies to
+\be\label{eq:simplelikelihood22}
+	\ln \calL = -\frac{1}{2} \left\langle 22 | 22 \right\rangle  \left[ \left| s_{a}^{22} - s_{a, \mathrm{inj}}^{22} \right|^{2} + \left| s_{e}^{22} - s_{e, \mathrm{inj}}^{22}\right|^{2} \right] \,.
+\ee
+The functions~\eqref{eq:defsaelm} take the explicit form
 \begin{align}
-	f_{R} &= 3.2\times10^{-4}\Hz \,,\\
-	f_{L} &= 1.9\times 10^{-2}\Hz \,.
+	s_{a,e}^{22} &= \frac{1}{4d} \sqrt{\frac{5}{\pi}} \cos^{4}\frac{\iota}{2} e^{2i(\varphi-\psiL)} \left( F_{a,e}^{+} + i F_{a,e}^{\times} \right) \\
+	&+ \frac{1}{4d} \sqrt{\frac{5}{\pi}} \sin^{4}\frac{\iota}{2} e^{2i(\varphi+\psiL)} \left( F_{a,e}^{+} - i F_{a,e}^{\times} \right) \,,
 \end{align}
-\end{subequations}
-The LISA response will behave qualitatively differently on the three frequency bands $f \leq f_{R}$, $f_{R} \leq f \leq f_{L}$ and $f_{L} \leq f$.
+with the pattern functions for the channels $a$ and $e$ defined in \eqref{eq:defFapcFepc}-\eqref{eq:FapcFepc}.
 
-The first stage of the response, the orbital delay, consists simply in applying the varying time delay to bring the wavefront sampling point from the SSB reference to the center of the LISA triangular constellation, common to all $y_{slr}$ observables. For $h^{\rm TT}$ the transverse-traceless gravitational waveform in matrix form, we write this orbital time delay as
-\be\label{eq:defresponse0}
-	h_{0}^{\rm TT} (t) = h^{\rm TT}(t-\hatk\cdot p_{0}) \,,
-\ee
-with $p_{0}$ the position of the constellation center, which follows the Earth orbit around the Sun. The second stage of the response calculation comprises the remaining, constellation-centered response. For the single-link contribution to the response, for the laser link from spacecraft $s$ to spacecraft $r$ along a path in direction $n_l$, we write
-\begin{align}\label{eq:defresponseL}
-	y_{slr} &= \frac{1}{2} \frac{1}{1 - \hatk\cdot n_{l}} \nn\\
-	& \cdot n_{l}\cdot \left[ h_{0}^{\rm TT}(t - L - \hatk\cdot p^{L}_{s}) - h_{0}^{\rm TT}(t - \hatk\cdot p^{L}_{r}) \right] \cdot n_{l}\,,
-\end{align}
-where we reference the positions of the spacecraft relative to the center of the constellation, $p^{L}_{A} \equiv p_{A} - p_{0}$.
-
-As described in App.~\ref{app:notation} We will decompose the full signal in the contributions of the individual spin-weighted spherical modes $h_{\ell m}$, whose Fourier transforms are assumed to have a smooth amplitude and phase. First, we define the matrices $P_{+},P_{\times}$ such that, in the sense of matrices,
+In order to make more manifest the degeneracies in the problem, it will be useful to introduce the following notations. First, since $\iota \in [0, \pi]$ while $\beta_{L} \in [-\pi/2, \pi/2]$, it will be more convenient to work with $\theta_{L} = \pi/2 - \beta_{L}$. We will further abbreviate notations by using the variables
 \be
-	h^{\rm TT} = h_{+}P_{+} + h_{\times}P_{\times} \,.
+	t_{\iota} \equiv \tan \iota/2 \,, \quad t_{\theta} \equiv \tan \theta_{L} / 2 \,.
 \ee
-We focus only on positive frequencies. Assuming that the approximation~\eqref{eq:zeronegativef} applies, we consider a single mode contribution, $h=h_{\ell m}$ with $m>0$. For each given mode we define a complex matrix $P_{\ell m}$ incorporating the spin-weighted spherical harmonic constant factor as
+We also introduce the azimuthal angles $\lambda_{a} = \lambda_{L} - \pi/6$, $\lambda_{e} = \lambda_{L} + \pi/12 = \lambda_{a} + \pi/4$, and form the combinations
 \be
-	P_{\ell m} =
-	\begin{cases}
-	\frac{1}{2} {}_{-2}Y_{\ell m} \left( P_{+} + i P_{\times} \right) \text{ for } m>0\,,\\
-	\frac{1}{2} {}_{-2}Y_{\ell m}^{*} \left( P_{+} - i P_{\times} \right) \text{ for } m<0\,.
-	\end{cases}
+	\sigma_{\pm} \equiv s_{a}^{22} \pm i s_{e}^{22} \,.
 \ee
-
-We now turn to the transformation of~\eqref{eq:defresponse0} and~\eqref{eq:defresponseL} to the Fourier domain. Applying a pure delay as in~\eqref{eq:defresponse0} translates into
-\be\label{eq:G0}
-	G_{0}(f, t) = e^{-2i\pi f d_{0}(t)} \,,
-\ee
-with $d_{0} = -\hatk \cdot p_{0}$ the delay associated to the orbit around the Sun. For the leading-order response~\eqref{eq:transferlocal}, this gives a Fourier-domain transfer function common to all modes, that is a pure phase factor, proportional to the frequency but also $t_{f}$-dependent:
-\be\label{eq:transfer0local}
-	\calT_{0}^{\rm local}(f) = G_{0}(f, \tf)\,.
-\ee
-If $(\lambda, \beta)$ are the ecliptic longitude and latitude of the source in the sky, and if the orbital phase is set by convention to $0$ at $t=0$, the orbital delay has the simple expression
-\be\label{eq:delay0}
-	d_{0}(t) = -R \cos\beta \cos\left(\Omega_{0}t - \lambda\right)\,.
-\ee
-
-For the constellation part of response~\eqref{eq:defresponseL}, treated separately from the delay~\eqref{eq:delay0}, we write
-\begin{align}\label{eq:decomposeGslr}
-	F_{slr}^{L}(t) &= \frac{1}{2} \frac{1}{1 - \hatk\cdot n_{l}(t)} n_{l}(t) \cdot P_{\ell m} \cdot n_{l} (t) \,,\nn\\
-	d_{s}(t) &= - k\cdot p_{s}^{L}(t) \,, \quad d_{r}(t) = - k\cdot p_{r}^{L}(t) \,,\nn\\
-	G_{slr}^{L}(f,t) &=  F_{slr}^{L}(t) \left( e^{-2i\pi f (d_{s,L}(t) + L)} - e^{-2i\pi f d_{r}(t)} \right) \,.
+In these notations, we obtain
+\bsub\label{eq:sigmapm}
+\begin{align}
+	\sigma_{+} &= \rho e^{2i\varphi} \left[ t_{\theta}^{4} e^{-2 i \psiL} + t_{\iota}^{4} e^{2 i \psiL} \right] e^{-2i \lambda_{a}} \,, \\
+	\sigma_{-} &= \rho e^{2i\varphi} \left[ e^{-2 i \psiL} + t_{\theta}^{4} t_{\iota}^{4} e^{2 i \psiL} \right] e^{2i \lambda_{a}} \,,
 \end{align}
-The superscript $L$ indicates that the orbital delay~\eqref{eq:delay0} is not included. Since we also assume the rigid approximation for the constellation, where the armlengths are fixed, a particular simplification occurs when combining these individual delays, thanks to the relation $p^{L}_{r} - p^{L}_{s} =  L n_{l}$:
-\begin{align}\label{eq:GslrL}
-	G_{slr}^{L}(f,t) &= \frac{i \pi f L}{2} \sinc \left[ \pi f L\left(1-\hatk\cdot n_{l} \right) \right] \nn\\
-	& \quad \cdot \exp\left[ i \pi f \left( L + \hatk\cdot \left( p_{1}^{L} + p_{2}^{L} \right) \right) \right]  n_{l} \cdot P_{\ell m} \cdot n_{l} \,,
-\end{align}
-with all time-dependent vectors evaluated at $t$. This expression is well known as describing the frequency-dependency in the LISA response~\cite{Larson+99, Cornish01, CR02, RCP04}. In the local approximation~\eqref{eq:transferlocal}, the Fourier-domain transfer function then reads
-\begin{align}\label{eq:transferLlocal}
-	\calT_{slr}^{L, \mathrm{local}}(f) &= G_{slr}^{L}(f, \tf) \,.
-\end{align}
-For plotting purposes, we will also define
-\be\label{eq:transferLenvelope}
-	\overline{\calT}_{slr}^{L} (f) = \frac{i \pi f L}{2} n_{l} \cdot P_{\ell m} \cdot n_{l} (\tf)
+\esub
+with a common prefactor
+\be\label{eq:sigmafactorrho}
+	\rho(d, \iota, \theta_{L}) = \frac{1}{4d} \sqrt{\frac{5}{\pi}} \frac{1}{\left( 1 + t_{\iota}^{2} \right)^{2} \left(1 + t_{\theta}^{2} \right)^{2}} \,.
 \ee
-which will serve as an estimate for the enveloppe function of the response, devoid of the zero-crossings at high frequencies of the $\sinc$ term in~\eqref{eq:GslrL}.
+Finding points in the parameter space that are degenerate with the injection, with $\ln \calL \simeq 0$, amounts to try to obtain both the same value of $\sigma_{+}$ and $\sigma_{-}$ as the injection.
 
-Note that, if the corrections of Sec.~\ref{subsec:delays}, for non-negligible $\dot d$, are included for the constellation delays, the transfer function will not have this simple form anymore, as $\dot{d}$ will have a different velocity-dependent expression for the sending and receiving spacecraft. One must then separately handle $d_{s}$ and $d_{r}$ in~\eqref{eq:decomposeGslr} to compute the corrections.
+We can now use the simplified response written in the form~\eqref{eq:sigmapm}-\eqref{eq:sigmafactorrho} to look for symmetries and degeneracies. First, we note the following manifest symmetry: changing simultaneously
+\be\label{eq:symmetryresponse}
+	\betaL \rightarrow -\betaL\,, \quad \iota \rightarrow \pi - \iota \,, \quad \psiL \rightarrow \pi - \psiL
+\ee
+leaves the likelihood exactly invariant. There is also a form of symmetry obatained by exchanging $\iota \leftrightarrow \theta_{L}$. This conjugate the term inside bracket for $\sigma_{+}$, which can be corrected withe the phase terms $\varphi \pm \lambda_{a}$. If $\Phi = \mathrm{Arg} \left[ t_{\theta}^{4} e^{-2 i \psiL} + t_{\iota}^{4} e^{2 i \psiL} \right]$, we obtain the symmetry
+\begin{align}
+	\iota' = \theta_{L} \,, \quad \theta_{L}' = \iota \,, \nn\\
+	\varphi' = \varphi + \frac{1}{2} \Phi \; \mathrm{mod} \; \pi\,, \nn\\
+	\lambda_{a}' = \lambda_{a} - \frac{1}{2} \Phi \; \mathrm{mod} \; \pi\,.
+\end{align}
 
-The orbital response~\eqref{eq:transfer0local}-\eqref{eq:delay0} takes a simple analytic form, but the phase contribution of this delay is significant across most of the frequency band and can be large for $f \gg f_{R}$.
+We can now explain the degenerate features we found as certain limits in this simplified likelihood. In the face-on or face-off limit $\iota \rightarrow 0$, $|t_{\iota}| \ll 1$. This amounts to the $(\ell,m)=(2,2)$ contribution dominating the $(\ell, m)=(2,-2)$ contribution. Neglecting the terms in~\eqref{eq:sigmapm} that are quartic in $t_{\iota}$, we have
+\bsub\label{eq:sigmapmapprox}
+\begin{align}
+	\sigma_{+} &\simeq \rho e^{2i(\varphi - \psiL)} t_{\theta}^{4} e^{-2i \lambda_{a}} \,, \\
+	\sigma_{-} &\simeq \rho e^{2i(\varphi - \psiL)} e^{2i \lambda_{a}} \,,
+\end{align}
+\esub
+Defining the ratio
+\be
+	r = \frac{\sigma_{+}}{\sigma_{-}} \,,
+\ee
+we see that finding $(\lambda_{a}^{*}, \theta_{L}^{*})$ verifying
+\be\label{eq:degenconditionsky}
+	\frac{\sigma_{+}}{\sigma_{-}} (\lambda_{a}^{*}, \theta_{L}^{*}) = r_{\rm inj} \,,
+\ee
+with the approximation~\eqref{eq:sigmapmapprox} for the left-hand side, guarantees that we can then match both $\sigma_{+}$ and $\sigma_{-}$ of the injection with the condition
+\be\label{eq:degenconditionprefactor}
+	\rho e^{2i(\varphi - \psiL)} e^{2i \lambda_{a}^{*}} = \sigma_{-}^{\rm inj}\,.
+\ee
+In the limit $|t_{\iota}| \ll 1$,
+\be
+	\frac{\sigma_{+}}{\sigma_{-}} \simeq t_{\theta}^{4} e^{-4i\lambda_{a}} \,,
+\ee
+so that~\eqref{eq:degenconditionsky} is verified for special positions in the sky at (coming back to the original variables $(\lambdaL, \betaL)$)
+\bsub\label{eq:soldegensky}
+\begin{align}
+	\beta_{L}^{*} &= \frac{\pi}{2} - 2 \mathrm{Arctan} \; \left| r_{\rm inj}\right|^{1/4} \,, \\
+	\lambda_{L}^{*} &= \frac{\pi}{6} -\frac{1}{4} \mathrm{Arg} \; r_{\rm inj} \;\mathrm{mod}\; \frac{\pi}{2} \,.
+\end{align}
+\esub
+The other condition~\eqref{eq:conditionprefactor} gives then a single phase constraint for $\varphi - \psiL$, and a single amplitude constraint for $\rho(d, \iota, \theta_{L}^{*})$. The limit $\iota \rightarrow \pi$ (where the $(2,-2)$ contribution dominates the $(2,2)$) is very similar, as can be seen most easily by the change of variable $\iota \rightarrow \pi - \iota$, with $-\psiL$ and $\pi - \theta_{L}$ playing the roles of $\psiL$ and $\theta_{L}$.
 
-The constellation response~\eqref{eq:GslrL}-\eqref{eq:transferLlocal} can be interpreted as the Fourier-domain translation of a discrete derivative taken on the waveform. The leading factor in~\eqref{eq:GslrL} shows that the amplitude of the response is proportional to $f$ in the low-frequency limit $f\ll f_{L}$, where the other factors are essentially unity. For $f\gtrsim f_{L}$, the $\sinc$ and the phase of the exponential generate additional structure in the response, including zero-crossings when the projected armlength is an integer number of wavelengths. From~\eqref{eq:transferLlocal}, an expansion for small $f\ll f_{L}$ yields back a Fourier-domain analog of the low-frequency approximation of the response~\cite{Cutler97, RCP04}, which is equivalent to having two LIGO-type interferometers turned by $\pi/4$ and set in motion.
+With the $\lambdaL \rightarrow \lambdaL + k \pi/2$ and $\betaL \rightarrow - \betaL$ symmetries, we arrive at eight sky positions where the degeneracy occurs, with an exact degeneracy for the pair of parameters $(\varphi, \psiL)$, as well as an approximate degeneracy for the pair $(d, \iota)$ as long as we remain in the regime $t_{\iota}^{4} \ll 1$ or $t_{\iota}^{4} \gg 1$ (which is quite extended, thanks to the quartic power). For each of these sky positions built from~\eqref{eq:soldegensky}, many different values of $(\varphi, \psiL)$ and $(d, \iota)$ produce a waveform very close to the injection, resulting in apparent peaks in the marginalized posterior distribution for the sky position, located at the special sky positions $(\lambda_{a}^{*}, \theta_{L}^{*})$, which are offset from the injected value.
 
-For analysis of the response we need a concrete set of gravitational waveforms. We will use the PhenomD model~\cite{Khan+15,Husa+15}, which provides Fourier-domain inspiral-merger-ringdown waveforms for aligned spins. We refer to App.~\ref{app:precLISA} for a brief discussion of the prospects for applying our formalism for the LISA response to precessing Fourier-domain waveforms.
+We can further find the same mechanism, with a few differences, by exchanging the roles of $(\iota, \varphi)$ and $(\theta_{L}, \lambda_{a})$, as follows. In the limit $\theta_{L} \rightarrow 0$ with $|t_{\theta}| \ll 1$, we have this time
+\be
+	\frac{\sigma_{+}}{\sigma_{-}} \simeq t_{\iota}^{4} e^{-4i(\lambda_{a} - \psi_{L})} \,,
+\ee
+which gives in the same way a degeneracy if
+\bsub\label{eq:soldegeniotaphi}
+\begin{align}
+	\iota^{*} &= 2 \mathrm{Arctan} \; \left| r_{\rm inj}\right|^{1/4} \,, \\
+	(\lambda_{a} - \psiL)^{*} &= -\frac{1}{4} \mathrm{Arg} \; r_{\rm inj} \;\mathrm{mod}\; \frac{\pi}{2} \,,
+\end{align}
+\esub
+with a condition on $\rho$ and $\varphi$ that is now
+\be
+	\rho e^{2i\varphi} e^{2i (\lambda_{a}^{*} - \psi_{L}^{*})} = \sigma_{-}^{\rm inj} \,.
+\ee
+Thus, we find again a degenerate pattern, with the difference that \eqref{eq:soldegeniotaphi} imposes a condition on the pair $\lambda_{a} - \psiL$ instead of $\lambda_{a}$, and the extra condition imposes a condition on $\varphi$ instead of the pair $\varphi - \psiL$.
 
-\SM{------------------------------------------------------}
+Finally, when considering more harmonics beyond the dominant mode $h_{22}$, the degeneracies will be broken easily. As in the case of the full likelihood, the simplified likelihood~\eqref{eq:simplelikelihoodhm} will have several terms with different inclination and phase dependencies. If the signal is loud enough for at least two modes to be detected, then the inclination $\iota$ and the phase $\varphi$ are fixed by the relative amplitude and phase of these modes. This will break the degeneracies $(d, \iota)$ and the degeneracy $(\varphi, \psiL)$.  
+
+We illustrate our findings by running a Bayesian parameter estimation for the simplified likelihood~\eqref{eq:simplelikelihood22} with the two samplers \texttt{MultiNest} and \texttt{PTMCMC} described in Sec.~\ref{}. Since the inner products~\eqref{eq:innerproductlmlpmp} are constants computed only once, the external factors become trivially inexpensive, and the likelihood is very fast to compute. We take advantage of this to run \texttt{PTMCMC} for a very large number of steps, ensuring that we do not miss degenerate regions of the parameter space. The resulting posterior distribution is extremely degenerate, as shown in Fig.~\ref{fig:PEsmbh22hmSimpleLikeCase9}. The sampler \texttt{MultiNest} fails to resolve this structure, stopping after having only explored the degenerate region $\iota \rightarrow 0$ and $\iota \rightarrow \pi$ and the eight sky positions~\eqref{eq:soldegensky}. In accordance with~\eqref{eq:degenconditionsky}-\eqref{eq:degenconditionprefactor}, this corresponds to lines in $\varphi \pm \psiL = \mathrm{const}$. The sampler \texttt{PTMCMC} finds more degenerate regions, in particular it finds similar structures with the roles of $\iota$ and $\betaL$ exchanged (as shown notably by the $(d,\iota)$ and $(d,\betaL)$ panels), as well as intermediate regions connecting all these features. 
+
+Fig.~\ref{fig:PEsmbh22hmSimpleLikeCase9} also shows the result obtained when including all available harmonics~\eqref{} in~\eqref{eq:simplelikelihoodhm}. The degenerate structures collapse to leave only eight modes corresponding to $\betaL \rightarrow - \betaL$ and $\lambdaL \rightarrow \lambdaL + k\pi/2$. We found that this degeneracy-breaking occurs already when including a single subdominant harmonic $h_{21}$.
+
+We can now come back to explaining the results of Sec.~\ref{}, and in particular Fig.~\ref{}, obtained with the true likelihood function for the mode $h_{22}$. First, the difference between the two Bayesian samplers has been made more extreme by going to the more degenerate likelihood~\eqref{eq:simplelikelihood22}, allowing us to attribute their disagreement to an apparent shortcoming of \texttt{MultiNest}\footnote{We recall that we only used standard values for the metaparameters \SM{[complete]} for this sampler, and we do not exclude that it would be possible to improve results with minor changes.} for resolving extended degenerate regions. Focusing on the sky position, we zoom close to the injection in Fig.~\ref{fig:Skydownsmbh22hmSimpleLikeCase9}. We compare here the posterior distribution generated with the true likelihood with the one obtained with the simplified likelihood~\eqref{eq:simplelikelihood22}, for both samplers.  We also superimpose the prediction~\eqref{eq:soldegensky} for the degeneracy-induced peak. We see that, although , 
+
+%\be\label{eq:symmetryresponse}
+%\betaL \rightarrow -\betaL\,, \quad \iota \rightarrow \pi - \iota \,, \quad \psiL \rightarrow \pi - \psiL
+%\ee
+%leaves the signal unchanged. We can also rewrite the likelihood in a way that makes clearer the symmetry between the two pairs of parameters $(\iota, \varphiL)$ and $(\betaL, \lambdaL)$ \SM{[TODO]}.
+%
+%The simplified extrinsic likelihood for a frozen LISA then takes the form
+%\be\label{eq:simplelikelihood}
+%	\ln \calL = - \frac{1}{2} \Lambda \left( \left| s_{a} - s_{a}^{\rm inj} \right|^{2} + \left| s_{e} - s_{e}^{\rm inj} \right|^{2} \right) \,,
+%\ee
+%where $\Lambda$ appears as an overall normalization factor, playing the role of the square SNR of the signal.
+
+%We can now explore possible degeneracies in the likelihood given by~\eqref{eq:simplelikelihood}, \eqref{eq:defsase} and \eqref{eq:defa22a2m2}-\eqref{eq:defe22e2m2}. We note that the relative contributions of the modes $h_{2,2}$ and $h_{2,-2}$ are strongly separated in the face-on or face-off limit, leading to a simplification of the response and an enhanced degeneracy. Due to the symmetry~\eqref{eq:symmetryresponse}, we will focus on the face-on limit $\iota \rightarrow 0$. In this limit, the $h_{2,-2}$ contributions die off rapidly as $a_{2,-2}\,, e_{2,-2} \sim \sin^{4} (\iota/2)$. If they are assumed to be negligible, then we can rewrite
+%\bsub\label{eq:saseapprox}
+%\begin{align}
+%	s_{a} \simeq i\calA e^{2 i \xi} \left( D_{a}^{+} + i D_{a}^{\times} \right) \,, \\
+%	s_{e} \simeq i\calA e^{2 i \xi} \left( D_{e}^{+} + i D_{e}^{\times} \right) \,,
+%\end{align}
+%\esub
+%where we introduced the notations $\xi (\varphiL, \psiL) \equiv -\varphiL - \psiL$ and $\calA(d, \iota) \equiv 3/4\sqrt{5/\pi}\cos^{4}(\iota/2)/d $ for the common phase and amplitude factors.
+%
+%For a degeneracy to occur, both complex quantities $s_{a}$ and $s_{e}$ must be close to the injection values $s_{a}^{\rm inj}$ and $s_{e}^{\rm inj}$, which can be achieved as follows if~\eqref{eq:saseapprox} is valid. Defining the complex ratio
+%\be\label{eq:defr}
+%	r(\lambdaL, \betaL) = \frac{D_{a}^{+} + i D_{a}^{\times}}{D_{e}^{+} + i D_{e}^{\times} } \,,
+%\ee
+%if the position in the sky $(\lambda_{L}^{*}, \beta_{L}^{*})$ can be chosen so that
+%\be\label{eq:rcondition}
+%	r(\lambda_{L}^{*}, \beta_{L}^{*}) = \frac{s_{a}^{\rm inj}}{s_{e}^{\rm inj}} \,,
+%\ee
+%then adjusting $\calA$ and $\xi$ so that
+%\be
+%	i\calA e^{2 i \xi} = \frac{s_{a}^{\rm inj}}{\left( D_{a}^{+} + i D_{a}^{\times} \right)(\lambda_{L}^{*}, \beta_{L}^{*})}
+%\ee
+%generates degenerate points in parameter space with $\ln \calL \simeq 0$.
+%
+%The conditions~\eqref{eq:defr}-\eqref{eq:rcondition} can be inverted for the sky position as follows. For a given complex value of $r = s_{a}^{\rm inj} / s_{e}^{\rm inj}$, $r(\lambda_{L}^{*}, \beta_{L}^{*}) = r$ can be rewritten as
+%\be\label{eq:eqtosolveforlambdabetaL}
+%	e^{4i\lambda_{L}^{*}}e^{i\frac{\pi}{3}} \frac{\left( 1 +\sin\beta_{L}^{*} \right)^{2}}{\left( 1 - \sin\beta_{L}^{*} \right)^{2}} = \frac{1+ i r}{1 - i r} \,.
+%\ee
+%Solving for the modulus of~\eqref{eq:eqtosolveforlambdabetaL} then yields
+%\be\label{eq:solutionbetaL}
+%	\sin\beta_{L}^{*} = \frac{\rho - 1}{\rho + 1} \,,
+%\ee
+%for
+%\be
+%	\rho = \sqrt{\left| \frac{1+ i r}{1 - i r} \right|} \,.
+%\ee
+%Solving for the argument of~\eqref{eq:eqtosolveforlambdabetaL} gives four solutions for $\lambda_{L}^{*}$ as
+%\be\label{eq:solutionlambdaL}
+%	\lambda_{L}^{*} = - \frac{\pi}{12} + \frac{1}{4}\mathrm{Arg} \frac{1+ i r}{1 - i r} + \frac{k \pi}{2} \quad \mathrm{for} \quad k = 0,\dots,3 \,.
+%\ee
+%
+%Repeating the argument for the other branch of solutions $\iota \rightarrow \pi$ (or directly considering the symmery~\eqref{eq:symmetryresponse}) gives four other solutions in the sky with identical sky longitudes $\lambda_{L}^{*}$, with symmetrized sky latitudes $\beta_{L}^{*} \rightarrow -\beta_{L}^{*}$, and with $\xi (\varphiL, \psiL) \equiv -\varphiL + \psiL$, $\calA(d, \iota) \equiv 3/4\sqrt{5/\pi}\sin^{4}(\iota/2)/d $.
+%
+%Thus, with~\eqref{eq:solutionbetaL}, \eqref{eq:solutionlambdaL} and $\beta_{L}^{*} \rightarrow -\beta_{L}^{*}$, we arrive at eight degenerate positions in the sky $(\lambda_{L}^{*}, \beta_{L}^{*})$. For each of these sky positions, an exact line degeneracy exists between $\varphiL$ and $\psiL$ as long as $\xi = \mathrm{const}$, as well as an approximate line degeneracy between $d$ and $\iota$, as long as $\calA = \mathrm{const}$, limited to inclination values where $\sin^{4}(\iota/2)$ (or $\cos^{4}(\iota/2)$, for the other branch of solutions) remains negligible. The combination of these degeneracies generates an extended structure in the multi-dimensional parameter space. As a result, when considering the marginal posterior for the sky position, these degenerate spots in the sky can have a lot of probability support.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Stellar origin black holes}
+\label{sec:SOBH}
+
+-- SOBH system, SNR sufficient for clean analysis + Fisher - stacked SNR contours
+-- Performance: waveform and likelihood costs, number of sampler evaluations
+
+Stellar-origin black-hole (SOBH) mergers have been recently recognized as an
+important source of LISA detections \cite{Sesana16} although full parameter
+estimation studies are not available yet. In this section we present
+three case studies of parameter inference for such sources. The parameters of
+the simulated mergers are taken from the Radler LISA data challenge and are
+listed in Table \ref{table:sobh_params}.
+\begin{table}
+	\begin{tabular}{|c||c|c|c|}
+		\hline
+		Radler entry 		& 1 	& 12 	& 52 \\
+		\hline
+		Mass 1 ($\Msol$) 	& 21.4	& 63.5	& 57.0 \\
+		\hline
+		Mass 2 ($\Msol$) 	& 20.1	& 45.1	& 36.8 \\
+		\hline
+		Distance (Mpc) 		& 49.1	& 318	& 308 \\
+		\hline
+		LISA SNR 			& 26.6	& 11.9	& 16.0 \\
+		\hline
+	\end{tabular}
+	\caption{Parameters of the simulated SOBH mergers. \tdc{Maybe we can show
+			 these on the upper right of each corner plot instead.}}
+	\label{table:sobh_params}
+\end{table}
+
+The waveform model used to work with such systems is the phenomenological
+approximant IMRPhenomD, extended at low frequency with a post-Newtonian
+frequency-domain waveform. In practice, because LISA only observes the early
+inspiral of SOBH systems, only the post-Newtonian waveform plays a role here.
+We do not expect radiation modes beyond the quadrupole to give a significant
+contribution to the parameter estimates, so we only include the $(2,2)$ mode
+for simplicity. We do not include any effect arising from black-hole spins.
+
+As done in the previous section, we apply our parameter inference procedure to
+these systems using both BAMBI and parallel-tempered MCMC sampling, and we
+numerically evaluate the Fisher matrix at the parameters of the injection.
+
+Due to the duration of an SOBH inspiral in the LISA band, and the complete lack
+of merger and ringdown, the chirp mass $\Mchirp$ is measured much better than
+other mass parameters and the component masses have a much stronger correlation
+than usually found with ground-based gravitational-wave detectors. In order for
+the sampling to converge robustly in a reasonable time, we find it is necessary
+to express the mass parameters in terms of $\Mchirp$ and symmetric mass ratio
+$\eta$, and a relatively tight prior around the injected parameters is required
+as well.
+
+In order to generate these results, our PTMCMC sampler requires between
+$5\times 10^5$ and $3\times 10^6$ steps with 100 temperatures, taking on the
+order of days on a single CPU core without careful optimization. The BAMBI
+sampling, on the other hand, completes in tens of minutes only.
+
+The resulting posterior distributions are shown in Fig.~\ref{fig:sobh_corner_1}
+and \ref{fig:sobh_corner_12}. We find close agreement between the BAMBI and
+PTMCMC samplers. The full joint distributions are fairly complex, but the
+complexity is mostly restricted to multimodalities and degeneracies in the
+angular parameters only. The typical degeneracy between inclination and distance
+is evident. Masses, merger time, distance, inclination and sky location, which
+are arguably the most astrophysically useful parameters, have simple marginal
+distributions with a well-defined mode and close to Gaussian, even at these
+moderate SNR values. The Fisher matrix estimates represent the marginal
+distributions of these parameters at least to the order of magnitude. In some
+cases the Fisher estimates approximate very precisely even the joint
+distributions of pairs of these parameters.
+
+\begin{figure*}
+	\includegraphics[width=\textwidth]{../plots/corner_sobh_tdc1_ptmcmc_bambi}
+	\caption{Inferred parameter posterior distribution for SOBH system 1.}
+	\label{fig:sobh_corner_1}
+\end{figure*}
+
+\begin{figure*}
+	\includegraphics[width=\textwidth]{../plots/corner_sobh_tdc2_ptmcmc_bambi}
+	\caption{Inferred parameter posterior distribution for SOBH system 12.}
+	\label{fig:sobh_corner_12}
+\end{figure*}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Signals and transfer functions}
+\label{subsec:signaltransferSOBH}
+
+\begin{figure*}
+  \centering
+  \includegraphics[width=.98\linewidth]{../plots/plot_sobh1_alltdi.pdf}
+  \caption{\SM{TODO: rethink the visualization, maybe plot only transfer functions}.}
+  \label{fig:PEsmbh22hmCase0}
+\end{figure*}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Discussion}
+\label{sec:discussion}
+
+- Summary/conclusions
+
+
+----------------
+Other questions:
+- special orientations/sky locations ?
+- Fisher matrix qualification - explore parameter choices
+- continuously increase SNR - include on these examples
+- continuously accumulate information over time
+- full exploration of parameter space for all of the above...
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\appendix
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{The LISA instrument response}
+\label{sec:response}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%\subsection{The LISA response - OLD}
+%\label{sec:lisaresponse}
+%
+%\SM{------------------------------------------------------}
+%
+%\SM{[copy-paste from previous paper -- just here to copy needed formulas / refs]}
+%
+%We begin by detailing the model that we use for the response of a LISA-like detector, together with the assumptions used and their limitations. Since our aim is to assess the accuracy of our direct Fourier-domain treatment of the response, we can focus on the gravitational-wave contribution to the basic single-link observables. We therefore use a somewhat simplified model for the time-domain response~\cite{Krolak+04}, ignoring corrections that would be crucial from the point of view of noise cancellations, keeping in mind that the response model can be enriched later without affecting the conclusions of the present analysis.
+%
+%The frequency-shift response for a single link~\eqref{eq:yslr} was derived in Ref.~\cite{EW75} (see also~\cite{CR02, RCP04, Finn08, Cornish09}). Several assumptions enter the result as written in~\eqref{eq:yslr}: (i) effects of the order $v/c$ are neglected, including for instance the special relativistic Doppler effect created by the relative speeds of the spacecraft on their orbits (ii) the propagation is assumed to take place in a flat spacetime, perturbed only by the gravitational wave; thus the gravitational redshift as well as the deflection of light created by the gravitational potential of the Sun is ignored (iii) all geometric factors are evaluated at a single time, whereas one should consider the beam as propagating from the position of the first spacecraft at the time of emission to the position of the second scapecraft at the time of reception, leading to a point-ahead effect.
+%
+%Additionally, we limit ourselves to a rigid model for the orbits of the constellation, namely we assume that the constellation remains in an equilateral configuration with fixed armlengths. These simplified orbits neglect (iv) effects of order $e^{2}$ from the eccentricity of the individual Keplerian orbits, (v) the effect of gravitational perturbations coming from other celestial bodies, such as the Earth, the quadrupole of the Sun, and the other planets. Note that although we can neglect all the effects (i)-(v) for our present study, keeping track of these corrections is crucial for the purpose of laser noise cancellations, and led to the development of new generations of TDI observables~\cite{Tintoliving}.
+%
+%It is natural to split the response~\eqref{eq:yslr} into two steps: first the orbital delay related to the orbit around the Sun of the whole constellation, and then the constellation response. The baselines for the delays are indeed very different in the two cases. Geometrical projection factors aside, we have for the orbit around the Sun $R=1\text{au}=1.5\times 10^{8} \text{km}$, while the detector armlength is $L=2.5\times 10^{6}\text{km}$ (in the configuration proposed in~\cite{LISA17}). It is natural to define two transfer frequencies for the two relevant length scales for the delays, defined such that a wavelength fits within this length scale, i.e. $2\pi f d = 1$. This gives
+%\begin{subequations}\label{eq:transferfrequencies}
+%\begin{align}
+%	f_{R} &= 3.2\times10^{-4}\Hz \,,\\
+%	f_{L} &= 1.9\times 10^{-2}\Hz \,.
+%\end{align}
+%\end{subequations}
+%The LISA response will behave qualitatively differently on the three frequency bands $f \leq f_{R}$, $f_{R} \leq f \leq f_{L}$ and $f_{L} \leq f$.
+%
+%The first stage of the response, the orbital delay, consists simply in applying the varying time delay to bring the wavefront sampling point from the SSB reference to the center of the LISA triangular constellation, common to all $y_{slr}$ observables. For $h^{\rm TT}$ the transverse-traceless gravitational waveform in matrix form, we write this orbital time delay as
+%\be\label{eq:defresponse0}
+%	h_{0}^{\rm TT} (t) = h^{\rm TT}(t-\hatk\cdot p_{0}) \,,
+%\ee
+%with $p_{0}$ the position of the constellation center, which follows the Earth orbit around the Sun. The second stage of the response calculation comprises the remaining, constellation-centered response. For the single-link contribution to the response, for the laser link from spacecraft $s$ to spacecraft $r$ along a path in direction $n_l$, we write
+%\begin{align}\label{eq:defresponseL}
+%	y_{slr} &= \frac{1}{2} \frac{1}{1 - \hatk\cdot n_{l}} \nn\\
+%	& \cdot n_{l}\cdot \left[ h_{0}^{\rm TT}(t - L - \hatk\cdot p^{L}_{s}) - h_{0}^{\rm TT}(t - \hatk\cdot p^{L}_{r}) \right] \cdot n_{l}\,,
+%\end{align}
+%where we reference the positions of the spacecraft relative to the center of the constellation, $p^{L}_{A} \equiv p_{A} - p_{0}$.
+%
+%As described in App.~\ref{app:notation} We will decompose the full signal in the contributions of the individual spin-weighted spherical modes $h_{\ell m}$, whose Fourier transforms are assumed to have a smooth amplitude and phase. First, we define the matrices $P_{+},P_{\times}$ such that, in the sense of matrices,
+%\be
+%	h^{\rm TT} = h_{+}P_{+} + h_{\times}P_{\times} \,.
+%\ee
+%We focus only on positive frequencies. Assuming that the approximation~\eqref{eq:zeronegativef} applies, we consider a single mode contribution, $h=h_{\ell m}$ with $m>0$. For each given mode we define a complex matrix $P_{\ell m}$ incorporating the spin-weighted spherical harmonic constant factor as
+%\be
+%	P_{\ell m} =
+%	\begin{cases}
+%	\frac{1}{2} {}_{-2}Y_{\ell m} \left( P_{+} + i P_{\times} \right) \text{ for } m>0\,,\\
+%	\frac{1}{2} {}_{-2}Y_{\ell m}^{*} \left( P_{+} - i P_{\times} \right) \text{ for } m<0\,.
+%	\end{cases}
+%\ee
+%
+%We now turn to the transformation of~\eqref{eq:defresponse0} and~\eqref{eq:defresponseL} to the Fourier domain. Applying a pure delay as in~\eqref{eq:defresponse0} translates into
+%\be\label{eq:G0}
+%	G_{0}(f, t) = e^{-2i\pi f d_{0}(t)} \,,
+%\ee
+%with $d_{0} = -\hatk \cdot p_{0}$ the delay associated to the orbit around the Sun. For the leading-order response~\eqref{eq:transferlocal}, this gives a Fourier-domain transfer function common to all modes, that is a pure phase factor, proportional to the frequency but also $t_{f}$-dependent:
+%\be\label{eq:transfer0local}
+%	\calT_{0}^{\rm local}(f) = G_{0}(f, \tf)\,.
+%\ee
+%If $(\lambda, \beta)$ are the ecliptic longitude and latitude of the source in the sky, and if the orbital phase is set by convention to $0$ at $t=0$, the orbital delay has the simple expression
+%\be\label{eq:delay0}
+%	d_{0}(t) = -R \cos\beta \cos\left(\Omega_{0}t - \lambda\right)\,.
+%\ee
+%
+%For the constellation part of response~\eqref{eq:defresponseL}, treated separately from the delay~\eqref{eq:delay0}, we write
+%\begin{align}\label{eq:decomposeGslr}
+%	F_{slr}^{L}(t) &= \frac{1}{2} \frac{1}{1 - \hatk\cdot n_{l}(t)} n_{l}(t) \cdot P_{\ell m} \cdot n_{l} (t) \,,\nn\\
+%	d_{s}(t) &= - k\cdot p_{s}^{L}(t) \,, \quad d_{r}(t) = - k\cdot p_{r}^{L}(t) \,,\nn\\
+%	G_{slr}^{L}(f,t) &=  F_{slr}^{L}(t) \left( e^{-2i\pi f (d_{s,L}(t) + L)} - e^{-2i\pi f d_{r}(t)} \right) \,.
+%\end{align}
+%The superscript $L$ indicates that the orbital delay~\eqref{eq:delay0} is not included. Since we also assume the rigid approximation for the constellation, where the armlengths are fixed, a particular simplification occurs when combining these individual delays, thanks to the relation $p^{L}_{r} - p^{L}_{s} =  L n_{l}$:
+%\begin{align}\label{eq:GslrL}
+%	G_{slr}^{L}(f,t) &= \frac{i \pi f L}{2} \sinc \left[ \pi f L\left(1-\hatk\cdot n_{l} \right) \right] \nn\\
+%	& \quad \cdot \exp\left[ i \pi f \left( L + \hatk\cdot \left( p_{1}^{L} + p_{2}^{L} \right) \right) \right]  n_{l} \cdot P_{\ell m} \cdot n_{l} \,,
+%\end{align}
+%with all time-dependent vectors evaluated at $t$. This expression is well known as describing the frequency-dependency in the LISA response~\cite{Larson+99, Cornish01, CR02, RCP04}. In the local approximation~\eqref{eq:transferlocal}, the Fourier-domain transfer function then reads
+%\begin{align}\label{eq:transferLlocal}
+%	\calT_{slr}^{L, \mathrm{local}}(f) &= G_{slr}^{L}(f, \tf) \,.
+%\end{align}
+%For plotting purposes, we will also define
+%\be\label{eq:transferLenvelope}
+%	\overline{\calT}_{slr}^{L} (f) = \frac{i \pi f L}{2} n_{l} \cdot P_{\ell m} \cdot n_{l} (\tf)
+%\ee
+%which will serve as an estimate for the enveloppe function of the response, devoid of the zero-crossings at high frequencies of the $\sinc$ term in~\eqref{eq:GslrL}.
+%
+%Note that, if the corrections of Sec.~\ref{subsec:delays}, for non-negligible $\dot d$, are included for the constellation delays, the transfer function will not have this simple form anymore, as $\dot{d}$ will have a different velocity-dependent expression for the sending and receiving spacecraft. One must then separately handle $d_{s}$ and $d_{r}$ in~\eqref{eq:decomposeGslr} to compute the corrections.
+%
+%The orbital response~\eqref{eq:transfer0local}-\eqref{eq:delay0} takes a simple analytic form, but the phase contribution of this delay is significant across most of the frequency band and can be large for $f \gg f_{R}$.
+%
+%The constellation response~\eqref{eq:GslrL}-\eqref{eq:transferLlocal} can be interpreted as the Fourier-domain translation of a discrete derivative taken on the waveform. The leading factor in~\eqref{eq:GslrL} shows that the amplitude of the response is proportional to $f$ in the low-frequency limit $f\ll f_{L}$, where the other factors are essentially unity. For $f\gtrsim f_{L}$, the $\sinc$ and the phase of the exponential generate additional structure in the response, including zero-crossings when the projected armlength is an integer number of wavelengths. From~\eqref{eq:transferLlocal}, an expansion for small $f\ll f_{L}$ yields back a Fourier-domain analog of the low-frequency approximation of the response~\cite{Cutler97, RCP04}, which is equivalent to having two LIGO-type interferometers turned by $\pi/4$ and set in motion.
+%
+%For analysis of the response we need a concrete set of gravitational waveforms. We will use the PhenomD model~\cite{Khan+15,Husa+15}, which provides Fourier-domain inspiral-merger-ringdown waveforms for aligned spins. We refer to App.~\ref{app:precLISA} for a brief discussion of the prospects for applying our formalism for the LISA response to precessing Fourier-domain waveforms.
+%
+%\SM{------------------------------------------------------}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -504,14 +979,21 @@ Scaling out the same square factors from the noise power spectral density as
 \end{align}
 \esub
 the reduced PSD for the three channels take the form
-\bsub
+\bsub\label{eq:Snaet}
 \begin{align}
 	S_{n}^{a} = S_{n}^{e} &= 2 \left( 3 + 2\cos 2\pi f L + \cos 4 \pi f L \right) S^{\rm pm}(f) \nn\\
 	& \quad + \left( 2 + \cos 2\pi f L \right) S^{\rm op}(f) \,,\\
 	S_{n}^{t} &= 4 \sin^{2} 2\pi f L S^{\rm pm}(f) + S^{\rm op}(f) \,,
 \end{align}
 \esub
-with $S^{\rm pm}$ the test-mass noise PSD and $S^{\rm op}$ the optical noise PSD. Here we ignore the confusion noise coming from the background of galactic binaries in the  LISA band. Note that the prefactors~\eqref{eq:scalingAET} are oscillatory and have zero-crossings at high frequencies, and scaling them out from both the signal and the noise is an approximation, as we can expect that the real delays would lead to imperfect cancellations in the vicinity of the zero-crossings. 
+with $S^{\rm pm}$ the test-mass noise PSD and $S^{\rm op}$ the optical noise PSD. Here we ignore the confusion noise coming from the background of galactic binaries in the  LISA band. Note that the prefactors~\eqref{eq:scalingAET} are oscillatory and have zero-crossings at high frequencies, and scaling them out from both the signal and the noise is an approximation, as we can expect that the real delays would lead to imperfect cancellations in the vicinity of the zero-crossings.
+
+Finally, the likelihood function that we use, with a zero noise realization, is
+\begin{align}
+	\ln\calL &= -\frac{1}{2} \left[ \left( \tilde{a} - \tilde{a}_{\rm inj} | \tilde{a} - \tilde{a}_{\rm inj}  \right) + \left( \tilde{e} - \tilde{e}_{\rm inj} | \tilde{e} - \tilde{e}_{\rm inj}  \right) \right. \nn\\
+	& \qquad\qquad + \left. \left( \tilde{t} - \tilde{t}_{\rm inj} | \tilde{t} - \tilde{t}_{\rm inj} \right) \right] \,,
+\end{align}
+with the $\rm inj$ subscript indicating the injected signals, and where the inner products $(\cdot | \cdot)$ are given by~\eqref{eq:definnerproduct} with the noise PSDs~\eqref{eq:Snaet}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -574,480 +1056,6 @@ Note that the expressions for the channel $e$ can be obtained from the expressio
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Methodology}
-\label{sec:method}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\subsection{Bayesian setting}
-\label{subsec:defbayes}
-
--- definitions relevant to the Bayesian setting (likelihood, ...)
-
-Introducing the standard matched-filter inner product as
-\be
-	\left( \tilde{a} | \tilde{b} \right) = 4 \mathrm{Re} \int_{0}^{+\infty} df \; \frac{\tilde{a}(f) \tilde{b}^{*}(f)}{S_{n}(f)} \,,
-\ee
-for stationary Gaussian noise with noise PSD $S_{n}$, the likelihood $\calL = p(d | \bm{\theta})$ for a given gravitational wave channel takes the form
-\be\label{eq:deflnL}
-	\ln \calL = -\frac{1}{2} \left( h(\bm{\theta}) - d | h(\bm{\theta}) - d \right) \,,
-\ee
-with the data stream being a superposition of the gravitational wave signal for the true parameters $\bm{\theta}_{0}$ and the noise realization in the experiment, $d = s(\bm{\theta}_{0}) + n$. The posterior distribution for the physical parameters $\bm{\theta}$ given the observed data $d$ is then
-\be\label{eq:defBayes}
-	p\left( \bm{\theta} | d \right) = \frac{p(d | \bm{\theta})p(\bm{\theta})}{p(d)}\,,
-\ee
-with $p(\bm{\theta})$ the priors on the parameters, and $p(d)$ the evidence that we will ignore here as it enters as a multiplicative constant in the posterior.
-
-In our analysis, we will use the so-called zero-noise approximation. This corresponds simply to performing a Bayesian analysis with~\eqref{eq:deflnL} and ~\eqref{eq:defBayes}, but setting the noise realization to zero, $n=0$. It allows us to accelerate the likelihood computation, as will be explained in~\ref{}. For exploratory parameter estimation runs, this approximation allows us to explore the structure of the likelihood with its possible parameter degeneracies (\SM{[cite past use of this approx.]}), and is a significant improvement over Fisher matrix estimates in that sense. We leave the extension of our analysis to include noise realizations for future work. We will also ignore waveform systematic errors and assume our waveform templates match exactly the real signals.
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\subsection{Frequency domain LISA response}
-\label{sec:response}
-
--- Geometric setting, definitions, summarize the FD response
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\subsection{Reduced order model for EOBNRv2HM waveforms.}
-\label{sec:waveforms}
-
--- Waveforms: EOBNRv2HMROM + PNext
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\subsection{Likelihood computation}
-\label{sec:likelihood}
-
--- Likelihood computation: fast overlaps
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\subsection{Fisher matrix parameter estimation}
-\label{sec:Fisher}
-
--- Fisher matrices computation: step self-tuning,...
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\subsection{Bayesian sampling}
-\label{sec:samplers}
-
--- Bayesian samplers: Multinest, PTMCMC
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\section{Supermassive black holes}
-\label{sec:SMBH}
-
-- Demonstration/examples
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\subsection{Signals and transfer functions}
-\label{sec:signaltransfer}
-
-\begin{figure*}
-  \centering
-  \includegraphics[width=.98\linewidth]{../plots/plot_smbh9_alltdi.pdf}
-  \caption{\SM{TODO: rethink the visualization, maybe plot only transfer functions}.}
-  \label{fig:tranferSMBHCase9}
-\end{figure*}
-
-\begin{figure*}
-  \centering
-  \includegraphics[width=.7\linewidth]{../plots/plot_tdia_hm.pdf}
-  \caption{\SM{TODO: make figure smaller, single-column.}}
-  \label{fig:FDHMSMBHCase9}
-\end{figure*}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\subsection{Time and frequency accumulation of SNR}
-\label{sec:timefreqSNR}
-
--- SNR accumulation with time or frequency: inspiral/MRD balance across mass range
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\subsection{A non-degenerate case}
-\label{sec:SMBHPEnondeg}
-
-\begin{figure*}
-  \centering
-  \includegraphics[width=.98\linewidth]{../plots/corner_smbh_case0_ptmcmc_22_hm.png}
-  \caption{.}
-  \label{fig:PEsmbh22hmCase0}
-\end{figure*}
-
--- High-mass system, non-degenerate, 22 and HM + Fisher - stacked SNR contours
-eg:
-
-Case 12?
-m1,    m2,    t0,D,     phi0,i,   lam,  bet, psi
-8.89e5,1.11e5,0, 3.67e4,pi/3,pi/2,3pi/4,pi/3,pi/3
-
-Case 0
-
--- Performance: waveform and likelihood costs, number of sampler evaluations
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\subsection{Accumulating signal with time}
-\label{sec:SMBHPEacctime}
-
-\begin{figure*}
-  \centering
-  \begin{minipage}{.32\linewidth}
-      \includegraphics[width=.99\linewidth]{../plots/corner_smbh_case9_hm_tseries_m1m2.png}
-   \end{minipage}
-   \begin{minipage}{.32\linewidth}
-      \includegraphics[width=.99\linewidth]{../plots/corner_smbh_case9_hm_tseries_Dinc.png}
-   \end{minipage}
-   \begin{minipage}{.32\linewidth}
-      \includegraphics[width=.99\linewidth]{../plots/corner_smbh_case9_hm_tseries_tphi.png}
-   \end{minipage}
-  \caption{.}
-  \label{fig:smbhCornerZoomHMCase9}
-\end{figure*}
-
-\begin{figure*}
-  \centering
-  \includegraphics[width=.8\linewidth]{../plots/plot_mollweide_tseries.png}
-  \caption{.}
-  \label{fig:MollweidesmbhTserieshmCase9}
-\end{figure*}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\subsection{SNR dependence of parameter estimation}
-\label{sec:SMBHPEdistance}
-
--- Move to Appendix ?
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\subsection{Investigating degeneracies}
-\label{sec:SMBHPEdegen}
-
-\begin{figure*}
-  \centering
-  \includegraphics[width=.98\linewidth]{../plots/corner_smbh_case9_ptmcmc_22_hm.png}
-  \caption{.}
-  \label{fig:PEsmbh22hmCase0}
-\end{figure*}
-
-\begin{figure*}
-  \centering
-  \includegraphics[width=.8\linewidth]{../plots/corner_smbh_case9_simplelike_ptmcmc_bambi.png}
-  \caption{.}
-  \label{fig:PEsmbh22hmSimpleLikeCase9}
-\end{figure*}
-
-\begin{figure}
-  \centering
-  \begin{minipage}{.49\linewidth}
-  \includegraphics[width=.99\linewidth]{../plots/corner_skydown_smbh_case9_22_ptmcmc_bambi_withdegen.png}
-  \end{minipage}
-  \begin{minipage}{.49\linewidth}
-  \includegraphics[width=.99\linewidth]{../plots/corner_skydown_smbh_case9_simplelike_ptmcmc_bambi_withdegen.png}
-  \end{minipage}
-  \caption{.}
-  \label{fig:Skydownsmbh22hmSimpleLikeCase9}
-\end{figure}
-
-In this section, we investigate the cause of the degeneracies appearing in the posterior of Case~II shown in~\ref{subsec:SMBHPE}. Understanding the structure of these features could prove useful to inform Bayesian samplers, for instance by building adapted jump proposal allowing a much faster mixing of MCMC chains than naive methods. a simplified form of the extrinsic likelihood and the structure of its degeneracies.
-
-An important clue about the appearance of these degeneracies is the length of the observable signal. As shown in Fig.~\ref{}, for our example SMBH systems the SNR accumulates in a matter of days before merger, which means that there is only little impact of the modulations caused by the motion of the detector on the TDI transfer functions~\eqref{}. If we can neglect entirely the motion of the detector (which is not quite true as we will see later on), then we are in a regime where the information about the sky position of the source comes essentially from the pattern functions affecting this high-SNR signal. Using the the low-frequency approximation (see~\ref{}) and the time-at-LISA $t_{L}$ as a time variable, there is no frequency dependence in the response. A further simplification occurs when pinning the masses and the time of coalescence to their true values. We found indeed that these parameters correlate only weakly to the other ones, so that we can hope to understand the degeneracy features by restricting the analysis to the six extrinsic parameters $(D_{L}, \iota, \varphi, \lambdaL, \betaL, \psiL)$.
-
-Under all these simplifying assumptions, the likelihood function becomes purely extrinsic, and takes the form of trivial geometric factors multiplying a constant overlap that can be precomputed. Using the subscript $\mathrm{inj}$ for the injected signal, the likelihood~\eqref{eq:defliklihood} is
-\be
-	\ln \calL = -\frac{1}{2} \left( \tilde{a} - \tilde{a}_{\rm inj} | \tilde{a} - \tilde{a}_{\rm inj} \right) -\frac{1}{2} \left( \tilde{e} - \tilde{e}_{\rm inj} | \tilde{e} - \tilde{e}_{\rm inj} \right) \,.
-\ee
-From the low-frequency response \eqref{eq:aelowfmodes}, pinning the time-at-LISA so that we ca ignore the factor $\exp [2 i \pi f k\cdot p_{0}]$ as a pure constant corresponding to a redefinition of time, we obtain 
-\begin{align}
-	\ln \calL &= -\frac{1}{2} \sum_{\ell m} \sum_{\ell' m'}   \left[ \left( s_{a}^{\ell m} - s_{a, \mathrm{inj}}^{\ell m}\right) \left( s_{a}^{\ell' m'} - s_{a, \mathrm{inj}}^{\ell' m'}\right)^{*} \right. \nn\\
-	& \qquad \left. + \left( s_{e}^{\ell m} - s_{e, \mathrm{inj}}^{\ell m}\right) \left( s_{e}^{\ell' m'} - s_{e, \mathrm{inj}}^{\ell' m'}\right)^{*} \right] \left\langle \ell m | \ell' m' \right\rangle \,,
-\end{align}
-where we introduced the following extrinsic signal functions
-\be\label{eq:defsaelm}
-	s_{a,e}^{\ell m} = \frac{1}{d} \frac{2}{3L} D_{a,e} : P_{\ell m} \,,
-\ee
-with $d = D / D^{\rm inj}$ the dimensionless ratio of luminosity distances. The prefactors $\left\langle \ell m | \ell' m' \right\rangle$ are pure normalization constants, and represent mode overlaps as
-\be
-	\left\langle \ell m | \ell' m' \right\rangle = 4\mathrm{Re} \int \frac{df}{S_{n}^{a,e}} \left( 3 \pi f L\right)^{2} \tilde{h}_{\ell m} \tilde{h}_{\ell' m'}^{*} \,.
-\ee
-Here, the noise PSD $S_{n}^{a,e}$ is given by~\eqref{} and is identical between the channels $a$ and $e$. Having fixed the masses and the time, these overlaps are to be computed with the modes $\tilde{h}_{\ell m}^{\rm inj}$ of the injected signal.
-
-In the case where we only include the dominant harmonic $h_{22}$, the functions~\eqref{eq:defsaelm} take the explicit form
-\begin{align}
-	s_{a,e}^{22} &= \frac{1}{4d} \sqrt{\frac{5}{\pi}} \cos^{4}\frac{\iota}{2} e^{2i(\varphi-\psiL)} \left( F_{a,e}^{+} + i F_{a,e}^{\times} \right) \\
-	&+ \frac{1}{4d} \sqrt{\frac{5}{\pi}} \sin^{4}\frac{\iota}{2} e^{2i(\varphi+\psiL)} \left( F_{a,e}^{+} - i F_{a,e}^{\times} \right) \,,
-\end{align}
-with the pattern functions for the channels $a$ and $e$ defined in \eqref{eq:defFapcFepc}-\eqref{eq:FapcFepc}.
-
-In order to make more manifest the degeneracies in the problem, it will be useful to introduce the following notations. First, since $\iota \in [0, \pi]$ while $\beta_{L} \in [-\pi/2, \pi/2]$, it will be more convenient to work with $\theta_{L} = \pi/2 - \beta_{L}$. We will further abbreviate notations by using the variables
-\be
-	t_{\iota} \equiv \tan \iota/2 \,, \quad t_{\theta} \equiv \tan \theta_{L} / 2 \,.
-\ee
-We also introduce the azimuthal angles $\lambda_{a} = \lambda_{L} - \pi/6$, $\lambda_{e} = \lambda_{L} + \pi/12 = \lambda_{a} + \pi/4$, and form the combinations
-\be
-	\sigma_{\pm} \equiv s_{a}^{22} \pm i s_{e}^{22} \,.
-\ee
-In these notations, we obtain
-\bsub\label{eq:sigmapm}
-\begin{align}
-	\sigma_{+} &= \rho e^{2i\varphi} \left[ t_{\theta}^{4} e^{-2 i \psiL} + t_{\iota}^{4} e^{2 i \psiL} \right] e^{-2i \lambda_{a}} \,, \\
-	\sigma_{-} &= \rho e^{2i\varphi} \left[ e^{-2 i \psiL} + t_{\theta}^{4} t_{\iota}^{4} e^{2 i \psiL} \right] e^{2i \lambda_{a}} \,,
-\end{align}
-\esub
-with a common prefactor
-\be\label{eq:sigmafactorrho}
-	\rho(d, \iota, \theta_{L}) = \frac{1}{4d} \sqrt{\frac{5}{\pi}} \frac{1}{\left( 1 + t_{\iota}^{2} \right)^{2} \left(1 + t_{\theta}^{2} \right)^{2}} \,.
-\ee
-Finding points in the parameter space that are degenerate with the injection, with $\ln \calL \simeq 0$, amounts to try to obtain both the same value of $\sigma_{+}$ and $\sigma_{-}$ as the injection.
-
-We can now use the simplified response written in the form~\eqref{eq:sigmapm}-\eqref{eq:sigmafactorrho} to look for symmetries and degeneracies. First, we note the following manifest symmetry: changing simultaneously
-\be\label{eq:symmetryresponse}
-	\betaL \rightarrow -\betaL\,, \quad \iota \rightarrow \pi - \iota \,, \quad \psiL \rightarrow \pi - \psiL
-\ee
-leaves the likelihood exactly invariant. There is also a form of symmetry obatained by exchanging $\iota \leftrightarrow \theta_{L}$. This conjugate the term inside bracket for $\sigma_{+}$, which can be corrected withe the phase terms $\varphi \pm \lambda_{a}$. If $\Phi = \mathrm{Arg} \left[ t_{\theta}^{4} e^{-2 i \psiL} + t_{\iota}^{4} e^{2 i \psiL} \right]$, we obtain the symmetry
-\begin{align}
-	\iota' = \theta_{L} \,, \quad \theta_{L}' = \iota \,, \nn\\
-	\varphi' = \varphi + \frac{1}{2} \Phi \; \mathrm{mod} \; \pi\,, \nn\\
-	\lambda_{a}' = \lambda_{a} - \frac{1}{2} \Phi \; \mathrm{mod} \; \pi\,.
-\end{align}
-
-We can now explain the degenerate features we found as certain limits in this simplified likelihood. In the face-on or face-off limit $\iota \rightarrow 0$, $|t_{\iota}| \ll 1$. This amounts to the $(\ell,m)=(2,2)$ contribution dominating the $(\ell, m)=(2,-2)$ contribution. Neglecting the terms in~\eqref{eq:sigmapm} that are quartic in $t_{\iota}$, we have
-\bsub\label{eq:sigmapmapprox}
-\begin{align}
-	\sigma_{+} &\simeq \rho e^{2i(\varphi - \psiL)} t_{\theta}^{4} e^{-2i \lambda_{a}} \,, \\
-	\sigma_{-} &\simeq \rho e^{2i(\varphi - \psiL)} e^{2i \lambda_{a}} \,,
-\end{align}
-\esub
-Defining the ratio
-\be
-	r = \frac{\sigma_{+}}{\sigma_{-}} \,,
-\ee
-we see that finding $(\lambda_{a}^{*}, \theta_{L}^{*})$ verifying
-\be\label{eq:conditionsky}
-	\frac{\sigma_{+}}{\sigma_{-}} (\lambda_{a}^{*}, \theta_{L}^{*}) = r_{\rm inj} \,,
-\ee
-with the approximation~\eqref{eq:sigmapmapprox} for the left-hand side, guarantees that we can then match both $\sigma_{+}$ and $\sigma_{-}$ of the injection with the condition
-\be\label{eq:conditionprefactor}
-	\rho e^{2i(\varphi - \psiL)} e^{2i \lambda_{a}^{*}} = \sigma_{-}^{\rm inj}\,.
-\ee
-In the limit $|t_{\iota}| \ll 1$,
-\be
-	\frac{\sigma_{+}}{\sigma_{-}} \simeq t_{\theta}^{4} e^{-4i\lambda_{a}} \,,
-\ee
-so that~\eqref{eq:conditionsky} is verified for special positions in the sky at (coming back to the original variables $(\lambdaL, \betaL)$)
-\bsub\label{eq:soldegensky}
-\begin{align}
-	\beta_{L}^{*} &= \frac{\pi}{2} - 2 \mathrm{Arctan} \; \left| r_{\rm inj}\right|^{1/4} \,, \\
-	\lambda_{L}^{*} &= \frac{\pi}{6} -\frac{1}{4} \mathrm{Arg} \; r_{\rm inj} \;\mathrm{mod}\; \frac{\pi}{2} \,.
-\end{align}
-\esub
-The other condition gives then a single phase constraint for $\varphi - \psiL$, and a single amplitude constraint for $\rho(d, \iota, \theta_{L}^{*})$. The limit $\iota \rightarrow \pi$ (where the $(2,-2)$ contribution dominates the $(2,2)$) is very similar, as can be seen most easily by the change of variable $\iota \rightarrow \pi - \iota$, with $-\psiL$ and $\pi - \theta_{L}$ playing the roles of $\psiL$ and $\theta_{L}$.
-
-With the $\lambdaL \rightarrow \lambdaL + k \pi/2$ and $\betaL \rightarrow - \betaL$ symmetries, we arrive at eight sky positions where the degeneracy occurs, with an exact degeneracy for the pair of parameters $(\varphi, \psiL)$, as well as an approximate degeneracy for the pair $(d, \iota)$ as long as we remain in the regime $t_{\iota}^{4} \ll 1$ or $t_{\iota}^{4} \gg 1$ (which is quite extended, thanks to the quartic power). For each of these sky positions built from~\eqref{eq:soldegensky}, many different values of $(\varphi, \psiL)$ and $(d, \iota)$ produce a waveform very close to the injection, resulting in apparent peaks in the marginalized posterior distribution for the sky position, located at the special sky positions $(\lambda_{a}^{*}, \theta_{L}^{*})$, which are offset from the injected value.
-
-We can further find the same mechanism, with a few differences, by exchanging the roles of $(\iota, \varphi)$ and $(\theta_{L}, \lambda_{a})$, as follows. In the limit $\theta_{L} \rightarrow 0$ with $|t_{\theta}| \ll 1$, we have this time
-\be
-	\frac{\sigma_{+}}{\sigma_{-}} \simeq t_{\iota}^{4} e^{-4i(\lambda_{a} - \psi_{L})} \,,
-\ee
-which gives in the same way a degeneracy if
-\bsub\label{eq:soldegeniotaphi}
-\begin{align}
-	\iota^{*} &= 2 \mathrm{Arctan} \; \left| r_{\rm inj}\right|^{1/4} \,, \\
-	(\lambda_{a} - \psiL)^{*} &= -\frac{1}{4} \mathrm{Arg} \; r_{\rm inj} \;\mathrm{mod}\; \frac{\pi}{2} \,,
-\end{align}
-\esub
-with a condition on prefactors that is now concerning $\rho e^{2 i \varphi}$. Thus, we find again a degenerate pattern, with the difference that \eqref{eq:soldegeniotaphi} imposes a condition on the pair $\lambda_{a} - \psiL$ instead of $\lambda_{a}$, and the extra condition imposes a condition on $\varphi$ instead of the pair $\varphi - \psiL$.
-
-We illustrate our findings by running a Bayesian parameter estimation for the simplified likelihood. The results are shown in Fig.~\ref{fig:PEsmbh22hmSimpleLikeCase9}, with the two samplers.
-
-Focusing on the sky position, we investigate the degenerate peak in the sky that is the closest to the injection in Fig.~\ref{fig:Skydownsmbh22hmSimpleLikeCase9}. We compare here the sky position posterior distribution generated by the two samplers for the true likelihood 
-
-%\be\label{eq:symmetryresponse}
-%\betaL \rightarrow -\betaL\,, \quad \iota \rightarrow \pi - \iota \,, \quad \psiL \rightarrow \pi - \psiL
-%\ee
-%leaves the signal unchanged. We can also rewrite the likelihood in a way that makes clearer the symmetry between the two pairs of parameters $(\iota, \varphiL)$ and $(\betaL, \lambdaL)$ \SM{[TODO]}.
-%
-%The simplified extrinsic likelihood for a frozen LISA then takes the form
-%\be\label{eq:simplelikelihood}
-%	\ln \calL = - \frac{1}{2} \Lambda \left( \left| s_{a} - s_{a}^{\rm inj} \right|^{2} + \left| s_{e} - s_{e}^{\rm inj} \right|^{2} \right) \,,
-%\ee
-%where $\Lambda$ appears as an overall normalization factor, playing the role of the square SNR of the signal.
-
-%We can now explore possible degeneracies in the likelihood given by~\eqref{eq:simplelikelihood}, \eqref{eq:defsase} and \eqref{eq:defa22a2m2}-\eqref{eq:defe22e2m2}. We note that the relative contributions of the modes $h_{2,2}$ and $h_{2,-2}$ are strongly separated in the face-on or face-off limit, leading to a simplification of the response and an enhanced degeneracy. Due to the symmetry~\eqref{eq:symmetryresponse}, we will focus on the face-on limit $\iota \rightarrow 0$. In this limit, the $h_{2,-2}$ contributions die off rapidly as $a_{2,-2}\,, e_{2,-2} \sim \sin^{4} (\iota/2)$. If they are assumed to be negligible, then we can rewrite
-%\bsub\label{eq:saseapprox}
-%\begin{align}
-%	s_{a} \simeq i\calA e^{2 i \xi} \left( D_{a}^{+} + i D_{a}^{\times} \right) \,, \\
-%	s_{e} \simeq i\calA e^{2 i \xi} \left( D_{e}^{+} + i D_{e}^{\times} \right) \,,
-%\end{align}
-%\esub
-%where we introduced the notations $\xi (\varphiL, \psiL) \equiv -\varphiL - \psiL$ and $\calA(d, \iota) \equiv 3/4\sqrt{5/\pi}\cos^{4}(\iota/2)/d $ for the common phase and amplitude factors.
-%
-%For a degeneracy to occur, both complex quantities $s_{a}$ and $s_{e}$ must be close to the injection values $s_{a}^{\rm inj}$ and $s_{e}^{\rm inj}$, which can be achieved as follows if~\eqref{eq:saseapprox} is valid. Defining the complex ratio
-%\be\label{eq:defr}
-%	r(\lambdaL, \betaL) = \frac{D_{a}^{+} + i D_{a}^{\times}}{D_{e}^{+} + i D_{e}^{\times} } \,,
-%\ee
-%if the position in the sky $(\lambda_{L}^{*}, \beta_{L}^{*})$ can be chosen so that
-%\be\label{eq:rcondition}
-%	r(\lambda_{L}^{*}, \beta_{L}^{*}) = \frac{s_{a}^{\rm inj}}{s_{e}^{\rm inj}} \,,
-%\ee
-%then adjusting $\calA$ and $\xi$ so that
-%\be
-%	i\calA e^{2 i \xi} = \frac{s_{a}^{\rm inj}}{\left( D_{a}^{+} + i D_{a}^{\times} \right)(\lambda_{L}^{*}, \beta_{L}^{*})}
-%\ee
-%generates degenerate points in parameter space with $\ln \calL \simeq 0$.
-%
-%The conditions~\eqref{eq:defr}-\eqref{eq:rcondition} can be inverted for the sky position as follows. For a given complex value of $r = s_{a}^{\rm inj} / s_{e}^{\rm inj}$, $r(\lambda_{L}^{*}, \beta_{L}^{*}) = r$ can be rewritten as
-%\be\label{eq:eqtosolveforlambdabetaL}
-%	e^{4i\lambda_{L}^{*}}e^{i\frac{\pi}{3}} \frac{\left( 1 +\sin\beta_{L}^{*} \right)^{2}}{\left( 1 - \sin\beta_{L}^{*} \right)^{2}} = \frac{1+ i r}{1 - i r} \,.
-%\ee
-%Solving for the modulus of~\eqref{eq:eqtosolveforlambdabetaL} then yields
-%\be\label{eq:solutionbetaL}
-%	\sin\beta_{L}^{*} = \frac{\rho - 1}{\rho + 1} \,,
-%\ee
-%for
-%\be
-%	\rho = \sqrt{\left| \frac{1+ i r}{1 - i r} \right|} \,.
-%\ee
-%Solving for the argument of~\eqref{eq:eqtosolveforlambdabetaL} gives four solutions for $\lambda_{L}^{*}$ as
-%\be\label{eq:solutionlambdaL}
-%	\lambda_{L}^{*} = - \frac{\pi}{12} + \frac{1}{4}\mathrm{Arg} \frac{1+ i r}{1 - i r} + \frac{k \pi}{2} \quad \mathrm{for} \quad k = 0,\dots,3 \,.
-%\ee
-%
-%Repeating the argument for the other branch of solutions $\iota \rightarrow \pi$ (or directly considering the symmery~\eqref{eq:symmetryresponse}) gives four other solutions in the sky with identical sky longitudes $\lambda_{L}^{*}$, with symmetrized sky latitudes $\beta_{L}^{*} \rightarrow -\beta_{L}^{*}$, and with $\xi (\varphiL, \psiL) \equiv -\varphiL + \psiL$, $\calA(d, \iota) \equiv 3/4\sqrt{5/\pi}\sin^{4}(\iota/2)/d $.
-%
-%Thus, with~\eqref{eq:solutionbetaL}, \eqref{eq:solutionlambdaL} and $\beta_{L}^{*} \rightarrow -\beta_{L}^{*}$, we arrive at eight degenerate positions in the sky $(\lambda_{L}^{*}, \beta_{L}^{*})$. For each of these sky positions, an exact line degeneracy exists between $\varphiL$ and $\psiL$ as long as $\xi = \mathrm{const}$, as well as an approximate line degeneracy between $d$ and $\iota$, as long as $\calA = \mathrm{const}$, limited to inclination values where $\sin^{4}(\iota/2)$ (or $\cos^{4}(\iota/2)$, for the other branch of solutions) remains negligible. The combination of these degeneracies generates an extended structure in the multi-dimensional parameter space. As a result, when considering the marginal posterior for the sky position, these degenerate spots in the sky can have a lot of probability support.
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\section{Stellar origin black holes}
-\label{sec:SOBH}
-
--- SOBH system, SNR sufficient for clean analysis + Fisher - stacked SNR contours
--- Performance: waveform and likelihood costs, number of sampler evaluations
-
-Stellar-origin black-hole (SOBH) mergers have been recently recognized as an
-important source of LISA detections \cite{Sesana16} although full parameter
-estimation studies are not available yet. In this section we present
-three case studies of parameter inference for such sources. The parameters of
-the simulated mergers are taken from the Radler LISA data challenge and are
-listed in Table \ref{table:sobh_params}.
-\begin{table}
-	\begin{tabular}{|c||c|c|c|}
-		\hline
-		Radler entry 		& 1 	& 12 	& 52 \\
-		\hline
-		Mass 1 ($\Msol$) 	& 21.4	& 63.5	& 57.0 \\
-		\hline
-		Mass 2 ($\Msol$) 	& 20.1	& 45.1	& 36.8 \\
-		\hline
-		Distance (Mpc) 		& 49.1	& 318	& 308 \\
-		\hline
-		LISA SNR 			& 26.6	& 11.9	& 16.0 \\
-		\hline
-	\end{tabular}
-	\caption{Parameters of the simulated SOBH mergers. \tdc{Maybe we can show
-			 these on the upper right of each corner plot instead.}}
-	\label{table:sobh_params}
-\end{table}
-
-The waveform model used to work with such systems is the phenomenological
-approximant IMRPhenomD, extended at low frequency with a post-Newtonian
-frequency-domain waveform. In practice, because LISA only observes the early
-inspiral of SOBH systems, only the post-Newtonian waveform plays a role here.
-We do not expect radiation modes beyond the quadrupole to give a significant
-contribution to the parameter estimates, so we only include the $(2,2)$ mode
-for simplicity. We do not include any effect arising from black-hole spins.
-
-As done in the previous section, we apply our parameter inference procedure to
-these systems using both BAMBI and parallel-tempered MCMC sampling, and we
-numerically evaluate the Fisher matrix at the parameters of the injection.
-
-Due to the duration of an SOBH inspiral in the LISA band, and the complete lack
-of merger and ringdown, the chirp mass $\Mchirp$ is measured much better than
-other mass parameters and the component masses have a much stronger correlation
-than usually found with ground-based gravitational-wave detectors. In order for
-the sampling to converge robustly in a reasonable time, we find it is necessary
-to express the mass parameters in terms of $\Mchirp$ and symmetric mass ratio
-$\eta$, and a relatively tight prior around the injected parameters is required
-as well.
-
-In order to generate these results, our PTMCMC sampler requires between
-$5\times 10^5$ and $3\times 10^6$ steps with 100 temperatures, taking on the
-order of days on a single CPU core without careful optimization. The BAMBI
-sampling, on the other hand, completes in tens of minutes only.
-
-The resulting posterior distributions are shown in Fig.~\ref{fig:sobh_corner_1}
-and \ref{fig:sobh_corner_12}. We find close agreement between the BAMBI and
-PTMCMC samplers. The full joint distributions are fairly complex, but the
-complexity is mostly restricted to multimodalities and degeneracies in the
-angular parameters only. The typical degeneracy between inclination and distance
-is evident. Masses, merger time, distance, inclination and sky location, which
-are arguably the most astrophysically useful parameters, have simple marginal
-distributions with a well-defined mode and close to Gaussian, even at these
-moderate SNR values. The Fisher matrix estimates represent the marginal
-distributions of these parameters at least to the order of magnitude. In some
-cases the Fisher estimates approximate very precisely even the joint
-distributions of pairs of these parameters.
-
-\begin{figure*}
-	\includegraphics[width=\textwidth]{../plots/corner_sobh_tdc1_ptmcmc_bambi}
-	\caption{Inferred parameter posterior distribution for SOBH system 1.}
-	\label{fig:sobh_corner_1}
-\end{figure*}
-
-\begin{figure*}
-	\includegraphics[width=\textwidth]{../plots/corner_sobh_tdc2_ptmcmc_bambi}
-	\caption{Inferred parameter posterior distribution for SOBH system 12.}
-	\label{fig:sobh_corner_12}
-\end{figure*}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\subsection{Signals and transfer functions}
-\label{subsec:signaltransferSOBH}
-
-\begin{figure*}
-  \centering
-  \includegraphics[width=.98\linewidth]{../plots/plot_sobh1_alltdi.pdf}
-  \caption{\SM{TODO: rethink the visualization, maybe plot only transfer functions}.}
-  \label{fig:PEsmbh22hmCase0}
-\end{figure*}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\section{Discussion}
-\label{sec:discussion}
-
-- Summary/conclusions
-
-
-----------------
-Other questions:
-- special orientations/sky locations ?
-- Fisher matrix qualification - explore parameter choices
-- continuously increase SNR - include on these examples
-- continuously accumulate information over time
-- full exploration of parameter space for all of the above...
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\appendix
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 \section{Numerical integration with spline-interpolated phases}
 \label{sec:numintegration}
 
@@ -1060,6 +1068,14 @@ Other questions:
 \label{sec:rom}
 
 [describe implementation of the ROM]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{SNR dependence of parameter estimation}
+\label{sec:SMBHPEdistance}
+
+-- show series of analyses varying only the distance/SNR
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
