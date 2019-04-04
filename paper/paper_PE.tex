@@ -623,17 +623,28 @@ In our analysis, we will use the so-called zero-noise approximation. This corres
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\subsection{Fisher matrix parameter estimation}
-\label{sec:Fisher}
-
--- Fisher matrices computation: step self-tuning,...
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 \subsection{Bayesian sampling}
 \label{sec:samplers}
 
--- Bayesian samplers: Multinest, PTMCMC
+For this exploratory work we take a ``naive'' approach to  estimating posterior-probability distributed parameter samples, not applying any specific knowledge or expectations about distributions which might plausibly lead to artifically robust-seeming but incomplete results.  We apply two independent approaches, an parallel tempering MCMC sampler with generically wtih amotivated proposal distribution, and nested sampling. \jgb{More to come}
+
+-- Bayesian samplers: Multinest, PTMC
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Fisher matrix parameter estimation}
+\label{sec:Fisher}
+
+For comparison with our Bayesian inference results we also compute estimates of parameter estimation precision using the Fisher information matrix the common workhorse of LISA science studies despite its limitations.~\cite{Vallisneri08}  For measurements with additive Gaussian noise, as assumed here, the Fisher information matrix can be computed by
+\be
+F_{ij}=\left( \partial_{\theta_i} h| \partial_{\theta_i} h \right).
+\ee
+The inverse of this matrix estimates the covariance matrix describing parameter uncertainty. 
+The derivatives are computed by second-order finite differences, with the signal inner-products expanded and computed before differencing. For these calculations, where numerical smoothness is more of a concern than speed we compute the inner products explicitly on a fine grid.
+
+Generally, finite difference Fisher matrices can be problematic, with small numerical defects potentially having outsized impact, so the finite-difference step size $\epsilon_i$ used in each parameter derivative $\partial_{\theta_i}h$ must be chosen carefully. We target the step-size to be scaled off the diagonal Fisher matrix elements by ${\epsilon_i}\approx\delta/\sqrt{F_{ii}}$ using $\delta=0.001$ \jgb{This is \texttt{fisher\_err\_target}, was it different for some runs?}  for the results shown here.  To achieve this we set begin with an initial choice of the $\epsilon_i$ scaled of parameter values or prior widths, then we estimate the Fisher diagonals and iterate until convergence. In this process we also constrain that the step is never more than $10^{-10}$ times the initial scaling. \jgb{There are some more special-case details, but probably not worth elaborating.  We could also discuss how we do matrix inversion, but I don't think there is anything interesting there.}
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
