@@ -117,7 +117,7 @@
 
 -- definitions relevant to the Bayesian setting (likelihood, ...)
 
-Introducing the standard matched-filter inner product as
+Introducing the standard matched-filter inner product (also called overlap) as
 \be\label{eq:definnerproduct}
 	( \tilde{a} | \tilde{b} ) = 4 \mathrm{Re} \int_{0}^{+\infty} df \; \frac{\tilde{a}(f) \tilde{b}^{*}(f)}{S_{n}(f)} \,,
 \ee
@@ -125,7 +125,7 @@ for stationary Gaussian noise with noise PSD $S_{n}$, the likelihood $\calL = p(
 \be\label{eq:deflnL}
 	\ln \calL = -\frac{1}{2} \left( h(\bm{\theta}) - d | h(\bm{\theta}) - d \right) \,,
 \ee
-with the data stream being a superposition of the gravitational wave signal for the true parameters $\bm{\theta}_{0}$ and the noise realization in the experiment, $d = s(\bm{\theta}_{0}) + n$. The posterior distribution for the physical parameters $\bm{\theta}$ given the observed data $d$ is then
+with the data stream being a superposition of the gravitational wave signal for the true parameters $\bm{\theta}_{0}$ and the noise realization in the experiment, $d = h(\bm{\theta}_{0}) + n$. In general, the templates $h(\theta)$ used for the analysis will only be an approximation of the physical signals entering the data stream $d$; we will ignore entirely this distinction and neglect the systematic errors in the waveform model. The posterior distribution for the physical parameters $\bm{\theta}$ given the observed data $d$ is then
 \be\label{eq:defBayes}
 	p\left( \bm{\theta} | d \right) = \frac{p(d | \bm{\theta})p(\bm{\theta})}{p(d)}\,,
 \ee
@@ -136,14 +136,14 @@ In our analysis, we will use the so-called zero-noise approximation. This corres
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsection{Frequency domain LISA response}
-\label{sec:response}
+\label{subsec:response}
 
 -- Geometric setting, definitions, summarize the FD response
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsection{Reduced order model for EOBNRv2HM waveforms.}
-\label{sec:waveforms}
+\label{subsec:ROM}
 
 -- Waveforms: EOBNRv2HMROM + PNext
 
@@ -152,7 +152,26 @@ In our analysis, we will use the so-called zero-noise approximation. This corres
 \subsection{Likelihood computation}
 \label{sec:likelihood}
 
--- Likelihood computation: fast overlaps
+Setting the noise realization to zero in~\eqref{eq:deflnL}, having at our disposal a compact amplitude/phase respresentation of the signals allows us to compute likelihoods in an accelerated fashion. In general, both the template and the injection in~\eqref{eq:deflnL} are given as frequency series sampled with the Nyquist criterion $\Delta f = 1/(2T)$ with $T$ the duration of the signal, and the overlaps~\eqref{eq:definnerproduct} are simply computed as discrete sums over those frequency samples. Although transforming~\eqref{eq:definnerproduct} in a discrete is a simple operation, the size of the frequency series alone can represent a significant cost. In the context of binary neutron star observations. In the LISA.
+
+Applying the response as in~\ref{subsec:response} mode-by-mode on the sparsely sampled amplitude and phase generated as in~\ref{subsec:ROM}, we obtain a complete representation of both the waveform and of the instrument transfer functions~\eqref{} on a few hundred points in the Fourier domain, with the full signal being implicitly reconstructed with a standard cubic spline interpolation over frequencies. Decomposing~\eqref{eq:deflnL} as
+\be\label{eq:lnLoverlapstructure}
+	\ln \calL = \left( h(\bm{\theta}) | h(\bm{\theta}_{0}) \right)- \frac{1}{2} \left( h(\bm{\theta}) | h(\bm{\theta}) \right) - \frac{1}{2} \left( h(\bm{\theta}_{0}) | h(\bm{\theta}_{0}) \right) \,,
+\ee
+we have to compute inner products of the form~\eqref{eq:definnerproduct}. Note that individual terms in~\eqref{eq:lnLoverlapstructure} can be individually large, and computing $\ln \calL$ relies on accurate cancellations. Decomposing further in TDI channels as in~\eqref{} and in harmonics as in~\eqref{}, we have a sum of terms with the structure
+\be
+	\int \frac{df}{S_{n}} \; \calT_{1}^{\ell m} \calT_{2}^{\ell' m'} A_{1,\ell, m} A_{2, \ell' m'} e^{i(\Phi_{1,\ell m} - \Phi_{2,\ell' m'})} \,.
+\ee
+The difficulty of computing such an overlap depends on the phase difference. A large phase difference causes the integrand to be very oscillatory, requiring more frequency resolution than non-oscillatory integrands; on the other hand, oscillatory integrands give raise to a small integral due to cancellation effects, while non-oscillatory integrands contribute the most. For a single mode, SNR terms of the type $(h|h)$ have a zero phase difference by construction, but including different modes generates cross-terms $(\ell, m) \neq (\ell', m')$ with a large phase difference. In a Bayesian analysis, a large fraction of the time (after burn-in) will be spent exploring signals that are rather close to the injection.
+
+Thus, one can envision several approaches to compute integrals of the type~\eqref{eq:lnLoverlapstructure}, such as factoring out a guess of the injected signal~\cite{} and ignoring cross-terms between modes. In this work, we use a generic numerical treatment for the integrals~\eqref{eq:lnLoverlapstructure} and keep all terms with no further approximation.
+
+First, we built a joint sparse frequency grid suitable to represent both signals and the transfer functions. We then resample the integrand on this grid, separating prefactors (noise PSD, transfer function without the Doppler phase~\eqref{eq:defPhiR}, signal amplitude) from phases (Doppler phases, signal phase difference). We build a cubic spline for the prefactor, and a quadratic spline for the phase. We obtain the structure
+\be\label{eq:fastlikestructure}
+	\sum_{j \in \mathrm{grid}} \int_{f_{j}}^{f_{j+1}} df \; P_{j} (f) e^{i \phi_{j} (f)} \,,
+\ee
+where in each grid interval $P_{j}$ is a cubic polynomial and $\phi_{j}$ a quadratic polynomial. We can then compute the elementary integrals~\eqref{eq:fastlikestructure} using a combination of integrations by parts and asymptotic expansions, as explained in~\ref{app:numintegration}. The number of grid intervals is typically several hundreds \SM{[COMPLETE]}.
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -192,7 +211,7 @@ Generally, finite difference Fisher matrices can be problematic, with small nume
 
 \begin{figure*}
   \centering
-  \includegraphics[width=.98\linewidth]{../plots/plot_smbh9_alltdi.pdf}
+  \includegraphics[width=.98\linewidth]{../plots/plot_smbh9_tdi.pdf}
   \caption{\SM{TODO: rethink the visualization, maybe plot only transfer functions}.}
   \label{fig:tranferSMBHCase9}
 \end{figure*}
@@ -295,7 +314,7 @@ Under all these simplifying assumptions, the likelihood function becomes purely 
 \be
 	\ln \calL = -\frac{1}{2} \left( \tilde{a} - \tilde{a}_{\rm inj} | \tilde{a} - \tilde{a}_{\rm inj} \right) -\frac{1}{2} \left( \tilde{e} - \tilde{e}_{\rm inj} | \tilde{e} - \tilde{e}_{\rm inj} \right) \,.
 \ee
-From the low-frequency response \eqref{eq:aelowfmodes}, pinning the time-at-LISA so that we ca ignore the factor $\exp [2 i \pi f k\cdot p_{0}]$ as a pure constant corresponding to a redefinition of time, we obtain 
+From the low-frequency response \eqref{eq:aelowfmodes}, pinning the time-at-LISA~\eqref{} \SM{[COMPLETE $t_{L}$]} so that we can ignore the factor $\exp [2 i \pi f k\cdot p_{0}]$ as a pure constant corresponding to a redefinition of time, we obtain 
 \begin{align}\label{eq:simplelikelihoodhm}
 	\ln \calL &= -\frac{1}{2} \sum_{\ell m} \sum_{\ell' m'}   \left[ \left( s_{a}^{\ell m} - s_{a, \mathrm{inj}}^{\ell m}\right) \left( s_{a}^{\ell' m'} - s_{a, \mathrm{inj}}^{\ell' m'}\right)^{*} \right. \nn\\
 	& \qquad \left. + \left( s_{e}^{\ell m} - s_{e, \mathrm{inj}}^{\ell m}\right) \left( s_{e}^{\ell' m'} - s_{e, \mathrm{inj}}^{\ell' m'}\right)^{*} \right] \left\langle \ell m | \ell' m' \right\rangle \,,
@@ -558,7 +577,7 @@ distributions of pairs of these parameters.
 
 \begin{figure*}
   \centering
-  \includegraphics[width=.98\linewidth]{../plots/plot_sobh1_alltdi.pdf}
+  \includegraphics[width=.98\linewidth]{../plots/plot_sobh1_tdi.pdf}
   \caption{\SM{TODO: rethink the visualization, maybe plot only transfer functions}.}
   \label{fig:PEsmbh22hmCase0}
 \end{figure*}
@@ -1013,7 +1032,11 @@ For $f \ll f_{L}$, we have $2\pi f L \ll 1$ and the kernel~\eqref{eq:defGslr} re
 \be\label{eq:Gslrlowf}
 	G^{\ell m}_{slr} \simeq \frac{i \pi f L}{2} \exp\left[ 2 i \pi f k\cdot p_{0} \right] n_{l} \otimes n_{l} : P_{\ell m}\,.
 \ee
-For even lower frequencies, when $f \ll f_{R}$ as well, $2\pi f R \ll 1$ and the delay term is negligible: $\exp\left[ 2 i \pi f k\cdot p_{0} \right] \simeq 1$.
+For even lower frequencies, when $f \ll f_{R}$ as well, $2\pi f R \ll 1$ and the delay term is negligible: $\exp\left[ 2 i \pi f k\cdot p_{0} \right] \simeq 1$. It can be convenient to introduce the following notations for this delay phase:
+\be\label{eq:defPhiR}
+	\Phi_{R} \equiv 2 \pi f k\cdot p_{0} \,, \quad \Delta \Phi_{R} = \Phi_{R} - \Phi_{R}(t=t_{f}^{\rm peak}) \,.
+\ee
+Here, $\Phi_{R}$ with $t=t_{f}$ is what is called often the Doppler phase in the literature, and $\Delta \Phi_{R}$ subtracts the contribution that corresponds to shifting the origin of times to the time of the peak seen at the LISA location \SM{[COMPLETE $t_{L}$]}, which is equivalent to using the time variable $t_{L}$ as defined in~\eqref{}.
 
 In the following, we will also apply frequency-domain response at leading order in the separation of timescales~\cite{MB18}, so that the transfer functions are $\calT(f) = G(f, \tf)$ with $\tf$ the time-of-frequency function~\eqref{eq:deftf}. For $2\pi f L \ll 1$, we have $z\simeq 1$, and the link reversal symmetry $\tilde{y}_{slr} \simeq \tilde{y}_{r-ls}$, so that~\eqref{eq:aet} becomes
 \bsub\label{eq:aetlowf}
@@ -1064,7 +1087,7 @@ Note that the expressions for the channel $e$ can be obtained from the expressio
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Numerical integration with spline-interpolated phases}
-\label{sec:numintegration}
+\label{app:numintegration}
 
 [describe implementation of 0-noise integrals]
 
@@ -1076,6 +1099,13 @@ Note that the expressions for the channel $e$ can be obtained from the expressio
 
 [describe implementation of the ROM]
 
+\begin{figure}
+  \centering
+  \includegraphics[width=.99\linewidth]{../plots/plot_MM_ROM.pdf}
+  \caption{Unfaithfulness of ROM waveforms compared to the original EOBNRv2HM waveforms, computed as in~\eqref{}. We show here the results for the orientations \SM{[complete]}, for 200 random mass ratio values between 1 and 12, for masses $10 \Msol$, $50 \Msol$ and $250 \Msol$. The inclination angle is $\iota = \pi/2$, maximizing the effect of higher harmonics.}
+  \label{fig:MMROM}
+\end{figure}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -1083,6 +1113,28 @@ Note that the expressions for the channel $e$ can be obtained from the expressio
 \label{sec:SMBHPEdistance}
 
 -- show series of analyses varying only the distance/SNR
+
+\begin{figure*}
+  \centering
+  \begin{minipage}{.32\linewidth}
+      \includegraphics[width=.99\linewidth]{../plots/corner_smbh_case9_hm_dseries_m1m2.png}
+   \end{minipage}
+   \begin{minipage}{.32\linewidth}
+      \includegraphics[width=.99\linewidth]{../plots/corner_smbh_case9_hm_dseries_Dinc.png}
+   \end{minipage}
+   \begin{minipage}{.32\linewidth}
+      \includegraphics[width=.99\linewidth]{../plots/corner_smbh_case9_hm_dseries_tphi.png}
+   \end{minipage}
+  \caption{.}
+  \label{fig:smbhCornerZoomHMCase9}
+\end{figure*}
+
+\begin{figure*}
+  \centering
+  \includegraphics[width=.8\linewidth]{../plots/plot_mollweide_dseries.png}
+  \caption{.}
+  \label{fig:MollweidesmbhTserieshmCase9}
+\end{figure*}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
