@@ -496,22 +496,22 @@ We can now come back to explaining the results of Sec.~\ref{}, and in particular
 
 Stellar-origin black-hole (SOBH) mergers have been recently recognized as an
 important source of LISA detections \cite{Sesana16} although full parameter
-estimation studies are not available yet. In this section we present
-three case studies of parameter inference for such sources. The parameters of
-the simulated mergers are taken from the Radler LISA data challenge and are
-listed in Table \ref{table:sobh_params}.
+estimation studies are not available yet. In this section we present two case
+studies of parameter inference for such sources using the formalism and methods
+described earlier. The parameters of the simulated mergers are taken from the
+Radler LISA data challenge and are listed in Table \ref{table:sobh_params}.
 \begin{table}
-	\begin{tabular}{|c||c|c|c|}
+	\begin{tabular}{|c||c|c|}
 		\hline
-		Radler entry 		& 1 	& 12 	& 52 \\
+		Radler entry 		& 1 	& 12   \\
 		\hline
-		Mass 1 ($\Msol$) 	& 21.4	& 63.5	& 57.0 \\
+		Mass 1 ($\Msol$) 	& 21.4	& 63.5 \\
 		\hline
-		Mass 2 ($\Msol$) 	& 20.1	& 45.1	& 36.8 \\
+		Mass 2 ($\Msol$) 	& 20.1	& 45.1 \\
 		\hline
-		Distance (Mpc) 		& 49.1	& 318	& 308 \\
+		Distance (Mpc) 		& 49.1	& 318  \\
 		\hline
-		LISA SNR 			& 26.6	& 11.9	& 16.0 \\
+		LISA SNR 			& 26.6	& 11.9 \\
 		\hline
 	\end{tabular}
 	\caption{Parameters of the simulated SOBH mergers. \tdc{Maybe we can show
@@ -519,8 +519,20 @@ listed in Table \ref{table:sobh_params}.
 	\label{table:sobh_params}
 \end{table}
 
-The waveform model used to work with such systems is the phenomenological
-approximant IMRPhenomD, extended at low frequency with a post-Newtonian
+We caution the reader that our purpose here is to show the feasibility of
+Bayesian inference for SOBH sources in LISA using the methodology presented in
+this paper. It is by no means a final answer on how to do so in an optimal or
+convenient way.  For this reason, the problem is posed in a simplified
+way here: in particular, the SOBH signal is assumed to merge roughly at the end of
+the observation epoch, and the finite observation time is enforced by
+converting it to a minimum analyzed Fourier frequency via the time-frequency
+relation of a simple Newtonian inspiral. In a more realistic situation, the
+merger time would likely be free to range from the beginning of the observation
+to years after its end, and the frequency of the signal at the beginning of the
+observation would be another sampling parameter.
+
+The waveform model used to work with SOBH systems is the same phenomenological
+approximant PhenomD used earlier, extended at low frequency with a post-Newtonian
 frequency-domain waveform. In practice, because LISA only observes the early
 inspiral of SOBH systems, only the post-Newtonian waveform plays a role here.
 We do not expect radiation modes beyond the quadrupole to give a significant
@@ -569,6 +581,13 @@ distributions of pairs of these parameters.
 	\caption{Inferred parameter posterior distribution for SOBH system 12.}
 	\label{fig:sobh_corner_12}
 \end{figure*}
+
+Such posterior distributions should not be taken literally as expectations of
+LISA's capability for SOBH systems. One reason is the simplified treatment of
+the finite observation time described earlier. A second reason is the assumption
+of zero black-hole spins, which artificially reduces the width of the posterior
+distribution due to the strong degeneracy between spins and symmetric mass
+ratio \cite{Baird+2013}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
