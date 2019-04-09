@@ -138,14 +138,53 @@ In our analysis, we will use the so-called zero-noise approximation. This corres
 \subsection{Frequency domain LISA response}
 \label{subsec:response}
 
--- Geometric setting, definitions, summarize the FD response
+We will give in this section a brief summary of the instrument response of LISA, and of our Fourier-domain treatment of the modulations and delays. We refer the reader to App.~\ref{app:response} for comprehensive notations and definitions.
+
+The higher harmonics $h_{\ell, m}$ parametrize the decomposition of the gravitational wave signal $h_{+}$, $h_{\times}$ in spin-weighted spherical harmonics as
+\be\label{eq:hpcmodes}
+	h_{+} - i h_{\times} = \sum_{\ell \geq 2} \sum_{m = -\ell}^{\ell} {}_{-2}Y_{\ell m} (\iota, \varphi) h_{\ell m} \,,
+\ee
+where $(\iota, \varphi)$ is the direction of emission in a frame attached to the source by convention, and the ${}_{-2}Y_{\ell m}$ are spin-weighted spherical harmonics~\cite{}.
+
+The LISA response can be built from single-link observables $y_{slr} = (\nu_{r} - \nu_{s})/\nu$ respresenting a frequency shift between the spacecrafts $s$ and $r$ along the link $l$. We use the expression~\cite{}
+\be\label{eq:defyslr}
+	y_{slr} = \frac{1}{2} \frac{n_{l} \otimes n_{l}}{1 - k\cdot n_{l}} : \left[ H(t - L - k\cdot p_{s}) - H(t - k\cdot p_{r}) \right] \,,
+\ee
+with $H$ the transverse-traceless matrix representing the gravitational wave, $L$ the delay along one arm\footnote{We use units with $G=c=1$.}, taken to be fixed, $k$ the propagation vector, $n_{l}$ the link unit vectors and $p_{r}$, $p_{s}$ the positions of the spacecrafts.
+
+In the frequency domain, modes will be respresented with their amplitude and phase as\footnote{Note our Fourier convention~\eqref{eq:defFourier}.}
+\be\label{eq:hlmampphase}
+	\tilde{h}_{\ell m} (f) = A_{\ell m} (f) e^{-i\Psi_{\ell m} (f)}\,.
+\ee
+We will use the analysis of~\cite{MB18} and write the response in individual observables $y_{slr}$ with a transfer function for each spherical harmonic mode as
+\be
+	\tilde{y}_{slr} = \sum_{\ell, m}\calT_{slr}^{\ell m}(f) \tilde{h}_{\ell m} \,.
+\ee
+With the decomposition~\eqref{eq:Hsummodes}, the corresponding form of the kernel $G^{\ell m}_{slr}(f, t)$ in the formalism of~\cite{MB18} is
+\begin{align}\label{eq:Gslr}
+	G_{slr}^{\ell m}(f,t) &= \frac{i \pi f L}{2} \sinc \left[ \pi f L\left(1-k\cdot n_{l} \right) \right] \nn\\
+	& \quad \cdot \exp\left[ i \pi f \left( L + k\cdot \left( p_{1} + p_{2} \right) \right) \right]  n_{l} \cdot P_{\ell m} \cdot n_{l} \,.
+\end{align}
+At leading order in the perturbative formalism of~\cite{MB18}, we have simply
+\be
+	\calT_{slr}^{\ell m}(f) = G_{slr}^{\ell m}(f, t_{f}^{\ell m}) \,,
+\ee
+with $t_{f}^{\ell m}$ the effective time-to-frequency correspondence, defined across the whole frequency band, including in the merger-ringdown, as $t_{f}^{\ell m} = -1/(2\pi) d\Psi_{\ell m} / df$. The analysis of~\cite{} has shown that higher-order corrections are small for SMBH systems, and for SOBH systems provided they are close enough to merger as will be the case for the examples chosen here. The fact that we use the same Fourier-domain treatment of the transfer functions for both the signal and the templates should also mitigate the importance of modelling errors.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsection{Reduced order model for EOBNRv2HM waveforms.}
 \label{subsec:ROM}
 
--- Waveforms: EOBNRv2HMROM + PNext
+As opposed to previous studies of Bayesian parameter recovery for LISA, we wish to use full inspiral-merger-ringdown signals. Since higher harmonics will play a crucial role in our analysis, in this study we use the Effective-One-Body (EOB) waveform model \texttt{EOBNRv2HM}~\cite{Pan+11}. These waveforms are base on the EOB formalism~\cite{BD99, BD00}, and are calibrated on a set of numerical relativity waveforms. The model is limited to non-spinning systems on quasicircular orbits, but includes the most important higher harmonics in the signal:
+\be
+	(\ell, m) = (2,2) ,\, (2,1) ,\, (3,3) ,\, (4,4) ,\, (5,5) \,.
+\ee
+The waveform are generated in time domain by integrating a system of ODEs, which can become quite slow for long signals (up to seconds of integration). We developed a reduced order model (ROM) for these waveforms, \texttt{EOBNRv2HM}, following the methods of~\cite{Puerrer14}, allowing a much accelerated generation of the Fourier-domain amplitudes and phases of the modes~\eqref{eq:hlmampphase}. 
+
+We note that the limitation to non-spinning waveforms is a stringent one. In particular, it means that our results ignore the well-known degeneracy between mass ratio and spin, thus underestimating the uncertainty in the recovered mass ratio. By ignoring misaligned spins, we also leave precession effects aside. However, consistently including the merger and ringdown in the signal, as well as the higher harmonics, represents a significant improvement over previous studies. We also expect intrinsic and extrinsic parameters to correlate weakly, at least in the absence of precession, so that the conclusions drawn from Sec.~\ref{sec:SMBHPE} below, notably the analysis of possible degeneracies in the extrinsic part of the likelihood, should hold for aligned spin systems.
+
+Fast waveforms including both the aligned components of the spins and higher harmonics are becoming available, in the phenomenological waveform family~\cite{London+17}, as EOB models~\cite{Cotesta+18}\footnote{A ROM is under construction to accelerate the waveform model of~\cite{Cotesta+18}.}, and as Numerical Relativity surrogates~\cite{Varma+18}. We plan to include the effects of aligned spins, and of misaligned spins causing precession effects, in future studies.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -170,7 +209,7 @@ First, we built a joint sparse frequency grid suitable to represent both signals
 \be\label{eq:fastlikestructure}
 	\sum_{j \in \mathrm{grid}} \int_{f_{j}}^{f_{j+1}} df \; P_{j} (f) e^{i \phi_{j} (f)} \,,
 \ee
-where in each grid interval $P_{j}$ is a cubic polynomial and $\phi_{j}$ a quadratic polynomial. We can then compute the elementary integrals~\eqref{eq:fastlikestructure} using a combination of integrations by parts and asymptotic expansions, as explained in~\ref{app:numintegration}. The number of grid intervals is typically several hundreds \SM{[COMPLETE]}.
+where in each grid interval $P_{j}$ is a cubic polynomial and $\phi_{j}$ a quadratic polynomial. We can then compute the elementary integrals~\eqref{eq:fastlikestructure} using a combination of integrations by parts and asymptotic expansions, as explained in App.~\ref{app:numintegration}. The number of grid intervals is typically several hundreds \SM{[COMPLETE]}.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -285,7 +324,7 @@ Case 0
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsection{Investigating degeneracies}
-\label{sec:SMBHPEdegen}
+\label{subsec:SMBHPEdegen}
 
 \begin{figure*}
   \centering
@@ -532,7 +571,7 @@ to years after its end, and the frequency of the signal at the beginning of the
 observation would be another sampling parameter.
 
 The waveform model used to work with SOBH systems is the same phenomenological
-approximant PhenomD used earlier, extended at low frequency with a post-Newtonian
+approximant \texttt{EOBNRv2HMROM} used earlier, extended at low frequency with a post-Newtonian
 frequency-domain waveform. In practice, because LISA only observes the early
 inspiral of SOBH systems, only the post-Newtonian waveform plays a role here.
 We do not expect radiation modes beyond the quadrupole to give a significant
@@ -628,7 +667,7 @@ Other questions:
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{The LISA instrument response}
-\label{sec:response}
+\label{app:response}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
@@ -722,6 +761,8 @@ Other questions:
 %
 %\SM{------------------------------------------------------}
 
+For completeness, we provide in this Appendix comprehensive definitions and notations for the gravitational wave signal as well as the LISA response. We hope to spare the reader the effort of navigating between the various conventions used in the literature, and to provide a point of reference for future works. Having these definitions at hand will also help us derive the approximations linking the full response to the simplified response that we used in Sec.~\ref{subsec:SMBHPEdegen}.
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsection{The GW signal}
@@ -761,7 +802,7 @@ Conversely, the polarizations are
 \esub
 
 We will further decompose the gravitational wave signal, seen as a function of the direction of emission $(\iota, \varphi)$, in spin-weighted spherical harmonics as
-\be\label{eq:hpcmodes}
+\be\label{eq:apphpcmodes}
 	h_{+} - i h_{\times} = \sum_{\ell \geq 2} \sum_{m = -\ell}^{\ell} {}_{-2}Y_{\ell m} (\iota, \varphi) h_{\ell m} \,,
 \ee
 where the explicit expression of the ${}_{-2}Y_{\ell m}$ is given in~\cite{}.
@@ -781,7 +822,7 @@ We will both generate the waveforms and apply the response directly in the Fouri
 \ee
 Note that this differs by a change $f\rightarrow -f$ from the most usual one (used e.g. in \texttt{LAL}).
 
-The definition of the reference time and phase \dots
+The definition of the reference time and phase \SM{[\dots COMPLETE]}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -966,8 +1007,10 @@ Writing the $P_{\ell m}$ matrices in this way allows to factor out all dependenc
 \subsection{The LISA observables}
 \label{sec:LISAobservables}
 
+\SM{[avoid repetition with methodology section]}
+
 The single-link frequency shift observable $y_{slr} = (\nu_{r} - \nu_{s})/\nu$ between sending spacecraft $s$ and receiving spacecraft $r$ along the link $l$ takes the form 
-\be\label{eq:defyslr}
+\be\label{eq:appdefyslr}
 	y_{slr} = \frac{1}{2} \frac{n_{l} \otimes n_{l}}{1 - k\cdot n_{l}} : \left[ H(t - L - k\cdot p_{s}) - H(t - k\cdot p_{r}) \right] \,.
 \ee
 Several assumptions enter this form of the response: \dots \SM{[COMPLETE]}.
@@ -987,7 +1030,7 @@ At leading order in the separation of timescales, we have simply
 \ee
 with $t_{f}^{\ell m}$ the effective time-to-frequency correspondence, defined across the whole frequency band, including in the merger-ringdown, as $t_{f}^{\ell m} = -1/(2\pi) d\Psi_{\ell m} / df$ for a mode $\tilde{h}_{\ell m} = A_{\ell m}(f) \exp\left[-i \Psi_{\ell m}\right]$. The analysis of~\cite{} has shown that higher-order corrections are small for SMBH systems, and for SOBH systems that are close enough to merger as will be the case for the examples chosen here. The fact that we use the same Fourier-domain treatment of the transfer functions for both the signal and the templates should also mitigate errors. 
 
-In our rigid approximation, delays are simply all constant and constant to $L$. Using the shortcut notation $y_{sr,L} = y_{slr}(t - L)$, the first-generation TDI Michelson observable $X$ reads
+In our rigid approximation, delays are simply all constant and constant to $L$. Using the shortcut notation $y_{sr,L} = y_{slr}(t - L)$, the first-generation TDI Michelson observable $X$ reads~\cite{}
 \begin{align}
 	X &= y_{31} + y_{13,L} + \left( y_{21} + y_{12,L} \right)_{2L} \nn\\
 	& - \left( y_{21} + y_{12,L} \right) - \left( y_{31} + y_{13,L} \right)_{2L} \,,
