@@ -184,7 +184,7 @@ The waveform are generated in time domain by integrating a system of ODEs, which
 
 We note that the limitation to non-spinning waveforms is a stringent one. In particular, it means that our results ignore the well-known degeneracy between mass ratio and spin, thus underestimating the uncertainty in the recovered mass ratio. By ignoring misaligned spins, we also leave precession effects aside. However, consistently including the merger and ringdown in the signal, as well as the higher harmonics, represents a significant improvement over previous studies. We also expect intrinsic and extrinsic parameters to correlate weakly, at least in the absence of precession, so that the conclusions drawn from Sec.~\ref{sec:SMBHPE} below, notably the analysis of possible degeneracies in the extrinsic part of the likelihood, should hold for aligned spin systems.
 
-Fast waveforms including both the aligned components of the spins and higher harmonics are becoming available, in the phenomenological waveform family~\cite{London+17}, as EOB models~\cite{Cotesta+18}\footnote{A ROM is under construction to accelerate the waveform model of~\cite{Cotesta+18}.}, and as Numerical Relativity surrogates~\cite{Varma+18}. We plan to include the effects of aligned spins, and of misaligned spins causing precession effects, in future studies.
+Fast waveforms including both the aligned components of the spins and higher harmonics are becoming available, in the phenomenological waveform family~\cite{London+17}, as EOB models~\cite{Cotesta+18}~\footnote{A ROM is under construction to accelerate the waveform model of~\cite{Cotesta+18}.}, and as Numerical Relativity surrogates~\cite{Varma+18}. We plan to include the effects of aligned spins, and of misaligned spins causing precession effects, in future studies.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -217,9 +217,15 @@ where in each grid interval $P_{j}$ is a cubic polynomial and $\phi_{j}$ a quadr
 \subsection{Bayesian sampling}
 \label{sec:samplers}
 
-For this exploratory work we take a ``naive'' approach to  estimating posterior-probability distributed parameter samples, not applying any specific knowledge or expectations about distributions which might plausibly lead to artifically robust-seeming but incomplete results.  We apply two independent approaches, an parallel tempering MCMC sampler with generically wtih amotivated proposal distribution, and nested sampling. \jgb{More to come}
+For this exploratory work we take a ``naive'' approach to  estimating posterior-probability distributed parameter samples, without applying specific knowledge or expectations about distributions which might plausibly lead to artifically robust-seeming but incomplete results.  We apply two independent approaches, a parallel tempering Markov-chain Monte Carlo (MCMC) sampler and nested sampling. 
 
--- Bayesian samplers: Multinest, PTMC
+Our MCMC code \texttt{PTMCMC}\footnote{Open source at github.com/JohnGBaker/ptmcmc.} has been developed through several astrophysics projects, tested on several sample problems, and modularly designed with the aim of minizing opportunities for errors with new projects. The code performs parallel tempered MCMC\cite{Swendsen+1986,Littenberg2009} with temperatures slowly adjusted to achieve nearly equal exchange rates among all pairs of adjacent temperatures.  Most runs here performed comparably with either 80 or 240 parallel temperature chains.
+We applied a general-purpose proposal distribution composed of a weighted set of sub-proposals, including differential-evolution steps~\cite{Vrugt+2008} (although the proposal in this case is based on each single chain, not an ensemble) and a collection of several Gaussian step draws of varying sizes scaled off the prior domain at about 0.01--1\% of its scale and weighted favor the smaller scale proposal draws.
+Effective sample sizes (ESS) were estimated from the number of (post-burn-in) samples, reduced by the autocorrelation length, with the burn-in size chosen to optimize the ESS. In most cases, the runs were continued until achieving an estimated ESS~$>2000$.
+  
+For comparison and verification we also computed posterior samples using the nested sampling code \texttt{BAMBI}\cite{Graff+2012} a variant of \texttt{MultiNest}\cite{Feroz+2009b} with additional options (unused here).  The nested sampling algorithm evolves a set of 'live points' toward regions of high probability by iteratively resampling the lowest probability point from within an ever-narrowing region covering the set of live-point samples.  The computation proceeds until the estimated Bayesian evidence, or marginal probability, within the region covered by the live points is smaller than some threshold.  Posterior-distributed samples are then drawn based on the set of sub-regions and sample posterior values thereby generated. In our runs we used 4000 live points and with an stopping evidence threshhod of 1.0. \jgb{Sylvain needs to check these values.}
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -289,6 +295,8 @@ eg:
 Case 12?
 m1,    m2,    t0,D,     phi0,i,   lam,  bet, psi
 8.89e5,1.11e5,0, 3.67e4,pi/3,pi/2,3pi/4,pi/3,pi/3
+
+--enumerate priors
 
 Case 0
 
