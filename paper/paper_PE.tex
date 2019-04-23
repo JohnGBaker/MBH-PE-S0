@@ -362,16 +362,16 @@ Under all these simplifying assumptions, the likelihood function becomes purely 
 \be
 	\ln \calL = -\frac{1}{2} \left( \tilde{a} - \tilde{a}_{\rm inj} | \tilde{a} - \tilde{a}_{\rm inj} \right) -\frac{1}{2} \left( \tilde{e} - \tilde{e}_{\rm inj} | \tilde{e} - \tilde{e}_{\rm inj} \right) \,.
 \ee
-From the low-frequency response \eqref{eq:aelowfmodes}, pinning the time-at-LISA~\eqref{} \SM{[COMPLETE $t_{L}$]} so that we can ignore the factor $\exp [2 i \pi f k\cdot p_{0}]$ as a pure constant corresponding to a redefinition of time, we obtain 
+From the low-frequency response \eqref{eq:aelowfmodes}, pinning the time-at-LISA~\eqref{} \SM{[COMPLETE $t_{L}$]} so that we can ignore the factor $\exp [2 i \pi f k\cdot p_{0}]$ as a pure constant corresponding to a redefinition of time, we obtain \jgb{Should we use notation $\Phi_R$ here and in \eqref{eq:aelowfmodes}?} 
 \begin{align}\label{eq:simplelikelihoodhm}
 	\ln \calL &= -\frac{1}{2} \sum_{\ell m} \sum_{\ell' m'}   \left[ \left( s_{a}^{\ell m} - s_{a, \mathrm{inj}}^{\ell m}\right) \left( s_{a}^{\ell' m'} - s_{a, \mathrm{inj}}^{\ell' m'}\right)^{*} \right. \nn\\
 	& \qquad \left. + \left( s_{e}^{\ell m} - s_{e, \mathrm{inj}}^{\ell m}\right) \left( s_{e}^{\ell' m'} - s_{e, \mathrm{inj}}^{\ell' m'}\right)^{*} \right] \left\langle \ell m | \ell' m' \right\rangle \,,
 \end{align}
-where we introduced the following extrinsic signal functions
+where we introduced the following extrinsic signal functions \jgb{Since neither $D_{a,e}$ nor $P_{\ell m}$ are defined in the main text, may be better to write in terms of a version of $F$ as in \eqref{eq:defFapcFepc}}
 \be\label{eq:defsaelm}
 	s_{a,e}^{\ell m} = \frac{1}{d} \frac{2}{3L} D_{a,e} : P_{\ell m} \,,
 \ee
-with $d = D / D^{\rm inj}$ the dimensionless ratio of luminosity distances. The prefactors $\left\langle \ell m | \ell' m' \right\rangle$ are pure normalization constants, and represent mode overlaps as
+with $d = D / D^{\rm inj}$ the dimensionless ratio of luminosity distances. The prefactors $\left\langle \ell m | \ell' m' \right\rangle$ \sout{are pure normalization constants, and} represent mode overlaps as
 \be\label{eq:innerproductlmlpmp}
 	\left\langle \ell m | \ell' m' \right\rangle = 4\mathrm{Re} \int \frac{df}{S_{n}^{a,e}} \left( 3 \pi f L\right)^{2} \tilde{h}_{\ell m} \tilde{h}_{\ell' m'}^{*} \,.
 \ee
@@ -1009,7 +1009,7 @@ or explicitly in $P_{\ell m}$ as
 	P_{\ell m} &= \frac{1}{2} \sYlm e^{-2 i \psi} \left( P_{+}^{0} + i P_{\times}^{0} \right) \nn\\
 	& + \frac{1}{2} (-1)^{\ell} \sYlminusmstar e^{+2 i \psi} \left( P_{+}^{0} - i P_{\times}^{0} \right) \,.
 \end{align}
-Writing the $P_{\ell m}$ matrices in this way allows to factor out all dependencies in the extrinsic parameters $(\iota, \phi, \psi)$. Together with the luminosity distance $D_{L}$, these parameters appear in combinations of constant factors multiplying the whole response.
+Writing the $P_{\ell m}$ matrices in this way allows to factor out all dependencies in the extrinsic parameters $(\iota, \phi, \psi)$. Together with the luminosity distance $D_{L}$, these parameters appear in combinations of constant factors multiplying the whole response. \jgb{Would it be better to include the angle dependence explicitly here in the $\sYlm$ here for clarity, since the point is to account for parameter dependencies.} 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -1022,7 +1022,7 @@ The single-link frequency shift observable $y_{slr} = (\nu_{r} - \nu_{s})/\nu$ b
 \be\label{eq:appdefyslr}
 	y_{slr} = \frac{1}{2} \frac{n_{l} \otimes n_{l}}{1 - k\cdot n_{l}} : \left[ H(t - L - k\cdot p_{s}) - H(t - k\cdot p_{r}) \right] \,.
 \ee
-Several assumptions enter this form of the response: \dots \SM{[COMPLETE]}.
+Several assumptions enter this form of the response: \dots \SM{[COMPLETE]} \jgb{Define $n_l$. Also double dot looks like colon, needing some clarification.}.
 
 In the frequency domain, we will use the analysis of~\cite{} and write the response in individual observables $y_{slr}$ with a transfer function for each spherical harmonic mode as
 \be
@@ -1139,7 +1139,10 @@ By comparison with~\eqref{eq:DaDe}, we obtain
 \be
 	L_{a} = L_{e} = \frac{3L}{2} \,, \; \epsilon_{a} = \frac{2\pi}{3} \,, \; \epsilon_{e} = \frac{5\pi}{12} \,.
 \ee
-Note a degeneracy $\pm \pi$ in how we choose to orient these effective detectors. We can recover pattern functions (for $\psi_{L}=0$) by factoring out the effective length, defining
+Note a degeneracy $\pm \pi$ in how we choose to orient these effective detectors.
+We can recover pattern functions (for $\psi_{L}=0$) by factoring out the effective length, we define
+\jgb{Would it be better to just include a new version of expression \eqref{eq:aelowfmodes} here using $F_{a,e}$, such as:
+  $\tilde{a}, \tilde{e} = (-3i\pi f L)\left[ \tilde{h}_{\ell m}^\times F_{a,e}^+ + \tilde{h}_{\ell m}^\times F_{a,e}^\times\right]$. Also an $(\ell,m)$ version of $F_{a,e}$ would be useful in the main text.}
 \be\label{eq:defFapcFepc}
 	F_{a,e}^{+,\times} \equiv \frac{2}{3L} D_{a,e} : P_{+,\times}^{0} \,,
 \ee
