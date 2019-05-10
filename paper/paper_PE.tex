@@ -62,18 +62,19 @@
 \newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
 \newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
 
-\newcommand{\SM}[1]{{\color{Blue} #1}}
-\newcommand{\jgb}[1]{{\color{DarkGreen} #1}}
-\newcommand{\tdc}[1]{{\color{red} (TD: #1)}}
+\newcommand{\SM}[1]{{\color{Blue} [SM: #1]}}
+\newcommand{\JGB}[1]{{\color{DarkGreen} [JGB: #1]}}
+\newcommand{\TDC}[1]{{\color{red} [TDC: #1]}}
 
 \begin{document}
 
-\title{Bayesian methods for black hole merger parameter estimation with LISA.}
+%\title{Bayesian methods for black hole merger parameter estimation with LISA.}
+\title{Exploring Bayesian parameter estimation of binary black holes with LISA}
 
-\author{John G. Baker}
-\affiliation{Gravitational Astrophysics Laboratory, NASA Goddard Space Flight Center, 8800 Greenbelt Rd., Greenbelt, MD 20771, USA}
 \author{Sylvain Marsat}
 \affiliation{APC, AstroParticule et Cosmologie, Universit\'{e} Paris Diderot, CNRS/IN2P3, CEA/Irfu, Observatoire de Paris, Sorbonne Paris Cit\'{e}, 10, rue Alice Domon et L\'{e}onie Duquet 75205 PARIS Cedex 13, France}
+\author{John G. Baker}
+\affiliation{Gravitational Astrophysics Laboratory, NASA Goddard Space Flight Center, 8800 Greenbelt Rd., Greenbelt, MD 20771, USA}
 \author{Tito Dal Canton}
 \thanks{NASA Postdoctoral Program fellow}
 \affiliation{Gravitational Astrophysics Laboratory, NASA Goddard Space Flight Center, 8800 Greenbelt Rd., Greenbelt, MD 20771, USA}
@@ -83,7 +84,7 @@
 
 \begin{abstract}
 
-[Abstract]
+The space-based gravitational wave detector LISA will observe mergers of supermassive black hole binary systems (SMBHs) to cosmological distances, as well as inspiralling stellar-origin (or stellar-mass) binaries (SOBHs) years before they enter the LIGO/Virgo band. Much remains to be explored for the parameter recovery of both class of systems. Previous SMBH analyses relied on inspiral-only signals and/or a simplified Fisher matrix analysis, while SOBHs have not yet been analyzed with Bayesian methods. We accelerate likelihood computations by (i) using a Fourier-domain response of the LISA instrument, (ii) using a reduced-order model for non-spinning waveforms that include a merger-ringdown and higher harmonics, (iii) setting the noise realization to zero and computing overlaps in the amplitude/phase representation. We present the first simulations of Bayesian inference for the parameters of supermassive black hole systems including consistently the merger and ringdown of the signal, as well as higher harmonics. We find that restricting the merger-dominated signal to its dominant harmonic can make the extrinsic likelihood very degenerate. Including higher harmonics proves to be crucial to break degeneracies and considerably improves the localization of the source, with a surviving bimodality in the sky position. We also present the first simulations of Bayesian inference for SOBHs, and show that although unimodal, their posterior distributions can have non-Gaussian features.
 
 \end{abstract}
 
@@ -103,7 +104,15 @@
 \section{Introduction}
 \label{sec:intro}
 
-[Introduction]
+%The future gravitational wave detector LISA~\cite{LISA2017}.
+%
+%, the network of ground-based detectors will have expanded from the current LIGO~\cite{} and Virgo~\cite{} detectors to include KAGRA~\cite{} and Indigo, which will have continued improving their sensitivity. By the time LISA will fly, a third generation of detectors, like Einstein Telescope~\cite{} and Cosmic Explorer~\cite{}, might be operating.
+%
+%LISA will provide complementary informations. By targeting a much lower frequency band, will be sensitive to different sources. Among the sources, mergers of SMBHs, seen at high SNR and anywhere in the observable universe, and inspirals of LIGO-type sources (SOBHs), opening the possibility of multi-band gravitational wave astronomy.
+%
+%Much remained to be explored for the data analysis of LISA. Different challenges : high SNR for merger-dominated SMBH signals, SNR-limited regime for very long SOBH signals. The motion of the detector leaves an imprint on the signal, while the response also has frequency-dependency at high frequencies where the long-wavelength approx is not valid anymore. Finally, many other challenges : calibration and understanding noise on the fly, non-stationarity of the noise, dealing with glitches, and most importantly global fit: superposition of long-lived sources in a single datastream.
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -132,7 +141,7 @@ with the data stream being a superposition of the gravitational wave signal for 
 \ee
 with $p(\bm{\theta})$ the priors on the parameters, and $p(d)$ the evidence that we will ignore here as it enters as a multiplicative constant in the posterior.
 
-In our analysis, we will use the so-called zero-noise approximation. This corresponds simply to performing a Bayesian analysis with~\eqref{eq:deflnL} and ~\eqref{eq:defBayes}, but setting the noise realization to zero, $n=0$. It allows us to accelerate the likelihood computation, as will be explained in~\ref{}. For exploratory parameter estimation runs, this approximation allows us to explore the structure of the likelihood with its possible parameter degeneracies (\SM{[cite past use of this approx.]}), and is a significant improvement over Fisher matrix estimates in that sense. We leave the extension of our analysis to include noise realizations for future work. We will also ignore waveform systematic errors and assume our waveform templates match exactly the real signals.
+In our analysis, we will use the so-called zero-noise approximation. This corresponds simply to performing a Bayesian analysis with~\eqref{eq:deflnL} and ~\eqref{eq:defBayes}, but setting the noise realization to zero, $n=0$. It allows us to accelerate the likelihood computation, as will be explained in~\ref{}. For exploratory parameter estimation runs, this approximation allows us to explore the structure of the likelihood with its possible parameter degeneracies (\SM{cite past use of this approx.}), and is a significant improvement over Fisher matrix estimates in that sense. We leave the extension of our analysis to include noise realizations for future work. We will also ignore waveform systematic errors and assume our waveform templates match exactly the real signals.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -168,10 +177,9 @@ Applying the perturbative formalism of~\cite{MB18} to leading order, we have sim
 where
 \begin{align}\label{eq:Gslr}
 	G_{slr}^{\ell m}(f,t) &= \frac{i \pi f L}{2} \sinc \left[ \pi f L\left(1-k\cdot n_{l} \right) \right] \nn\\
-	& \quad \cdot \exp\left[ i \pi f \left( L + k\cdot \left( p_{1} + p_{2} \right) \right) \right] \nn\\
+	& \quad \cdot \exp\left[ i \pi f \left( L + k\cdot \left( p_{r} + p_{s} \right) \right) \right] \nn\\
 	& \quad \cdot n_{l} \cdot P_{\ell m} \cdot n_{l} \,
 \end{align}
-\tdc{what are $p_1$ and $p_2$ here? Are they the same as $p_r$ and $p_s$?}
 is the kernel from~\cite{MB18}, $P_{\ell m}$ is defined by the decomposition~\eqref{eq:Hsummodes}, and
 \be
 	t_{f}^{\ell m} = -\frac{1}{2\pi} \frac{d\Psi_{\ell m}}{df}
@@ -191,28 +199,28 @@ As opposed to previous studies of Bayesian parameter recovery for LISA, we wish 
 \ee
 The waveforms are generated in the time domain by integrating a system of ODEs, an operation requiring up to seconds of computing time for long signals. For this reason, we developed a reduced order model (ROM) for these waveforms, \texttt{EOBNRv2HM}, following the methods of~\cite{Puerrer14}, enabling a much faster generation of the Fourier-domain amplitudes and phases of the modes~\eqref{eq:hlmampphase}.
 
-We note that the assumption of non-spinning black holes is an important limitation to a realistic assessment of parameter uncertainties. In particular, it means that our results ignore the well-known degeneracy between mass ratio and spin \cite{Baird+2013}, thus underestimating the uncertainty in the recovered mass ratio. By ignoring misaligned spins, we also neglect the possible effects of orbital precession on parameter degeneracies. Nevertheless, consistently including merger, ringdown and higher harmonics already represents a significant improvement over previous studies. We also expect intrinsic and extrinsic parameters to correlate weakly, at least in the absence of precession, so that the conclusions drawn from Sec.~\ref{sec:SMBHPE} below, notably the analysis of possible degeneracies in the extrinsic part of the likelihood, should hold for aligned spin systems. \tdc{the last sentence would fit well in the conclusion.}
+We note that the assumption of non-spinning black holes is an important limitation to a realistic assessment of parameter uncertainties. In particular, it means that our results ignore the well-known degeneracy between mass ratio and spin \cite{Baird+2013}, thus underestimating the uncertainty in the recovered mass ratio. By ignoring misaligned spins, we also neglect the possible effects of orbital precession on parameter degeneracies. Nevertheless, consistently including merger, ringdown and higher harmonics already represents a significant improvement over previous studies. We also expect intrinsic and extrinsic parameters to correlate weakly, at least in the absence of precession, so that the conclusions drawn from Sec.~\ref{sec:SMBHPE} below, notably the analysis of possible degeneracies in the extrinsic part of the likelihood, should hold for aligned spin systems. \TDC{the last sentence would fit well in the conclusion.}
 
 Fast waveforms including both the aligned components of the spins and higher harmonics are becoming available in the phenomenological waveform family~\cite{London+17}, as EOB models~\cite{Cotesta+18}, and as Numerical Relativity surrogates~\cite{Varma+18}.
 ROMs to accelerate the waveform model of~\cite{Cotesta+18} are under construction, and we plan to include the effects of aligned and misaligned spins in future studies.
-\tdc{this paragraph also sounds like conclusion material.}
+\TDC{this paragraph also sounds like conclusion material.}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsection{Likelihood computation}
 \label{sec:likelihood}
 
-Setting the noise realization to zero in~\eqref{eq:deflnL}, having at our disposal a compact amplitude/phase respresentation of the signals allows us to compute likelihoods in an accelerated fashion. In general, both the template and the injection in~\eqref{eq:deflnL} are given as frequency series sampled with the Nyquist criterion $\Delta f = 1/(2T)$ with $T$ the duration of the signal, and the overlaps~\eqref{eq:definnerproduct} are simply computed as discrete sums over those frequency samples. Although transforming~\eqref{eq:definnerproduct} in a discrete is a simple operation, the size of the frequency series alone can represent a significant cost. In the context of binary neutron star observations. In the LISA. \tdc{this paragraph seems to need more work. I would start with the existing general case, then say that by using a zero-noise realization we can write the amplitude/phase representation and use a sparse grid and get a large speedup.}
+Setting the noise realization to zero in~\eqref{eq:deflnL}, having at our disposal a compact amplitude/phase respresentation of the signals allows us to compute likelihoods in an accelerated fashion. In general, both the template and the injection in~\eqref{eq:deflnL} are given as frequency series sampled with the Nyquist criterion $\Delta f = 1/(2T)$ with $T$ the duration of the signal, and the overlaps~\eqref{eq:definnerproduct} are simply computed as discrete sums over those frequency samples. Although transforming~\eqref{eq:definnerproduct} in a discrete is a simple operation, the size of the frequency series alone can represent a significant cost. In the context of binary neutron star observations. In the LISA. \TDC{this paragraph seems to need more work. I would start with the existing general case, then say that by using a zero-noise realization we can write the amplitude/phase representation and use a sparse grid and get a large speedup.}
 
 Applying the response as in~\ref{subsec:response} mode-by-mode on the sparsely sampled amplitude and phase generated as in~\ref{subsec:ROM}, we obtain a complete representation of both the waveform and of the instrument transfer functions~\eqref{} on a few hundred points in the Fourier domain, with the full signal being implicitly reconstructed with a standard cubic spline interpolation over frequencies. Decomposing~\eqref{eq:deflnL} as
 \be\label{eq:lnLoverlapstructure}
 	\ln \calL = \left( h(\bm{\theta}) | h(\bm{\theta}_{0}) \right)- \frac{1}{2} \left( h(\bm{\theta}) | h(\bm{\theta}) \right) - \frac{1}{2} \left( h(\bm{\theta}_{0}) | h(\bm{\theta}_{0}) \right) \,,
 \ee
-we have to compute inner products of the form~\eqref{eq:definnerproduct}. Note that individual terms in~\eqref{eq:lnLoverlapstructure} can be individually large, and computing $\ln \calL$ relies on accurate cancellations. Decomposing further in TDI channels as in~\eqref{} and in harmonics as in~\eqref{}, we have a sum of terms with the structure \tdc{we need one or two more equations describing explicitly how to go from $\tilde{y}_{slr}$ to $\ln \calL$}
+we have to compute inner products of the form~\eqref{eq:definnerproduct}. Note that individual terms in~\eqref{eq:lnLoverlapstructure} can be individually large, and computing $\ln \calL$ relies on accurate cancellations. Decomposing further in TDI channels as in~\eqref{} and in harmonics as in~\eqref{}, we have a sum of terms with the structure \TDC{we need one or two more equations describing explicitly how to go from $\tilde{y}_{slr}$ to $\ln \calL$}
 \be
 	\int \frac{df}{S_{n}} \; \calT_{1}^{\ell m} \calT_{2}^{\ell' m'} A_{1,\ell, m} A_{2, \ell' m'} e^{i(\Phi_{1,\ell m} - \Phi_{2,\ell' m'})} \,.
 \ee
-\tdc{should this notation be aligned to Eq 6 and 7?}
+\TDC{should this notation be aligned to Eq 6 and 7?}
 The difficulty of computing such an overlap depends on the phase difference. A large phase difference causes the integrand to be very oscillatory, requiring more frequency resolution than non-oscillatory integrands; on the other hand, oscillatory integrands give raise to a small integral due to cancellation effects, while non-oscillatory integrands contribute the most. For a single mode, SNR terms of the type $(h|h)$ have a zero phase difference by construction, but including different modes generates cross-terms $(\ell, m) \neq (\ell', m')$ with a large phase difference. In a Bayesian analysis, a large fraction of the time (after burn-in) will be spent exploring signals that are rather close to the injection.
 
 Thus, one can envision several approaches to compute integrals of the type~\eqref{eq:lnLoverlapstructure}, such as factoring out a guess of the injected signal~\cite{} and ignoring cross-terms between modes. In this work, we use a generic numerical treatment for the integrals~\eqref{eq:lnLoverlapstructure} and keep all terms with no further approximation.
@@ -221,7 +229,7 @@ First, we built a joint sparse frequency grid suitable to represent both signals
 \be\label{eq:fastlikestructure}
 	\sum_{j \in \mathrm{grid}} \int_{f_{j}}^{f_{j+1}} df \; P_{j} (f) e^{i \phi_{j} (f)} \,,
 \ee
-where in each grid interval $P_{j}$ is a cubic polynomial and $\phi_{j}$ a quadratic polynomial. We can then compute the elementary integrals~\eqref{eq:fastlikestructure} using a combination of integrations by parts and asymptotic expansions, as explained in App.~\ref{app:numintegration}. The number of grid intervals is typically several hundreds \SM{[COMPLETE]}.
+where in each grid interval $P_{j}$ is a cubic polynomial and $\phi_{j}$ a quadratic polynomial. We can then compute the elementary integrals~\eqref{eq:fastlikestructure} using a combination of integrations by parts and asymptotic expansions, as explained in App.~\ref{app:numintegration}. The number of grid intervals is typically several hundreds \SM{to be completed}.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -229,13 +237,13 @@ where in each grid interval $P_{j}$ is a cubic polynomial and $\phi_{j}$ a quadr
 \subsection{Bayesian sampling}
 \label{sec:samplers}
 
-For this exploratory work we take a ``naive'' \tdc{``brute force''?} approach to inferring the posterior probability distribution of the parameters, without applying specific knowledge or expectations about distributions and degeneracies. Such assumptions might in fact lead to an incomplete exploration of the posterior probability in ways that would be difficult to recognize and diagnose. In order to demonstrate that the problem is tractable without critically depending on the details of the methodology, we also use two independent approaches to sample the posterior distributions: parallel tempering Markov-chain Monte Carlo (MCMC) and nested sampling.
+For this exploratory work we take a ``naive'' \TDC{``brute force''?} approach to inferring the posterior probability distribution of the parameters, without applying specific knowledge or expectations about distributions and degeneracies. Such assumptions might in fact lead to an incomplete exploration of the posterior probability in ways that would be difficult to recognize and diagnose. In order to demonstrate that the problem is tractable without critically depending on the details of the methodology, we also use two independent approaches to sample the posterior distributions: parallel tempering Markov-chain Monte Carlo (MCMC) and nested sampling.
 
 Our MCMC code \texttt{PTMCMC}\footnote{https://github.com/JohnGBaker/ptmcmc} has been developed through several astrophysics projects, tested on several sampling problems, and modularly designed with the aim of minizing opportunities for errors with new applications. The code performs parallel tempered MCMC \cite{Swendsen+1986,Littenberg2009} with temperatures slowly adjusted to achieve nearly equal exchange rates among all pairs of adjacent temperatures.  Most runs here performed comparably with either 80 or 240 parallel temperature chains.
 We applied a general-purpose proposal distribution composed of a weighted set of sub-proposals, including differential-evolution steps~\cite{Vrugt+2008} (although the proposal in this case is based on each single chain, not an ensemble) and a collection of several Gaussian step draws of varying sizes scaled off the prior domain at about 0.01--1\% of its scale and weighted favor the smaller scale proposal draws.
-Effective sample sizes (ESS) were estimated from the number of post-burn-in samples, reduced by the autocorrelation length, with the burn-in size chosen to optimize \tdc{maximize?} the ESS. In most cases, the runs were continued until achieving an estimated ESS~$>2000$.
-  
-For comparison and verification we also computed posterior samples using the nested sampling code \texttt{BAMBI} \cite{Graff+2012}, a variant of \texttt{MultiNest} \cite{Feroz+2009b} with additional options (unused here).  The nested sampling algorithm evolves a set of 'live points' toward regions of high probability by iteratively resampling the lowest probability point from within an ever-narrowing region covering the set of live-point samples.  The computation proceeds until the estimated Bayesian evidence, or marginal probability, within the region covered by the live points is smaller than some threshold.  Posterior-distributed samples are then drawn based on the set of sub-regions and sample posterior values thereby generated. In our runs we used 4000 live points and a stopping evidence threshold of 1.0. \jgb{Sylvain needs to check these values.}
+Effective sample sizes (ESS) were estimated from the number of post-burn-in samples, reduced by the autocorrelation length, with the burn-in size chosen to optimize \TDC{maximize?} the ESS. In most cases, the runs were continued until achieving an estimated ESS~$>2000$.
+
+For comparison and verification we also computed posterior samples using the nested sampling code \texttt{BAMBI} \cite{Graff+2012}, a variant of \texttt{MultiNest} \cite{Feroz+2009b} with additional options (unused here).  The nested sampling algorithm evolves a set of 'live points' toward regions of high probability by iteratively resampling the lowest probability point from within an ever-narrowing region covering the set of live-point samples.  The computation proceeds until the estimated Bayesian evidence, or marginal probability, within the region covered by the live points is smaller than some threshold.  Posterior-distributed samples are then drawn based on the set of sub-regions and sample posterior values thereby generated. In our runs we used 4000 live points and a stopping evidence threshold of 1.0. \JGB{Sylvain needs to check these values.}
 
 
 
@@ -248,10 +256,10 @@ For comparison with our Bayesian inference results we also compute estimates of 
 \be
 F_{ij}=\left( \partial_{\theta_i} h| \partial_{\theta_i} h \right).
 \ee
-The inverse of this matrix estimates the covariance matrix describing parameter uncertainty. 
+The inverse of this matrix estimates the covariance matrix describing parameter uncertainty.
 The derivatives are computed by second-order finite differences, with the signal inner-products expanded and computed before differencing. For these calculations, where numerical smoothness is more of a concern than speed we compute the inner products explicitly on a fine grid.
 
-Generally, finite difference Fisher matrices can be problematic, with small numerical defects potentially having outsized impact, so the finite-difference step size $\epsilon_i$ used in each parameter derivative $\partial_{\theta_i}h$ must be chosen carefully. We target the step-size to be scaled off the diagonal Fisher matrix elements by ${\epsilon_i}\approx\delta/\sqrt{F_{ii}}$ using $\delta=0.001$ \jgb{This is \texttt{fisher\_err\_target}, was it different for some runs?}  for the results shown here.  To achieve this we set begin with an initial choice of the $\epsilon_i$ scaled of parameter values or prior widths, then we estimate the Fisher diagonals and iterate until convergence. In this process we also constrain that the step is never more than $10^{-10}$ times the initial scaling. \jgb{There are some more special-case details, but probably not worth elaborating.  We could also discuss how we do matrix inversion, but I don't think there is anything interesting there.}
+Generally, finite difference Fisher matrices can be problematic, with small numerical defects potentially having outsized impact, so the finite-difference step size $\epsilon_i$ used in each parameter derivative $\partial_{\theta_i}h$ must be chosen carefully. We target the step-size to be scaled off the diagonal Fisher matrix elements by ${\epsilon_i}\approx\delta/\sqrt{F_{ii}}$ using $\delta=0.001$ \JGB{This is \texttt{fisher\_err\_target}, was it different for some runs?}  for the results shown here.  To achieve this we set begin with an initial choice of the $\epsilon_i$ scaled of parameter values or prior widths, then we estimate the Fisher diagonals and iterate until convergence. In this process we also constrain that the step is never more than $10^{-10}$ times the initial scaling. \JGB{There are some more special-case details, but probably not worth elaborating.  We could also discuss how we do matrix inversion, but I don't think there is anything interesting there.}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -367,18 +375,18 @@ Case 0
 
 In this section, we investigate the cause of the degeneracies appearing in the posterior of Case~II shown in~\ref{subsec:SMBHPE}. Understanding the structure of these features could prove useful to inform Bayesian samplers, for instance by building adapted jump proposal allowing a much faster mixing of MCMC chains than naive methods. a simplified form of the extrinsic likelihood and the structure of its degeneracies.
 
-An important clue about the appearance of these degeneracies is the length of the observable signal. As shown in Fig.~\ref{}, for our example SMBH systems the SNR accumulates in a matter of days before merger, which means that there is only little impact of the modulations caused by the motion of the detector on the TDI transfer functions~\eqref{}. If we can neglect entirely the motion of the detector (which is not quite true as we will see later on), then we are in a regime where the information about the sky position of the source comes essentially from the pattern functions affecting this high-SNR signal. Using the low-frequency approximation (see~\ref{}) and the time-at-LISA $t_{L}$ as a time variable, there is no frequency dependence in the response. A further simplification occurs when pinning the masses and the time of coalescence to their true values. We found indeed that these parameters correlate only weakly to the other ones, so that we can hope to understand the degeneracy features by restricting the analysis to the six extrinsic parameters $(D_{L}, \iota, \varphi, \lambdaL, \betaL, \psiL)$. \tdc{we could make the connection with a similar decoupling in LIGO/Virgo, which is actually what makes low-latency sky localization possible.}
+An important clue about the appearance of these degeneracies is the length of the observable signal. As shown in Fig.~\ref{}, for our example SMBH systems the SNR accumulates in a matter of days before merger, which means that there is only little impact of the modulations caused by the motion of the detector on the TDI transfer functions~\eqref{}. If we can neglect entirely the motion of the detector (which is not quite true as we will see later on), then we are in a regime where the information about the sky position of the source comes essentially from the pattern functions affecting this high-SNR signal. Using the low-frequency approximation (see~\ref{}) and the time-at-LISA $t_{L}$ as a time variable, there is no frequency dependence in the response. A further simplification occurs when pinning the masses and the time of coalescence to their true values. We found indeed that these parameters correlate only weakly to the other ones, so that we can hope to understand the degeneracy features by restricting the analysis to the six extrinsic parameters $(D_{L}, \iota, \varphi, \lambdaL, \betaL, \psiL)$. \TDC{we could make the connection with a similar decoupling in LIGO/Virgo, which is actually what makes low-latency sky localization possible.}
 
 Under all these simplifying assumptions, the likelihood function becomes purely extrinsic, and takes the form of trivial geometric factors multiplying a constant overlap that can be precomputed. Using the subscript $\mathrm{inj}$ for the injected signal, the likelihood~\eqref{eq:defliklihood} is
 \be
 	\ln \calL = -\frac{1}{2} \left( \tilde{a} - \tilde{a}_{\rm inj} | \tilde{a} - \tilde{a}_{\rm inj} \right) -\frac{1}{2} \left( \tilde{e} - \tilde{e}_{\rm inj} | \tilde{e} - \tilde{e}_{\rm inj} \right) \,.
 \ee
-From the low-frequency response \eqref{eq:aelowfmodes}, pinning the time-at-LISA~\eqref{} \SM{[COMPLETE $t_{L}$]} so that we can ignore the factor $\exp [2 i \pi f k\cdot p_{0}]$ as a pure constant corresponding to a redefinition of time, we obtain \jgb{Should we use notation $\Phi_R$ here and in \eqref{eq:aelowfmodes}?} 
+From the low-frequency response \eqref{eq:aelowfmodes}, pinning the time-at-LISA~\eqref{} \SM{to be completed for $t_{L}$} so that we can ignore the factor $\exp [2 i \pi f k\cdot p_{0}]$ as a pure constant corresponding to a redefinition of time, we obtain \JGB{Should we use notation $\Phi_R$ here and in \eqref{eq:aelowfmodes}?}
 \begin{align}\label{eq:simplelikelihoodhm}
 	\ln \calL &= -\frac{1}{2} \sum_{\ell m} \sum_{\ell' m'}   \left[ \left( s_{a}^{\ell m} - s_{a, \mathrm{inj}}^{\ell m}\right) \left( s_{a}^{\ell' m'} - s_{a, \mathrm{inj}}^{\ell' m'}\right)^{*} \right. \nn\\
 	& \qquad \left. + \left( s_{e}^{\ell m} - s_{e, \mathrm{inj}}^{\ell m}\right) \left( s_{e}^{\ell' m'} - s_{e, \mathrm{inj}}^{\ell' m'}\right)^{*} \right] \left\langle \ell m | \ell' m' \right\rangle \,,
 \end{align}
-where we introduced the following extrinsic signal functions \jgb{Since neither $D_{a,e}$ nor $P_{\ell m}$ are defined in the main text, may be better to write in terms of a version of $F$ as in \eqref{eq:defFapcFepc}}
+where we introduced the following extrinsic signal functions \JGB{Since neither $D_{a,e}$ nor $P_{\ell m}$ are defined in the main text, may be better to write in terms of a version of $F$ as in \eqref{eq:defFapcFepc}}
 \be\label{eq:defsaelm}
 	s_{a,e}^{\ell m} = \frac{1}{d} \frac{2}{3L} D_{a,e} : P_{\ell m} \,,
 \ee
@@ -400,9 +408,9 @@ The functions~\eqref{eq:defsaelm} take the explicit form
 with the pattern functions for the channels $a$ and $e$ defined in \eqref{eq:defFapcFepc}-\eqref{eq:FapcFepc}.
 
 In order to make more manifest the degeneracies in the problem, it will be useful to introduce the following notations. First, since $\iota \in [0, \pi]$ while $\beta_{L} \in [-\pi/2, \pi/2]$, it will be more convenient to work with $\theta_{L} = \pi/2 - \beta_{L}$. We will further abbreviate notations by using the variables
-\tdc{it is unclear if these mean $\tan (\iota/2)$ or $(\tan \iota)/2$}
+\TDC{it is unclear if these mean $\tan (\iota/2)$ or $(\tan \iota)/2$}
 \be
-	t_{\iota} \equiv \tan \iota/2 \,, \quad t_{\theta} \equiv \tan \theta_{L} / 2 \,.
+	t_{\iota} \equiv \tan \frac{\iota}{2} \,, \quad t_{\theta} \equiv \tan \frac{\theta_{L}}{2} \,.
 \ee
 We also introduce the azimuthal angles $\lambda_{a} = \lambda_{L} - \pi/6$, $\lambda_{e} = \lambda_{L} + \pi/12 = \lambda_{a} + \pi/4$, and form the combinations
 \be
@@ -517,13 +525,13 @@ The other condition~\eqref{eq:conditionprefactor} gives then a single phase cons
 \jgb{Keep something from this?}
 Thus, we find again a degenerate pattern, with the difference that \eqref{eq:soldegeniotaphi} imposes a condition on the pair $\lambda_{a} - \psiL$ instead of $\lambda_{a}$, and the extra condition imposes a condition on $\varphi$ instead of the pair $\varphi - \psiL$.
 
-When considering more harmonics beyond the dominant mode $h_{22}$, such degeneracies will be broken easily. As in the case of the full likelihood, the simplified likelihood~\eqref{eq:simplelikelihoodhm} will have several terms with different inclination and phase dependencies. If the signal is loud enough for at least two modes to be detected, then the inclination $\iota$ and the phase $\varphi$ are fixed by the relative amplitude and phase of these modes. This will break the degeneracies $(d, \iota)$ and the degeneracy $(\varphi, \psiL)$.  
+When considering more harmonics beyond the dominant mode $h_{22}$, such degeneracies will be broken easily. As in the case of the full likelihood, the simplified likelihood~\eqref{eq:simplelikelihoodhm} will have several terms with different inclination and phase dependencies. If the signal is loud enough for at least two modes to be detected, then the inclination $\iota$ and the phase $\varphi$ are fixed by the relative amplitude and phase of these modes. This will break the degeneracies $(d, \iota)$ and the degeneracy $(\varphi, \psiL)$.
 
-We illustrate our findings by running a Bayesian parameter estimation for the simplified likelihood~\eqref{eq:simplelikelihood22} with the two samplers \texttt{MultiNest} and \texttt{PTMCMC} described in Sec.~\ref{}. Since the inner products~\eqref{eq:innerproductlmlpmp} are constants computed only once, the external factors become trivially inexpensive, and the likelihood is very fast to compute. We take advantage of this to run \texttt{PTMCMC} for a very large number of steps, ensuring that we do not miss degenerate regions of the parameter space. The resulting posterior distribution is extremely degenerate, as shown in Fig.~\ref{fig:PEsmbh22hmSimpleLikeCase9}. The sampler \texttt{MultiNest} fails to resolve this structure, stopping after having only explored the degenerate region $\iota \rightarrow 0$ and $\iota \rightarrow \pi$ and the eight sky positions~\eqref{eq:soldegensky}. In accordance with~\eqref{eq:degenconditionsky}-\eqref{eq:degenconditionprefactor}, this corresponds to lines in $\varphi \pm \psiL = \mathrm{const}$. The sampler \texttt{PTMCMC} finds more degenerate regions, in particular it finds similar structures with the roles of $\iota$ and $\betaL$ exchanged (as shown notably by the $(d,\iota)$ and $(d,\betaL)$ panels), as well as intermediate regions connecting all these features. 
+We illustrate our findings by running a Bayesian parameter estimation for the simplified likelihood~\eqref{eq:simplelikelihood22} with the two samplers \texttt{MultiNest} and \texttt{PTMCMC} described in Sec.~\ref{}. Since the inner products~\eqref{eq:innerproductlmlpmp} are constants computed only once, the external factors become trivially inexpensive, and the likelihood is very fast to compute. We take advantage of this to run \texttt{PTMCMC} for a very large number of steps, ensuring that we do not miss degenerate regions of the parameter space. The resulting posterior distribution is extremely degenerate, as shown in Fig.~\ref{fig:PEsmbh22hmSimpleLikeCase9}. The sampler \texttt{MultiNest} fails to resolve this structure, stopping after having only explored the degenerate region $\iota \rightarrow 0$ and $\iota \rightarrow \pi$ and the eight sky positions~\eqref{eq:soldegensky}. In accordance with~\eqref{eq:degenconditionsky}-\eqref{eq:degenconditionprefactor}, this corresponds to lines in $\varphi \pm \psiL = \mathrm{const}$. The sampler \texttt{PTMCMC} finds more degenerate regions, in particular it finds similar structures with the roles of $\iota$ and $\betaL$ exchanged (as shown notably by the $(d,\iota)$ and $(d,\betaL)$ panels), as well as intermediate regions connecting all these features.
 
 Fig.~\ref{fig:PEsmbh22hmSimpleLikeCase9} also shows the result obtained when including all available harmonics~\eqref{} in~\eqref{eq:simplelikelihoodhm}. The degenerate structures collapse to leave only eight modes corresponding to $\betaL \rightarrow - \betaL$ and $\lambdaL \rightarrow \lambdaL + k\pi/2$. We found that this degeneracy-breaking occurs already when including a single subdominant harmonic $h_{21}$.
 
-We can now come back to explaining the results of Sec.~\ref{}, and in particular Fig.~\ref{}, obtained with the true likelihood function for the mode $h_{22}$. First, the difference between the two Bayesian samplers has been made more extreme by going to the more degenerate likelihood~\eqref{eq:simplelikelihood22}, allowing us to attribute their disagreement to an apparent shortcoming of \texttt{MultiNest}\footnote{We recall that we only used standard values for the metaparameters \SM{[complete]} for this sampler, and we do not exclude that it would be possible to improve results with minor changes.} for resolving extended degenerate regions. Focusing on the sky position, we zoom close to the injection in Fig.~\ref{fig:Skydownsmbh22hmSimpleLikeCase9}. We compare here the posterior distribution generated with the true likelihood with the one obtained with the simplified likelihood~\eqref{eq:simplelikelihood22}, for both samplers.  We also superimpose the prediction~\eqref{eq:soldegensky} for the degeneracy-induced peak. We see that, although , 
+We can now come back to explaining the results of Sec.~\ref{}, and in particular Fig.~\ref{}, obtained with the true likelihood function for the mode $h_{22}$. First, the difference between the two Bayesian samplers has been made more extreme by going to the more degenerate likelihood~\eqref{eq:simplelikelihood22}, allowing us to attribute their disagreement to an apparent shortcoming of \texttt{MultiNest}\footnote{We recall that we only used standard values for the metaparameters \SM{[complete]} for this sampler, and we do not exclude that it would be possible to improve results with minor changes.} for resolving extended degenerate regions. Focusing on the sky position, we zoom close to the injection in Fig.~\ref{fig:Skydownsmbh22hmSimpleLikeCase9}. We compare here the posterior distribution generated with the true likelihood with the one obtained with the simplified likelihood~\eqref{eq:simplelikelihood22}, for both samplers.  We also superimpose the prediction~\eqref{eq:soldegensky} for the degeneracy-induced peak. We see that, although ,
 
 %\be\label{eq:symmetryresponse}
 %\betaL \rightarrow -\betaL\,, \quad \iota \rightarrow \pi - \iota \,, \quad \psiL \rightarrow \pi - \psiL
@@ -608,7 +616,7 @@ Radler LISA data challenge and are listed in Table \ref{table:sobh_params}.
 		LISA SNR 			& 26.6	& 11.9 \\
 		\hline
 	\end{tabular}
-	\caption{Parameters of the simulated SOBH mergers. \tdc{Maybe we can show
+	\caption{Parameters of the simulated SOBH mergers. \TDC{Maybe we can show
 			 these on the upper right of each corner plot instead.}}
 	\label{table:sobh_params}
 \end{table}
@@ -1012,7 +1020,7 @@ which is valid in general. Now, for non-precessing binary systems, an exact symm
 \ee
 Using this symmetry, we can write
 \be
-	h_{+,\times} = \sum_{\ell, m} K_{\ell m}^{+, \times} h_{\ell m} \,, 
+	h_{+,\times} = \sum_{\ell, m} K_{\ell m}^{+, \times} h_{\ell m} \,,
 \ee
 with
 \bsub
@@ -1055,7 +1063,7 @@ or explicitly in $P_{\ell m}$ as
 	P_{\ell m} &= \frac{1}{2} \sYlm e^{-2 i \psi} \left( P_{+}^{0} + i P_{\times}^{0} \right) \nn\\
 	& + \frac{1}{2} (-1)^{\ell} \sYlminusmstar e^{+2 i \psi} \left( P_{+}^{0} - i P_{\times}^{0} \right) \,.
 \end{align}
-Writing the $P_{\ell m}$ matrices in this way allows to factor out all dependencies in the extrinsic parameters $(\iota, \phi, \psi)$. Together with the luminosity distance $D_{L}$, these parameters appear in combinations of constant factors multiplying the whole response. \jgb{Would it be better to include the angle dependence explicitly here in the $\sYlm$ here for clarity, since the point is to account for parameter dependencies.} 
+Writing the $P_{\ell m}$ matrices in this way allows to factor out all dependencies in the extrinsic parameters $(\iota, \phi, \psi)$. Together with the luminosity distance $D_{L}$, these parameters appear in combinations of constant factors multiplying the whole response. \JGB{Would it be better to include the angle dependence explicitly here in the $\sYlm$ here for clarity, since the point is to account for parameter dependencies.}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -1064,11 +1072,11 @@ Writing the $P_{\ell m}$ matrices in this way allows to factor out all dependenc
 
 \SM{[avoid repetition with methodology section]}
 
-The single-link frequency shift observable $y_{slr} = (\nu_{r} - \nu_{s})/\nu$ between sending spacecraft $s$ and receiving spacecraft $r$ along the link $l$ takes the form 
+The single-link frequency shift observable $y_{slr} = (\nu_{r} - \nu_{s})/\nu$ between sending spacecraft $s$ and receiving spacecraft $r$ along the link $l$ takes the form
 \be\label{eq:appdefyslr}
 	y_{slr} = \frac{1}{2} \frac{n_{l} \otimes n_{l}}{1 - k\cdot n_{l}} : \left[ H(t - L - k\cdot p_{s}) - H(t - k\cdot p_{r}) \right] \,.
 \ee
-Several assumptions enter this form of the response: \dots \SM{[COMPLETE]} \jgb{Define $n_l$. Also double dot looks like colon, needing some clarification.}.
+Several assumptions enter this form of the response: \dots \SM{[COMPLETE]} \JGB{Define $n_l$. Also double dot looks like colon, needing some clarification.}.
 
 In the frequency domain, we will use the analysis of~\cite{} and write the response in individual observables $y_{slr}$ with a transfer function for each spherical harmonic mode as
 \be
@@ -1083,7 +1091,7 @@ At leading order in the separation of timescales, we have simply
 \be
 	\calT_{slr}^{\ell m}(f) = G_{slr}^{\ell m}(f, t_{f}^{\ell m}) \,,
 \ee
-with $t_{f}^{\ell m}$ the effective time-to-frequency correspondence, defined across the whole frequency band, including in the merger-ringdown, as $t_{f}^{\ell m} = -1/(2\pi) d\Psi_{\ell m} / df$ for a mode $\tilde{h}_{\ell m} = A_{\ell m}(f) \exp\left[-i \Psi_{\ell m}\right]$. The analysis of~\cite{} has shown that higher-order corrections are small for SMBH systems, and for SOBH systems that are close enough to merger as will be the case for the examples chosen here. The fact that we use the same Fourier-domain treatment of the transfer functions for both the signal and the templates should also mitigate errors. 
+with $t_{f}^{\ell m}$ the effective time-to-frequency correspondence, defined across the whole frequency band, including in the merger-ringdown, as $t_{f}^{\ell m} = -1/(2\pi) d\Psi_{\ell m} / df$ for a mode $\tilde{h}_{\ell m} = A_{\ell m}(f) \exp\left[-i \Psi_{\ell m}\right]$. The analysis of~\cite{} has shown that higher-order corrections are small for SMBH systems, and for SOBH systems that are close enough to merger as will be the case for the examples chosen here. The fact that we use the same Fourier-domain treatment of the transfer functions for both the signal and the templates should also mitigate errors.
 
 In our rigid approximation, delays are simply all constant and constant to $L$. Using the shortcut notation $y_{sr,L} = y_{slr}(t - L)$, the first-generation TDI Michelson observable $X$ reads~\cite{}
 \begin{align}
@@ -1187,7 +1195,7 @@ By comparison with~\eqref{eq:DaDe}, we obtain
 \ee
 Note a degeneracy $\pm \pi$ in how we choose to orient these effective detectors.
 We can recover pattern functions (for $\psi_{L}=0$) by factoring out the effective length, we define
-\jgb{Would it be better to just include a new version of expression \eqref{eq:aelowfmodes} here using $F_{a,e}$, such as:
+\JGB{Would it be better to just include a new version of expression \eqref{eq:aelowfmodes} here using $F_{a,e}$, such as:
   $\tilde{a}, \tilde{e} = (-3i\pi f L)\left[ \tilde{h}_{\ell m}^\times F_{a,e}^+ + \tilde{h}_{\ell m}^\times F_{a,e}^\times\right]$. Also an $(\ell,m)$ version of $F_{a,e}$ would be useful in the main text.}
 \be\label{eq:defFapcFepc}
 	F_{a,e}^{+,\times} \equiv \frac{2}{3L} D_{a,e} : P_{+,\times}^{0} \,,
