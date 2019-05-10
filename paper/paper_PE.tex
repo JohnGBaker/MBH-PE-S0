@@ -403,72 +403,106 @@ In these notations, we obtain
 	\sigma_{-} &= \rho e^{2i\varphi} \left[ e^{-2 i \psiL} + t_{\theta}^{4} t_{\iota}^{4} e^{2 i \psiL} \right] e^{2i \lambda_{a}} \,,
 \end{align}
 \esub
-with a common prefactor
+with a common prefactor \jgb{This seems to need to  be multiplied by -6 to get what I have in my notes. Trace to change in def of $s_{a,e}$?}
 \be\label{eq:sigmafactorrho}
 	\rho(d, \iota, \theta_{L}) = \frac{1}{4d} \sqrt{\frac{5}{\pi}} \frac{1}{\left( 1 + t_{\iota}^{2} \right)^{2} \left(1 + t_{\theta}^{2} \right)^{2}} \,.
 \ee
-Finding points in the parameter space that are degenerate with the injection, with $\ln \calL \simeq 0$, amounts to try to obtain both the same value of $\sigma_{+}$ and $\sigma_{-}$ as the injection.
+Finding points in the parameter space that are degenerate with the injection, i.e. with $\ln \calL \simeq 0$, amounts finding choices for the parameters which obtain the same values for both  $\sigma_{+}$ and $\sigma_{-}$ as the injection.
 
 We can now use the simplified response written in the form~\eqref{eq:sigmapm}-\eqref{eq:sigmafactorrho} to look for symmetries and degeneracies. First, we note the following manifest symmetry: changing simultaneously
 \be\label{eq:symmetryresponse}
 	\betaL \rightarrow -\betaL\,, \quad \iota \rightarrow \pi - \iota \,, \quad \psiL \rightarrow \pi - \psiL
 \ee
-leaves the likelihood exactly invariant. There is also a form of symmetry obatained by exchanging $\iota \leftrightarrow \theta_{L}$. This conjugate the term inside bracket for $\sigma_{+}$, which can be corrected withe the phase terms $\varphi \pm \lambda_{a}$. If $\Phi = \mathrm{Arg} \left[ t_{\theta}^{4} e^{-2 i \psiL} + t_{\iota}^{4} e^{2 i \psiL} \right]$, we obtain the symmetry
+leaves the likelihood exactly invariant. There is also a form of symmetry obatained by exchanging $\iota \leftrightarrow \theta_{L}$. While leaving $\sigma_-$ unchanged, this conjugates the factor inside brackets for $\sigma_{+}$, which can be compensated using the phase terms $\varphi \pm \lambda_{a}$. If $\Phi = \mathrm{Arg} \left[ t_{\theta}^{4} e^{-2 i \psiL} + t_{\iota}^{4} e^{2 i \psiL} \right]$, we obtain the symmetry
 \begin{align}
-	\iota' = \theta_{L} \,, \quad \theta_{L}' = \iota \,, \nn\\
-	\varphi' = \varphi + \frac{1}{2} \Phi \; \mathrm{mod} \; \pi\,, \nn\\
-	\lambda_{a}' = \lambda_{a} - \frac{1}{2} \Phi \; \mathrm{mod} \; \pi\,.
+	\iota' = \theta_{L} \,, \qquad \theta_{L}' = \iota \,, \nn\\
+	\varphi' = \varphi + \frac{1}{2} \Phi \quad \mathrm{mod} \; \pi\,, \nn\\
+	\lambda_{a}' = \lambda_{a} - \frac{1}{2} \Phi \quad \mathrm{mod} \; \pi\,.
 \end{align}
 
-We can now explain the degenerate features we found as certain limits in this simplified likelihood. In the face-on or face-off limit $\iota \rightarrow 0$, $|t_{\iota}| \ll 1$. This amounts to the $(\ell,m)=(2,2)$ contribution dominating the $(\ell, m)=(2,-2)$ contribution. Neglecting the terms in~\eqref{eq:sigmapm} that are quartic in $t_{\iota}$, we have
-\bsub\label{eq:sigmapmapprox}
-\begin{align}
-	\sigma_{+} &\simeq \rho e^{2i(\varphi - \psiL)} t_{\theta}^{4} e^{-2i \lambda_{a}} \,, \\
-	\sigma_{-} &\simeq \rho e^{2i(\varphi - \psiL)} e^{2i \lambda_{a}} \,,
-\end{align}
-\esub
+\jgb{Don't have to resort to limits.}
+\sout{We can now explain the degenerate features we found as certain limits in this simplified likelihood. In the face-on or face-off limit $\iota \rightarrow 0$, $|t_{\iota}| \ll 1$. This amounts to the $(\ell,m)=(2,2)$ contribution dominating the $(\ell, m)=(2,-2)$ contribution. Neglecting the terms in~\eqref{eq:sigmapm} that are quartic in $t_{\iota}$, we have}
+%\bsub\label{eq:sigmapmapprox}
+%\begin{align}
+%	\sigma_{+} &\simeq \rho e^{2i(\varphi - \psiL)} t_{\theta}^{4} e^{-2i \lambda_{a}} \,, \\
+%	\sigma_{-} &\simeq \rho e^{2i(\varphi - \psiL)} e^{2i \lambda_{a}} \,,
+%\end{align}
+%\esub
+
+Beyond these discrete symetries, since likelihood function dependence on the six extrinsic parameters is funneled through just two complex functions, we should expect a two-dimensional degenerate subspace.  Indeed we can explicitly find a general solution for parameter values that solve $\sigma_{\pm}((D_{L}, t_\iota, t_\theta \varphi, \lambda_a, \psiL)=\sigma_{\pm,{\rm inj}}$, which we just sketch here, as needed to explain features of the degeneracies.
+
 Defining the ratio
 \be
-	r = \frac{\sigma_{+}}{\sigma_{-}} \,,
+	r(\lambda_a, t_\iota, t_\theta, \psiL) = \frac{\sigma_{+}}{\sigma_{-}} \,,
 \ee
-we see that finding $(\lambda_{a}^{*}, \theta_{L}^{*})$ verifying
-\be\label{eq:degenconditionsky}
-	\frac{\sigma_{+}}{\sigma_{-}} (\lambda_{a}^{*}, \theta_{L}^{*}) = r_{\rm inj} \,,
-\ee
-with the approximation~\eqref{eq:sigmapmapprox} for the left-hand side, guarantees that we can then match both $\sigma_{+}$ and $\sigma_{-}$ of the injection with the condition
-\be\label{eq:degenconditionprefactor}
-	\rho e^{2i(\varphi - \psiL)} e^{2i \lambda_{a}^{*}} = \sigma_{-}^{\rm inj}\,.
-\ee
-In the limit $|t_{\iota}| \ll 1$,
-\be
-	\frac{\sigma_{+}}{\sigma_{-}} \simeq t_{\theta}^{4} e^{-4i\lambda_{a}} \,,
-\ee
-so that~\eqref{eq:degenconditionsky} is verified for special positions in the sky at (coming back to the original variables $(\lambdaL, \betaL)$)
-\bsub\label{eq:soldegensky}
+makes clear that $r=r_{\rm inj}$ provides one complex condition on 4 real unknown parameters, eliminating parameters $D_{L}$ and $\varphi$ while retaining the features of the full degenerate subspace.  Going further, $|r|^2=|r_{\rm inj}|^2$ yields one condition on 3 parameters, eliminating $\lambda_a$.  In fact, with a little rearrangement, this can be written as a quadratic expression for either $t_\iota^4$ or $t_\theta^4$ for an explicit solution.  Depending on the value of $|r_{\rm inj}|^2$, values of $\psiL$ and the independent variable ($t_\theta$ or $t_i$) can always be chosen to guarantee a real, positive solution.
+
+Given a solution for $(t_\iota,t_\theta,\psi_L)$, the rest of the solution then proceeds backwards. An explicit expression for commensurate $\lambda$ comes from solving $r=r_{\rm inj}$, and then $D_L$ and $\varphi$ are obtained from solving, e.g., $s_+=s_{+,{\rm inj}}$.
+
+In the limit that the independent variable is given a value far from unity (near polar $\iota$ ot $\beta_L$), then the solution for the dependent variable approaches a fixed constant special values $t_{\iota,\theta}^4={|r_{\rm inj}|^{\pm1}}$, with leading order corrections proportional to  $t_{\theta,\iota}^{4}$.  A large part of the degenerate subspace volume then tends to found with parameters $\iota$ ot $\beta_L$ near these special values with corresponding constraints on $\lambda$ coming from the solution for the complex argument of $r$.
+
+In terms of the original parameters then, if we consider inferences with the parameter $\iota$ that is not near the source equator, then we find a significant part of the degenerate maximum-likelihood parameter space volume near the special sky positions
+\bsub
 \begin{align}
-	\beta_{L}^{*} &= \frac{\pi}{2} - 2 \mathrm{Arctan} \; \left| r_{\rm inj}\right|^{1/4} \,, \\
-	\lambda_{L}^{*} &= \frac{\pi}{6} -\frac{1}{4} \mathrm{Arg} \; r_{\rm inj} \;\mathrm{mod}\; \frac{\pi}{2} \,.
+  \beta_L&\approx{\beta_L}^{*}=\pm\left(\frac{\pi}{2} - 2 \mathrm{Arctan} \; \left| r_{\rm inj}\right|^{1/4} \right)\,, \\
+  \lambda_a&\approx {\lambda_a}^{*}=\frac{\pi}{6} -\frac{1}{4} \mathrm{Arg} \; r_{\rm inj} \;\mathrm{mod}\; \frac{\pi}{2} \,,\\
+  \rho e^{2i(\varphi-\psiL)} &\approx e^{-2i\lambda_{a}^{*}} \sigma_{-}^{\rm inj} \,.
 \end{align}
 \esub
-The other condition~\eqref{eq:conditionprefactor} gives then a single phase constraint for $\varphi - \psiL$, and a single amplitude constraint for $\rho(d, \iota, \theta_{L}^{*})$. The limit $\iota \rightarrow \pi$ (where the $(2,-2)$ contribution dominates the $(2,2)$) is very similar, as can be seen most easily by the change of variable $\iota \rightarrow \pi - \iota$, with $-\psiL$ and $\pi - \theta_{L}$ playing the roles of $\psiL$ and $\theta_{L}$.
-
 With the $\lambdaL \rightarrow \lambdaL + k \pi/2$ and $\betaL \rightarrow - \betaL$ symmetries, we arrive at eight sky positions where the degeneracy occurs, with an exact degeneracy for the pair of parameters $(\varphi, \psiL)$, as well as an approximate degeneracy for the pair $(d, \iota)$ as long as we remain in the regime $t_{\iota}^{4} \ll 1$ or $t_{\iota}^{4} \gg 1$ (which is quite extended, thanks to the quartic power). For each of these sky positions built from~\eqref{eq:soldegensky}, many different values of $(\varphi, \psiL)$ and $(d, \iota)$ produce a waveform very close to the injection, resulting in apparent peaks in the marginalized posterior distribution for the sky position, located at the special sky positions $(\lambda_{a}^{*}, \theta_{L}^{*})$, which are offset from the injected value.
 
-We can further find the same mechanism, with a few differences, by exchanging the roles of $(\iota, \varphi)$ and $(\theta_{L}, \lambda_{a})$, as follows. In the limit $\theta_{L} \rightarrow 0$ with $|t_{\theta}| \ll 1$, we have this time
-\be
-	\frac{\sigma_{+}}{\sigma_{-}} \simeq t_{\iota}^{4} e^{-4i(\lambda_{a} - \psi_{L})} \,,
-\ee
-which gives in the same way a degeneracy if
-\bsub\label{eq:soldegeniotaphi}
+Without special tuning, the injected sky position which led to the given values of $s_{a,\mathrm{inj}}$ and $s_{e,\mathrm{inj}}$ is correspondingly likely to have been near one of these sky locations, but it may not have been. In those cases the posterior\ldots
+
+Similarly, considering inferred locations away from the LISA-constellation plane, we find a significant part of the degenerate parameter space near special values for inclination and correspondingly for $\lambda_L+\varphi$
+\bsub
 \begin{align}
-	\iota^{*} &= 2 \mathrm{Arctan} \; \left| r_{\rm inj}\right|^{1/4} \,, \\
-	(\lambda_{a} - \psiL)^{*} &= -\frac{1}{4} \mathrm{Arg} \; r_{\rm inj} \;\mathrm{mod}\; \frac{\pi}{2} \,,
+	\iota&\approx\iota^{*} = 2 \mathrm{Arctan} \; \left| r_{\rm inj}\right|^{1/4} \,, \\
+	\lambda_a-\psiL&\approx (\lambda_{a} - \psiL)^{*} = -\frac{1}{4} \mathrm{Arg} \; r_{\rm inj} \;\mathrm{mod}\; \frac{\pi}{2} \,\\
+        \rho e^{2i\varphi} &\approx e^{-2i (\lambda_{a} - \psi_{L})^{*}} \sigma_{-}^{\rm inj} \,.
 \end{align}
 \esub
-with a condition on $\rho$ and $\varphi$ that is now
-\be
-	\rho e^{2i\varphi} e^{2i (\lambda_{a}^{*} - \psi_{L}^{*})} = \sigma_{-}^{\rm inj} \,.
-\ee
+
+
+
+%finding $(\lambda_{a}^{*}, \theta_{L}^{*})$ verifying
+%\be\label{eq:degenconditionsky}
+%	\frac{\sigma_{+}}{\sigma_{-}} (\lambda_{a}^{*}, \theta_{L}^{*}) = r_{\rm inj} \,,
+%\ee
+%with the approximation~\eqref{eq:sigmapmapprox} for the left-hand side, guarantees that we can then match both $\sigma_{+}$ and $\sigma_{-}$ of the injection with the condition
+%\be\label{eq:degenconditionprefactor}
+%	\rho e^{2i(\varphi - \psiL)} e^{2i \lambda_{a}^{*}} = \sigma_{-}^{\rm inj}\,.
+%\ee
+%In the limit $|t_{\iota}| \ll 1$,
+%\be
+%	\frac{\sigma_{+}}{\sigma_{-}} \simeq t_{\theta}^{4} e^{-4i\lambda_{a}} \,,
+%\ee
+%so that~\eqref{eq:degenconditionsky} is verified for special positions in the sky at (coming back to the original variables $(\lambdaL, \betaL)$)
+%\bsub\label{eq:soldegensky}
+%\begin{align}
+%\beta_{L}^{*} &= \frac{\pi}{2} - 2 \mathrm{Arctan} \; \left| r_{\rm inj}\right|^{1/4} \,, \\
+%	\lambda_{L}^{*} &= \frac{\pi}{6} -\frac{1}{4} \mathrm{Arg} \; r_{\rm inj} \;\mathrm{mod}\; \frac{\pi}{2} \,.
+%\end{align}
+%\esub
+\jgb{Keep something from this?}
+The other condition~\eqref{eq:conditionprefactor} gives then a single phase constraint for $\varphi - \psiL$, and a single amplitude constraint for $\rho(d, \iota, \theta_{L}^{*})$. The limit $\iota \rightarrow \pi$ (where the $(2,-2)$ contribution dominates the $(2,2)$) is very similar, as can be seen most easily by the change of variable $\iota \rightarrow \pi - \iota$, with $-\psiL$ and $\pi - \theta_{L}$ playing the roles of $\psiL$ and $\theta_{L}$.
+
+
+%We can further find the same mechanism, with a few differences, by exchanging the roles of $(\iota, \varphi)$ and $(\theta_{L}, \lambda_{a})$, as follows. In the limit $\theta_{L} \rightarrow 0$ with $|t_{\theta}| \ll 1$, we have this time
+%\be
+%	\frac{\sigma_{+}}{\sigma_{-}} \simeq t_{\iota}^{4} e^{-4i(\lambda_{a} - \psi_{L})} \,,
+%\ee
+%which gives in the same way a degeneracy if
+%\bsub\label{eq:soldegeniotaphi}
+%\begin{align}
+%	\iota^{*} &= 2 \mathrm{Arctan} \; \left| r_{\rm inj}\right|^{1/4} \,, \\
+%	(\lambda_{a} - \psiL)^{*} &= -\frac{1}{4} \mathrm{Arg} \; r_{\rm inj} \;\mathrm{mod}\; \frac{\pi}{2} \,,
+%\end{align}
+%\esub
+%with a condition on $\rho$ and $\varphi$ that is now
+%\be
+%\rho e^{2i\varphi} e^{2i (\lambda_{a}^{*} - \psi_{L}^{*})} = \sigma_{-}^{\rm inj} \,.
+%\ee
+\jgb{Keep something from this?}
 Thus, we find again a degenerate pattern, with the difference that \eqref{eq:soldegeniotaphi} imposes a condition on the pair $\lambda_{a} - \psiL$ instead of $\lambda_{a}$, and the extra condition imposes a condition on $\varphi$ instead of the pair $\varphi - \psiL$.
 
 Finally, when considering more harmonics beyond the dominant mode $h_{22}$, the degeneracies will be broken easily. As in the case of the full likelihood, the simplified likelihood~\eqref{eq:simplelikelihoodhm} will have several terms with different inclination and phase dependencies. If the signal is loud enough for at least two modes to be detected, then the inclination $\iota$ and the phase $\varphi$ are fixed by the relative amplitude and phase of these modes. This will break the degeneracies $(d, \iota)$ and the degeneracy $(\varphi, \psiL)$.  
