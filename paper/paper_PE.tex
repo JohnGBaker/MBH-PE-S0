@@ -112,21 +112,37 @@ The space-based gravitational wave detector LISA will observe mergers of superma
 %
 %Much remained to be explored for the data analysis of LISA. Different challenges : high SNR for merger-dominated SMBH signals, SNR-limited regime for very long SOBH signals. The motion of the detector leaves an imprint on the signal, while the response also has frequency-dependency at high frequencies where the long-wavelength approx is not valid anymore. Finally, many other challenges : calibration and understanding noise on the fly, non-stationarity of the noise, dealing with glitches, and most importantly global fit: superposition of long-lived sources in a single datastream.
 
-Gravitational waves are awesome.
+Gravitational waves from the coalescence of black hole binaries are routinely observed \cite{GWTC-1} by the ground-based interferometers Advanced LIGO \cite{LIGO}, Advanced Virgo \cite{Virgo} and, soon, KAGRA \cite{KAGRA}.
 
-LISA will be awesome.
+Ground-based interferometers are fundamentally limited at low frequency by terrestrial noise, and cannot be used to study mergers of compact objects much heavier than $\approx 10^3 \Msol$.
+The LISA mission \cite{LISA2017} is designed to overcome this limitation, enabling the observation and precise characterization of mergers of black holes ranging in mass from tens of $\Msol$ (stellar-origin black holes, SOBH) to millions of $\Msol$ (supermassive black holes, SMBH).
+Black hole mergers, in fact, will be a major class of sources in the LISA frequency band.
 
-Literature review on BBH PE (can base on GOAT study).
+In order to realize the full scientific objective of LISA with respect to black hole mergers, adequate data analysis tools must be prepared in advance.
+Similarly to what happens in LIGO and Virgo, one has to first identify the presence of a merger waveform in the LISA data, and then infer the distribution of the physical parameters of its source from the data, enabling the construction of a catalog of black hole mergers.
+Inferring the parameters of binaries, in particular their distance and sky location, will also be necessary to organize multimessenger observations of their late inspirals and mergers \cite{TAP-LISA} and for multiband gravitational-wave astronomy \cite{Sesana16}.
+In this paper we focus on the latter part of the analysis problem, i.e.~the inference of the black hole parameters from the LISA data, once we have reasons to believe the presence of the signal in the data.
 
-Main points of study:
-\begin{itemize}
-    \item Fast likelihood calculation of mergers, including ROM model with FD LISA response and techniques for fast overlaps.
-    \item Example cases of MBH near sweet spot and SOBH.
-    \item Compare Bayesian and Fisher.
-    \item Study effect of higher modes for MBH.
-    \item Evolution of information over time to merger.
-    \item Analytic intuitive explanation of complicated degeneracies.
-\end{itemize}
+The inference problem amounts to computing a likelihood function, i.e.~the probability of observing the measured data given a model of the source and detector, and a particular parameter vector for the model.
+In LISA, this problem is more challenging than in kilometer-scale ground-based interferometers.
+Depending on the masses and spins of the black holes, the complexity arises from the much longer duration of the waveform, the much larger expected signal-to-noise ratios (SNRs), or the much more complex response of the LISA constellation to a given waveform.
+The large number of cycles in the LISA band and the large SNR require very accurate modeling of the waveform, including the merger and ringdown regimes, the effects of spin and corrections of higher order than the quadrupole.
+Contrary to LIGO and Virgo, which are approximately fixed in an inertial frame during the observation of any merger, the LISA constellation will move around the Sun and change its orientation appreciably during the observation of a large fraction of the inspirals, leading to additional modulations of the signals.
+Furthermore, due to the LISA arm length, for many sources the long-wavelength approximation will not hold.
+As we will see in this study, a proper treatment of these effects is necessary in order to break severe degeneracies between the source parameters.
+
+\TDC{Add literature review on BBH PE here, can base on GOAT study.}
+
+Here we demonstrate that standard Bayesian inference can be performed for SMBHs and SOBHs using a self-consistent waveform model that includes inspiral, merger, ringdown and higher-order modes (albeit neglecting spins) and a full model of the LISA response.
+We start by introducing a fast method to calculate the likelihood for a black hole merger.
+The method includes: a fast computation of a Fourier-domain inspiral-merger-ringdown waveform with higher-order modes based on reduced-order modeling; a fast Fourier-domain computation of the LISA response based on \cite{MB18}; and a fast method for computing the noise-weighted product between waveforms.
+We couple our likelihood with two codes for Bayesian inference based on different sampling techniques, constructing an inference engine which allows us to perform a variety of investigations with simulated black hole mergers.
+Both samplers are first shown to converge to comparable posterior distributions of the source parameters for a few case studies, and we highlight the challenges we encounter in the sampling.
+The full posterior distributions are then compared with their Fisher approximations, widely used in gravitational-wave analysis.
+Focusing on massive black holes, we show next the effect of higher-order modes on the degeneracies between some of the parameters.
+We derive an analytic and intuitive explanation of the origin of such degeneracies via various approximations.
+We show examples of how the posterior distributions evolve over time as more and more data becomes available for the inference.
+Finally, we repeat some of our investigations for stellar-origin black hole mergers as well.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
