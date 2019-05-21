@@ -359,6 +359,26 @@ Case 0
 
 \begin{figure*}
   \centering
+  \begin{minipage}{.48\linewidth}
+      \includegraphics[width=.99\linewidth]{../plots/t-of-F.pdf}
+   \end{minipage}
+   \begin{minipage}{.48\linewidth}
+      \includegraphics[width=.99\linewidth]{../plots/t-of-SNR.pdf}
+   \end{minipage}
+  \caption{Relations of time, Fourier frequency, and accumulated SNR for $M=2\times 10^6$,$q=3$ merger at $z=4$. The left panel shows times computed from $\tilde h(f)$ using Eq.~eref{eq:t-of-f}, and are approximately common among the waveform component modes up to minutes before merger. We use this relation to simulate time-cuts of the signals a various points before merger.  The right panel shows how SNR accumulates with time, though the full signal has a high SNR of about 666.0, most SNR accumulates very late. The curves shown extend from approximately SNR=1 until $t(f)$ is 40s after nominal merger.  The stars show points where the SNR has reached $\{1/4,1/16,1/64\}$ of the full-signal total, where we have studied parameter estimate for temporally incomplete signals.}
+  \label{fig:t-f-snr-Case9}
+\end{figure*}
+
+The rate at which parameter information accumulates LISA merger observations is crucial for planning strategies for multi-messenger observations and in guiding the latency demands of the LISA down-link and data processing.  We explore how parameter information accumulates on approach to merger by performing parameter estimation studies temporally truncated signals, cut at points where the accumulated SNR is about $\{10,42,166\}$ corresponding to $\{1/64,1/16,1/4\}$ of the total SNR=$666.0$, and times $\{41 \mathrm{hr}, 2.5 \mathrm{hr}, 7 \mathrm{min}\}$ before merger.
+
+We implement these temporal cuts in the Fourier domain, using Eq.XXXX, the $t(f)$ relation inferred from the smoothly chirping harmonic mode components of the waveforms as part of the LISA response.  This is a good approximation for temporal cuts, and consistent among the various modes for our cuts, which are sufficiently early before merger, as shown in Fig.~\ref{fig:t-f-snr-Case9}.
+
+The right panel of the figure also shows the times before merger at which a given value of SNR is reached.  In this case the signal begins being relevant, reaching SNR~1 about 34 days before merger, but reaches a plausible first-detectability threshold about 41 hours before merger. Most of the SNR accumulates over the last few minutes of signal.
+
+In Fig.~\ref{fig:smbhCornerZoomHMCase9} and Fig.~\ref{fig:MollweidesmbhTserieshmCase9} we show how parameter information accumulates at these time points.  Individual masses are within a factor of 2 at first detection and better than $10\%$ by 41 hours before merger.  Distance within a factor of 2 at 41 hours and within roughly $10\%$ at 2.5 hours prior to merger. Merger time is estimated to about an hour at first detection, and within a few minutes by 2.5 hours before merger.  Sky position...
+
+\begin{figure*}
+  \centering
   \begin{minipage}{.32\linewidth}
       \includegraphics[width=.99\linewidth]{../plots/corner_smbh_case9_hm_tseries_m1m2.png}
    \end{minipage}
