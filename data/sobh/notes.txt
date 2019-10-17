@@ -7,3 +7,19 @@ inj12
 -----
 
 Parameters from Radler's signal #12. SNR 10.9.
+
+================================================
+#01
+python ../../../flare/ptmcmc/python/comparechains.py SOBH_1-results/*/*_resampled.dat --tag trials
+Results in  /gpfsm/dnb31/jgbaker/GW-DA/Nov18/MBH-PE-S0/data/sobh/SOBH_1-results/SOBH_1_a_n0/SOBH_1_a_ntrials_corner.png
+All runs closely consistent.
+#combine data:
+cat SOBH_1-results/*/*_resampled.dat > SOBH_1-results/SOBH_1_joint_resampled.dat
+
+#12
+python ../../../flare/ptmcmc/python/comparechains.py SOBH_12-results/*/*_resampled.dat --tag trials
+Results in  /gpfsm/dnb31/jgbaker/GW-DA/Nov18/MBH-PE-S0/data/sobh/SOBH_12-results/SOBH_12_a_n0/SOBH_12_a_ntrials_corner.png
+All runs closely consistent at 2-sigma, though there are som differences in outlying bubbles at 3-sigma
+#combine data:
+cat SOBH_1-results/*/*_resampled.dat > SOBH_12-results/SOBH_12_joint_resampled.dat
+
