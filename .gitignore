@@ -242,3 +242,6 @@ TSWLatexianTemp*
 
 # generated if using elsarticle.cls
 *.spl
+
+paper_PE.pdf
+paper_PENotes.bib

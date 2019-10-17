@@ -6,13 +6,16 @@ from sklearn.neighbors.kde import KernelDensity
 fig = pl.figure()
 ax = fig.add_subplot(1, 1, 1, projection='hammer')
 
-labels = ['40 h', '2.5 h', '7 m', 'Post-merger']
-colors = ['g', 'b', 'r', 'k']
+labels = ['64D', '16D', '4D', 'D']
+# colors = ['g', 'b', 'r', 'k']
 bandwidths = [0.2, 0.05, 0.01, 0.005]
+
+plotpalette = ["#4C72B0", "#C44E52", "#CCB974", "#55A868", "#8172B2", "#64B5CD"]
+colors = plotpalette[:4][::-1]
 
 for i, label, color, bw in zip([64, 16, 4, 1], labels, colors, bandwidths):
     print(i)
-    data = np.loadtxt('STP_09_lm55_d{:02d}_joint_resampled_Lframe.dat'.format(i))
+    data = np.loadtxt('STP_09_lm55_d{:02d}_joint_Lframe_resampled.dat'.format(i))
     ra, dec = data[:,8], data[:,9]
     #ra -= np.pi
 

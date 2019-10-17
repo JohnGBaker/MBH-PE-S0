@@ -7,12 +7,15 @@ fig = pl.figure()
 ax = fig.add_subplot(1, 1, 1, projection='hammer')
 
 labels = ['40 h', '2.5 h', '7 m', 'Post-merger']
-colors = ['g', 'b', 'r', 'k']
+#colors = ['g', 'b', 'r', 'k']
 bandwidths = [0.2, 0.05, 0.01, 0.005]
+
+plotpalette = ["#4C72B0", "#C44E52", "#CCB974", "#55A868", "#8172B2", "#64B5CD"]
+colors = plotpalette[:4][::-1]
 
 for i, label, color, bw in zip([64, 16, 4, 1], labels, colors, bandwidths):
     print(i)
-    data = np.loadtxt('STP_09_lm55_t{:02d}_joint_resampled_Lframe.dat'.format(i))
+    data = np.loadtxt('STP_09_lm55_t{:02d}_joint_Lframe_resampled.dat'.format(i))
     ra, dec = data[:,8], data[:,9]
     #ra -= np.pi
 
@@ -25,6 +28,7 @@ for i, label, color, bw in zip([64, 16, 4, 1], labels, colors, bandwidths):
     n = 10000
     sample = kde.sample(n)
     sample_densities = np.sort(np.exp(kde.score_samples(sample)))
+    # Note: are those levels appropriate for 2d ?
     levels = [sample_densities[int(n * (1 - p))] for p in [0.9973, 0.9545, 0.6827]]
 
     gra = np.linspace(-np.pi, np.pi, 300)
@@ -36,5 +40,5 @@ for i, label, color, bw in zip([64, 16, 4, 1], labels, colors, bandwidths):
     cs.collections[0].set_label(label)
 
 ax.grid()
-ax.legend()
+ax.legend(loc=[0.4, 0.75])
 pl.savefig('skymap_Lframe.png', dpi=200)
