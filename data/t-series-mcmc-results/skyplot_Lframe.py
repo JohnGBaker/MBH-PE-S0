@@ -22,14 +22,16 @@ for i, label, color, bw in zip([64, 16, 4, 1], labels, colors, bandwidths):
     # create the KDE estimator
     # we could use grid-search cross validation to estimate the bandwidth here
     radec = np.vstack((dec, ra)).T
-    kde = KernelDensity(kernel='tophat', bandwidth=bw, metric='haversine').fit(radec)
+    kde = KernelDensity(kernel='gaussian', bandwidth=bw, metric='haversine').fit(radec)
 
     # find the density levels corresponding to 1, 2, 3 sigmas
     n = 10000
     sample = kde.sample(n)
     sample_densities = np.sort(np.exp(kde.score_samples(sample)))
     # Note: are those levels appropriate for 2d ?
-    levels = [sample_densities[int(n * (1 - p))] for p in [0.9973, 0.9545, 0.6827]]
+    # levels = [sample_densities[int(n * (1 - p))] for p in [0.9973, 0.9545, 0.6827]]
+    sigmalevels2d = 1.0 - np.exp(-0.5 * np.linspace(1.0, 3.0, num=3) ** 2)
+    levels = [sample_densities[int(n * (1 - p))] for p in sigmalevels2d]
 
     gra = np.linspace(-np.pi, np.pi, 300)
     gdec = np.linspace(-np.pi/2, np.pi/2, 300)
@@ -41,4 +43,4 @@ for i, label, color, bw in zip([64, 16, 4, 1], labels, colors, bandwidths):
 
 ax.grid()
 ax.legend(loc=[0.4, 0.75])
-pl.savefig('skymap_Lframe.png', dpi=200)
+pl.savefig('skymap_Lframe_test.png', dpi=200)
