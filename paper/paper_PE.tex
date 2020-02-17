@@ -311,12 +311,18 @@ The transfer frequency $f_{L}$ correspond to fitting a full wavelength in the ar
 \subsection{Time Delay Interferometry}
 \label{subsec:TDIresponse}
 
-To mitigate laser noise, LISA requires Time Delay Interferometry (TDI)~\cite{TintoArmstrong99, Armstrong+99, Estabrook+00, Dhurandhar+02, Tintoliving}. These TDI observables are built from delayed combinations of the one-arm basic observables~\eqref{eq:defyslr}. Detailed cancellations for a flexing and rotating constellation prompted the development of higher-generation TDI schemes~\cite{Shaddock03, CornishHellings03, Shaddock+03, Tinto+04}. However, these refinements affect only marginally the response to the gravitational waves. We therefore limit ourselves to first-generation TDI and adopt a rigid approximation for the cancellation, where delays are all constant and set to $L$. Using the notation $y_{slr,nL} = y_{slr}(t - nL)$, the first-generation TDI Michelson observable $X$ reads~\cite{Vallisneri04}
+The basic one-arm observables of Eq.~\eqref{eq:defyslr} are affected by laser noise whose amplitude is orders of magnitude larger than the astrophysical signal.
+However, time delay interferometry (TDI) allows one to construct a new set of observables from delayed combinations of $y_{slr}$, where laser noise is suppressed by orders of magnitude~\cite{TintoArmstrong99, Armstrong+99, Estabrook+00, Dhurandhar+02, Tintoliving}.
+Various generations of TDI schemes have been proposed in order to deal with a non-rigid and rotating LISA constellation~\cite{Shaddock03, CornishHellings03, Shaddock+03, Tinto+04}.
+However, these refinements affect only marginally the response to the gravitational waves.
+Hence, in this work we only consider first-generation TDI and adopt a rigid approximation for the constellation, where delays are all constant and equal to $L$.
+Using the notation $y_{slr,nL} = y_{slr}(t - nL)$, the first-generation TDI Michelson observable $X$ reads~\cite{Vallisneri04}
 \begin{align}
 	X &= y_{31} + y_{13,L} + \left( y_{21} + y_{12,L} \right)_{,2L} \nn\\
 	& - \left( y_{21} + y_{12,L} \right) - \left( y_{31} + y_{13,L} \right)_{,2L} \,,
 \end{align}
-with the other Michelson observables $Y$, $Z$ being obtained by cyclic permutation. Uncorrelated combinations $A$, $E$ and $T$~\cite{Prince+02} are then defined as
+with the other Michelson observables $Y$, $Z$ being obtained by cyclic permutation.
+The uncorrelated-noise combinations $A$, $E$ and $T$~\cite{Prince+02} are then defined as
 \bsub\label{eq:defAET}
 \begin{align}
 	A &= \frac{1}{\sqrt{2}} \left( Z - X \right) \,,\\
@@ -324,10 +330,11 @@ with the other Michelson observables $Y$, $Z$ being obtained by cyclic permutati
 	T &= \frac{1}{\sqrt{3}} \left( X + Y + Z \right) \,.
 \end{align}
 \esub
-These channels are independent under the assumption of an identical and uncorrrelated noise in the detector arms. Note that various conventions coexist in the literature. With constant delays in the rigid approximation, with the notation $z\equiv \exp[2i\pi fL]$ the TDI combinations take the form
+These channels are independent under the assumption of an identical and uncorrrelated noise in the detector arms. Note that various conventions coexist in the literature.
+With constant delays in the rigid approximation, and using the notation $z\equiv \exp[2i\pi fL]$, the TDI combinations in the frequency domain take the form
 \bsub\label{eq:aet}
 \begin{align}
-	\tilde{a} &= \left[ (1+z) \left( \tilde{y}_{31} + \tilde{y}_{13} \right) - \tilde{y}_{23} - z \tilde{y}_{32} - \tilde{y}_{21} - z \tilde{y}_{12} \right] \,,\\
+	\tilde{a} &= (1+z) \left( \tilde{y}_{31} + \tilde{y}_{13} \right) - \tilde{y}_{23} - z \tilde{y}_{32} - \tilde{y}_{21} - z \tilde{y}_{12} \,,\\
 	\tilde{e} &= \frac{1}{\sqrt{3}} \left[ (1-z)\left( \tilde{y}_{13} - \tilde{y}_{31} \right) + (2+z) \left( \tilde{y}_{12} - \tilde{y}_{32} \right) \right. \nn\\
 	&\qquad\quad \left. + (1+2z) \left( \tilde{y}_{21} - \tilde{y}_{23} \right) \right] \,,\\
 	\tilde{t} &= \frac{\sqrt{2}}{\sqrt{3}} \left[ \tilde{y}_{21} - \tilde{y}_{12} + \tilde{y}_{32} - \tilde{y}_{23} + \tilde{y}_{13} - \tilde{y}_{31} \right] \,,
@@ -379,7 +386,7 @@ The prefactors~\eqref{eq:scalingAET} are oscillatory and have zero-crossings at 
 \subsection{The low-frequency limit}
 \label{subsec:lowfresponse}
 
-As is well known~\cite{Cutler97}, in the low-frequency limit (also called the long-wavelength approximation), the finite-armlength effects vanish, and the response of LISA is analogous to the response of of two LIGO-type detectors  rotated from each other by $\pi/4$ and set in motion.
+In the low-frequency limit, also called the long-wavelength approximation, the effects due the finite LISA armlength become negligible and the LISA response becomes equivalent to the response of two coplanar LIGO-like detectors rotated by $\pi/4$ relative to each other and set in motion~\cite{Cutler97}.
 
 For $f \ll f_{L}$, we have $2\pi f L \ll 1$ and the kernel~\eqref{eq:Gslr} reduces to
 \be\label{eq:Gslrlowf}
@@ -411,9 +418,10 @@ where we introduced the detector tensors
 	D_{e} &= \frac{L\sqrt{3}}{2} \left( n_{1} \otimes n_{1} - n_{3} \otimes n_{3} \right) \,.
 \end{align}
 \esub
-Here, we have made apparent factors $(-2i\pi f)$ corresponding to the Fourier-domain translation of a time derivative. The observables $\tilde{a}$, $\tilde{e}$ are analogous to a time derivative of the strain more commonly used for ground-based detectors.
+Here, we have made apparent factors $(-2i\pi f)$, which correspond to Fourier-domain time derivatives.
+The observables $\tilde{a}$, $\tilde{e}$ are therefore analogous to time derivatives of the strain commonly used for ground-based detectors.
 
-We can now map these two channels to two fictitious LIGO-type detectors as follows. For an orthogonal detector of the same setup as the ground-based LIGO and Virgo with armlength $L_{D}$, rotated by an angle $\epsilon_{D}$ from the basis vectors $x,y$, the detector tensor is\S
+We can now map these two channels to two fictitious LIGO-type detectors as follows. For an orthogonal detector of the same setup as the ground-based LIGO and Virgo with armlength $L_{D}$, rotated by an angle $\epsilon_{D}$ from the basis vectors $x,y$, the detector tensor is
 \begin{align}
 	D &= \frac{L_{D}}{2} \left[ \cos 2\epsilon_{D} \left( x\otimes x - y\otimes y \right) \right. \nn\\
 	& \qquad\quad + \left. \sin 2\epsilon_{D} \left( x\otimes y + y \otimes x\right) \right] \,.
@@ -482,24 +490,33 @@ Introducing the standard matched-filter inner product (also called overlap) as
 \be\label{eq:definnerproduct}
 	( \tilde{a} | \tilde{b} ) = 4 \mathrm{Re} \int_{0}^{+\infty} df \; \frac{\tilde{a}(f) \tilde{b}^{*}(f)}{S_{n}(f)} \,,
 \ee
-for stationary Gaussian noise with noise PSD $S_{n}$, the likelihood $\calL = p(d | \bm{\theta})$ for a given gravitational wave channel takes the form
+for stationary Gaussian noise with PSD $S_{n}$, the likelihood $\calL = p(d | \bm{\theta})$ for a given gravitational wave channel takes the form
 \be\label{eq:deflnL}
 	\ln \calL = -\frac{1}{2} \left( h(\bm{\theta}) - d | h(\bm{\theta}) - d \right) \,,
 \ee
-with the data stream being a superposition of the gravitational wave signal for the true parameters $\bm{\theta}_{0}$ and the noise realization in the experiment, $d = h(\bm{\theta}_{0}) + n$. In general, the templates $h(\theta)$ used for the analysis will only be an approximation of the physical signals entering the data stream $d$; we will ignore entirely this distinction and neglect the systematic errors in the waveform model. The posterior distribution for the physical parameters $\bm{\theta}$ given the observed data $d$ is then
-\be\label{eq:defBayes}
+with the data stream being a superposition of the gravitational wave signal for the true parameters $\bm{\theta}_{0}$ and the noise realization in the experiment, $d = h(\bm{\theta}_{0}) + n$.
+The posterior distribution for the physical parameters $\bm{\theta}$ given the observed data $d$ is then \be\label{eq:defBayes}
 	p\left( \bm{\theta} | d \right) = \frac{p(d | \bm{\theta})p(\bm{\theta})}{p(d)}\,,
 \ee
-with $p(\bm{\theta})$ the priors on the parameters, and $p(d)$ the evidence that we will ignore here as it enters as a multiplicative constant in the posterior.
+with $p(\bm{\theta})$ the priors on the parameters, and $p(d)$ the evidence.
+The focus of this work is not selecting between different models, so we will treat $p(d)$ as a normalization constant and do not consider it further.
 
-In our analysis, we will use the so-called zero-noise approximation. This corresponds simply to performing a Bayesian analysis with~\eqref{eq:deflnL} and ~\eqref{eq:defBayes}, but setting the noise realization to zero, $n=0$. It allows us to accelerate the likelihood computation, as will be explained in~\ref{subsec:likelihood}. For exploratory parameter estimation runs, this approximation allows us to explore the structure of the likelihood with its possible parameter degeneracies, and is a significant improvement over Fisher matrix estimates in that sense. We leave the extension of our analysis to include noise realizations for future work. We will also ignore waveform systematic errors and assume our waveform templates match exactly the real signals.
+In general, the templates $h(\bm{\theta})$ used for the analysis will only be an approximation of the physical signals present in the data stream $d$.
+In this work we will ignore entirely this distinction and assume that our template waveforms exactly match the astrophysical waveforms.
+In other words, we will not explore the issue of systematic errors arising from incomplete modeling of compact binary merger waveforms.
+
+In our analysis, we will simulate signals and perform Bayesian analyses of them with Eq.~\eqref{eq:deflnL} and ~\eqref{eq:defBayes} to obtain the parameter posteriors.
+In doing so, we will use the so-called zero-noise approximation, i.e.~setting $n=0$.
+This allows us to accelerate the likelihood computation as explained in Sec.~\ref{subsec:likelihood}.
+The approximation is sufficient to explore the structure of the likelihood and the parameter degeneracies, greatly improving with respect to the Fisher matrix approach.
+The extension of our analysis to include nonzero noise realizations will be discussed in future work.
 
 The log-likelihood function that we use, with a zero noise realization, is a sum over the three independent channels $A$, $E$, $T$~\eqref{eq:defAET} rescaled according to~\eqref{eq:scalingAET}: 
 \begin{align}\label{eq:deflnLaet}
 	\ln\calL &= -\frac{1}{2} \left[ \left( \tilde{a} - \tilde{a}_{\rm inj} | \tilde{a} - \tilde{a}_{\rm inj}  \right) + \left( \tilde{e} - \tilde{e}_{\rm inj} | \tilde{e} - \tilde{e}_{\rm inj}  \right) \right. \nn\\
 	& \qquad\qquad + \left. \left( \tilde{t} - \tilde{t}_{\rm inj} | \tilde{t} - \tilde{t}_{\rm inj} \right) \right] \,,
 \end{align}
-with the $\rm inj$ subscript indicating the injected signals, and where the inner products $(\cdot | \cdot)$ are given by~\eqref{eq:definnerproduct} with the noise PSDs~\eqref{eq:Snaet}.
+with the ``$\rm inj$'' subscript indicating the simulated signals, and where the inner products $(\cdot | \cdot)$ are given by~\eqref{eq:definnerproduct} with the noise PSDs~\eqref{eq:Snaet}.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -507,20 +524,24 @@ with the $\rm inj$ subscript indicating the injected signals, and where the inne
 \subsection{Reduced order model for EOBNRv2HM waveforms.}
 \label{subsec:ROM}
 
-As opposed to previous studies of Bayesian parameter recovery for LISA, we wish to use full inspiral-merger-ringdown signals. Since higher harmonics will play a crucial role in our analysis, in this study we use the Effective-One-Body (EOB) waveform model \texttt{EOBNRv2HM}~\cite{Pan+11}. These waveforms are based on the EOB formalism~\cite{BD99, BD00}, and are calibrated on a set of numerical relativity waveforms. The model is limited to non-spinning systems on quasicircular orbits, but includes a set of higher harmonics in the signal, among the most important quantitatively:
+As opposed to previous studies of Bayesian parameter recovery for LISA, we wish to use full inspiral-merger-ringdown signals. Since higher harmonics will play a crucial role in our analysis, in this study we use the Effective-One-Body (EOB) waveform model \texttt{EOBNRv2HM}~\cite{Pan+11}. These waveforms are based on the EOB formalism~\cite{BD99, BD00}, and are calibrated to numerical relativity waveforms. The model is limited to non-spinning systems on quasicircular orbits, but includes a set of higher harmonics in the signal, among the most important quantitatively:
 \be\label{eq:listmodes}
 	(\ell, m) = (2,2) ,\, (2,1) ,\, (3,3) ,\, (4,4) ,\, (5,5) \,.
 \ee
-The waveforms are generated in the time domain by integrating a system of ODEs, an operation requiring up to seconds of computing time for long signals. For this reason, we developed a reduced order model (ROM) for these waveforms, \texttt{EOBNRv2HMROM}, following the methods of~\cite{Puerrer14}, enabling a much faster generation of the Fourier-domain amplitudes and phases of the modes~\eqref{eq:hlmampphase}. As the total mass $M$ scales out of the problem, the parameter space is effectively only one-dimensional, with only the mass ratio $q=m_{1}/m_{2}$. The parameter space interpolation in this ROM is therefore significantly simpler than the models~\cite{Puerrer14, Puerrer15, Bohe+16}, which was three-dimensional as it included aligned spins. The inclusion of higher harmonics, however, imposes to model the relative dephasing of different modes. The output of the code consists of a Fourier domain amplitude and phase for each mode, sparsely sampled on $\sim 300$ frequencies. The faithfulness with the original waveforms was measured with \texttt{aLIGO} noise curves~\cite{UnofficialNoiseCurves18} to be $\lesssim 10^{-4}$, while the computational cost is submillisecond and subdominant with respect to other stages of our likelihood computation.
+The waveforms are generated in the time domain by integrating a system of ordinary differential equations, an operation requiring up to seconds of computing time for long signals. For this reason, we developed a reduced order model (ROM) for these waveforms, \texttt{EOBNRv2HMROM}, following the methods of~\cite{Puerrer14}, enabling a much faster generation of the Fourier-domain amplitudes and phases of the modes in Eq.~\eqref{eq:hlmampphase}. As the total mass $M$ scales out of the problem, the parameter space reduces to the mass ratio $q=m_{1}/m_{2}$ only. The parameter space interpolation in this ROM is therefore significantly simpler than the models~\cite{Puerrer14, Puerrer15, Bohe+16}, which include aligned spins. The inclusion of higher harmonics, however, requires modeling the relative dephasing of different modes. The output of the code consists of a Fourier domain amplitude and phase for each mode, sparsely sampled on $\sim 300$ frequencies.
+The faithfulness with the original waveforms, assuming Advanced LIGO noise curves~\cite{UnofficialNoiseCurves18}, is $\lesssim 10^{-4}$.
+The computational cost is submillisecond and smaller than other stages of our likelihood computation.
 
-We note that the assumption of non-spinning black holes is an important limitation to a realistic assessment of intrinsic parameter uncertainties. In particular, it means that our results ignore the well-known degeneracy between mass ratio and spin~\cite{CF94, PW95, Baird+2013}, thus underestimating the uncertainty in the recovered mass ratio. By ignoring misaligned spins, we also neglect the possible effects of orbital precession on parameter degeneracies. Nevertheless, consistently including merger, ringdown and higher harmonics already represents a significant improvement over previous studies, as these features in the signal carry a lot of SNR by themselves~\cite{Babak+08, Thorpe+08, McWilliams+09, McWilliams+10, McWilliams+11, Klein+15}. In the absence of precession at least, we expect intrinsic and extrinsic parameters to correlate weakly, so that  our investigations of the extrinsic part of the likelihood should be valid for aligned spins.
+We note that the assumption of non-spinning black holes is an important limitation to a realistic assessment of intrinsic parameter uncertainties. In particular, it means that our results ignore the well-known degeneracy between mass ratio and spin~\cite{CF94, PW95, Baird+2013}, thus underestimating the uncertainty in the recovered mass ratio. By ignoring misaligned spins, we also neglect the possible effects of orbital precession on parameter degeneracies. Nevertheless, consistently including merger, ringdown and higher harmonics already represents a significant improvement over previous studies, as these features in the signal carry a lot of SNR by themselves~\cite{Babak+08, Thorpe+08, McWilliams+09, McWilliams+10, McWilliams+11, Klein+15}.
+In the absence of precession, we expect intrinsic and extrinsic parameters to be weakly correlated, so that  our investigations of the extrinsic part of the likelihood should be valid for aligned spins.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsection{Likelihood computation with zero noise}
 \label{subsec:likelihood}
 
-Since typical Bayesian analyses will need to evaluate millions of likelihood values, the computational performance of the likelihood function is crucial. In general, both the template and the injection in~\eqref{eq:deflnL} are given as frequency series sampled with the Nyquist criterion $\Delta f = 1/(2T)$ with $T$ the duration of the signal, and the overlaps~\eqref{eq:definnerproduct} are simply computed as discrete sums over those frequency samples. Although transforming~\eqref{eq:definnerproduct} in a discrete sum is a straightforward operation, the size of the frequency series alone can represent a significant cost. In the context of LIGO/Virgo observations, this has prompted the development of Reduced Order Quadratures (ROQ)~\cite{Smith+14, Canizares+14, Smith+16} to accelerate the likelihood computation. In the LISA case, the computational cost of the standard likelihood implementation depends primarily on the mass of the system and the duration of the signal. This cost can range from tens of milliseconds for SMBHBs and short-lived signals (a few days), to impracticable values for SBHBs signals lasting for years and sampled at high frequency. Setting the noise realization to zero, however, we can exploit an amplitude/phase representation of the signals, use a sparse frequency grid and get a large speedup.
+Since typical Bayesian analyses will need to evaluate millions of likelihood values, the computational performance of the likelihood function is crucial. In general, both the template and the injection in~\eqref{eq:deflnL} are given as frequency series sampled with the Nyquist criterion $\Delta f = 1/(2T)$ with $T$ the duration of the signal, and the overlaps~\eqref{eq:definnerproduct} are simply computed as discrete sums over those frequency samples. Although transforming~\eqref{eq:definnerproduct} in a discrete sum is a straightforward operation, the size of the frequency series can lead to a significant cost. In the context of LIGO/Virgo observations, this has prompted the development of Reduced Order Quadratures (ROQ)~\cite{Smith+14, Canizares+14, Smith+16} to accelerate the likelihood computation. In the LISA case, the computational cost of the standard likelihood implementation depends primarily on the mass of the system and the duration of the signal. This cost can range from tens of milliseconds for SMBHBs and short-lived signals (a few days), to impracticable values for SBHBs signals lasting for years and sampled at high frequency.
+By setting the noise realization to zero, however, we can represent the amplitude and phase of the signals over a sparse frequency grid and obtain a large speedup.
 
 Applying the response as in~\ref{subsec:FDresponse} mode-by-mode on the sparsely sampled amplitude and phase generated as in~\ref{subsec:ROM}, we obtain a complete representation of both the waveform and of the instrument transfer functions~\eqref{eq:defTlmaet} on a few hundred points in the Fourier domain, with the full signal being implicitly reconstructed with a standard cubic spline interpolation over frequencies. Decomposing~\eqref{eq:deflnL} as
 \be\label{eq:lnLoverlapstructure}
@@ -534,7 +555,10 @@ Taking the likelihood~\eqref{eq:deflnLaet} decomposed in TDI channels, decomposi
 \ee
 with transfer functions $\calT$ for each TDI channel, and Fourier-domain amplitudes $A$ and phases $\Psi$ (see~\eqref{eq:hlmampphase}).
 
-The difficulty of computing numerically such an overlap depends on the phase difference. A large phase difference causes the integrand to be very oscillatory, requiring more frequency resolution than non-oscillatory integrands; on the other hand, oscillatory integrands give raise to a small integral due to cancellation effects, while non-oscillatory integrands contribute the most. For a single mode, $\mathrm{SNR}$ terms of the type $(h|h)$ have a zero phase difference by construction, but including different modes generates cross-terms $(\ell, m) \neq (\ell', m')$ with a large phase difference.
+The difficulty of numerically computing such an overlap depends on the phase difference.
+A large phase difference causes the integrand to be very oscillatory, requiring more frequency resolution than non-oscillatory integrands.
+On the other hand, oscillatory integrands result in a small integral due to cancellation effects, while non-oscillatory integrands contribute the most.
+For a single mode, $\mathrm{SNR}$ terms of the type $(h|h)$ have a zero phase difference by construction, but including different modes generates cross-terms $(\ell, m) \neq (\ell', m')$ with a large phase difference.
 
 Note that in a Bayesian analysis, a large fraction of the time (after burn-in) will be spent exploring signals that are rather close to the injection; with a single mode phase differences will be mostly small. In this work, we wish to include oscillatory cross-terms between modes, and we use a generic numerical treatment for the integrals~\eqref{eq:lnLoverlapstructure} and keep all terms with no further approximation. Other methods to accelerate likelihoods, applicable in the presence of noise, include heterodyning with a reference signal~\cite{Cornish10}, using a variable frequency resolution (multibanding)~\cite{Porter14, Vinciguerra+17}, and, as discussed before, ROQs~\cite{Smith+14, Canizares+14, Smith+16}. We leave for future work the generalization of our likelihood computations to accomodate for noise. 
 
@@ -544,12 +568,25 @@ First, we built a joint sparse frequency grid suitable to represent both signals
 \ee
 where in each grid interval $P_{j}$ is a cubic polynomial and $\phi_{j}$ a quadratic polynomial. We can then compute the elementary integrals~\eqref{eq:fastlikestructure} using a combination of numerical methods. Integrations by parts can reduce the polynomial order in~\eqref{eq:fastlikestructure}, leaving only Fresnel integral functions to be evaluated. Numerical instabilities can occur in these integration by parts when the coefficients of the phase polynomial are very small or very large, in which case we resort to asymptotic expansions instead.
 
-We combine this implementation of overlap computations with our fast waveform generation~\ref{subsec:ROM} and fast treatment of the Fourier-domain response~\ref{subsec:FDresponse}. Since the number of overlaps to compute in~\eqref{eq:defTlmaet} is quadratic in the number of modes, likelihoods with higher harmonics are significantly more expensive. The final likelihood cost depends also on the number of grid intervals, that is chosen to limit spline interpolation errors:
-\begin{itemize}
-	\item for SBHBs with $h_{22}$ only: $\sim 500$ grid points, likelihood cost $\sim 2\mathrm{ms}$;
-	\item for SMBHBs with $h_{22}$ only: $\sim 300$ grid points, likelihood cost $\sim 1.2\mathrm{ms}$;
-	\item for SMBHBs with 5 modes $h_{\ell m}$: $\sim 300$ grid points, likelihood cost $\sim 15\mathrm{ms}$.
-\end{itemize}
+We combine this implementation of overlap computations with our fast waveform generation~\ref{subsec:ROM} and fast treatment of the Fourier-domain response~\ref{subsec:FDresponse}. Since the number of overlaps to compute in~\eqref{eq:defTlmaet} is quadratic in the number of modes, likelihoods with higher harmonics are significantly more expensive. The final likelihood cost depends also on the number of grid intervals, that is chosen to limit spline interpolation errors (Table~\ref{tab:likecost}).
+\begin{table}
+	\begin{tabular}{|c|c|c|c|}
+		\hline
+		Source type & Modes & Grid points & Cost \\
+		\hline
+		SBHB & $h_{22}$ & $500$ & $2$ ms \\
+		SMBHB & $h_{22}$ & $300$ & $1.2$ ms \\
+		SMBHB & $5$ & $300$ & $15$ ms \\
+		\hline
+	\end{tabular}
+	\label{tab:likecost}
+	\caption{Approximate frequency grid resolution and likelihood cost for different choices of source type and number of modes in the waveform.}
+\end{table}
+%\begin{itemize}
+%	\item for SBHBs with $h_{22}$ only: $\sim 500$ grid points, likelihood cost $\sim 2\mathrm{ms}$;
+%	\item for SMBHBs with $h_{22}$ only: $\sim 300$ grid points, likelihood cost $\sim 1.2\mathrm{ms}$;
+%	\item for SMBHBs with 5 modes: $\sim 300$ grid points, likelihood cost $\sim 15\mathrm{ms}$.
+%\end{itemize}
 The accuracy of our likelihood computations is typically $|\Delta \ln \calL| \lesssim 0.2$, due to the numerical errors being magnified by the required cancellations between overlaps terms in~\eqref{eq:lnLoverlapstructure}.
 
 
