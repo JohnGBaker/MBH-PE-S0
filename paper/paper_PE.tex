@@ -877,9 +877,10 @@ We compare the Bayesian inference results obtained with our two samplers, \textt
 \subsection{Degeneracies in the sky}
 \label{subsec:MBHBPEdegen}
 
-A remarkable feature in Figs.~\ref{fig:PEsmbh22hmCase0} and~\ref{fig:PEsmbh22hmCase9} is the existence of a degenerate mode (or secondary maximum) in the posterior distribution for the sky position $(\lambda_{L}, \beta_{L})$, located at $\beta_{L}^{*} = -\beta_{L}^{\rm inj}$, i.e. by reflecting the wave vector $k$ across the plane of the LISA constellation. This secondary mode has less weight than the main mode around the injection, but is present in both cases. In particular, it survives when including higher harmonics.
+A remarkable feature in Figs.~\ref{fig:PEsmbh22hmCase0} and~\ref{fig:PEsmbh22hmCase9} is the existence of a degenerate mode (or secondary maximum) in the posterior distribution for the sky position $(\lambda_{L}, \beta_{L})$, located at $\beta_{L}^{*} = -\beta_{L}^{\rm inj}$, i.e. by reflecting the wave vector $k$ across the plane of the LISA constellation.
+The secondary mode contains less probability than the ``correct'' mode close to the true parameters, but it is present in both simulations and it survives the inclusion of higher harmonics.
 
-We can gain insight about degeneracies in the parameter space by considering the simple expressions representing the instrument response in the \textit{Frozen low-$f$} approximation described in Sec.~\ref{subsec:MBHBresponseapprox}, appropriate for the low-frequency limit and signals short enough that the LISA motion can be neglected; we will explore in details the respective influence of these neglected effects in Sec.~\ref{sec:MBHBPEacctime}.
+We can gain insight about degeneracies in the parameter space by considering the simple expressions of the instrument response in the \textit{Frozen low-$f$} approximation described in Sec.~\ref{subsec:MBHBresponseapprox}, appropriate for the low-frequency limit and signals short enough that the LISA motion can be neglected; we will explore in details the respective influence of these neglected effects in Sec.~\ref{sec:MBHBPEacctime}.
 
 The \textit{Frozen low-$f$} response is given by~\eqref{eq:FapcFepc}-\eqref{eq:transferlowfae}, ignoring the $k\cdot p_{0}$ delay as a mere constant delay, and neglecting time-dependency in the LISA frame angles $(\lambda_{L}, \beta_{L}, \psi_{L})$. The response is then summarized by the pattern functions for harmonics $F^{\ell m}_{a,e} (\iota, \varphi, \lambda_{L}, \beta_{L}, \psi_{L})$ given in~\eqref{eq:Flmae}, which we reproduce here:
 \begin{align}\label{eq:Flmaerepeat}
@@ -887,11 +888,13 @@ The \textit{Frozen low-$f$} response is given by~\eqref{eq:FapcFepc}-\eqref{eq:t
 	& + \frac{1}{2} (-1)^{\ell} \sYlminusmstar (\iota, \varphi) e^{+2 i \psi_{L}} \left( F_{a,e}^{+} - i F_{a,e}^{\times} \right) (\lambda_{L}, \beta_{L}) \,.
 \end{align}
 
-Changing the sign of $\beta_{L}$ in the pattern functions $F_{a,e}^{+,\times}$ given in~\eqref{eq:FapcFepc} changes the sign of $F_{a,e}^{\times}$ for both channels, leaving $F_{a,e}^{+}$ invariant. In~\eqref{eq:Flmaerepeat} the $F_{a,e}^{+,\times}$ factors of the two lines are exchanged. Since spin-weighted spherical harmonics~\cite{Goldberg+67} obey the relation
+Changing the sign of $\beta_{L}$ in the pattern functions $F_{a,e}^{+,\times}$ given in~\eqref{eq:FapcFepc} has no effect on $F_{a,e}^{+}$ and it changes the sign of $F_{a,e}^{\times}$ for both channels.
+Thus, the $\left( F_{a,e}^{+} \pm i F_{a,e}^{\times}\right)$ factors in the two terms of Eq.~\eqref{eq:Flmaerepeat} are exchanged.
+Moreover, since spin-weighted spherical harmonics~\cite{Goldberg+67} obey the relation
 \be
 	\sYlm (\pi - \iota, \varphi) = (-1)^{\ell} \sYlminusmstar (\iota, \varphi) \,,
 \ee
-we see that changing $\iota \rightarrow \pi-\iota$, $\psi_{L} \rightarrow \pi - \psi_{L}$ leaves $F_{a}^{\ell m}$, $F_{e}^{\ell m}$ invariant.
+we see that simultaneously changing $\iota \rightarrow \pi-\iota$ and $\psi_{L} \rightarrow \pi - \psi_{L}$ leaves $F_{a}^{\ell m}$, $F_{e}^{\ell m}$ unchanged.
 
 This defines a transformation of extrinsic parameters yielding an exact degeneracy in the \textit{Frozen low-$f$} approximation, which we call the \textit{reflected} sky position (for a reflection with respect to the LISA plane):
 \begin{align} \label{eq:degenreflection}
@@ -917,7 +920,7 @@ Combining~\eqref{eq:degenreflection} and~\eqref{eq:degenlambdapi2}, we arrive at
 	\iota^{(a)} &= \pi - \iota \,, \nn \\
 	\varphi^{(a)} &= \varphi \,.
 \end{align}
-How does this situation change when considering a more complete instrument response, moving away from the \textit{Frozen low-$f$} approximation ?
+How does this situation change when considering a more complete instrument response, moving away from the \textit{Frozen low-$f$} approximation?
 
 When adding back the frequency-dependence while keeping LISA motionless, in the \textit{Frozen} response, the \textit{reflected} mode is the only mode remaining degenerate. Indeed, as noted in Sec.~\ref{subsec:FDresponse}, in~\eqref{eq:Gslr} the frequency-dependent terms feature $k\cdot n_{l}$, $k \cdot p_{s,r}$ projections, that depend only on the projection of the wave vector $k$ in the plane of LISA, invariant for $\betaL \rightarrow -\betaL$. The LISA motion, however, will break this degeneracy in general.
 
@@ -947,7 +950,7 @@ When adding back the LISA motion while still ignoring the frequency-dependence i
 	\label{tab:MBHBdegen}
 \end{table} 
 
-Thus, we have found that in the \textit{Frozen low-$f$} approximation for the response we expect a pattern of degeneracy of eight degenerate positions in the sky (with certain rules for inclination and polarization). Table~\ref{tab:MBHBdegen} summarizes the qualitative picture of degeneracy breaking by the features of the response. We note that the recent work~\cite{Baibhav+20}, focusing on low-frequency ringdown-dominated signals for which the LISA motion can be neglected, remarked the same 8-modes sky degeneracy that we described in this section. We will see in Sec.~\ref{sec:MBHBPEacctime} that the eight-mode degeneracy pattern indeed appears when doing a pre-merger analysis; on the other hand, in results Figs.~\ref{fig:PEsmbh22hmCase0} and~\ref{fig:PEsmbh22hmCase9} for full IMR signals, out of the eight possible sky modes only the \textit{reflected} mode~\eqref{eq:degenreflection} survives. We will investigate in detail in Sec.~\ref{sec:MBHBPEacctime} how time-dependence and frequency-dependence in the response break part, but not all, of the degeneracies. 
+Thus, we have found that in the \textit{Frozen low-$f$} approximation for the response we expect a pattern of eight degenerate positions in the sky (with certain rules for inclination and polarization). Table~\ref{tab:MBHBdegen} summarizes the qualitative picture of degeneracy breaking by the features of the response. We note that the recent work~\cite{Baibhav+20}, focusing on low-frequency ringdown-dominated signals for which the LISA motion can be neglected, remarked the same 8-modes sky degeneracy that we described in this section. We will see in Sec.~\ref{sec:MBHBPEacctime} that the eight-mode degeneracy pattern indeed appears when doing a pre-merger analysis; on the other hand, in results Figs.~\ref{fig:PEsmbh22hmCase0} and~\ref{fig:PEsmbh22hmCase9} for full IMR signals, out of the eight possible sky modes only the \textit{reflected} mode~\eqref{eq:degenreflection} survives. We will investigate in detail in Sec.~\ref{sec:MBHBPEacctime} how time-dependence and frequency-dependence in the response break part, but not all, of the degeneracies. 
 
 However, this analysis does not explain why one obtains, with a zero noise realization, marginalized posteriors for the sky positions that appear biased from the injected signal, when ignoring higher harmonics. This is the question that we will address in the next Section.
 
