@@ -609,17 +609,19 @@ For comparison and verification we also computed posterior samples using the nes
 \subsection{Fisher matrix parameter estimation}
 \label{subsec:Fisher}
 
-For comparison with our Bayesian inference results we also compute estimates of parameter uncertainties using the Fisher information matrix, which despite its limitations has been the common workhorse of LISA science studies to date ~\cite{Vallisneri08}. For measurements with additive Gaussian noise, as assumed here, the Fisher information matrix can be computed by
+For comparison with our Bayesian inference results we also compute estimates of parameter uncertainties using the Fisher information matrix, which despite its limitations has been the common workhorse of LISA science studies to date \cite{Vallisneri08}. For measurements with additive Gaussian noise, as assumed here, the Fisher information matrix can be computed by
 \be
-	F_{ij} = \left( \partial_{i} h | \partial_{i} h \right),
+	F_{ij} = \left( \partial_{i} h | \partial_{j} h \right),
 \ee
-where derivatives are taken with respect to one of the parameter space coordinates $\bm{\theta}$. In the Fisher matrix approach, the likelihood is approximated as
+where $\partial_i$ is the derivative with respect to component $i$ of the parameter vector $\bm{\theta}$. In the Fisher matrix approach, the likelihood is approximated as
 \be
 	\ln \calL \simeq -\frac{1}{2} F_{ij} \Delta \theta^{i} \Delta \theta^{j} \,,
 \ee
 with $\Delta \theta^{i}$ the parameter deviation from the true signal. The inverse of the Fisher matrix, $\Sigma = F^{-1}$, is the Gaussian covariance matrix that can be used as an estimate of the true parameter uncertainties.
 
-We compute the derivatives by second-order finite differences, with the signal inner-products expanded and computed before differencing. For these calculations, where numerical smoothness is more of a concern than speed, we compute the inner products~\eqref{eq:definnerproduct} explicitly on a fine grid. Generally, finite difference Fisher matrices can be problematic, with small numerical defects potentially having outsized impact, so the finite-difference step size $\epsilon_i$ used in each parameter derivative $\partial_{i}h$ must be chosen carefully. We target the step-size to be scaled off the diagonal Fisher matrix elements by ${\epsilon_i}\approx\delta/\sqrt{F_{ii}}$ using $\delta=0.001$ for the results shown here.  To achieve this we set begin with an initial choice of the $\epsilon_i$ scaled of parameter values or prior widths, then we estimate the Fisher diagonals and iterate until convergence. In this process we also constrain that the step is never more than $10^{-10}$ times the initial scaling.
+We compute the derivatives by second-order finite differences, with the signal inner-products expanded and computed before differencing. For these calculations, where numerical smoothness is more of a concern than speed, we compute the inner products~\eqref{eq:definnerproduct} explicitly on a fine grid. Generally, finite difference Fisher matrices can be problematic, with small numerical defects potentially having outsized impact, so the finite-difference step size $\epsilon_i$ used in each parameter derivative $\partial_{i}h$ must be chosen carefully. We target the step-size to be scaled off the diagonal Fisher matrix elements by ${\epsilon_i}\approx\delta/\sqrt{F_{ii}}$ using $\delta=0.001$ for the results shown here.
+To achieve this, we begin with an initial choice of $\epsilon_i$ scaled off the parameter values or prior widths, then we estimate the Fisher diagonals and iterate until convergence.
+In this process we also impose the constrain that the step is never larger than $10^{-10}$ times the initial scaling.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -632,7 +634,7 @@ We compute the derivatives by second-order finite differences, with the signal i
 \subsection{Signals and transfer functions}
 \label{sec:signaltransfer}
 
-We focus our analysis on a single set of mass parameters, representative of canonical SMBHB sources expected for LISA~\cite{Barausse12, Klein+15, LISA2017}: we pick a total redshifted mass $M=m_{1}+m_{2} = 2\times10^{6} M_{\odot}$ and a mass ratio $q=m_{1}/m_{2} = 3$, and place the source at a redshift $z=4$. The corresponding source-frame total mass is $M/(1+z) = 4\times10^{5} M_{\odot}$. The inclination plays an important role in deciding the importance of higher harmonics; we set it to the median value $\iota = \pi/3$. We will study in detail two such systems, named cases I and II, stemming from a series of twelve runs with randomized orientation parameters, and chosen to exemplify qualitative differences in the parameter estimation. The parameters are summarized in Table~\ref{tab:MBHBparams}, along with the SNR of these signals with and without higher harmonics. The randomized orientations and the inclusion of higher harmonics both have a sizeable impact on the SNR.
+We focus our analysis on a single choice of mass parameters, representative of canonical SMBHB sources expected for LISA~\cite{Barausse12, Klein+15, LISA2017}: we pick a total redshifted mass $M=m_{1}+m_{2} = 2\times10^{6} M_{\odot}$ and a mass ratio $q=m_{1}/m_{2} = 3$, and place the source at a redshift $z=4$. The corresponding source-frame total mass is $M/(1+z) = 4\times10^{5} M_{\odot}$. The inclination plays an important role in deciding the importance of higher harmonics; we set it to the median value $\iota = \pi/3$. We will study in detail two such systems, named cases I and II, stemming from a series of twelve runs with randomized orientation parameters, and chosen to exemplify qualitative differences in the parameter estimation. The parameters are summarized in Table~\ref{tab:MBHBparams}, along with the SNR of these signals with and without higher harmonics. The randomized orientations and the inclusion of higher harmonics both have a sizeable impact on the SNR.
 
 We note that, by contrast with current ground-based observations that are horizon-limited and that have a strong selection bias towards systems with favorable orientations (face-on or face-off), the LISA horizon for SMBHB systems extends to essentially the entirety of the observable universe~\cite{LISA2017}; it is therefore natural to consider randomized orientations.
 
@@ -695,9 +697,14 @@ We illustrate the Fourier-domain signal in Fig.~\ref{fig:hctdiahm}, with mode-by
 	S^{a,e,t}_{c} (f) &= f S^{a,e,t}_{h} (f) \,,
 \end{align}
 \esub
-with the strain-like observables and noise PSD defined in~\eqref{eq:defhaet} and~\eqref{eq:defShaet}. We represent the $A$ TDI channel (the $E$ channel is similar, and the $T$ channel is negligible at low frequencies). The full signal shows oscillatory features in frequency that are due to beatings between the harmonics that have smooth amplitudes individually. Since we represent mode contributions to the TDI observables, the response is included; we see that all modes display structure at low frequencies that corresponds to the time modulation resulting of the LISA motion.
+with the strain-like observables and noise PSD defined in~\eqref{eq:defhaet} and~\eqref{eq:defShaet}.
+We only show the $A$ TDI channel, as the $E$ channel is qualitatively similar and the $T$ channel is negligible at low frequencies.
+Although the individual harmonics have fairly smooth amplitudes as a function of frequency, the full signal shows strong oscillations caused by the beating between the harmonics.
+The effect of the LISA response can be seen in the amplitude oscillations at low frequency, which are caused by the modulation resulting from the LISA motion.
 
-Fig.~\ref{fig:tranferSMBHCase9} shows the detail of the transfer functions themselves. The Doppler phase variation $\Delta \Phi_{R}$~\eqref{eq:defPhiR} is a small effect at low frequencies, being suppressed by a factor $\sim 2\pi f R$; it is also small at higher frequencies, because the chirp happens over a short time interval during which $\Phi_{R}$ does not have time to vary. We also show transfer functions for the mode $h_{22}$ in the three TDI channels $A,E,T$, ($T$ is suppressed at low frequencies), after factoring out the Doppler phase. The low-frequency features show the time-dependency of the response created by the LISA motion, while frequency-dependency in the response appears at high frequencies. We will investigate further these different physical effects in the response in Sec.~\ref{subsec:MBHBresponseapprox}
+Fig.~\ref{fig:tranferSMBHCase9} focuses on the details of the transfer functions.
+The Doppler phase variation $\Delta \Phi_{R}$~\eqref{eq:defPhiR} is a small effect at low frequencies, being suppressed by a factor $\sim 2\pi f R$; it is also small at higher frequencies, because the chirp happens over a short time interval during which $\Phi_{R}$ does not have time to vary. We also show transfer functions for the mode $h_{22}$ in the three TDI channels $A,E,T$, ($T$ is suppressed at low frequencies), after factoring out the Doppler phase. The low-frequency features show the time-dependency of the response created by the LISA motion, while frequency-dependency in the response appears at high frequencies.
+Sec.~\ref{subsec:MBHBresponseapprox} will further investigate these different physical effects in the response.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -706,29 +713,31 @@ Fig.~\ref{fig:tranferSMBHCase9} shows the detail of the transfer functions thems
 
 \begin{figure}
    \includegraphics[width=.99\linewidth]{../plots/tflm_smbh.pdf}
-  \caption{Time-to-frequency relation for MBHB systems I and II with $M=2\times 10^6 \; M_{\odot}$, $q=3$ and $z=4$. The different lines correspond to the $(\ell, m)$ harmonics available in the waveform model. The time-to-frequency is computed according to the defintion in $t_{f}^{\ell m}$ defined in~\eqref{eq:deftflm}, evaluated at $m/2 \times f$ to map to the same time according to~\eqref{eq:fscalinglm}. The vertical lines represent the time cuts explained in~\ref{subsec:MBHBacctime} and the merger frequency.}
+  \caption{Relation between inspiral time and frequency for MBHB systems I and II with $M=2\times 10^6 \; M_{\odot}$, $q=3$ and $z=4$. The different lines correspond to the $(\ell, m)$ harmonics available in the waveform model. The time-to-frequency correspondence is computed according to $t_{f}^{\ell m}$ defined in~\eqref{eq:deftflm}, evaluated at $m f / 2$ to map to the same time according to~\eqref{eq:fscalinglm}. The vertical lines represent the time cuts explained in~\ref{subsec:MBHBacctime} and the merger frequency.}
   \label{fig:t-f-relation-lm}
 \end{figure}
 
 \begin{figure*}
   \centering
   \includegraphics[width=.98\linewidth]{../plots/overlapmodebymode_maxfscaledlm_t.pdf}
-  \caption{Cumulative contribution to $\mathrm{SNR}^{2}$ as defined in~\eqref{eq:defcontribSNR2}. The left panel shows inner products of modes with themselves, the middle panel shows cross-terms involving $h_{22}$, while the right panel shows other cross-terms. In all panels the black line represents the total. The horizontal axis gives the time to merger, with vertical lines for the cuts of~\ref{subsec:MBHBacctime}, and the dots on the right of each panel show the result for the full signal including the post-merger.}
+  \caption{Cumulative contribution to $\mathrm{SNR}^{2}$ as defined in~\eqref{eq:defcontribSNR2}. The left panel shows inner products of modes with themselves, the middle panel shows cross-terms involving $h_{22}$, while the right panel shows other cross-terms. In all panels the black line represents the total. The horizontal axis gives the time to merger, with vertical lines for the cuts of~\ref{subsec:MBHBacctime}, and the dots on the right of each panel show the result for the full signal including the ringdown.}
   \label{fig:modeoverlapsoftime}
 \end{figure*}
 
 We now illustrate the accumulation of the gravitational wave signal with time, which is crucial to understand the ability of the instrument to indentify and localize MBHB signals in advance of their coalescence, as well as the requirements put on the instrumental configuration (data gaps and downlink cadence). As will be shown in more details in a separate publication~\cite{MarsatBabak20} (see also~\cite{KatzLarson18}), within the uncertainties of astrophysical models we can expect the bulk of MBHB signals to be detectable only a few days prior to merger, while a tail of more favorable events could be observable for significantly longer times, up to months.
 
-We will focus on the system II of Table~\ref{tab:MBHBparams}, and we will highlight four different epochs, corresponding to the time before merger where a certain fraction of the total $\SNR = 666$ has been accumulated. We include higher harmonics here. These epochs are:
+We will focus on system II of Table~\ref{tab:MBHBparams}, and we will highlight four different epochs, corresponding to the time before merger where a certain fraction of the total $\SNR = 666$ has been accumulated. We include higher harmonics here. These epochs are:
 \begin{itemize}
-	\item $\SNR/64$: $\sim 42\mathrm{h}$ before merger, which corresponds roughly, with $\SNR \simeq 10$, to the first time we could confidently claim a detection;
-	\item $\SNR/16$: $\sim 2.5\mathrm{h}$ before merger;
-	\item $\SNR/4$: $\sim 7\mathrm{min}$ before merger.
+	\item $\SNR/64$: $\sim 42$ hr before merger, which corresponds roughly, with $\SNR \simeq 10$, to the first time we could confidently claim a detection;
+	\item $\SNR/16$: $\sim 2.5$ hr before merger;
+	\item $\SNR/4$: $\sim 7$ min before merger.
 \end{itemize}
 
-To represent the observations stopping with a certain time to merger left, we will approximate the cut in time using simply the time-to-frequency correspondence~\eqref{eq:deftflm} to translate it as a cut in frequency. In a more realistic setting, an abrupt interruption of the signal would translate into non-local features in the Fourier domain unless tapering is applied, but we ignore these complications here.
+We approximate the abrupt interruption of the observation as an upper frequency cutoff.
+The cutoff frequency is derived from the end time of the observation via the time-to-frequency correspondence~\eqref{eq:deftflm}.
+In reality, an abrupt interruption of the signal would produce non-local features in the Fourier domain (unless tapering is applied) which we do not consider here.
 
-The time-to-frequency correspondence~\eqref{eq:deftflm} gives for each mode time as a function of frequency. Due to the scaling $h_{\ell m} \propto e^{-i m \phi_{\rm orb}}$ with $\phi_{\rm orb}$ the orbital phase, a given time corresponds to different frequencies according to
+The time-to-frequency correspondence~\eqref{eq:deftflm} gives time as a function of frequency for each $(\ell, m)$ mode. Due to the scaling $h_{\ell m} \propto e^{-i m \phi_{\rm orb}}$ with $\phi_{\rm orb}$ the orbital phase, a given time corresponds to different frequencies according to
 \bsub\label{eq:fscalinglm}
 \begin{align}
 	\omega_{\ell m}(t) &\simeq \frac{m}{2} \times \omega_{22}(t) \quad (\mathrm{Inspiral})\,, \\
@@ -737,7 +746,9 @@ The time-to-frequency correspondence~\eqref{eq:deftflm} gives for each mode time
 \esub
 with $\omega_{\ell m} = \dot{\phi}_{\ell m}$ the instantaneous mode frequency in the time-domain. Fig.~\ref{fig:t-f-relation-lm} illustrates these relations and we use them to mark in Fig.~\ref{fig:hctdiahm} the frequencies corresponding to our time cuts, that differ for each mode, together with the merger frequency (also called the peak frequency).
 
-The relations~\eqref{eq:fscalinglm} are accurate for the inspiral, as such a correspondence is at the heart of the SPA. As a function, $t_{f}^{\ell m}$~\eqref{eq:deftflm} extends formally through merger, while losing in accuracy and in physical interpretation, becoming non-monotonous with frequency (see the discussion in~\cite{MB18}). The departure from the scaling~\eqref{eq:fscalinglm} between modes is illustrated in Fig.~\ref{fig:t-f-relation-lm}, where we see that it holds up to roughly $\sim$7min before merger, with the mode $h_{21}$ showing the earliest departure.
+The relations~\eqref{eq:fscalinglm} are only accurate for the inspiral regime, as such a correspondence is at the heart of the SPA.
+Although $t_{f}^{\ell m}$~\eqref{eq:deftflm} can be formally extended even past the merger time, close to merger it starts to lose accuracy and physical interpretation, eventually becoming non-monotonic with frequency~\cite{MB18}.
+The departure from the scaling~\eqref{eq:fscalinglm} between modes can be seen in Fig.~\ref{fig:t-f-relation-lm}: the scaling holds up to a few minutes before merger, and the mode $h_{21}$ shows the earliest signs of a deviation.
 
 Fig.~\ref{fig:modeoverlapsoftime} shows the cumulative contributions to the total SNR of individual mode combinations. For a generic signal $s = \sum_{\ell m} s_{\ell m}$ with mode contributions $s_{\ell m}$ ($s$ is any among the channels $\tilde{a}$, $\tilde{e}$, $\tilde{t}$)
 \be\label{eq:defcontribSNR2}
@@ -761,7 +772,8 @@ We also see that, as even the most subdominant modes contribute significantly to
   \label{fig:responseapproxtdia22}
 \end{figure}
 
-The LISA instrument response, as recalled in Section~\ref{sec:response}, features both a time- and a frequency-dependency. As we will see, these features play an important role in breaking degeneracies in the parameter estimation of the source, notably allowing us to localize the source in the sky. It is therefore important to understand these features, also in the light of the pre-merger accumulation of signal with time.
+The LISA instrument response, as recalled in Section~\ref{sec:response}, is both time- and frequency-dependent.
+As we will see, these features play an important role in breaking degeneracies in the parameter estimation of the source, notably allowing us to localize the source in the sky. It is therefore important to understand these features, also in the light of the pre-merger accumulation of signal with time.
 
 The time-dependency in the response mirrors the motion of the LISA constellation. In the low-frequency picture of~Sec.~\ref{subsec:lowfresponse}, the time dependency enters both in the Doppler phase term~\eqref{eq:defPhiR} (LISA moves in the wavefront) and in the time-dependent LISA-frame angles~\eqref{eq:Lframeangles} (the LISA arms change orientation). However, we have seen in the previous section that the SMBHB signals we consider here are quite short (less than two days). This limits the effect of the LISA motion: between the time where the signal becomes detectable and the merger, LISA has barely changed in orientation and position. Moreover, the region where the signal accumulates most of its SNR is even shorter, as shown in Fig.~\ref{fig:modeoverlapsoftime}.
 
@@ -773,11 +785,13 @@ To disentangle these different physical effects, we distinguish four different a
 	\item \textit{Frozen low-$f$}: we neglect both the time and frequency dependency in the response.
 \end{enumerate}
 
-Case (iii), \textit{Low-$f$}, has been extensively used in the past for the analysis of MBHB signals. Being based on the $f \ll f_{L}$ approximation, it is less inaccurate for inspiral-only signals, to which most previous studies were limited, as it is for a full IMR signal.
+Case (iii), \textit{Low-$f$}, has been extensively used in the past for the analysis of MBHB signals.
+Since it is based on the $f \ll f_{L}$ approximation, it is more appropriate for inspiral-only signals (to which most previous studies were limited) than for a full IMR signal.
 
-In the case (iv), \textit{Frozen low-$f$}, the response is equivalent to two LIGO-type detectors, lying motionless in the same location and rotated from each other by $\pi/4$, and there is no other information on the source's sky position other than the pattern functions of the two effective detectors. Contrarily to networks of ground-based observatories, we have no triangulation information from times of arrival at different detectors. This case is the most degenerate, and will be useful to get an analytical understanding of approximate degeneracies occuring when using the more complicated full response (i). 
+In the case (iv), \textit{Frozen low-$f$}, the response is equivalent to two coplanar LIGO-type detectors, lying motionless at the same location and rotated with respect to each other by $\pi/4$, and there is no other information on the source's sky position other than the pattern functions of the two effective detectors. Contrarily to networks of ground-based observatories, we have no triangulation information from times of arrival at different detectors.
+This is the most degenerate case, and will be useful to get an analytical understanding of the approximate degeneracies occuring when using the more complicated full response (i). 
 
-The effect on the response of adopting these approximations is shown in Fig.~\ref{fig:responseapproxtdia22}. We display the strain transfer function $\calT_{h_{a}}^{22}(f)$ as defined in~\eqref{eq:defhaet} for the mode $h_{22}$, with the four lines showing the four approximations (i)-(iv). Vertical lines also indicate the times to merger highlighted in Sec.~\ref{subsec:MBHBacctime}, as well as the peak frequency. Paralleling this figure to Figs.~\ref{fig:hctdiahm} and~\ref{fig:modeoverlapsoftime}, we stress that most of the SNR is accumulated in the very last instants before merger and at the merger itself, due to the noise normalization not visible at the level of the transfer function.
+The effect of these approximations on the response is shown in Fig.~\ref{fig:responseapproxtdia22}. We display the strain transfer function $\calT_{h_{a}}^{22}(f)$ as defined in~\eqref{eq:defhaet} for the mode $h_{22}$, with the four lines showing the four approximations (i)-(iv). Vertical lines also indicate the times to merger highlighted in Sec.~\ref{subsec:MBHBacctime}, as well as the peak frequency. Paralleling this figure to Figs.~\ref{fig:hctdiahm} and~\ref{fig:modeoverlapsoftime}, we stress that most of the SNR is accumulated in the very last instants before merger and at the merger itself, due to the noise normalization not visible at the level of the transfer function.
 
 The \textit{Frozen low-$f$} transfer function is just a constant factor, similarly to the LIGO response where $h_{+,\times}$ are simply multiplied by pattern functions. The \textit{Low-$f$} transfer function goes to the same constant at high frequencies, where the signal chirps so rapidly that the LISA motion is negligible. At low frequencies, however, modulations due to the LISA motion appear. The \textit{Frozen} transfer function asymptotes to the constant of the \textit{Frozen low-$f$} case at low frequencies, for $f \ll f_{L}$. At higher frequencies, we see a growing departure from this approximation. As noted in Sec.~\ref{subsec:lowfresponse}, when reaching the armlength transfer frequency $f_{L} = 0.12 \Hz$ the long-wavelength approximation has completely broken down; departures start to be significant at much lower frequencies. Finally, the \textit{Full} transfer function displays all the features we discussed.
 
@@ -801,7 +815,8 @@ We note finally a coincidence in Fig.~\ref{fig:responseapproxtdia22}: the freque
 \begin{figure*}
   \centering
   \includegraphics[width=.98\linewidth]{../plots/corner_smbh_case9_ptmcmc_22_hm_withzoom.png}
-  \caption{Same as Fig.~\ref{fig:PEsmbh22hmCase0}, for the MBHB system II of Table~\ref{tab:MBHBparams}. In extrinsic parameters, the red 2D contours are barely visible on this scale.}
+  \caption{Same as Fig.~\ref{fig:PEsmbh22hmCase0}, for the MBHB system II of Table~\ref{tab:MBHBparams}.
+           In the extrinsic parameters, the red 2D contours are barely visible on this scale.}
   \label{fig:PEsmbh22hmCase9}
 \end{figure*}
 
@@ -826,19 +841,32 @@ We note finally a coincidence in Fig.~\ref{fig:responseapproxtdia22}: the freque
   \label{fig:PEsmbhskyptmcmcbambi}
 \end{figure*}
 
-We performed Bayesian parameter estimation for the two MBHB sources listed in Table.~\ref{tab:MBHBparams}, using the methodology summarized in Sec.~\ref{sec:method}. In particular, we set the noise realization to zero, used accelerated likelihood based on an amplitude and phase representation of the signals. The priors used are logarithmic in mass, flat in luminosity distance, and flat for the angles: flat on the sphere for the pairs of angles $(\iota, \varphi)$ and $(\lambda, \beta)$, and flat for the polarization $\psi$. We expect priors to be unimportant for the masses, since they are well determined in this very high SNR limit. The luminosity distance, as we will see, can be less well determined in the absence of higher harmonics, and one should keep in mind that the prior choice does affect the posterior there.
+Using the methodology summarized in Sec.~\ref{sec:method}, here we present the results of Bayesian parameter estimation for the two MBHB sources listed in Table~\ref{tab:MBHBparams}.
+The priors used are logarithmic in mass, flat in luminosity distance, and flat for the angles: flat on the sphere for the pairs of angles $(\iota, \varphi)$ and $(\lambda, \beta)$, and flat for the polarization $\psi$. We expect priors to be unimportant for the masses, since they are well determined in this very high SNR limit. The luminosity distance, as we will see, can be less well determined in the absence of higher harmonics, and one should keep in mind that the prior choice does affect the posterior there.
 
-We find that both our samplers \texttt{ptmcmc} and \texttt{multinest}, which as we recall were not really developed or tuned to this particular problem, spend a large number of likelihood evaluations, from a few $10^{7}$ to $10^{8}$, to produce a final set of posterior samples. This translates in reasonable computing costs thanks to our fast likelihoods, and is likely to be improvable in the future.
+We find that both our samplers, \texttt{ptmcmc} and \texttt{multinest}, require between $\sim 10^{7}$ and $\sim 10^{8}$ likelihood evaluations to produce a final set of posterior samples.
+Thanks to our fast likelihood implementation, this already represents a manageable computing cost.
+We stress again that the settings of both samplers were not optimized by taking into account the characteristics of the specific problem or the expected correlations between parameters.
+Therefore, we expect that the cost can be reduced even further with future optimizations.
 
-To illustrate the role of higher harmonics in the analysis, we will present two classes of results: ``22'', where we inject and recover signals including only the dominant harmonic $h_{22}$, and ``HM'', where we both inject and recover with the higher harmonics $(h_{22}, h_{21}, h_{33}, h_{44}, h_{55})$. We do not attempt to recover an injection with higher modes using 22-mode waveforms; one expects parameter biases in this case, induced by the inadequacy of the simplified waveforms. A related question would be to assess the mode content necessary for waveform models to mitigate systematic biases when analyzing full GR signals. We leave such waveform systematics studies for future work; we only note that, as shown in Fig.~\ref{fig:modeoverlapsoftime}, from SNR only the set of five modes we include in the present study is quite obviously incomplete.
+To illustrate the role of higher harmonics in the analysis, we will present two classes of results: ``22'', where we perform both the simulation and the inference by only including the dominant harmonic $h_{22}$, and ``HM'', where we perform both the simulation and the inference with all available harmonics $(h_{22}, h_{21}, h_{33}, h_{44}, h_{55})$.
+We do not consider the case where the simulation includes all harmonics and the inference is restricted to the 22 mode, as this will most likely bias the inferred parameters by an amount larger than the statistical uncertainties.
+In fact, the SNR calculation in Fig.~\ref{fig:modeoverlapsoftime} suggests that even the set of five modes included in this study may not be sufficient.
+The question of how many harmonics are necessary to keep the systematic errors below the statistical uncertainties is important and will be investigated in the future.
 
-Figs.~\ref{fig:PEsmbh22hmCase0} and~\ref{fig:PEsmbh22hmCase9} show posterior distributions for all parameters for Cases I and II respectively. We overlay ``22'' and ``HM'' posteriors. All results for MBHB systems are presented using LISA-frame parameters, as defined in App.~\ref{app:conventions}. We should keep in mind the difference in SNR of Cases I and II ($\SNR \simeq 945$ versus $\SNR \simeq 666$ with higher harmonics, see Table~\ref{tab:MBHBparams}), resulting from their different orientation, however their posteriors have qualitative differences that go beyond a simple scaling of the errors as $\sim 1/\SNR$.
+Figs.~\ref{fig:PEsmbh22hmCase0} and~\ref{fig:PEsmbh22hmCase9} show posterior distributions for all parameters for Cases I and II respectively.
+We overlay the ``22'' and ``HM'' posteriors.
+All results for MBHB systems are presented using LISA-frame parameters, as defined in App.~\ref{app:conventions}. We should keep in mind the difference in SNR of Cases I and II ($\SNR \simeq 945$ versus $\SNR \simeq 666$ with higher harmonics, see Table~\ref{tab:MBHBparams}), resulting from their different orientation, however their posteriors have qualitative differences that go beyond a simple scaling of the errors as $\sim 1/\SNR$.
 
 In Case I, the ``22'' posterior appears to be well represented by a multimodal Gaussian, with multimodality for the angular parameters. The sky position, most notably, admits a degenerate mode at $\betaL \rightarrow -\betaL$, although it has less weight than the main mode around the injection. By contrast, in Case II, the ``22'' posterior is much more degenerate. The distance and inclination are very degenerate with each other, with a support extending all the way to $\iota=0$ (or $\iota=\pi$). The phase $\varphi$ and polarization $\psiL$ have a distinct extended degeneracy along lines of constant $\varphi + \psiL$ and $\varphi - \psiL$. Most notably, the sky position, if retaining the same overall bimodality $\betaL \rightarrow -\betaL$ as in Case I, shows here a curious feature: the marginalized sky posterior peaks away from the injected value. Looking at correlations, we see that the shifted peak corresponds to the region of high distance (and extremal inclination). This is a genuine feature of the multidimensional zero-noise posterior and will be explained in Sec.~\ref{subsec:MBHBPEdegen22}.
 
-In both Cases I and II, including the higher harmonics has a major effect on the parameter recovery (as was already stressed in~\cite{Arun+07a, TriasSintes07, PorterCornish08, McWilliams+09}), much beyond what we would expect from the sole gain in total SNR shown in Table.~\ref{tab:MBHBparams} (and a scaling of statistical errors $\sim 1/\SNR$). The marginalized posterior of the masses is narrower, although not qualitatively different; the major change is in the extrinsic parameters.
+In both Cases I and II, including the higher harmonics greatly reduces the uncertainties in the inferred parameters, consistently with previous studies~\cite{Arun+07a, TriasSintes07, PorterCornish08, McWilliams+09}.
+The improvement is much larger than we would expect from the gain in total SNR and a scaling of statistical errors $\sim 1/\SNR$.
+The largest effect is found for the angular parameters and luminosity distance.
+The mass posteriors are slightly more precise, but remain qualitatively similar.
 
-We can understand the effect of the higher harmonics by noting that, in a signal of the form $\sum_{\ell m} \sYlm(\iota, \varphi)h_{\ell m}$ where the $\sYlm$ all have a different dependency with the inclination $\iota$, measuring independently two separate contributions $(\ell m) \neq (\ell' m')$ gives us an independent measurement of $\iota$ by the relative amplitude of the two mode contributions. When only the $h_{22}$ mode is included, both the luminosity distance and inclination determine the overall signal amplitude and they are therefore degenerate. This is visible in Figs.~\ref{fig:PEsmbh22hmCase0} and~\ref{fig:PEsmbh22hmCase9}, where including the higher harmonics in the analysis gives a better determination of distance and inclination by more than an order of magnitude.
+We can understand the dramatic effect of the higher harmonics on distance and inclination by noting that, in a signal of the form $\sum_{\ell m} \sYlm(\iota, \varphi)h_{\ell m}$ where the $\sYlm$ all have a different dependency with the inclination $\iota$, measuring independently two separate contributions $(\ell m) \neq (\ell' m')$ gives us an independent measurement of $\iota$ by the relative amplitude of the two mode contributions.
+When only the $h_{22}$ mode is included, both the luminosity distance and inclination determine the overall signal amplitude and they are therefore degenerate.
 
 Higher harmonics also lead to an independent determination of the phase $\varphi$, which in turn breaks degeneracies in the other angular parameters. In both cases I and II, the sky localization in vastly improved, with a remaining multimodality that we will discuss in the next section.
 
