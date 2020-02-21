@@ -133,7 +133,7 @@ On the other hand, important advances have been registered in recent years in pr
 
 Here we demonstrate that standard Bayesian inference can be performed for SMBHBs using a self-consistent waveform model that includes inspiral, merger, ringdown and higher-order modes (albeit no spins) and a full model of the LISA response. We investigate and explain degeneracies in the posterior distribution of the source's parameters, and highlight the crucial role played by the higher harmonics in the signal and the frequency-dependency in the instrument response.
 
-We start by introducing a fast method to calculate the likelihood for a black hole merger. This method includes: a fast computation of a Fourier-domain inspiral-merger-ringdown waveform with higher-order modes based on ROM; a fast Fourier-domain computation of the LISA response based on~\cite{MB18}; and a fast method for computing the noise-weighted product between waveforms when setting the noise realization to zero. We couple our likelihood with two codes for Bayesian inference based on different sampling techniques, constructing an inference engine which enables us to perform a variety of investigations with simulated black hole mergers.
+We start by introducing a fast method to calculate the likelihood for a black hole merger. This method includes: a fast computation of a Fourier-domain inspiral-merger-ringdown waveform with higher-order modes based on a reduced order model; a fast Fourier-domain computation of the LISA response based on~\cite{MB18}; and a fast method for computing the noise-weighted product between waveforms when setting the noise realization to zero. We couple our likelihood with two codes for Bayesian inference based on different sampling techniques, constructing an inference engine which enables us to perform a variety of investigations with simulated black hole mergers.
 
 Focusing on two examples of moderately massive black holes binaries, we perform Bayesian parameter estimation simulation for full, inspiral-merger-signals, and we show the crucial role of higher-order modes. We highlight the challenges we encounter in the sampling, and compare our two samplers with each other and with the Fisher matrix approximation. We explore degeneracies appearing between some of the parameters when ignoring these higher harmonics, and derive an analytic explanation of their origin via a simplified approximations to the instrument response. We show for our examples how the posterior distributions evolve over time as more and more data becomes available for the inference, and explain how degeneracies between different positions of the source in the sky are broken by features in the instrument response.
 
@@ -264,7 +264,7 @@ The LISA response~\cite{EW75, Cutler97, Larson+99, CR02, RCP04} can be built fro
 \be\label{eq:defyslr}
 	y_{slr} = \frac{1}{2} \frac{n_{l} \otimes n_{l}}{1 - k\cdot n_{l}} : \left[ H(t - L - k\cdot p_{s}) - H(t - k\cdot p_{r}) \right] \,,
 \ee
-with $H$ the transverse-traceless matrix representing the gravitational wave, $L$ the delay along one arm, taken to be fixed, $n_{l}$ the link unit vectors (from $s$ to $r$) and $p_{s}$, $p_{r}$ the positions of the spacecrafts. Here $n_{l}$, $p_{s}$ and $p_{r}$ are evaluated at the same time $t$.
+with $H$ the transverse-traceless matrix representing the gravitational wave, $k$ the wave propagation vector, $L$ the delay along one arm, taken to be fixed, $n_{l}$ the link unit vectors (from $s$ to $r$) and $p_{s}$, $p_{r}$ the positions of the spacecrafts. Here $n_{l}$, $p_{s}$ and $p_{r}$ are evaluated at the same time $t$.
 
 In the frequency domain, modes will be represented with their amplitude and phase as
 \be\label{eq:hlmampphase}
@@ -379,7 +379,7 @@ with $S^{\rm pm}$ the test-mass noise PSD and $S^{\rm op}$ the optical noise PSD
 	S_{h}^{a,e,t} (f) = \frac{S_{n}^{a,e,t}(f)}{(6 \pi f L)^{2}}\,.
 \ee
 
-The prefactors~\eqref{eq:scalingAET} are oscillatory and have zero-crossings at high frequencies, with the first one occuring at $f_{L}/2 = 0.06 \mathrm{Hz}$, which is why it is convenient to eliminate them to avoid $0/0$ numerical instabilities. However, scaling these factors out from both the signal and the noise is an approximation, as we can expect that realistic delays would lead to imperfect cancellations; in the vicinity of the zero-crossings, we should therefore expect a localized loss of sensitivity.
+The prefactors~\eqref{eq:scalingAET} are oscillatory and have zero-crossings at high frequencies, with the first one occuring at $f_{L}/2 = 0.06 \mathrm{Hz}$, which is why it is convenient to eliminate them to avoid $0/0$ numerical instabilities. However, scaling these factors out from both the signal and the noise is an approximation, as we can expect that realistic delays would lead to imperfect cancellations; in the vicinity of the zero-crossings, we should therefore expect a localized loss of sensitivity. \SM{make clear approximation already baked in}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -418,7 +418,7 @@ where we introduced the detector tensors
 	D_{e} &= \frac{L\sqrt{3}}{2} \left( n_{1} \otimes n_{1} - n_{3} \otimes n_{3} \right) \,.
 \end{align}
 \esub
-Here, we have made apparent factors $(-2i\pi f)$, which correspond to Fourier-domain time derivatives.
+Here, we have made apparent factors $(-2i\pi f)$, which correspond to a time derivative in the Fourier-domain.
 The observables $\tilde{a}$, $\tilde{e}$ are therefore analogous to time derivatives of the strain commonly used for ground-based detectors.
 
 We can now map these two channels to two fictitious LIGO-type detectors as follows. For an orthogonal detector of the same setup as the ground-based LIGO and Virgo with armlength $L_{D}$, rotated by an angle $\epsilon_{D}$ from the basis vectors $x,y$, the detector tensor is
@@ -445,7 +445,7 @@ which gives in terms of the LISA-frame sky position angles $\lambdaL$, $\betaL$ 
 	F_{e}^{\times} &= \sin\beta_{L} \sin \left(2\lambda_{L} + \frac{\pi}{6} \right)  \,.
 \end{align}
 \esub
-These functions are the familiar pattern functions of ground-based detectors (for $\psi_{L}=0$).
+These functions are the familiar pattern functions of ground-based detectors (for $\psi_{L}=0$) \SM{[add citation]}.
 One can check that the expressions for the channel $e$ are obtained from the expressions for $a$ with the replacement $\lambdaL \rightarrow \lambdaL + \pi/4$.
 
 If we introduce
@@ -486,7 +486,7 @@ if we ignore the delay $k \cdot p_{0}$ and treat the angles as constants. This i
 \subsection{Bayesian setting}
 \label{subsec:bayes}
 
-Introducing the standard matched-filter inner product (also called overlap) as
+Introducing the standard matched-filter inner \SM{[add reference]} product (also called overlap) as
 \be\label{eq:definnerproduct}
 	( \tilde{a} | \tilde{b} ) = 4 \mathrm{Re} \int_{0}^{+\infty} df \; \frac{\tilde{a}(f) \tilde{b}^{*}(f)}{S_{n}(f)} \,,
 \ee
@@ -572,11 +572,11 @@ We combine this implementation of overlap computations with our fast waveform ge
 \begin{table}
 	\begin{tabular}{|c|c|c|c|}
 		\hline
-		Source type & Modes & Grid points & Cost \\
+		Source type & Modes & Grid & Cost \\
 		\hline
-		SBHB & $h_{22}$ & $500$ & $2$ ms \\
-		SMBHB & $h_{22}$ & $300$ & $1.2$ ms \\
-		SMBHB & $5$ & $300$ & $15$ ms \\
+		SBHB & $(2,2)$ & $500$ & $2$ ms \\
+		SMBHB & $(2,2)$ & $300$ & $1.2$ ms \\
+		SMBHB & $(2,2),(2,1),(3,3),(4,4),(5,5)$ & $300$ & $15$ ms \\
 		\hline
 	\end{tabular}
 	\label{tab:likecost}
@@ -713,7 +713,7 @@ Sec.~\ref{subsec:MBHBresponseapprox} will further investigate these different ph
 
 \begin{figure}
    \includegraphics[width=.99\linewidth]{../plots/tflm_smbh.pdf}
-  \caption{Relation between inspiral time and frequency for MBHB systems I and II with $M=2\times 10^6 \; M_{\odot}$, $q=3$ and $z=4$. The different lines correspond to the $(\ell, m)$ harmonics available in the waveform model. The time-to-frequency correspondence is computed according to $t_{f}^{\ell m}$ defined in~\eqref{eq:deftflm}, evaluated at $m f / 2$ to map to the same time according to~\eqref{eq:fscalinglm}. The vertical lines represent the time cuts explained in~\ref{subsec:MBHBacctime} and the merger frequency.}
+  \caption{Relation between time and frequency for MBHB systems I and II with $M=2\times 10^6 \; M_{\odot}$, $q=3$ and $z=4$. The different lines correspond to the $(\ell, m)$ harmonics available in the waveform model. The time-to-frequency correspondence is computed according to $t_{f}^{\ell m}$ defined in~\eqref{eq:deftflm}, evaluated at $m f / 2$ to map to the same time according to~\eqref{eq:fscalinglm}. The vertical lines represent the time cuts explained in~\ref{subsec:MBHBacctime} and the merger frequency.}
   \label{fig:t-f-relation-lm}
 \end{figure}
 
@@ -847,7 +847,7 @@ The priors used are logarithmic in mass, flat in luminosity distance, and flat f
 We find that both our samplers, \texttt{ptmcmc} and \texttt{multinest}, require between $\sim 10^{7}$ and $\sim 10^{8}$ likelihood evaluations to produce a final set of posterior samples.
 Thanks to our fast likelihood implementation, this already represents a manageable computing cost.
 We stress again that the settings of both samplers were not optimized by taking into account the characteristics of the specific problem or the expected correlations between parameters.
-Therefore, we expect that the cost can be reduced even further with future optimizations.
+Therefore, we expect that the cost can be reduced with future optimizations.
 
 To illustrate the role of higher harmonics in the analysis, we will present two classes of results: ``22'', where we perform both the simulation and the inference by only including the dominant harmonic $h_{22}$, and ``HM'', where we perform both the simulation and the inference with all available harmonics $(h_{22}, h_{21}, h_{33}, h_{44}, h_{55})$.
 We do not consider the case where the simulation includes all harmonics and the inference is restricted to the 22 mode, as this will most likely bias the inferred parameters by an amount larger than the statistical uncertainties.
