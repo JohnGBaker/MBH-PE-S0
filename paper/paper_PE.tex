@@ -8,7 +8,7 @@
 \usepackage{bm}
 %\usepackage{color}
 \usepackage{enumerate}
-\usepackage{ulem}
+%\usepackage{ulem}
 \usepackage{tabularx}
 \usepackage{braket}
 
@@ -294,7 +294,7 @@ The analysis of~\cite{MB18} has shown that higher-order corrections are small in
 
 We note an important feature of~\eqref{eq:Gslr}: frequency-dependent terms only feature the projections
 \be
-	k_{\parallel} \cdot n_{l}, \; k_{\parallel} \cdot p_{s,r} \,, 
+	k_{\parallel} \cdot n_{l}, \; k_{\parallel} \cdot p_{s,r} \,,
 \ee
 with $k_{\parallel}$ the projection of the wave vector $k$ in the (instantaneous) LISA plane, thus the frequency-dependent factors are invariant when we reflect $k$ across this plane. This will remain true when constructing TDI variables below\footnote{Strictly speaking it will not be true in the most general response formalism of~\cite{MB18}, where corrections are either slightly non-local in time or involve velocities, that are out of the LISA plane.}. We will investigate sky degeneracies in detail in Sections~\ref{subsec:MBHBPEdegen} and~\ref{subsec:MBHBacctimebreakdegen}.
 
@@ -341,7 +341,7 @@ where we have eliminated frequency-dependent prefactors that are common to the s
 	\tilde{t} &= \frac{1}{2\sqrt{2} e^{3i\pi fL} \sin (\pi f L) \sin (2\pi f L)} \times \tilde{T} \,.
 \end{align}
 \esub
-We will use mode-by-mode transfer functions for these reduced channels as 
+We will use mode-by-mode transfer functions for these reduced channels as
 \be\label{eq:defTlmaet}
 	\tilde{a}, \tilde{e}, \tilde{t} = \sum_{\ell, m} \calT_{a,e,t}^{\ell m} \tilde{h}_{\ell m}\,.
 \ee
@@ -497,7 +497,7 @@ with $p(\bm{\theta})$ the priors on the parameters, and $p(d)$ the evidence that
 
 In our analysis, we will use the so-called zero-noise approximation. This corresponds simply to performing a Bayesian analysis with~\eqref{eq:deflnL} and ~\eqref{eq:defBayes}, but setting the noise realization to zero, $n=0$. It allows us to accelerate the likelihood computation, as will be explained in~\ref{subsec:likelihood}. For exploratory parameter estimation runs, this approximation allows us to explore the structure of the likelihood with its possible parameter degeneracies, and is a significant improvement over Fisher matrix estimates in that sense. We leave the extension of our analysis to include noise realizations for future work. We will also ignore waveform systematic errors and assume our waveform templates match exactly the real signals.
 
-The log-likelihood function that we use, with a zero noise realization, is a sum over the three independent channels $A$, $E$, $T$~\eqref{eq:defAET} rescaled according to~\eqref{eq:scalingAET}: 
+The log-likelihood function that we use, with a zero noise realization, is a sum over the three independent channels $A$, $E$, $T$~\eqref{eq:defAET} rescaled according to~\eqref{eq:scalingAET}:
 \begin{align}\label{eq:deflnLaet}
 	\ln\calL &= -\frac{1}{2} \left[ \left( \tilde{a} - \tilde{a}_{\rm inj} | \tilde{a} - \tilde{a}_{\rm inj}  \right) + \left( \tilde{e} - \tilde{e}_{\rm inj} | \tilde{e} - \tilde{e}_{\rm inj}  \right) \right. \nn\\
 	& \qquad\qquad + \left. \left( \tilde{t} - \tilde{t}_{\rm inj} | \tilde{t} - \tilde{t}_{\rm inj} \right) \right] \,,
@@ -539,7 +539,7 @@ with transfer functions $\calT$ for each TDI channel, and Fourier-domain amplitu
 
 The difficulty of computing numerically such an overlap depends on the phase difference. A large phase difference causes the integrand to be very oscillatory, requiring more frequency resolution than non-oscillatory integrands; on the other hand, oscillatory integrands give rise to a small integral due to cancellation effects, while non-oscillatory integrands contribute the most. For a single mode, $\mathrm{SNR}$ terms of the type $(h|h)$ have a zero phase difference by construction, but including different modes generates cross-terms $(\ell, m) \neq (\ell', m')$ with a large phase difference.
 
-Note that in a Bayesian analysis, a large fraction of the time (after burn-in) will be spent exploring signals that are rather close to the injection; with a single mode phase differences will be mostly small. In this work, we wish to include oscillatory cross-terms between modes, and we use a generic numerical treatment for the integrals~\eqref{eq:lnLoverlapstructure} and keep all terms with no further approximation. Other methods to accelerate likelihoods, applicable in the presence of noise, include heterodyning with a reference signal~\cite{Cornish10}, using a variable frequency resolution (multibanding)~\cite{Porter14, Vinciguerra+17}, and, as discussed before, ROQs~\cite{Smith+14, Canizares+14, Smith+16}. We leave for future work the generalization of our likelihood computations to accomodate for noise. 
+Note that in a Bayesian analysis, a large fraction of the time (after burn-in) will be spent exploring signals that are rather close to the injection; with a single mode phase differences will be mostly small. In this work, we wish to include oscillatory cross-terms between modes, and we use a generic numerical treatment for the integrals~\eqref{eq:lnLoverlapstructure} and keep all terms with no further approximation. Other methods to accelerate likelihoods, applicable in the presence of noise, include heterodyning with a reference signal~\cite{Cornish10}, using a variable frequency resolution (multibanding)~\cite{Porter14, Vinciguerra+17}, and, as discussed before, ROQs~\cite{Smith+14, Canizares+14, Smith+16}. We leave for future work the generalization of our likelihood computations to accomodate for noise.
 
 First, we built a joint sparse frequency grid suitable to represent both signals and the transfer functions. We then resample the integrand on this grid, separating prefactors (noise PSD, transfer function without the Doppler phase~\eqref{eq:defPhiR}, signal amplitude) from phases (Doppler phases, signal phase difference). We build a cubic spline for the prefactor, and a quadratic spline for the phase. We obtain the structure
 \be\label{eq:fastlikestructure}
@@ -638,7 +638,7 @@ We note that, by contrast with current ground-based observations that are horizo
 	\end{tabular}
 	\caption{Parameters of the simulated SMBHB mergers. Angles are given in the SSB-frame. The $\mathrm{SNR}$ labelled $h_{\ell m}$ is obtained including all harmonics listed in~\eqref{eq:listmodes}.}
 	\label{tab:MBHBparams}
-\end{table} 
+\end{table}
 
 \begin{figure}
   \centering
@@ -713,7 +713,7 @@ We choose to show contributions to $\SNR^{2}$ because this is the scale on which
 
 We can draw several conclusions from Fig.~\ref{fig:modeoverlapsoftime}. The signal reaches a roughly detectable level of $\SNR=10$ about two days before merger. We see that the SNR accumulates rapidly in the last instants before merger, as shown in particular by reaching $\SNR/4$ only 7 minutes before coalescence. For a period following first detection most or all of the higher modes are not significant. Stopping the signal at a given time in the inspiral somewhat alters the hierarchy between subdominant modes that was seen in their power spectra: contrasting Fig.~\ref{fig:modeoverlapsoftime} with Fig.~\ref{fig:hctdiahm}, we see e.g that $h_{21}$ is now subdominant before merger (and increases significantly in strength when including the post-merger signal). This is because modes $h_{\ell m}$ with a higher $m$ will reach a higher frequency at any given time, while the weighting by the noise favors higher frequencies. This is also visible in Fig.~\ref{fig:hctdiahm} where ticks translate a cut in time into a different cut in frequency for different modes.
 
-We also see that, since even the most subdominant modes contribute significantly to $\SNR^{2}$, our set $(22, 21, 33, 44, 55)$ is seems to be incomplete; we will need waveforms with a richer set of higher harmonics to analyze real LISA data. Diagonal terms $(s_{\ell m} | s_{\ell m})$ and cross terms with $(\ell m) \neq (\ell' m')$ are qualitatively different. Diagonal terms accumulate coherently, while cross terms are oscillatory, as they feature two modes with different phasings. This oscillatory character tends to suppress the contribution of the cross terms; however, we see they are not negligible, in particular the ones involving the dominant harmonic and a subdominant harmonic. 
+We also see that, since even the most subdominant modes contribute significantly to $\SNR^{2}$, our set $(22, 21, 33, 44, 55)$ is seems to be incomplete; we will need waveforms with a richer set of higher harmonics to analyze real LISA data. Diagonal terms $(s_{\ell m} | s_{\ell m})$ and cross terms with $(\ell m) \neq (\ell' m')$ are qualitatively different. Diagonal terms accumulate coherently, while cross terms are oscillatory, as they feature two modes with different phasings. This oscillatory character tends to suppress the contribution of the cross terms; however, we see they are not negligible, in particular the ones involving the dominant harmonic and a subdominant harmonic.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -886,9 +886,9 @@ When adding back the LISA motion while still ignoring the frequency-dependence i
 	\end{tabularx}
 	\caption{Sketch of the degeneracy structure of the eight modes in the sky, with the cases where the degeneracy is exact (degen.), and with the qualitative effects that break the degeneracy with the injected signal: $t$-dependency, $f$-dependency, both, or only the Doppler phase $\Delta \Phi_{R}$~\eqref{eq:defPhiR}. This qualitative structure is the same with and without higher harmonics.}
 	\label{tab:MBHBdegen}
-\end{table} 
+\end{table}
 
-Thus, we have found that in the \textit{Frozen low-$f$} approximation for the response we expect a pattern of degeneracy of eight degenerate positions in the sky (with certain rules for inclination and polarization). Table~\ref{tab:MBHBdegen} summarizes the qualitative picture of degeneracy breaking by the features of the response. We note that the recent work~\cite{Baibhav+20}, focusing on low-frequency ringdown-dominated signals for which the LISA motion can be neglected, remarked the same 8-modes sky degeneracy that we described in this section. We will see in Sec.~\ref{sec:MBHBPEacctime} that the eight-mode degeneracy pattern indeed appears when doing a pre-merger analysis; on the other hand, in results Figs.~\ref{fig:PEsmbh22hmCase0} and~\ref{fig:PEsmbh22hmCase9} for full IMR signals, out of the eight possible sky modes only the \textit{reflected} mode~\eqref{eq:degenreflection} survives. We will investigate in detail in Sec.~\ref{sec:MBHBPEacctime} how time-dependence and frequency-dependence in the response break part, but not all, of the degeneracies. 
+Thus, we have found that in the \textit{Frozen low-$f$} approximation for the response we expect a pattern of degeneracy of eight degenerate positions in the sky (with certain rules for inclination and polarization). Table~\ref{tab:MBHBdegen} summarizes the qualitative picture of degeneracy breaking by the features of the response. We note that the recent work~\cite{Baibhav+20}, focusing on low-frequency ringdown-dominated signals for which the LISA motion can be neglected, remarked the same 8-modes sky degeneracy that we described in this section. We will see in Sec.~\ref{sec:MBHBPEacctime} that the eight-mode degeneracy pattern indeed appears when doing a pre-merger analysis; on the other hand, in results Figs.~\ref{fig:PEsmbh22hmCase0} and~\ref{fig:PEsmbh22hmCase9} for full IMR signals, out of the eight possible sky modes only the \textit{reflected} mode~\eqref{eq:degenreflection} survives. We will investigate in detail in Sec.~\ref{sec:MBHBPEacctime} how time-dependence and frequency-dependence in the response break part, but not all, of the degeneracies.
 
 However, this analysis does not explain why one obtains, with a zero noise realization, marginalized posteriors for the sky positions that appear biased from the injected signal, when ignoring higher harmonics. This is the question that we will address in the next Section.
 
@@ -911,7 +911,7 @@ However, this analysis does not explain why one obtains, with a zero noise reali
 
 In this section, we investigate the cause of the apparent bias in sky position in the posterior distribution of System~II when injecting and recovering with 22-mode only waveforms, as shown in Figs.~\ref{fig:PEsmbh22hmCase9} (and in the middle left panel of~\ref{fig:PEsmbhskyptmcmcbambi}). The posterior for the sky forms a peak that appears shifted from the injection. This feature is surprising: since we set the noise realization to zero, the maximum likelihood is by construction reached at the injection. It occurs only when 22-mode only signals are used, and is present for both Bayesian samplers, although $\texttt{ptmcmc}$ and $\texttt{multinest}$ differ noticeably for this case with $\texttt{ptmcmc}$ recovering more parameter volume. We will show that we can understand this feature as a projection effect in the multidimensional degenerate posterior. Understanding the structure of these features will be useful to inform Bayesian samplers, for instance by building adapted jump proposals allowing a much faster mixing of MCMC chains than naive methods.
 
-In the following we will aim at explaining these features analytically by building a simplified model for the response. In this \textit{simplified likelihood} approximation, we: 
+In the following we will aim at explaining these features analytically by building a simplified model for the response. In this \textit{simplified likelihood} approximation, we:
 \begin{itemize}
 	\item pin the masses and the LISA-frame coalescence time to their injected values;
 	\item use the \textit{Frozen low-$f$} response, ignoring the LISA motion and the frequency-dependence in the response.
@@ -1093,7 +1093,7 @@ We implement these temporal cuts in the Fourier domain, using the time-frequency
 
 In Fig.~\ref{fig:smbhCornerZoomHMCase9} we show how parameter information accumulates at these time points. The results are shown for Case II, including the higher harmonics in the signal. Individual masses are loosely constrained, within a factor of 2, at first detection; the chirp mass combination is better determined. They start to be individually constrained to better than $10\%$ by 2.5 hours before merger. The luminosity distance is poorly determined, within a factor of 4, when reaching the detection threshold 41 hours before merger; the constraint improves to roughly $10\%$ at 2.5 hours prior to merger. Merger time is estimated with an uncertainty of roughly 2hrs at first detection, which improves to a few minutes by 2.5 hours before merger.
 
-The corresponding sky position posteriors are shown in Fig.~\ref{fig:MollweidesmbhTseriesCase922hm}, using LISA frame angles~\ref{eq:Lframeangles}. The lines show the 1-2-3-$\sigma$ uncertainty contours on the sky, for each of our time cuts as well as for the full, post-merger signal, with the two panels differing by the inclusion of higher harmonics. We see clearly, in the pre-merger analysis, the 8-modes sky degeneracy introduced in~\eqref{eq:degenreflection}-\eqref{eq:degenlambdapi2}. The different cuts give us an idea of the continuous evolution from a badly determined sky position at first, when reaching detection, to an 8-modes degeneracy structure, to finally only two modes surviving when reaching merger, the true injection and the \textit{reflected} sky position. 
+The corresponding sky position posteriors are shown in Fig.~\ref{fig:MollweidesmbhTseriesCase922hm}, using LISA frame angles~\ref{eq:Lframeangles}. The lines show the 1-2-3-$\sigma$ uncertainty contours on the sky, for each of our time cuts as well as for the full, post-merger signal, with the two panels differing by the inclusion of higher harmonics. We see clearly, in the pre-merger analysis, the 8-modes sky degeneracy introduced in~\eqref{eq:degenreflection}-\eqref{eq:degenlambdapi2}. The different cuts give us an idea of the continuous evolution from a badly determined sky position at first, when reaching detection, to an 8-modes degeneracy structure, to finally only two modes surviving when reaching merger, the true injection and the \textit{reflected} sky position.
 
 \begin{figure*}
   \centering
@@ -1136,7 +1136,7 @@ We have already presented a discussion of different qualitative effects in the i
 
 In Fig.~\ref{fig:lnLskymodesapprox} we show log-likelihood values obtained with either the \textit{Full}, \textit{Frozen} or \textit{Low-$f$} response, with and without higher harmonics, for each of the eight modes in the sky described by~\eqref{eq:degenreflection}-\eqref{eq:degenlambdapi2}. The likelihood~\eqref{eq:deflnLaet} is computed with the same response approximation for the injection and for the template. The results are shown as a function of frequency in a cumulative sense: we compute the likelihood by accumulating signal up to the frequency shown in the $x$-axis. When including higher harmonics, this cut in frequency is interpreted as a cut in time and propagated to other harmonics according to~\eqref{eq:fscalinglm}.
 
-A value of $\ln \calL = 0$ means that the template signal with shifted parameters is identical to the injection, while a very negative $\ln \calL$ means that these parameter values are excluded in the inference. The injection (full black line) has always $\ln \calL = 0$ by construction. The \textit{reflected} sky mode~\eqref{eq:degenreflection} is the dashed black line, and the \textit{antipodal} sky mode~\eqref{eq:degenantipodal} is the dashed red line. 
+A value of $\ln \calL = 0$ means that the template signal with shifted parameters is identical to the injection, while a very negative $\ln \calL$ means that these parameter values are excluded in the inference. The injection (full black line) has always $\ln \calL = 0$ by construction. The \textit{reflected} sky mode~\eqref{eq:degenreflection} is the dashed black line, and the \textit{antipodal} sky mode~\eqref{eq:degenantipodal} is the dashed red line.
 
 With the \textit{Low-$f$} response, the \textit{antipodal} mode remains almost exactly degenerate with the injection, differing only by the Doppler phase~\eqref{eq:defPhiR}, which has a small effect on our short signals as shown in Fig.~\ref{fig:tranferSMBHCase9}. As explained below~\eqref{eq:degenantipodal}, other modes fail to reproduce the injected signal because of the time-dependence of the pattern functions. They acquire a moderate penalty at low frequency, but $\ln \calL$ then goes to a constant since the motion becomes negligible at high frequencies, as shown by the transfer functions in Fig.~\ref{fig:responseapproxtdia22}.
 
@@ -1220,7 +1220,7 @@ Fig.~\ref{fig:transferSBHBcaseI} illustrates, for the system I in this table, th
 We caution the reader that our purpose here is to show the feasibility of
 Bayesian inference for SBHB sources in LISA using the methodology presented in
 this paper, and to illustrate the qualitative features of the posterior distribution for extrinsic parameters, in relation to our previous investigations for SMBHB systems. To this end, the problem we pose is simplified
-in several ways: we assume that we know the signal to be present, bypassing the challenges of detection itself~\cite{Moore+19}, we fix the masses and the time to merger to the injected value, and we neglect spins. The parameter recovery of the intrinsic parameters, masses, spins, is important to address as one can expect strong degeneracies in mass ratio and spin for these inspiral signals; it will be tackled in a forthcoming publication~\cite{Toubiana+20}. 
+in several ways: we assume that we know the signal to be present, bypassing the challenges of detection itself~\cite{Moore+19}, we fix the masses and the time to merger to the injected value, and we neglect spins. The parameter recovery of the intrinsic parameters, masses, spins, is important to address as one can expect strong degeneracies in mass ratio and spin for these inspiral signals; it will be tackled in a forthcoming publication~\cite{Toubiana+20}.
 
 The waveform model used to work with SBHB systems is a standard post-Newtonian
 frequency-domain waveform (we use a version of the \texttt{TaylorF2} approximant as implemented in \texttt{LAL}~\cite{lal}). In practice, because LISA only observes the early
@@ -1238,7 +1238,7 @@ The resulting posterior distributions are shown in Fig.~\ref{fig:sbhb_corner_1}
 and \ref{fig:sbhb_corner_12}. We find close agreement between the \texttt{multinest} and
 \texttt{ptmcmc} samplers. The joint distributions for extrinsic parameters are fairly simple, with extended degeneracies occuring only in the angular parameters $(\varphi, \psi)$. Thanks to the complexity of the instrument transfer functions shown in Fig.~\ref{fig:transferSBHBcaseI} carrying a lot of information, the sky position determination is very good. The typical degeneracy between inclination and distance
 is evident, as there is no degeneracy breaking from higher harmonics. Even though the SNR values are much lower than for our SMBHB systems, the Fisher matrix estimates represent quite well the marginal
-distributions of most parameters. We note, however, some notable deviation from Gaussianity for the system II: the sky position is almost bimodal, with an approximate symmetry across the ecliptic plane (we recall here that the ecliptic plane is not the plane of the LISA instrument that was used to report SMBHB results), owing probably to the localization being close to this plane; and the distance and inclination posteriors show a long tail extending way beyond the Fisher estimate. 
+distributions of most parameters. We note, however, some notable deviation from Gaussianity for the system II: the sky position is almost bimodal, with an approximate symmetry across the ecliptic plane (we recall here that the ecliptic plane is not the plane of the LISA instrument that was used to report SMBHB results), owing probably to the localization being close to this plane; and the distance and inclination posteriors show a long tail extending way beyond the Fisher estimate.
 
 \begin{figure*}
 	\includegraphics[width=0.9\textwidth]{../plots/corner_sobh_tdc1_extr_ptmcmc_bambi}
