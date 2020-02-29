@@ -679,14 +679,14 @@ We note that, by contrast with current ground-based observations that are horizo
 
 \begin{figure}
   \centering
-  \includegraphics[width=.99\linewidth]{../plots/plot_hc_tdia_hm.pdf}
+  \includegraphics[width=.99\linewidth]{plot_hc_tdia_hm.pdf}
   \caption{Characteristic strain signal~\eqref{eq:defhc}, shown here for the TDI channel $A$ of System II, decomposed as a set of $(\ell,m)$ contributions from the modes available in the waveform model. The grey curve shows the characteristic noise PSD~\eqref{eq:defhc}. Vertical bars indicate for each mode the frequencies corresponding to the time-to-merger cuts marking the points where (1/64,1/16,1/4) of the final SNR has accumulated as in our pre-merger analysis as described in~\ref{subsec:MBHBacctime}, while the dots mark the merger frequency.}
   \label{fig:hctdiahm}
 \end{figure}
 
 \begin{figure*}
   \centering
-  \includegraphics[width=.98\linewidth]{../plots/plot_smbh9_tdi.pdf}
+  \includegraphics[width=.98\linewidth]{plot_smbh9_tdi.pdf}
   \caption{Example of instrument response for System II in Table~\ref{tab:MBHBparams}. The first panel isolates the Doppler phase $\Delta\Phi_{R}$ as defined in~\eqref{eq:defPhiR}, while the three other panels show the TDI transfer functions for $A,E,T$. We show here the rescaled transfer functions for the mode 22 as defined below~\eqref{eq:defTlmaet}. The vertical lines correspond to the frequency at merger.}
   \label{fig:tranferSMBHCase9}
 \end{figure*}
@@ -713,14 +713,14 @@ Sec.~\ref{subsec:MBHBresponseapprox} will further investigate these different ph
 \label{subsec:MBHBacctime}
 
 \begin{figure}
-   \includegraphics[width=.99\linewidth]{../plots/tflm_smbh.pdf}
+   \includegraphics[width=.99\linewidth]{tflm_smbh.pdf}
   \caption{Relation between time and frequency for MBHB systems I and II with $M=2\times 10^6 \; M_{\odot}$, $q=3$ and $z=4$. The different lines correspond to the $(\ell, m)$ harmonics available in the waveform model. The time-to-frequency correspondence is computed according to $t_{f}^{\ell m}$ defined in~\eqref{eq:deftflm}, evaluated at $m f / 2$ to map to the same time according to~\eqref{eq:fscalinglm}. The vertical lines represent the time cuts explained in~\ref{subsec:MBHBacctime} and the merger frequency.}
   \label{fig:t-f-relation-lm}
 \end{figure}
 
 \begin{figure*}
   \centering
-  \includegraphics[width=.98\linewidth]{../plots/overlapmodebymode_maxfscaledlm_t.pdf}
+  \includegraphics[width=.98\linewidth]{overlapmodebymode_maxfscaledlm_t.pdf}
   \caption{Cumulative contribution to $\mathrm{SNR}^{2}$ as defined in~\eqref{eq:defcontribSNR2} for system II. The left panel shows inner products of modes with themselves, the middle panel shows cross-terms involving $h_{22}$, while the right panel shows other cross-terms. Note that oscillatory cross-terms change sign, we show their absolute value. In all panels the black line represents the total. The horizontal axis gives the time to merger, with vertical lines for the cuts of~\ref{subsec:MBHBacctime}, and the dots on the right of each panel show the result for the full signal including the ringdown.}
   \label{fig:modeoverlapsoftime}
 \end{figure*}
@@ -768,7 +768,7 @@ We also see that, since even the most subdominant modes contribute significantly
 
 \begin{figure}
   \centering
-  \includegraphics[width=.98\linewidth]{../plots/responseapprox_tdia_22.pdf}
+  \includegraphics[width=.98\linewidth]{responseapprox_tdia_22.pdf}
   \caption{Real and imaginary part of the transfer function $\calT^{22}_{h_{a}}$~\eqref{eq:defhaet} in different response approximations. The four lines stand for the four approximation levels (i)-(iv) defined in~\ref{subsec:MBHBresponseapprox}. Vertical lines indicate the frequencies of the time cuts of~\ref{subsec:MBHBacctime} and the peak frequency.}
   \label{fig:responseapproxtdia22}
 \end{figure}
@@ -807,14 +807,14 @@ We note finally a coincidence in Fig.~\ref{fig:responseapproxtdia22}: the freque
 
 \begin{figure*}
   \centering
-  \includegraphics[width=.98\linewidth]{../plots/corner_smbh_case0_ptmcmc_22_hm_withzoom.png}
+  \includegraphics[width=.98\linewidth]{corner_smbh_case0_ptmcmc_22_hm_withzoom.png}
   \caption{Inferred parameter posterior distribution for the MBHB system I of Table~\ref{tab:MBHBparams}, with $1$-$2$-$3$-$\sigma$ contours and the black cross indicating the true parameters. The result injecting and recovering with only the 22 mode is shown in blue, and the result injecting and recovering with higher harmonics is in red. The top right panels zoom on the masses, distance-inclination, and sky position marginalized posteriors. The time is centered so that $\Delta t=0$ corresponds to the injection. All extrinsic parameters are given in the LISA-frame as defined in App.~\ref{app:LISAframe}.}
   \label{fig:PEsmbh22hmCase0}
 \end{figure*}
 
 \begin{figure*}
   \centering
-  \includegraphics[width=.98\linewidth]{../plots/corner_smbh_case9_ptmcmc_22_hm_withzoom.png}
+  \includegraphics[width=.98\linewidth]{corner_smbh_case9_ptmcmc_22_hm_withzoom.png}
   \caption{Same as Fig.~\ref{fig:PEsmbh22hmCase0}, for the MBHB system II of Table~\ref{tab:MBHBparams}.
            In the extrinsic parameters, the red 2D contours are barely visible on this scale.}
   \label{fig:PEsmbh22hmCase9}
@@ -822,21 +822,21 @@ We note finally a coincidence in Fig.~\ref{fig:responseapproxtdia22}: the freque
 
 \begin{figure*}
   \centering
-  \includegraphics[width=.98\linewidth]{../plots/row_m1m2_ptmcmc_bambi.png}
+  \includegraphics[width=.98\linewidth]{row_m1m2_ptmcmc_bambi.png}
   \caption{Comparisons between inferred posteriors obtained with our two different Bayesian samplers described in~\ref{subsec:samplers} and with the Fisher matrix approximation described in~\ref{subsec:Fisher}. Results are shown for the systems I and II of Table~\ref{tab:MBHBparams}, with the 22-mode only for the two left panels and with higher harmonics in the two right panels. Blue (22) and red (HM) show the $\texttt{ptmcmc}$ result, and green (22) and yellow (HM) the $\texttt{multinest}$ result. In all panels, the black ellipses show the Fisher matrix estimate for the posterior.}
   \label{fig:PEsmbhm1m2ptmcmcbambi}
 \end{figure*}
 
 \begin{figure*}
   \centering
-  \includegraphics[width=.98\linewidth]{../plots/row_Dinc_ptmcmc_bambi.png}
+  \includegraphics[width=.98\linewidth]{row_Dinc_ptmcmc_bambi.png}
   \caption{Same comparisons as in Fig.~\ref{fig:PEsmbhm1m2ptmcmcbambi}, for the distance and inclination parameters, zooming on the relevant regions.}
   \label{fig:PEsmbhDincptmcmcbambi}
 \end{figure*}
 
 \begin{figure*}
   \centering
-  \includegraphics[width=.98\linewidth]{../plots/row_sky_ptmcmc_bambi.png}
+  \includegraphics[width=.98\linewidth]{row_sky_ptmcmc_bambi.png}
   \caption{Same comparisons as in Fig.~\ref{fig:PEsmbhm1m2ptmcmcbambi}, for the sky position parameters, zooming on the relevant regions for inclination. The parameters shown are in the LISA-frame as defined in~\ref{app:LISAframe}.}
   \label{fig:PEsmbhskyptmcmcbambi}
 \end{figure*}
@@ -959,10 +959,10 @@ However, this analysis does not explain why one obtains, with a zero noise reali
 \begin{figure}
   \centering
   \begin{minipage}{.49\linewidth}
-  \includegraphics[width=.99\linewidth]{../plots/corner_skydown_smbh_case9_22_ptmcmc_bambi_withdegen.png}
+  \includegraphics[width=.99\linewidth]{corner_skydown_smbh_case9_22_ptmcmc_bambi_withdegen.png}
   \end{minipage}
   \begin{minipage}{.49\linewidth}
-  \includegraphics[width=.99\linewidth]{../plots/corner_skydown_smbh_case9_simplelike_ptmcmc_bambi_withdegen.png}
+  \includegraphics[width=.99\linewidth]{corner_skydown_smbh_case9_simplelike_ptmcmc_bambi_withdegen.png}
   \end{minipage}
   \caption{Sky position posterior for System II in Table~\ref{tab:MBHBparams} in presence of strong degeneracies, zooming close to the injected value and discarding the secondary mode in the sky. The left panel shows the complete likelihood, while the right panel shows the simplified likelihood~\eqref{eq:simplelikelihoodhm} in the \textit{Frozen, low-$f$} approximation and with fixed masses and time. The results of \texttt{ptmcmc} (blue) and \texttt{multinest} (green) are superimposed. The black cross is the injected value, and the grey cross is the analytic prediction~\eqref{eq:soldegensky} for the offset peak created by degeneracies.}
   \label{fig:Skydownsmbh22hmSimpleLikeCase9}
@@ -1141,10 +1141,10 @@ As shown in Fig.~\ref{fig:modeoverlapsoftime}, most of the SNR accumulates over 
 %\begin{figure*}
 %  \centering
 %  \begin{minipage}{.48\linewidth}
-%      \includegraphics[width=.99\linewidth]{../plots/t-of-F.pdf}
+%      \includegraphics[width=.99\linewidth]{t-of-F.pdf}
 %   \end{minipage}
 %   \begin{minipage}{.48\linewidth}
-%      \includegraphics[width=.99\linewidth]{../plots/t-of-SNR.pdf}
+%      \includegraphics[width=.99\linewidth]{t-of-SNR.pdf}
 %   \end{minipage}
 %  \caption{\SM{Redo left plot, right plot redundant with mode-by-mode SNR} Relations of time, Fourier frequency, and accumulated SNR for $M=2\times 10^6$,$q=3$ merger at $z=4$. The left panel shows times computed from $\tilde h(f)$ using Eq.~eref{eq:t-of-f}, and are approximately common among the waveform component modes up to minutes before merger. We use this relation to simulate time-cuts of the signals a various points before merger.  The right panel shows how SNR accumulates with time, though the full signal has a high SNR of about 666.0, most SNR accumulates very late. The curves shown extend from approximately SNR=1 until $t(f)$ is 40s after nominal merger.  The stars show points where the SNR has reached $\{1/4,1/16,1/64\}$ of the full-signal total, where we have studied parameter estimate for temporally incomplete signals.}
 %  \label{fig:t-f-snr-Case9}
@@ -1159,22 +1159,22 @@ The corresponding sky position posteriors are shown in Fig.~\ref{fig:Mollweidesm
 \begin{figure*}
   \centering
   \begin{minipage}{.32\linewidth}
-      \includegraphics[width=.99\linewidth]{../plots/corner_smbh_case9_hm_tseries_m1m2.png}
+      \includegraphics[width=.99\linewidth]{corner_smbh_case9_hm_tseries_m1m2.png}
    \end{minipage}
    \begin{minipage}{.32\linewidth}
-      \includegraphics[width=.99\linewidth]{../plots/corner_smbh_case9_hm_tseries_Dinc.png}
+      \includegraphics[width=.99\linewidth]{corner_smbh_case9_hm_tseries_Dinc.png}
    \end{minipage}
    \begin{minipage}{.32\linewidth}
-      \includegraphics[width=.99\linewidth]{../plots/corner_smbh_case9_hm_tseries_tphi.png}
+      \includegraphics[width=.99\linewidth]{corner_smbh_case9_hm_tseries_tphi.png}
    \end{minipage}
    \begin{minipage}{.32\linewidth}
-      \includegraphics[width=.99\linewidth]{../plots/corner_smbh_case9_hm_tseries_m1m2_zoom.png}
+      \includegraphics[width=.99\linewidth]{corner_smbh_case9_hm_tseries_m1m2_zoom.png}
    \end{minipage}
    \begin{minipage}{.32\linewidth}
-      \includegraphics[width=.99\linewidth]{../plots/corner_smbh_case9_hm_tseries_Dinc_zoom.png}
+      \includegraphics[width=.99\linewidth]{corner_smbh_case9_hm_tseries_Dinc_zoom.png}
    \end{minipage}
    \begin{minipage}{.32\linewidth}
-      \includegraphics[width=.99\linewidth]{../plots/corner_smbh_case9_hm_tseries_tphi_zoom.png}
+      \includegraphics[width=.99\linewidth]{corner_smbh_case9_hm_tseries_tphi_zoom.png}
    \end{minipage}
   \caption{Refinement of parameter inference over time for system II. The posteriors shown correspond to the time cuts defined in~\ref{subsec:MBHBacctime} at $\mathrm{SNR}/64$ (green), $\mathrm{SNR}/16$ (yellow), $\mathrm{SNR}/4$ (red) and post-merger (blue) for the masses (left), distance/inclination (center), and time/phase (right). On the first row, all four posteriors are shown, while in the second row we display only $\mathrm{SNR}/4$ and post-merger, zooming closer to the true parameters. We inject and recover with higher harmonics. The black cross shows the true parameters.}
   \label{fig:smbhCornerZoomHMCase9}
@@ -1182,8 +1182,8 @@ The corresponding sky position posteriors are shown in Fig.~\ref{fig:Mollweidesm
 
 \begin{figure*}
   \centering
-  \includegraphics[width=.8\linewidth]{../plots/skymap_Lframe_tseries_bambi_22.png}
-  \includegraphics[width=.8\linewidth]{../plots/skymap_Lframe_tseries_ptmcmc_hm.png}
+  \includegraphics[width=.8\linewidth]{skymap_Lframe_tseries_bambi_22.png}
+  \includegraphics[width=.8\linewidth]{skymap_Lframe_tseries_ptmcmc_hm.png}
   \caption{Refinement of the LISA-frame sky position inference over time for system II. The posteriors shown correspond to the time cuts defined in~\ref{subsec:MBHBacctime} at $\mathrm{SNR}/64$ (green), $\mathrm{SNR}/16$, $\mathrm{SNR}/4$ and post-merger (blue). For the top figure, we inject and recover with a 22-mode only waveform, while for the bottom figure we inject and recover with higher harmonics. The black cross is the injected sky position; the apparent offset in the 22-mode analysis corresponds to the phenomenon highlighted in~\ref{subsec:MBHBPEdegen22}. The blue contour for the analysis with the full signal corresponds to the posterior of Fig.~\ref{fig:PEsmbh22hmCase9} (where blue and red were used for 22 and HM); in the bottom figure with higher harmonics, is almost reduced to two dots on this scale.}
   \label{fig:MollweidesmbhTseriesCase922hm}
 \end{figure*}
@@ -1194,8 +1194,8 @@ The corresponding sky position posteriors are shown in Fig.~\ref{fig:Mollweidesm
 
 \begin{figure*}
   \centering
-  \includegraphics[width=.99\linewidth]{../plots/lnL_skymodes_approx_22.pdf}
-  \includegraphics[width=.99\linewidth]{../plots/lnL_skymodes_approx_hm.pdf}
+  \includegraphics[width=.99\linewidth]{lnL_skymodes_approx_22.pdf}
+  \includegraphics[width=.99\linewidth]{lnL_skymodes_approx_hm.pdf}
   \caption{Log-likelihood~\eqref{eq:deflnLaet} at degenerate modes in the sky summarized in Table~\ref{tab:MBHBdegen}, for different response approximations (from left to right: \textit{Full}, \textit{Frozen}, \textit{Low-$f$}), with 22-mode only (top) and with higher harmonics (bottom). The log-likelihood is shown as a function of the maximal frequency where we cut the 22-mode signal (with the rescaling~\eqref{eq:fscalinglm} for the other modes), which can be thought of as accumulating signal with time (the vertical lines represent the time cuts of~\ref{subsec:MBHBacctime} and the merger). The lines represent the sky positions listed in Table~\ref{tab:MBHBdegen}: in terms of LISA-frame parameters full or dashed stands for the reflection in latitude, and the color stands for the $\pi/2$-shifted longitudes. The dashed black curve corresponds to the \textit{reflected} position, and the dashed red to the \textit{antipodal} position. At the true position (solid black), $\ln\calL$ is zero by construction while it is decreasing as a function of $f$ for other sky positions. Reaching a very negative $\ln\calL$ means that this sky position is excluded by the data accumulated thus far. In the left panel, the circles indicate the maximum log-likelihood found among the posterior samples, when the parameters are allowed to deviate slightly from the theoretical degenerate point.}
   \label{fig:lnLskymodesapprox}
 \end{figure*}
@@ -1234,7 +1234,7 @@ We see that the best $\ln \calL$ among samples can be higher than the point esti
 
 \begin{figure*}
   \centering
-  \includegraphics[width=.98\linewidth]{../plots/plot_sobh1_tdi.pdf}
+  \includegraphics[width=.98\linewidth]{plot_sobh1_tdi.pdf}
   \caption{Example of instrument response for the SBHB system I in Table~\ref{tab:SBHBparams}. The first panel isolates the Doppler phase $\Delta\Phi_{R}$ as defined in~\eqref{eq:defPhiR}, while the three other panels show the TDI transfer functions for $A,E,T$. We show here the transfer functions for the 22-mode contribution to $a$, $e$, $t$ as defined in~\eqref{eq:defTlmaet}.}
   \label{fig:transferSBHBcaseI}
 \end{figure*}
@@ -1315,13 +1315,13 @@ is evident, as there is no degeneracy breaking from higher harmonics. Even thoug
 distributions of most parameters. We note, however, some notable deviation from Gaussianity for the system II: the sky position is almost bimodal, with an approximate symmetry across the ecliptic plane (we recall here that the ecliptic plane is not the plane of the LISA instrument that was used to report MBHB results), owing probably to the localization being close to this plane; and the distance and inclination posteriors show a long tail extending way beyond the Fisher estimate.
 
 \begin{figure*}
-	\includegraphics[width=0.9\textwidth]{../plots/corner_sobh_tdc1_extr_ptmcmc_bambi}
+	\includegraphics[width=0.9\textwidth]{corner_sobh_tdc1_extr_ptmcmc_bambi}
 	\caption{Inferred parameter posterior distribution for the SBHB system I of Table~\ref{tab:SBHBparams}, with $1$-$2$-$3$-$\sigma$ contours and the black cross indicating the true parameters. The black ellipses show the same contours for the Fisher matrix approximation. Waveforms include only the 22 mode. The results obtained with outr two different samples are shown, $\texttt{ptmcmc}$ in blue and $\texttt{multinest}$ in green. The initial frequency is fixed to obtain a time-to-merger of 2 years. All extrinsic parameters are given in the SSB-frame.}
 	\label{fig:sbhb_corner_1}
 \end{figure*}
 
 \begin{figure*}
-	\includegraphics[width=0.9\textwidth]{../plots/corner_sobh_tdc2_extr_ptmcmc_bambi}
+	\includegraphics[width=0.9\textwidth]{corner_sobh_tdc2_extr_ptmcmc_bambi}
 	\caption{Same as Fig.~\ref{fig:sbhb_corner_1}, for the SBHB system II of Table~\ref{tab:SBHBparams}.}
 	\label{fig:sbhb_corner_12}
 \end{figure*}
@@ -1519,7 +1519,7 @@ Finally, it is useful to introduce a ``time-at-LISA'' parameter $t_{L}$, taken i
 \be\label{eq:deftL}
 	t_{L} = t + k\cdot p_{0} \,.
 \ee
-Labeling short-lived MBHB signals by their time of arrival at the SSB is a bad parametrization. For a given measured arrival time at the LISA instrument $t_{L}$, different sky positions will give separate peaks in the ``time-at-SSB'' variable $t$. The use of $t_{L}$ eliminates this issue. 
+Labeling short-lived MBHB signals by their time of arrival at the SSB is a bad parametrization. For a given measured arrival time at the LISA instrument $t_{L}$, different sky positions will give separate peaks in the ``time-at-SSB'' variable $t$. The use of $t_{L}$ eliminates this issue.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -1554,7 +1554,7 @@ The instrumental noise we consider in this study is constructed from~\cite{LISAN
 %
 %\begin{figure}
 %  \centering
-%  \includegraphics[width=.99\linewidth]{../plots/plot_MM_ROM.pdf}
+%  \includegraphics[width=.99\linewidth]{plot_MM_ROM.pdf}
 %  \caption{Unfaithfulness of ROM waveforms compared to the original EOBNRv2HM waveforms, computed as in~\eqref{}. We show here the results for the orientations \SM{[complete]}, for 200 random mass ratio values between 1 and 12, for masses $10 \Msol$, $50 \Msol$ and $250 \Msol$. The inclination angle is $\iota = \pi/2$, maximizing the effect of higher harmonics.}
 %  \label{fig:MMROM}
 %\end{figure}
@@ -1567,7 +1567,7 @@ The instrumental noise we consider in this study is constructed from~\cite{LISAN
 
 \begin{figure*}
   \centering
-  \includegraphics[width=.9\linewidth]{../plots/corner_smbh_case9_simplelike_ptmcmc_bambi.png}
+  \includegraphics[width=.9\linewidth]{corner_smbh_case9_simplelike_ptmcmc_bambi.png}
   \caption{Posterior distributions obtained with the two samplers \texttt{ptmcmc} (blue) and $\texttt{multinest}$ (green) for the simplified likelihood~\eqref{eq:simplelikelihoodhm}, using only the dominant mode $(\ell, m) = (2,2)$. Masses and time are pinned to the injected value, and the motion of the detector is neglected. We also superimpose (red) the contours obtained with \texttt{multinest} by including all harmonics $(2,2)$, $(2,1)$, $(3,3)$, $(4,4)$, $(5,5)$.}
   \label{fig:PEsmbh22hmSimpleLikeCase9}
 \end{figure*}
@@ -1592,13 +1592,13 @@ These results also give us a hint to explain the results of Sec.~\ref{subsec:SMB
 %\begin{figure*}
 %  \centering
 %  \begin{minipage}{.32\linewidth}
-%      \includegraphics[width=.99\linewidth]{../plots/corner_smbh_case9_hm_dseries_m1m2.png}
+%      \includegraphics[width=.99\linewidth]{corner_smbh_case9_hm_dseries_m1m2.png}
 %   \end{minipage}
 %   \begin{minipage}{.32\linewidth}
-%      \includegraphics[width=.99\linewidth]{../plots/corner_smbh_case9_hm_dseries_Dinc.png}
+%      \includegraphics[width=.99\linewidth]{corner_smbh_case9_hm_dseries_Dinc.png}
 %   \end{minipage}
 %   \begin{minipage}{.32\linewidth}
-%      \includegraphics[width=.99\linewidth]{../plots/corner_smbh_case9_hm_dseries_tphi.png}
+%      \includegraphics[width=.99\linewidth]{corner_smbh_case9_hm_dseries_tphi.png}
 %   \end{minipage}
 %  \caption{.}
 %  \label{fig:smbhCornerZoomHMCase9}
@@ -1606,7 +1606,7 @@ These results also give us a hint to explain the results of Sec.~\ref{subsec:SMB
 %
 %\begin{figure*}
 %  \centering
-%  \includegraphics[width=.8\linewidth]{../plots/plot_mollweide_dseries.png}
+%  \includegraphics[width=.8\linewidth]{plot_mollweide_dseries.png}
 %  \caption{.}
 %  \label{fig:MollweidesmbhTserieshmCase9}
 %\end{figure*}
