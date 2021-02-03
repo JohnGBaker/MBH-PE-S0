@@ -1,0 +1,57 @@
+----------------------------------------------------------------------
+Report of the Referee -- DQ12326/Marsat
+----------------------------------------------------------------------
+
+Exploring the Bayesian parameter estimation of binary black
+holes with LISA
+
+
+In this paper, the authors present the Bayesian inferences
+of supermassive and stellar-mass black hole systems.
+For the supermassive systems, the waveforms include the
+merger/ringdown and higher harmonics. Parameter degeneracies
+are explored and the role of higher harmonics in breaking
+these degeneracies is discussed. This will be a valuable addition
+to the literature and should be published in PRD. I ask the
+authors to consider my comments below publication.
+
+
+I found the discussion of the LISA response in sec II
+particularly useful. Although most (all?) of this material
+is described elsewhere in the literature this is a nice
+concise summary. And it is well placed here as it helps
+in understanding the parameter degeneracies described later.
+(This is not a comment that requires any action.)
+
+
+For the supermassive BH signals, the inferences in this
+paper use a waveform model with no spins. (Described in
+sec III B). This very significant simplification; it greatly
+simplifies the modelling (e.g. the ROM only interpolates in 1D)
+and may obscure some parameter degeneracies. I ask the authors
+to consider emphasising this point more prominently in the
+introduction and/or abstract. The other key simplification
+(namely the accelerated likelihood calculation of a sparse grid
+of frequencies) is already clearly pointed out in the abstract.
+
+
+Eq. 20 describes an approximation to the transfer function
+(single link redshift observables) based on a separation of
+timescales. I would find useful if this approximation could
+be explained in more detail in the text. For example,
+what are the different timescales involved?
+
+
+When discussing degeneracies in the sky. Is it possible to
+compare the match between the injected signal and the best
+fitting signal from the other side of the sky? Currently in
+this is discussed in section VIB where the authors use
+log-likelihood values to quantify the importance of the second
+mode. I think using match values might be more familiar to
+many in the community.
+
+
+ONE MINOR TYPO THAT I SPOTTED
+----
+In sec III E: "In this process we also impose the
+constrain...", constraint?
