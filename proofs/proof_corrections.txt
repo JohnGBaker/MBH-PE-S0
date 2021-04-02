@@ -1,0 +1,32 @@
+# Proof corrections
+
+Thank you for formatting this article, below is a list of corrections.
+
+1. Text
+- l157-158: We start by introducing a fast method to calculate the likelihood of a black hole merger
+  -> likelihood function for black hole merger signals
+- l287-288 above (14): for the zero polarization angle -> for a zero polarization angle
+- l614-615: these features in the signal carry a lot of SNRs by themselves -> a large amount of SNR
+- l693-694 after (55): where in each grid interval Pj there is a cubic polynomial and in φj there is a quadratic polynomial -> where for each grid interval Pj is a cubic polynomial and φj is a quadratic polynomial
+- l708-709: the number of grid intervals that are chosen -> the number of grid intervals that is chosen [refers to the number of]
+- l712-713: between overlapped terms -> between the different terms
+- l1529-1530: we see that around 2mHz of the breaking -> we see that, around 2mHz, the breaking
+
+2. l130: IMR -> inspiral-merger-ringdown (IMR)
+
+4. l900-901: s is any among the channels -> where s stands for any of the channels
+
+5. l1062: full GR signals -> full physical signals
+
+6. F16:3 our two different samples -> our two different samplers
+
+8. l1920: Please remove the eq. number (A.11d)
+
+9. [89] DOI: 10.1111/j.1365-2966.2011.20288.x
+   [90] DOI: 10.1214/06-BA127
+
+12. Please restore the DOI: 10.1088/0264-9381/32/7/074001
+
+13. [94] arXiv:2003.00357 [gr-qc]
+    [99] DOI: 10.1103/PhysRevD.102.124037
+    [101] DOI: 10.1103/PhysRevD.102.023033
